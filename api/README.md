@@ -33,4 +33,5 @@ Precisa do Ollama com `bge-m3` e `qwen3:8b`. Detalhes em `pesquisa/Entrega4.md`.
 ```
 python -m pytest -q   # decisões dos agentes, sem LLM (rodam no CI)
 python demo.py        # os agentes colaborando, nos dois pipelines
+python demo.py -i     # interativo: digite perguntas até "sair" (:ambos compara os pipelines)
 ```

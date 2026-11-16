@@ -63,7 +63,10 @@ A partir de `api/`, com o Ollama aberto e o índice gerado:
 python demo.py                 # 5 cenários, nos dois pipelines
 python demo.py --so-agentes    # só o multiagente
 python demo.py "sua pergunta"
+python demo.py -i              # interativo: uma pergunta atrás da outra, até "sair"
 ```
+
+No modo interativo, o padrão é só o multiagente. Os comandos `:classico`, `:agentes` e `:ambos` trocam o pipeline no meio da conversa, e `:ambos` mostra as duas respostas para a mesma pergunta. Com `--url-agentes http://localhost:8002`, as perguntas vão para o container em vez de rodar localmente.
 
 | Cenário | O que mostra |
 | :-- | :-- |
