@@ -27,6 +27,7 @@ class Resultado:
     barrada_pelo_porteiro: bool = False
     chamadas_llm: int = 0
     diagnostico: dict | None = None
+    verificacao: dict | None = None
     latencia_s: float = 0.0
     rastro: list[Evento] = field(default_factory=list)
 

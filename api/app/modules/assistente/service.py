@@ -22,7 +22,7 @@ def responder(pergunta: str, pipeline: str | None = None) -> RespostaOut:
     r: Resultado = PIPELINES[pipeline_ativo(pipeline)](pergunta)
     return RespostaOut(
         pipeline=r.pipeline, pergunta=r.pergunta, resposta=r.resposta, fontes=r.fontes, d1=r.d1,
-        barrada_pelo_porteiro=r.barrada_pelo_porteiro, chamadas_llm=r.chamadas_llm, diagnostico=r.diagnostico,
+        barrada_pelo_porteiro=r.barrada_pelo_porteiro, chamadas_llm=r.chamadas_llm, diagnostico=r.diagnostico, verificacao=r.verificacao,
         latencia_s=r.latencia_s, rastro=[EventoOut(**asdict(e)) for e in r.rastro],
     )
 

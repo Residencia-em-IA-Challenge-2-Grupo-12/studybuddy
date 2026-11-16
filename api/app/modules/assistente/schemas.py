@@ -4,9 +4,13 @@ from pydantic import BaseModel, Field
 
 Pipeline = Literal["classico", "agentes"]
 
+# Teto da pergunta: as maiores do gabarito têm ~150 caracteres. Uma pergunta enorme iria inteira para a
+# busca e para os dois LLMs (Triagem e Planejador), e pode carregar instruções para o modelo.
+MAX_PERGUNTA = 1000
+
 
 class PerguntaIn(BaseModel):
-    pergunta: str = Field(min_length=3, examples=["Trabalho 8 horas por dia. Como encaixo o estudo sem prejudicar o sono?"])
+    pergunta: str = Field(min_length=3, max_length=MAX_PERGUNTA, examples=["Trabalho 8 horas por dia. Como encaixo o estudo sem prejudicar o sono?"])
     # Opcional: sobrescreve o pipeline do ambiente (útil para comparar os dois no mesmo servidor)
     pipeline: Pipeline | None = None
 
@@ -28,6 +32,8 @@ class RespostaOut(BaseModel):
     chamadas_llm: int
     # Só no pipeline multiagente: o diagnóstico da Triagem (problema, restrições, tipo de resposta, consultas)
     diagnostico: dict | None
+    # O que o verificador de citações encontrou (None quando o porteiro recusou e não houve geração)
+    verificacao: dict | None
     latencia_s: float
     rastro: list[EventoOut]
 

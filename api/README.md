@@ -29,9 +29,21 @@ Docs: http://localhost:8000/docs
 O pipeline padrão vem de `PIPELINE` (`classico` ou `agentes`); o corpo do `POST` pode sobrescrever.
 Precisa do Ollama com `bge-m3` e `qwen3:8b`. Detalhes em `pesquisa/Entrega4.md`.
 
+## Guardrails
+Todos por regra, sem LLM, nos dois pipelines:
+
+| Guardrail | Onde | O que faz |
+| :-- | :-- | :-- |
+| Tamanho da pergunta | `assistente/schemas.py` | De 3 a 1000 caracteres (`MAX_PERGUNTA`); fora disso, 422 antes de qualquer busca |
+| Porteiro de distância | `rag/repository.py` | Pergunta longe da base (`d1 > 1,026`) é recusada sem chamar o LLM |
+| Verificador de citações | `rag/verificador.py` | Remove `[Fonte: ...]` de artigo que o LLM não recebeu; sem nenhuma citação válida, acrescenta a lista dos trechos consultados. O resultado vai em `verificacao` e no rastro |
+| Erros do Ollama | `assistente/router.py` | Fora do ar ou modelo ausente: 503; lento demais (`OLLAMA_TIMEOUT_*`): 504 |
+
+As regras do prompt (não inventar, recusar com a frase fixa, citar a fonte) continuam valendo, mas são só instrução: os guardrails acima não dependem de o modelo obedecer.
+
 ## Testes e demonstração
 ```
-python -m pytest -q   # decisões dos agentes, sem LLM (rodam no CI)
+python -m pytest -q   # agentes e guardrails, sem LLM (rodam no CI)
 python demo.py        # os agentes colaborando, nos dois pipelines
 python demo.py -i     # interativo: digite perguntas até "sair" (:ambos compara os pipelines)
 ```

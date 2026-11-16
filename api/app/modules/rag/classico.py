@@ -1,11 +1,11 @@
 """Pipeline clássico: T3 + porteiro, a configuração escolhida na Semana 3.
 
-Busca k=5 -> porteiro (d1 > tau recusa sem LLM) -> LLM escreve a resposta -> sai. Ninguém confere.
+Busca k=5 -> porteiro (d1 > tau recusa sem LLM) -> LLM escreve a resposta -> verificador confere as citações.
 """
 
 import time
 
-from . import llm, repository
+from . import llm, repository, verificador
 from .fontes import formatar_trechos
 from .prompts import FRASE_RECUSA, RAG_SYSTEM_PROMPT, RAG_USER_PROMPT
 from .resultado import Cronometro, Evento, Resultado
@@ -16,6 +16,15 @@ def gerar(contexto: str, pergunta: str, user_prompt: str = RAG_USER_PROMPT, **ex
 
     pedido = user_prompt.format(context=contexto, question=pergunta, **extra)
     return llm.gerador().invoke([SystemMessage(RAG_SYSTEM_PROMPT), HumanMessage(pedido)]).content.strip()
+
+
+def conferir_citacoes(r: Resultado) -> None:
+    """Passa a resposta pelo verificador e registra no rastro o que ele encontrou (sem LLM)."""
+    with Cronometro() as c:
+        r.resposta, v = verificador.verificar(r.resposta, r.trechos)
+    r.verificacao = v.para_dict()
+    r.rastro.append(Evento("Verificador", "corrigiu as citações" if v.alterou else "conferiu as citações",
+                           v.resumo(), c.segundos))
 
 
 def responder(pergunta: str) -> Resultado:
@@ -37,6 +46,7 @@ def responder(pergunta: str) -> Resultado:
             r.resposta = gerar(formatar_trechos(r.trechos), pergunta)
         r.chamadas_llm = 1
         r.rastro.append(Evento("geração", "respondeu", f"{len(r.resposta)} caracteres", c.segundos))
+        conferir_citacoes(r)
 
     r.latencia_s = round(time.perf_counter() - inicio, 2)
     return r

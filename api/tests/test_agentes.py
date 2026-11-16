@@ -125,7 +125,7 @@ class PlanejadorFalso:
         return trechos + [doc("artigo_09", 3)]
 
     def responder(self, pergunta, trechos, diag):
-        return f"plano com {len(trechos)} trechos"
+        return f"plano com {len(trechos)} trechos [Fonte: artigo_09.txt]"
 
 
 def rodar(monkeypatch, triagem, planejador):
@@ -142,9 +142,10 @@ def test_porteiro_barra_antes_da_triagem(monkeypatch):
 
 def test_fluxo_completo_passa_o_diagnostico_e_as_evidencias(monkeypatch):
     r = rodar(monkeypatch, TriagemFalsa(), PlanejadorFalso())
-    assert r.resposta == "plano com 3 trechos" and r.chamadas_llm == 2
+    assert r.resposta == "plano com 3 trechos [Fonte: artigo_09.txt]" and r.chamadas_llm == 2
     assert r.diagnostico["tipo_resposta"] == PLANO
-    assert [e.agente for e in r.rastro] == ["Planejador", "Triagem", "Planejador", "Planejador"]
+    assert [e.agente for e in r.rastro] == ["Planejador", "Triagem", "Planejador", "Planejador", "Verificador"]
+    assert r.verificacao["citadas"] == ["artigo_09"] and not r.verificacao["alterou"]
 
 
 # ---------------------------------------------------------------- Triagem: JSON fora do esquema

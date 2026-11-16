@@ -4,12 +4,14 @@ Pergunta
   -> Planejador verifica o escopo (busca k=5 + porteiro). Barrada: recusa, 0 chamadas ao LLM.
   -> Triagem diagnostica o estudante (problema, restrições, plano ou explicação, consultas).
   -> Planejador reúne evidências (pergunta + consultas da Triagem) e escreve a resposta no formato decidido.
+  -> Verificador confere as citações (só regras, sem LLM), como no pipeline clássico.
 Cada passo vira um Evento no rastro, que a API devolve e a demonstração imprime.
 """
 
 import logging
 import time
 
+from app.modules.rag.classico import conferir_citacoes
 from app.modules.rag.prompts import FRASE_RECUSA
 from app.modules.rag.resultado import Cronometro, Evento, Resultado
 
@@ -67,6 +69,9 @@ def responder(pergunta: str) -> Resultado:
     r.chamadas_llm += 1
     _registrar(r, Evento(planejador.nome, f"escreveu {'o plano' if diag.tipo_resposta == 'plano' else 'a explicação'}",
                          f"{len(r.resposta)} caracteres", c.segundos))
+
+    # 5. Verificador: citações de artigos que o Planejador não recebeu saem do texto
+    conferir_citacoes(r)
 
     r.latencia_s = round(time.perf_counter() - inicio, 2)
     return r
