@@ -1,0 +1,2518 @@
+{
+  "config": {
+    "llm": "qwen3:8b",
+    "embedding": "bge-m3",
+    "chunk_size": 500,
+    "top_k": 5,
+    "tau": 1.026,
+    "prompt": "RAG_SYSTEM_PROMPT (api/app/modules/rag/prompts.py)",
+    "pipeline": "classico",
+    "modo": "classico_api",
+    "juiz": "gemma3:12b"
+  },
+  "resumo": {
+    "taxa_sucesso": 0.786,
+    "sucesso_em_escopo": 0.667,
+    "completude": 0.852,
+    "fidelidade_contexto": 0.953,
+    "fidelidade_base": 0.953,
+    "relevancia": 0.922,
+    "tem_citacao": 1.0,
+    "cita_esperada": 1.0,
+    "precisao_citacao": 1.0,
+    "recusa_indevida": 0.0,
+    "recusa_correta": 1.0,
+    "fora_fidelidade_base_quando_responde": null,
+    "latencia_p50": 20.26,
+    "latencia_p95": 45.16,
+    "latencia_p50_respostas": 29.5,
+    "tokens_resposta": 326,
+    "tokens_contexto": 598,
+    "chamadas_llm": 22,
+    "por_tipo": {
+      "direta": {
+        "n": 4,
+        "completude": 1.0,
+        "fidelidade_base": 1.0,
+        "relevancia": 0.75,
+        "sucesso": 1.0
+      },
+      "parafraseada": {
+        "n": 9,
+        "completude": 0.778,
+        "fidelidade_base": 0.953,
+        "relevancia": 0.956,
+        "sucesso": 0.444
+      },
+      "multi_fonte": {
+        "n": 5,
+        "completude": 0.867,
+        "fidelidade_base": 0.917,
+        "relevancia": 1.0,
+        "sucesso": 0.8
+      }
+    }
+  },
+  "perguntas": [
+    {
+      "id": "q01",
+      "tipo": "multi_fonte",
+      "pergunta": "Como organizar minha rotina de estudos trabalhando 8 horas por dia?",
+      "esperadas": [
+        "artigo_19_dual_burden_clt_martins.txt",
+        "artigo_14_willpower_depletion_baumeister.txt"
+      ],
+      "pontos_chave": [
+        "Micro-blocos matinais protegidos de 45 a 60 minutos",
+        "Estudar antes do expediente, quando o autocontrole ainda não se esgotou",
+        "Fins de semana para blocos de aprofundamento prático"
+      ],
+      "recuperados": [
+        "artigo_19_dual_burden_clt_martins.txt",
+        "artigo_17_study_cycle_perez.txt",
+        "artigo_06_deep_work_newport.txt",
+        "artigo_14_willpower_depletion_baumeister.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 45] ---\nTrabalhadores em regime integral que estudam à noite ou aos finais de semana enfrentam a 'pobreza crônica de tempo'. O estresse acumulado no trabalho reduz a capacidade de concentração estendida. O planejamento para esse perfil não pode pressupor rotinas ideais de 6 horas de estudo diário\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_17_study_cycle_perez.txt | Chunk ID: 40] ---\nGrades horárias fixas (ex.: Segunda: Matéria X, Terça: Matéria Y) quebram sistematicamente quando surgem imprevistos na rotina adulta, gerando frustração e sensação de atraso. O modelo de Ciclo de Estudos organiza as matérias em uma sequência circular contínua com blocos de 60 a 90 minutos\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_06_deep_work_newport.txt | Chunk ID: 17] ---\n. A capacidade de sustentar de 2 a 4 horas de trabalho profundo diário com zero distrações digitais é o diferencial crítico para alto rendimento acadêmico e técnico.\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 46] ---\n. A recomendação consiste em adotar micro-blocos matinais protegidos de 45 a 60 minutos e utilizar fins de semana para blocos de aprofundamento prático, preservando descanso para prevenção de esgotamento (burnout).\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_14_willpower_depletion_baumeister.txt | Chunk ID: 34] ---\nO autocontrole e a capacidade de tomada de decisão consciente operam como um recurso cognitivo finito que se desgasta ao longo do dia. Indivíduos que precisam tomar centenas de decisões operacionais no trabalho chegam ao período noturno com recursos volitivos exauridos. Estudantes trabalhadores devem reservar horários de estudo antes do início do expediente de trabalho ou adotar regras predefinidas que eliminem a decisão sobre o que estudar a cada noite.",
+      "resposta": "**Organização da Rotina de Estudos para Trabalhadores que Estudam 8 Horas por Dia**\n\n- **Evite Grades Horárias Fixas**: Grades horárias fixas, como \"Segunda: Matéria X, Terça: Matéria Y\", tendem a quebrar diante de imprevistos na rotina adulta, gerando frustração e sensação de atraso. Opte por um modelo mais flexível ([Fonte: ../api/data/artigo_17_study_cycle_perez.txt | Chunk ID: 40]).\n\n- **Adote Micro-Blocos Matinais Protegidos**: Recomenda-se adotar micro-blocos matinais de 45 a 60 minutos, protegidos de distrações, para manter a concentração e o rendimento. Esses blocos devem ser reservados antes do início do expediente de trabalho ([Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 46]).\n\n- **Utilize Fins de Semana para Aprofundamento Prático**: Os fins de semana podem ser utilizados para blocos de aprofundamento prático, permitindo uma revisão mais intensa e aplicada ([Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 46]).\n\n- **Priorize Estudos Antes do Expediente**: Para evitar o esgotamento de recursos volitivos ao longo do dia, estudantes trabalhadores devem reservar horários de estudo antes do início do expediente ou adotar regras predefinidas que eliminem a necessidade de tomar decisões sobre o que estudar a cada noite ([Fonte: ../api/data/artigo_14_willpower_depletion_baumeister.txt | Chunk ID: 34]).\n\n- **Evite a Pobreza Crônica de Tempo**: Trabalhadores em regime integral que estudam à noite ou aos finais de semana enfrentam a \"pobreza crônica de tempo\". O planejamento para esse perfil não pode pressupor rotinas ideais de 6 horas de estudo diário ([Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 45]).\n\n- **Promova o Trabalho Profundo com Zero Distrações Digitais**: A capacidade de sustentar de 2 a 4 horas de trabalho profundo diário com zero distrações digitais é o diferencial crítico para alto rendimento acadêmico e técnico ([Fonte: ../api/data/artigo_06_deep_work_newport.txt | Chunk ID: 17]).",
+      "latencia_s": 45.51,
+      "tokens_resposta": 595,
+      "tokens_contexto": 563,
+      "d1": 0.7555288076400757,
+      "chamou_llm": true,
+      "chamadas_llm": 1,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "buscou",
+          "detalhe": "5 trechos, d1=0.756, corte=1.026",
+          "segundos": 0.69
+        },
+        {
+          "agente": "geração",
+          "acao": "respondeu",
+          "detalhe": "2000 caracteres",
+          "segundos": 44.82
+        }
+      ],
+      "avaliacao": {
+        "recusou": false,
+        "citados": [
+          "17",
+          "19",
+          "14",
+          "06"
+        ],
+        "tem_citacao": 1.0,
+        "cita_esperada": 1.0,
+        "precisao_citacao": 1.0,
+        "afirmacoes_contexto": [
+          {
+            "afirmacao": "Grades horárias fixas tendem a quebrar diante de imprevistos na rotina adulta, gerando frustração e sensação de atraso.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Recomenda-se adotar micro-blocos matinais de 45 a 60 minutos, protegidos de distrações, para manter a concentração e o rendimento.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Os fins de semana podem ser utilizados para blocos de aprofundamento prático.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Estudantes trabalhadores devem reservar horários de estudo antes do início do expediente ou adotar regras predefinidas que eliminem a necessidade de tomar decisões sobre o que estudar a cada noite.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Trabalhadores em regime integral que estudam à noite ou aos finais de semana enfrentam a 'pobreza crônica de tempo'.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "O planejamento para esse perfil não pode pressupor rotinas ideais de 6 horas de estudo diário.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "A capacidade de sustentar de 2 a 4 horas de trabalho profundo diário com zero distrações digitais é o diferencial crítico para alto rendimento acadêmico e técnico.",
+            "sustentada": true
+          }
+        ],
+        "fidelidade": 1.0,
+        "afirmacoes_relevancia": [
+          {
+            "afirmacao": "Evite grades horárias fixas, pois elas tendem a quebrar diante de imprevistos.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Opte por um modelo mais flexível para sua rotina de estudos.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Recomenda-se adotar micro-blocos matinais de 45 a 60 minutos, protegidos de distrações.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Esses blocos devem ser reservados antes do início do expediente de trabalho.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Utilize fins de semana para aprofundamento prático e revisão intensa.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Estudantes trabalhadores devem reservar horários de estudo antes do início do expediente para evitar o esgotamento.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "É importante eliminar a necessidade de tomar decisões sobre o que estudar a cada noite.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Trabalhadores em regime integral enfrentam a 'pobreza crônica de tempo'.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "O planejamento para estudantes trabalhadores não pode pressupor rotinas ideais de 6 horas diárias.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Promover o trabalho profundo com zero distrações digitais é crucial para alto rendimento.",
+            "relevante": true
+          }
+        ],
+        "relevancia": 1.0,
+        "fidelidade_base": 1.0,
+        "origem_fidelidade_base": "piso: fidelidade ao contexto",
+        "pontos_cobertos": [
+          true,
+          true,
+          true
+        ],
+        "completude": 1.0,
+        "sucesso": true
+      }
+    },
+    {
+      "id": "q02",
+      "tipo": "multi_fonte",
+      "pergunta": "Trabalho 8 horas por dia e sinto que não consigo render nos estudos. Como devo dividir meus blocos de estudo diários e cuidar do sono?",
+      "esperadas": [
+        "artigo_19_dual_burden_clt_martins.txt",
+        "artigo_14_willpower_depletion_baumeister.txt",
+        "artigo_05_sleep_consolidation_walker.txt"
+      ],
+      "pontos_chave": [
+        "Micro-blocos matinais de 45 a 60 minutos",
+        "Não reduzir o sono abaixo de 7 horas, pois ele consolida a memória",
+        "Evitar depender de decisões à noite, quando a força de vontade está esgotada"
+      ],
+      "recuperados": [
+        "artigo_19_dual_burden_clt_martins.txt",
+        "artigo_05_sleep_consolidation_walker.txt",
+        "artigo_17_study_cycle_perez.txt",
+        "artigo_06_deep_work_newport.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 45] ---\nTrabalhadores em regime integral que estudam à noite ou aos finais de semana enfrentam a 'pobreza crônica de tempo'. O estresse acumulado no trabalho reduz a capacidade de concentração estendida. O planejamento para esse perfil não pode pressupor rotinas ideais de 6 horas de estudo diário\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_05_sleep_consolidation_walker.txt | Chunk ID: 14] ---\n. Reduzir o tempo de sono para menos de 7 horas diárias deteriora a capacidade de foco, aumenta a reatividade emocional e bloqueia a potenciação de longo prazo (LTP), tornando ineficazes as horas de estudo acumuladas na madrugada.\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_17_study_cycle_perez.txt | Chunk ID: 40] ---\nGrades horárias fixas (ex.: Segunda: Matéria X, Terça: Matéria Y) quebram sistematicamente quando surgem imprevistos na rotina adulta, gerando frustração e sensação de atraso. O modelo de Ciclo de Estudos organiza as matérias em uma sequência circular contínua com blocos de 60 a 90 minutos\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_06_deep_work_newport.txt | Chunk ID: 17] ---\n. A capacidade de sustentar de 2 a 4 horas de trabalho profundo diário com zero distrações digitais é o diferencial crítico para alto rendimento acadêmico e técnico.\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 46] ---\n. A recomendação consiste em adotar micro-blocos matinais protegidos de 45 a 60 minutos e utilizar fins de semana para blocos de aprofundamento prático, preservando descanso para prevenção de esgotamento (burnout).",
+      "resposta": "### Divisão dos Blocos de Estudo Diários  \n- Adote micro-blocos matinais protegidos de **45 a 60 minutos** para estudos, evitando distrações digitais, o que ajuda a manter a concentração e a produtividade ([Fonte: ../api/data/artigo_06_deep_work_newport.txt | Chunk ID: 17]).  \n- Utilize **fins de semana** para blocos de aprofundamento prático, permitindo que você dedique tempo maior a tarefas complexas sem a pressão do dia a dia ([Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 46]).  \n\n### Cuidados com o Sono  \n- **Reduzir o tempo de sono para menos de 7 horas diárias** pode prejudicar a capacidade de foco, aumentar a reatividade emocional e bloquear a potenciação de longo prazo (LTP), tornando ineficazes as horas de estudo acumuladas ([Fonte: ../api/data/artigo_05_sleep_consolidation_walker.txt | Chunk ID: 14]).  \n- Priorize **7 horas de sono diárias** para manter a saúde mental e a eficácia dos estudos.",
+      "latencia_s": 29.61,
+      "tokens_resposta": 289,
+      "tokens_contexto": 505,
+      "d1": 0.7195466160774231,
+      "chamou_llm": true,
+      "chamadas_llm": 1,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "buscou",
+          "detalhe": "5 trechos, d1=0.720, corte=1.026",
+          "segundos": 0.18
+        },
+        {
+          "agente": "geração",
+          "acao": "respondeu",
+          "detalhe": "940 caracteres",
+          "segundos": 29.44
+        }
+      ],
+      "avaliacao": {
+        "recusou": false,
+        "citados": [
+          "06",
+          "19",
+          "05"
+        ],
+        "tem_citacao": 1.0,
+        "cita_esperada": 1.0,
+        "precisao_citacao": 1.0,
+        "afirmacoes_contexto": [
+          {
+            "afirmacao": "Adote micro-blocos matinais protegidos de 45 a 60 minutos para estudos, evitando distrações digitais, o que ajuda a manter a concentração e a produtividade.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Utilize fins de semana para blocos de aprofundamento prático, permitindo que você dedique tempo maior a tarefas complexas sem a pressão do dia a dia.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Reduzir o tempo de sono para menos de 7 horas diárias pode prejudicar a capacidade de foco, aumentar a reatividade emocional e bloquear a potenciação de longo prazo (LTP), tornando ineficazes as horas de estudo acumuladas.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Priorize 7 horas de sono diárias para manter a saúde mental e a eficácia dos estudos.",
+            "sustentada": false
+          }
+        ],
+        "fidelidade": 0.75,
+        "afirmacoes_relevancia": [
+          {
+            "afirmacao": "Adote micro-blocos matinais protegidos de 45 a 60 minutos para estudos, evitando distrações digitais.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Micro-blocos matinais ajudam a manter a concentração e a produtividade.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Utilize fins de semana para blocos de aprofundamento prático, permitindo que você dedique tempo maior a tarefas complexas sem a pressão do dia a dia.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Reduzir o tempo de sono para menos de 7 horas diárias pode prejudicar a capacidade de foco.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Dormir pouco aumenta a reatividade emocional e bloqueia a potenciação de longo prazo (LTP).",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Priorize 7 horas de sono diárias para manter a saúde mental e a eficácia dos estudos.",
+            "relevante": true
+          }
+        ],
+        "relevancia": 1.0,
+        "fidelidade_base": 0.75,
+        "origem_fidelidade_base": "piso: fidelidade ao contexto",
+        "pontos_cobertos": [
+          true,
+          true,
+          false
+        ],
+        "completude": 0.6666666666666666,
+        "sucesso": false
+      }
+    },
+    {
+      "id": "q03",
+      "tipo": "multi_fonte",
+      "pergunta": "Eu perco horas montando planilhas e cronogramas que sempre atrasam quando surge um imprevisto. Quais técnicas práticas posso aplicar para evitar o overplanning?",
+      "esperadas": [
+        "artigo_12_perfectionism_flett.txt",
+        "artigo_17_study_cycle_perez.txt"
+      ],
+      "pontos_chave": [
+        "Ciclo de estudos em sequência circular com blocos de 60 a 90 minutos em vez de grade fixa",
+        "Retomar o ciclo de onde parou após um imprevisto, sem refazer o cronograma",
+        "Planejamento excessivo pode ser adiamento disfarçado, ligado ao perfeccionismo"
+      ],
+      "recuperados": [
+        "artigo_12_perfectionism_flett.txt",
+        "artigo_19_dual_burden_clt_martins.txt",
+        "artigo_07_attention_residue_leroy.txt",
+        "artigo_17_study_cycle_perez.txt",
+        "artigo_10_pomodoro_cirillo.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_12_perfectionism_flett.txt | Chunk ID: 30] ---\nO perfeccionismo desadaptativo está correlacionado à procrastinação crônica e à paralisia por análise. O medo do fracasso e a intolerância a erros fazem com que o indivíduo sobrecarregue a fase de planejamento como forma inconsciente de adiar o confronto prático com a tarefa. Esse mecanismo se manifesta na customização obsessiva de notas, cronogramas irrealistas e relutância em submeter seus conhecimentos a testes simulados.\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 46] ---\n. A recomendação consiste em adotar micro-blocos matinais protegidos de 45 a 60 minutos e utilizar fins de semana para blocos de aprofundamento prático, preservando descanso para prevenção de esgotamento (burnout).\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_07_attention_residue_leroy.txt | Chunk ID: 19] ---\nQuando uma pessoa muda o foco de uma Tarefa A para uma Tarefa B, a atenção não migra instantaneamente. Uma parcela significativa da atenção permanece fixada na tarefa anterior (resíduo de atenção). Esse efeito é acentuado se a Tarefa A foi interrompida antes da conclusão. Alternar frequentemente entre celular, notificações e estudo técnico gera dispersão cumulativa crônica, degradando o desempenho e a velocidade de raciocínio lógico.\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_17_study_cycle_perez.txt | Chunk ID: 40] ---\nGrades horárias fixas (ex.: Segunda: Matéria X, Terça: Matéria Y) quebram sistematicamente quando surgem imprevistos na rotina adulta, gerando frustração e sensação de atraso. O modelo de Ciclo de Estudos organiza as matérias em uma sequência circular contínua com blocos de 60 a 90 minutos\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_10_pomodoro_cirillo.txt | Chunk ID: 25] ---\nA Técnica Pomodoro utiliza intervalos de esforço sustentado (tradicionalmente 25 minutos) intercalados por pausas curtas (5 minutos) para aliviar a ansiedade associada à percepção contínua do tempo. Ao transformar o tempo em um aliado métrico de esforço concluído, e não em um fator de cobrança, a técnica reduz o atrito de inicialização da tarefa. O registro dos pomodoros finalizados provê feedback visual tangível de progresso diário.",
+      "resposta": "**Técnicas práticas para evitar o overplanning:**\n\n1. **Adote micro-blocos matinais protegidos de 45 a 60 minutos e reserve os fins de semana para blocos de aprofundamento prático.**  \n   Isso ajuda a organizar o tempo de forma mais flexível e evita a sobrecarga de planejamento excessivo ([Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 46]).\n\n2. **Evite grades horárias fixas e adote um modelo de Ciclo de Estudos com blocos de 60 a 90 minutos.**  \n   Esse modelo é mais adaptável a imprevistos e reduz a frustração causada por mudanças inesperadas na rotina ([Fonte: ../api/data/artigo_17_study_cycle_perez.txt | Chunk ID: 40]).\n\n3. **Utilize a Técnica Pomodoro para transformar o tempo em um aliado métrico de esforço concluído.**  \n   A técnica intercala intervalos de esforço sustentado (25 minutos) com pausas curtas (5 minutos), reduzindo o atrito de inicialização da tarefa e oferecendo feedback visual de progresso ([Fonte: ../api/data/artigo_10_pomodoro_cirillo.txt | Chunk ID: 25]).",
+      "latencia_s": 29.39,
+      "tokens_resposta": 313,
+      "tokens_contexto": 681,
+      "d1": 0.7196224927902222,
+      "chamou_llm": true,
+      "chamadas_llm": 1,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "buscou",
+          "detalhe": "5 trechos, d1=0.720, corte=1.026",
+          "segundos": 0.15
+        },
+        {
+          "agente": "geração",
+          "acao": "respondeu",
+          "detalhe": "1016 caracteres",
+          "segundos": 29.24
+        }
+      ],
+      "avaliacao": {
+        "recusou": false,
+        "citados": [
+          "19",
+          "17",
+          "10"
+        ],
+        "tem_citacao": 1.0,
+        "cita_esperada": 1.0,
+        "precisao_citacao": 1.0,
+        "afirmacoes_contexto": [
+          {
+            "afirmacao": "Adote micro-blocos matinais protegidos de 45 a 60 minutos e reserve os fins de semana para blocos de aprofundamento prático.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Isso ajuda a organizar o tempo de forma mais flexível e evita a sobrecarga de planejamento excessivo.",
+            "sustentada": false
+          },
+          {
+            "afirmacao": "Evite grades horárias fixas e adote um modelo de Ciclo de Estudos com blocos de 60 a 90 minutos.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Esse modelo é mais adaptável a imprevistos e reduz a frustração causada por mudanças inesperadas na rotina.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Utilize a Técnica Pomodoro para transformar o tempo em um aliado métrico de esforço concluído.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "A técnica intercala intervalos de esforço sustentado (25 minutos) com pausas curtas (5 minutos), reduzindo o atrito de inicialização da tarefa e oferecendo feedback visual de progresso.",
+            "sustentada": true
+          }
+        ],
+        "fidelidade": 0.8333333333333334,
+        "afirmacoes_relevancia": [
+          {
+            "afirmacao": "Adote micro-blocos matinais protegidos de 45 a 60 minutos e reserve os fins de semana para blocos de aprofundamento prático.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Isso ajuda a organizar o tempo de forma mais flexível e evita a sobrecarga de planejamento excessivo.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Evite grades horárias fixas e adote um modelo de Ciclo de Estudos com blocos de 60 a 90 minutos.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Esse modelo é mais adaptável a imprevistos e reduz a frustração causada por mudanças inesperadas na rotina.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Utilize a Técnica Pomodoro para transformar o tempo em um aliado métrico de esforço concluído.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "A técnica intercala intervalos de esforço sustentado (25 minutos) com pausas curtas (5 minutos), reduzindo o atrito de inicialização da tarefa e oferecendo feedback visual de progresso.",
+            "relevante": true
+          }
+        ],
+        "relevancia": 1.0,
+        "fidelidade_base": 0.8333333333333334,
+        "origem_fidelidade_base": "piso: fidelidade ao contexto",
+        "pontos_cobertos": [
+          true,
+          true,
+          false
+        ],
+        "completude": 0.6666666666666666,
+        "sucesso": true
+      }
+    },
+    {
+      "id": "q04",
+      "tipo": "multi_fonte",
+      "pergunta": "Como devo priorizar os tópicos de um edital extenso ou trilha autodidata em vez de estudar tudo de forma linear, e como validar meu aprendizado prático?",
+      "esperadas": [
+        "artigo_16_pareto_engineering_box.txt",
+        "artigo_18_project_based_learning_thomas.txt"
+      ],
+      "pontos_chave": [
+        "Pareto: cerca de 80% das questões vêm de 20% do conteúdo",
+        "Mapear a incidência histórica dos tópicos e alocar mais tempo nos de maior recorrência",
+        "Validar construindo projetos reais e artefatos práticos verificáveis"
+      ],
+      "recuperados": [
+        "artigo_16_pareto_engineering_box.txt",
+        "artigo_18_project_based_learning_thomas.txt",
+        "artigo_03_interleaving_rohwer.txt",
+        "artigo_17_study_cycle_perez.txt",
+        "artigo_15_self_efficacy_bandura.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_16_pareto_engineering_box.txt | Chunk ID: 38] ---\nEm ementas extensas, matrizes curriculares e editais de concursos, cerca de 80% das questões e desafios práticos concentram-se em aproximadamente 20% do conteúdo programático nuclear. Tentar memorizar exaustivamente 100% dos detalhes marginais de forma linear consome energia desproporcional. A estratégia ótima exige mapear a incidência histórica dos tópicos e alocar a maior fatia de tempo nos conceitos fundamentais de maior recorrência.\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_18_project_based_learning_thomas.txt | Chunk ID: 43] ---\nO aprendizado autodidata de ciências exatas e tecnologia ganha eficácia superior quando ancorado na construção de projetos reais. A resolução de problemas autênticos estimula o raciocínio diagnóstico e a autonomia intelectual. O estudante passa da assimilação passiva de sintaxe para a aplicação contextualizada, construindo artefatos práticos verificáveis (código, modelos de machine learning, pipelines de dados) que validam o domínio conceitual.\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_03_interleaving_rohwer.txt | Chunk ID: 7] ---\nA prática em blocos (resolver dezenas de exercícios seguidos do mesmo tipo) cria proficiência ilusória imediata, mas fraco desempenho em testes futuros. Em contrapartida, a prática intercalada — alternar intencionalmente problemas de diferentes tópicos ou disciplinas na mesma sessão de estudos — desenvolve a habilidade de discriminação categórica\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_17_study_cycle_perez.txt | Chunk ID: 40] ---\nGrades horárias fixas (ex.: Segunda: Matéria X, Terça: Matéria Y) quebram sistematicamente quando surgem imprevistos na rotina adulta, gerando frustração e sensação de atraso. O modelo de Ciclo de Estudos organiza as matérias em uma sequência circular contínua com blocos de 60 a 90 minutos\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_15_self_efficacy_bandura.txt | Chunk ID: 36] ---\nA crença do indivíduo em sua capacidade intrínseca de concluir tarefas com sucesso determina o nível de persistência diante de obstáculos. A autoeficácia é fortalecida principalmente por experiências de domínio (sucessos práticos acumulados em microtarefas), modelagem social e redução de estados emocionais negativos de estresse. Plataformas de estudo devem fornecer registros explícitos de progressão incremental para elevar a percepção de competência do aluno.",
+      "resposta": "### Priorização dos Tópicos\n\n- **Foco nos 20% mais relevantes**: Em edital extenso ou trilha autodidata, cerca de 80% das questões e desafios práticos concentram-se em aproximadamente 20% do conteúdo programático nuclear. Priorize esses tópicos fundamentais, que têm maior incidência histórica e recorrência [Fonte: ../api/data/artigo_16_pareto_engineering_box.txt | Chunk ID: 38].\n\n- **Avaliação da incidência histórica dos tópicos**: Mapeie a frequência com que os tópicos aparecem em provas e desafios, e alocando mais tempo aos conceitos de maior recorrência [Fonte: ../api/data/artigo_16_pareto_engineering_box.txt | Chunk ID: 38].\n\n### Validação do Aprendizado Prático\n\n- **Construção de projetos reais**: O aprendizado autodidata em ciências exatas e tecnologia é mais eficaz quando ancorado na construção de projetos reais. A resolução de problemas autênticos estimula o raciocínio diagnóstico e a autonomia intelectual, permitindo que o estudante passe da assimilação passiva para a aplicação contextualizada, criando artefatos práticos verificáveis (como código, modelos de machine learning, pipelines de dados) que validam o domínio conceitual [Fonte: ../api/data/artigo_18_project_based_learning_thomas.txt | Chunk ID: 43].",
+      "latencia_s": 33.9,
+      "tokens_resposta": 348,
+      "tokens_contexto": 709,
+      "d1": 0.8164201378822327,
+      "chamou_llm": true,
+      "chamadas_llm": 1,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "buscou",
+          "detalhe": "5 trechos, d1=0.816, corte=1.026",
+          "segundos": 0.15
+        },
+        {
+          "agente": "geração",
+          "acao": "respondeu",
+          "detalhe": "1235 caracteres",
+          "segundos": 33.74
+        }
+      ],
+      "avaliacao": {
+        "recusou": false,
+        "citados": [
+          "16",
+          "18"
+        ],
+        "tem_citacao": 1.0,
+        "cita_esperada": 1.0,
+        "precisao_citacao": 1.0,
+        "afirmacoes_contexto": [
+          {
+            "afirmacao": "Em edital extenso ou trilha autodidata, cerca de 80% das questões e desafios práticos concentram-se em aproximadamente 20% do conteúdo programático nuclear.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Priorize esses tópicos fundamentais, que têm maior incidência histórica e recorrência.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Mapeie a frequência com que os tópicos aparecem em provas e desafios, e alocando mais tempo aos conceitos de maior recorrência.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "O aprendizado autodidata em ciências exatas e tecnologia é mais eficaz quando ancorado na construção de projetos reais.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "A resolução de problemas autênticos estimula o raciocínio diagnóstico e a autonomia intelectual, permitindo que o estudante passe da assimilação passiva para a aplicação contextualizada.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Estudantes podem criar artefatos práticos verificáveis (como código, modelos de machine learning, pipelines de dados) que validam o domínio conceitual.",
+            "sustentada": true
+          }
+        ],
+        "fidelidade": 1.0,
+        "afirmacoes_relevancia": [
+          {
+            "afirmacao": "Priorize os tópicos que representam cerca de 20% do conteúdo programático nuclear, pois eles são responsáveis por aproximadamente 80% das questões e desafios práticos.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Mapeie a frequência com que os tópicos aparecem em provas e desafios para alocar mais tempo aos conceitos de maior recorrência.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "O aprendizado autodidata é mais eficaz quando ancorado na construção de projetos reais.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "A resolução de problemas autênticos estimula o raciocínio diagnóstico e a autonomia intelectual.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Crie artefatos práticos verificáveis (como código, modelos de machine learning, pipelines de dados) para validar o domínio conceitual.",
+            "relevante": true
+          }
+        ],
+        "relevancia": 1.0,
+        "fidelidade_base": 1.0,
+        "origem_fidelidade_base": "piso: fidelidade ao contexto",
+        "pontos_cobertos": [
+          true,
+          true,
+          true
+        ],
+        "completude": 1.0,
+        "sucesso": true
+      }
+    },
+    {
+      "id": "q05",
+      "tipo": "parafraseada",
+      "pergunta": "Por que eu releio o material várias vezes e mesmo assim não consigo lembrar na hora da prova?",
+      "esperadas": [
+        "artigo_01_active_recall_karpicke.txt"
+      ],
+      "pontos_chave": [
+        "A releitura gera ilusão de competência, pois o reconhecimento passivo exige pouco esforço",
+        "A recuperação ativa (testes, questões sem consulta) retém melhor a longo prazo"
+      ],
+      "recuperados": [
+        "artigo_16_pareto_engineering_box.txt",
+        "artigo_01_active_recall_karpicke.txt",
+        "artigo_07_attention_residue_leroy.txt",
+        "artigo_03_interleaving_rohwer.txt",
+        "artigo_17_study_cycle_perez.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_16_pareto_engineering_box.txt | Chunk ID: 38] ---\nEm ementas extensas, matrizes curriculares e editais de concursos, cerca de 80% das questões e desafios práticos concentram-se em aproximadamente 20% do conteúdo programático nuclear. Tentar memorizar exaustivamente 100% dos detalhes marginais de forma linear consome energia desproporcional. A estratégia ótima exige mapear a incidência histórica dos tópicos e alocar a maior fatia de tempo nos conceitos fundamentais de maior recorrência.\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_01_active_recall_karpicke.txt | Chunk ID: 1] ---\nO estudo demonstra que a recuperação ativa de informações da memória produz efeitos substancialmente superiores na retenção de longo prazo quando comparada à releitura repetida. Estudantes que apenas leem e releem materiais experimentam uma falsa sensação de domínio (ilusão de competência), pois o reconhecimento passivo demanda baixo esforço neural\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_07_attention_residue_leroy.txt | Chunk ID: 19] ---\nQuando uma pessoa muda o foco de uma Tarefa A para uma Tarefa B, a atenção não migra instantaneamente. Uma parcela significativa da atenção permanece fixada na tarefa anterior (resíduo de atenção). Esse efeito é acentuado se a Tarefa A foi interrompida antes da conclusão. Alternar frequentemente entre celular, notificações e estudo técnico gera dispersão cumulativa crônica, degradando o desempenho e a velocidade de raciocínio lógico.\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_03_interleaving_rohwer.txt | Chunk ID: 7] ---\nA prática em blocos (resolver dezenas de exercícios seguidos do mesmo tipo) cria proficiência ilusória imediata, mas fraco desempenho em testes futuros. Em contrapartida, a prática intercalada — alternar intencionalmente problemas de diferentes tópicos ou disciplinas na mesma sessão de estudos — desenvolve a habilidade de discriminação categórica\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_17_study_cycle_perez.txt | Chunk ID: 40] ---\nGrades horárias fixas (ex.: Segunda: Matéria X, Terça: Matéria Y) quebram sistematicamente quando surgem imprevistos na rotina adulta, gerando frustração e sensação de atraso. O modelo de Ciclo de Estudos organiza as matérias em uma sequência circular contínua com blocos de 60 a 90 minutos",
+      "resposta": "**Por que você releia o material várias vezes e mesmo assim não consegue lembrar na hora da prova?**\n\n- **Efeitos da releitura repetida:** A releitura repetida gera uma falsa sensação de domínio, pois o reconhecimento passivo demanda baixo esforço neural, o que pode levar a uma ilusão de competência ([Fonte: ../api/data/artigo_01_active_recall_karpicke.txt | Chunk ID: 1]).\n\n- **Falta de recuperação ativa:** A retenção de longo prazo é significativamente melhor quando se pratica a recuperação ativa de informações, em vez de apenas ler e releer ([Fonte: ../api/data/artigo_01_active_recall_karpicke.txt | Chunk ID: 1]).\n\n- **Concentração em detalhes marginais:** Em matérias extensas, cerca de 80% das questões concentram-se em aproximadamente 20% do conteúdo nuclear. Memorizar exaustivamente detalhes marginais consome energia desproporcional, enquanto a estratégia ótima é focar nos conceitos fundamentais ([Fonte: ../api/data/artigo_16_pareto_engineering_box.txt | Chunk ID: 38]).\n\n- **Prática em blocos vs. prática intercalada:** A prática em blocos (resolver exercícios do mesmo tipo seguidamente) cria proficiência ilusória, mas fraco desempenho em testes futuros. Já a prática intercalada, que alternar intencionalmente problemas de diferentes tópicos, desenvolve a habilidade de discriminação categórica ([Fonte: ../api/data/artigo_03_interleaving_rohwer.txt | Chunk ID: 7]).",
+      "latencia_s": 34.49,
+      "tokens_resposta": 401,
+      "tokens_contexto": 685,
+      "d1": 0.7815297842025757,
+      "chamou_llm": true,
+      "chamadas_llm": 1,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "buscou",
+          "detalhe": "5 trechos, d1=0.782, corte=1.026",
+          "segundos": 0.14
+        },
+        {
+          "agente": "geração",
+          "acao": "respondeu",
+          "detalhe": "1388 caracteres",
+          "segundos": 34.34
+        }
+      ],
+      "avaliacao": {
+        "recusou": false,
+        "citados": [
+          "01",
+          "16",
+          "03"
+        ],
+        "tem_citacao": 1.0,
+        "cita_esperada": 1.0,
+        "precisao_citacao": 1.0,
+        "afirmacoes_contexto": [
+          {
+            "afirmacao": "A releitura repetida gera uma falsa sensação de domínio, pois o reconhecimento passivo demanda baixo esforço neural, o que pode levar a uma ilusão de competência.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "A retenção de longo prazo é significativamente melhor quando se pratica a recuperação ativa de informações, em vez de apenas ler e releer.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Em matérias extensas, cerca de 80% das questões concentram-se em aproximadamente 20% do conteúdo nuclear.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Memorizar exaustivamente detalhes marginais consome energia desproporcional, enquanto a estratégia ótima é focar nos conceitos fundamentais.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "A prática em blocos (resolver exercícios do mesmo tipo seguidamente) cria proficiência ilusória, mas fraco desempenho em testes futuros.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Já a prática intercalada, que alternar intencionalmente problemas de diferentes tópicos, desenvolve a habilidade de discriminação categórica.",
+            "sustentada": true
+          }
+        ],
+        "fidelidade": 1.0,
+        "afirmacoes_relevancia": [
+          {
+            "afirmacao": "A releitura repetida gera uma falsa sensação de domínio, pois o reconhecimento passivo demanda baixo esforço neural, o que pode levar a uma ilusão de competência.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "A retenção de longo prazo é significativamente melhor quando se pratica a recuperação ativa de informações, em vez de apenas ler e releer.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Em matérias extensas, cerca de 80% das questões concentram-se em aproximadamente 20% do conteúdo nuclear. Memorizar exaustivamente detalhes marginais consome energia desproporcional, enquanto a estratégia ótima é focar nos conceitos fundamentais.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "A prática em blocos (resolver exercícios do mesmo tipo seguidamente) cria proficiência ilusória, mas fraco desempenho em testes futuros. Já a prática intercalada, que alternar intencionalmente problemas de diferentes tópicos, desenvolve a habilidade de discriminação categórica.",
+            "relevante": true
+          }
+        ],
+        "relevancia": 1.0,
+        "fidelidade_base": 1.0,
+        "origem_fidelidade_base": "piso: fidelidade ao contexto",
+        "pontos_cobertos": [
+          true,
+          true
+        ],
+        "completude": 1.0,
+        "sucesso": true
+      }
+    },
+    {
+      "id": "q06",
+      "tipo": "direta",
+      "pergunta": "Como devo espaçar minhas revisões antes de uma prova?",
+      "esperadas": [
+        "artigo_02_spaced_repetition_cepeda.txt"
+      ],
+      "pontos_chave": [
+        "Quanto mais distante a avaliação, maior o espaçamento entre as revisões",
+        "Priorizar itens com menor taxa de acerto recente"
+      ],
+      "recuperados": [
+        "artigo_02_spaced_repetition_cepeda.txt",
+        "artigo_19_dual_burden_clt_martins.txt",
+        "artigo_03_interleaving_rohwer.txt",
+        "artigo_17_study_cycle_perez.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_02_spaced_repetition_cepeda.txt | Chunk ID: 4] ---\nA prática distribuída (repetição espaçada) supera consistentemente a prática concentrada (estudo intensivo de última hora). O intervalo ideal entre sessões de estudo depende do intervalo de retenção desejado: quanto mais distante for o momento da avaliação final, maior deve ser o espaçamento temporal entre as revisões. Sessões de estudo espaçadas forçam o cérebro a reconstruir o traço de memória quase esquecido, o que fortalece a estabilidade do armazenamento a longo prazo\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 46] ---\n. A recomendação consiste em adotar micro-blocos matinais protegidos de 45 a 60 minutos e utilizar fins de semana para blocos de aprofundamento prático, preservando descanso para prevenção de esgotamento (burnout).\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_02_spaced_repetition_cepeda.txt | Chunk ID: 5] ---\n. Sistemas de repetição espaçada devem priorizar itens com menor taxa de acerto recente, recalculando dinamicamente os intervalos de revisão.\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_03_interleaving_rohwer.txt | Chunk ID: 7] ---\nA prática em blocos (resolver dezenas de exercícios seguidos do mesmo tipo) cria proficiência ilusória imediata, mas fraco desempenho em testes futuros. Em contrapartida, a prática intercalada — alternar intencionalmente problemas de diferentes tópicos ou disciplinas na mesma sessão de estudos — desenvolve a habilidade de discriminação categórica\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_17_study_cycle_perez.txt | Chunk ID: 39] ---\nTÍTULO: Dynamic Study Cycles vs. Fixed Timetables in High-Stakes Exam Preparation\nAUTORES: Alexandre Meirelles, Carlos R. Perez (2015, Educational Management Review)\nTEMA: Ciclo de Estudos Flexível vs. Grade Horária Rígida",
+      "resposta": "**Como devo espaçar minhas revisões antes de uma prova?**\n\n- **Espaçamento baseado no intervalo de retenção:** O intervalo ideal entre sessões de estudo deve ser maior quanto mais distante for o momento da avaliação final. Isso significa que, quanto mais tempo antes da prova, maior deve ser o espaçamento entre as revisões ([Fonte: ../api/data/artigo_02_spaced_repetition_cepeda.txt | Chunk ID: 4]).\n\n- **Priorizar itens com menor taxa de acerto recente:** Sistemas de repetição espaçada devem focar em itens que têm menor taxa de acerto recente, recalculando dinamicamente os intervalos de revisão ([Fonte: ../api/data/artigo_02_spaced_repetition_cepeda.txt | Chunk ID: 5]).\n\n- **Combinação com outros métodos de estudo:** Para otimizar o desempenho, é recomendável adotar micro-blocos matinais protegidos de 45 a 60 minutos e utilizar fins de semana para blocos de aprofundamento prático, preservando descanso para prevenção de esgotamento ([Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 46]).",
+      "latencia_s": 27.69,
+      "tokens_resposta": 290,
+      "tokens_contexto": 551,
+      "d1": 0.6898932456970215,
+      "chamou_llm": true,
+      "chamadas_llm": 1,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "buscou",
+          "detalhe": "5 trechos, d1=0.690, corte=1.026",
+          "segundos": 0.15
+        },
+        {
+          "agente": "geração",
+          "acao": "respondeu",
+          "detalhe": "1019 caracteres",
+          "segundos": 27.54
+        }
+      ],
+      "avaliacao": {
+        "recusou": false,
+        "citados": [
+          "02",
+          "19"
+        ],
+        "tem_citacao": 1.0,
+        "cita_esperada": 1.0,
+        "precisao_citacao": 1.0,
+        "afirmacoes_contexto": [
+          {
+            "afirmacao": "O intervalo ideal entre sessões de estudo deve ser maior quanto mais distante for o momento da avaliação final.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Sistemas de repetição espaçada devem focar em itens que têm menor taxa de acerto recente, recalculando dinamicamente os intervalos de revisão.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "É recomendável adotar micro-blocos matinais protegidos de 45 a 60 minutos e utilizar fins de semana para blocos de aprofundamento prático, preservando descanso para prevenção de esgotamento.",
+            "sustentada": true
+          }
+        ],
+        "fidelidade": 1.0,
+        "afirmacoes_relevancia": [
+          {
+            "afirmacao": "O intervalo ideal entre sessões de estudo deve ser maior quanto mais distante for o momento da avaliação final.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Quanto mais tempo antes da prova, maior deve ser o espaçamento entre as revisões.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Sistemas de repetição espaçada devem focar em itens que têm menor taxa de acerto recente.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Os intervalos de revisão devem ser recalculados dinamicamente.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "É recomendável adotar micro-blocos matinais protegidos de 45 a 60 minutos.",
+            "relevante": false
+          },
+          {
+            "afirmacao": "Utilizar fins de semana para blocos de aprofundamento prático é recomendado.",
+            "relevante": false
+          },
+          {
+            "afirmacao": "É importante preservar descanso para prevenção de esgotamento.",
+            "relevante": false
+          }
+        ],
+        "relevancia": 0.5714285714285714,
+        "fidelidade_base": 1.0,
+        "origem_fidelidade_base": "piso: fidelidade ao contexto",
+        "pontos_cobertos": [
+          true,
+          true
+        ],
+        "completude": 1.0,
+        "sucesso": true
+      }
+    },
+    {
+      "id": "q07",
+      "tipo": "parafraseada",
+      "pergunta": "Adianta resolver 30 exercícios do mesmo tipo de uma vez só?",
+      "esperadas": [
+        "artigo_03_interleaving_rohwer.txt"
+      ],
+      "pontos_chave": [
+        "Prática em blocos dá proficiência ilusória e fraco desempenho futuro",
+        "Alternar problemas de tópicos diferentes desenvolve a discriminação de estratégias"
+      ],
+      "recuperados": [
+        "artigo_03_interleaving_rohwer.txt",
+        "artigo_07_attention_residue_leroy.txt",
+        "artigo_02_spaced_repetition_cepeda.txt",
+        "artigo_11_temporal_motivation_steel.txt",
+        "artigo_19_dual_burden_clt_martins.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_03_interleaving_rohwer.txt | Chunk ID: 7] ---\nA prática em blocos (resolver dezenas de exercícios seguidos do mesmo tipo) cria proficiência ilusória imediata, mas fraco desempenho em testes futuros. Em contrapartida, a prática intercalada — alternar intencionalmente problemas de diferentes tópicos ou disciplinas na mesma sessão de estudos — desenvolve a habilidade de discriminação categórica\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_07_attention_residue_leroy.txt | Chunk ID: 19] ---\nQuando uma pessoa muda o foco de uma Tarefa A para uma Tarefa B, a atenção não migra instantaneamente. Uma parcela significativa da atenção permanece fixada na tarefa anterior (resíduo de atenção). Esse efeito é acentuado se a Tarefa A foi interrompida antes da conclusão. Alternar frequentemente entre celular, notificações e estudo técnico gera dispersão cumulativa crônica, degradando o desempenho e a velocidade de raciocínio lógico.\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_02_spaced_repetition_cepeda.txt | Chunk ID: 4] ---\nA prática distribuída (repetição espaçada) supera consistentemente a prática concentrada (estudo intensivo de última hora). O intervalo ideal entre sessões de estudo depende do intervalo de retenção desejado: quanto mais distante for o momento da avaliação final, maior deve ser o espaçamento temporal entre as revisões. Sessões de estudo espaçadas forçam o cérebro a reconstruir o traço de memória quase esquecido, o que fortalece a estabilidade do armazenamento a longo prazo\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_11_temporal_motivation_steel.txt | Chunk ID: 28] ---\n. Para neutralizar esse mecanismo, deve-se decompor metas longas em marcos semanais com feedback rápido.\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 46] ---\n. A recomendação consiste em adotar micro-blocos matinais protegidos de 45 a 60 minutos e utilizar fins de semana para blocos de aprofundamento prático, preservando descanso para prevenção de esgotamento (burnout).",
+      "resposta": "**Resposta:**\n\n- **Não, adianta resolver 30 exercícios do mesmo tipo de uma vez só.**  \n  A prática em blocos (resolver dezenas de exercícios seguidos do mesmo tipo) cria proficiência ilusória imediata, mas resulta em fraco desempenho em testes futuros. [Fonte: ../api/data/artigo_03_interleaving_rohwer.txt | Chunk ID: 7]",
+      "latencia_s": 13.51,
+      "tokens_resposta": 103,
+      "tokens_contexto": 606,
+      "d1": 0.8298887014389038,
+      "chamou_llm": true,
+      "chamadas_llm": 1,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "buscou",
+          "detalhe": "5 trechos, d1=0.830, corte=1.026",
+          "segundos": 0.14
+        },
+        {
+          "agente": "geração",
+          "acao": "respondeu",
+          "detalhe": "322 caracteres",
+          "segundos": 13.37
+        }
+      ],
+      "avaliacao": {
+        "recusou": false,
+        "citados": [
+          "03"
+        ],
+        "tem_citacao": 1.0,
+        "cita_esperada": 1.0,
+        "precisao_citacao": 1.0,
+        "afirmacoes_contexto": [
+          {
+            "afirmacao": "Resolver 30 exercícios do mesmo tipo de uma vez só não é útil.",
+            "sustentada": true
+          }
+        ],
+        "fidelidade": 1.0,
+        "afirmacoes_relevancia": [
+          {
+            "afirmacao": "Não, adianta resolver 30 exercícios do mesmo tipo de uma vez só.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "A prática em blocos cria proficiência ilusória imediata.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Isso resulta em fraco desempenho em testes futuros.",
+            "relevante": true
+          }
+        ],
+        "relevancia": 1.0,
+        "fidelidade_base": 1.0,
+        "origem_fidelidade_base": "piso: fidelidade ao contexto",
+        "pontos_cobertos": [
+          true,
+          false
+        ],
+        "completude": 0.5,
+        "sucesso": false
+      }
+    },
+    {
+      "id": "q08",
+      "tipo": "parafraseada",
+      "pergunta": "Estudar com um monte de abas e aplicativos abertos atrapalha o aprendizado?",
+      "esperadas": [
+        "artigo_04_cognitive_load_sweller.txt"
+      ],
+      "pontos_chave": [
+        "A memória de trabalho comporta só cerca de 4 a 7 elementos",
+        "Material e interfaces desorganizados geram carga extrínseca que consome capacidade cognitiva"
+      ],
+      "recuperados": [
+        "artigo_04_cognitive_load_sweller.txt",
+        "artigo_07_attention_residue_leroy.txt",
+        "artigo_03_interleaving_rohwer.txt",
+        "artigo_17_study_cycle_perez.txt",
+        "artigo_19_dual_burden_clt_martins.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_04_cognitive_load_sweller.txt | Chunk ID: 11] ---\n. Ferramentas de estudo eficientes devem minimizar a carga extrínseca (telas poluídas, excesso de configurações) para liberar largura de banda cognitiva voltada à assimilação do conteúdo complexo.\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_07_attention_residue_leroy.txt | Chunk ID: 19] ---\nQuando uma pessoa muda o foco de uma Tarefa A para uma Tarefa B, a atenção não migra instantaneamente. Uma parcela significativa da atenção permanece fixada na tarefa anterior (resíduo de atenção). Esse efeito é acentuado se a Tarefa A foi interrompida antes da conclusão. Alternar frequentemente entre celular, notificações e estudo técnico gera dispersão cumulativa crônica, degradando o desempenho e a velocidade de raciocínio lógico.\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_03_interleaving_rohwer.txt | Chunk ID: 7] ---\nA prática em blocos (resolver dezenas de exercícios seguidos do mesmo tipo) cria proficiência ilusória imediata, mas fraco desempenho em testes futuros. Em contrapartida, a prática intercalada — alternar intencionalmente problemas de diferentes tópicos ou disciplinas na mesma sessão de estudos — desenvolve a habilidade de discriminação categórica\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_17_study_cycle_perez.txt | Chunk ID: 40] ---\nGrades horárias fixas (ex.: Segunda: Matéria X, Terça: Matéria Y) quebram sistematicamente quando surgem imprevistos na rotina adulta, gerando frustração e sensação de atraso. O modelo de Ciclo de Estudos organiza as matérias em uma sequência circular contínua com blocos de 60 a 90 minutos\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 45] ---\nTrabalhadores em regime integral que estudam à noite ou aos finais de semana enfrentam a 'pobreza crônica de tempo'. O estresse acumulado no trabalho reduz a capacidade de concentração estendida. O planejamento para esse perfil não pode pressupor rotinas ideais de 6 horas de estudo diário",
+      "resposta": "Sim, estudar com um monte de abas e aplicativos abertos atrapalha o aprendizado. Isso ocorre porque a presença de múltiplas telas e configurações pode aumentar a carga extrínseca, ocupando a largura de banda cognitiva e dificultando a assimilação do conteúdo complexo [Fonte: ../api/data/artigo_04_cognitive_load_sweller.txt | Chunk ID: 11]. Além disso, alternar frequentemente entre diferentes tarefas, como estudar e verificar notificações, gera um resíduo de atenção, o que pode levar a uma dispersão cumulativa crônica e degradar o desempenho e a velocidade de raciocínio lógico [Fonte: ../api/data/artigo_07_attention_residue_leroy.txt | Chunk ID: 19].",
+      "latencia_s": 19.8,
+      "tokens_resposta": 196,
+      "tokens_contexto": 606,
+      "d1": 0.778566837310791,
+      "chamou_llm": true,
+      "chamadas_llm": 1,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "buscou",
+          "detalhe": "5 trechos, d1=0.779, corte=1.026",
+          "segundos": 0.14
+        },
+        {
+          "agente": "geração",
+          "acao": "respondeu",
+          "detalhe": "657 caracteres",
+          "segundos": 19.66
+        }
+      ],
+      "avaliacao": {
+        "recusou": false,
+        "citados": [
+          "04",
+          "07"
+        ],
+        "tem_citacao": 1.0,
+        "cita_esperada": 1.0,
+        "precisao_citacao": 1.0,
+        "afirmacoes_contexto": [
+          {
+            "afirmacao": "Estudar com um monte de abas e aplicativos abertos atrapalha o aprendizado.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "A presença de múltiplas telas e configurações pode aumentar a carga extrínseca.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Aumentar a carga extrínseca ocupa a largura de banda cognitiva.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Ocupar a largura de banda cognitiva dificulta a assimilação do conteúdo complexo.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Alternar frequentemente entre diferentes tarefas, como estudar e verificar notificações, gera um resíduo de atenção.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "O resíduo de atenção pode levar a uma dispersão cumulativa crônica.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "A dispersão cumulativa crônica degrada o desempenho e a velocidade de raciocínio lógico.",
+            "sustentada": true
+          }
+        ],
+        "fidelidade": 1.0,
+        "afirmacoes_relevancia": [
+          {
+            "afirmacao": "Estudar com um monte de abas e aplicativos abertos atrapalha o aprendizado.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "A presença de múltiplas telas e configurações pode aumentar a carga extrínseca.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Isso ocupa a largura de banda cognitiva.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Dificulta a assimilação do conteúdo complexo.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Alternar frequentemente entre diferentes tarefas, como estudar e verificar notificações, gera um resíduo de atenção.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Isso pode levar a uma dispersão cumulativa crônica.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Pode degradar o desempenho e a velocidade de raciocínio lógico.",
+            "relevante": true
+          }
+        ],
+        "relevancia": 1.0,
+        "fidelidade_base": 1.0,
+        "origem_fidelidade_base": "piso: fidelidade ao contexto",
+        "pontos_cobertos": [
+          false,
+          true
+        ],
+        "completude": 0.5,
+        "sucesso": false
+      }
+    },
+    {
+      "id": "q09",
+      "tipo": "parafraseada",
+      "pergunta": "Dá para dormir só 5 horas para ter mais tempo de estudar de madrugada?",
+      "esperadas": [
+        "artigo_05_sleep_consolidation_walker.txt"
+      ],
+      "pontos_chave": [
+        "Dormir menos de 7 horas deteriora foco e consolidação da memória",
+        "As horas de estudo na madrugada tornam-se ineficazes"
+      ],
+      "recuperados": [
+        "artigo_05_sleep_consolidation_walker.txt",
+        "artigo_19_dual_burden_clt_martins.txt",
+        "artigo_06_deep_work_newport.txt",
+        "artigo_14_willpower_depletion_baumeister.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_05_sleep_consolidation_walker.txt | Chunk ID: 14] ---\n. Reduzir o tempo de sono para menos de 7 horas diárias deteriora a capacidade de foco, aumenta a reatividade emocional e bloqueia a potenciação de longo prazo (LTP), tornando ineficazes as horas de estudo acumuladas na madrugada.\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 45] ---\nTrabalhadores em regime integral que estudam à noite ou aos finais de semana enfrentam a 'pobreza crônica de tempo'. O estresse acumulado no trabalho reduz a capacidade de concentração estendida. O planejamento para esse perfil não pode pressupor rotinas ideais de 6 horas de estudo diário\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_06_deep_work_newport.txt | Chunk ID: 17] ---\n. A capacidade de sustentar de 2 a 4 horas de trabalho profundo diário com zero distrações digitais é o diferencial crítico para alto rendimento acadêmico e técnico.\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 46] ---\n. A recomendação consiste em adotar micro-blocos matinais protegidos de 45 a 60 minutos e utilizar fins de semana para blocos de aprofundamento prático, preservando descanso para prevenção de esgotamento (burnout).\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_14_willpower_depletion_baumeister.txt | Chunk ID: 34] ---\nO autocontrole e a capacidade de tomada de decisão consciente operam como um recurso cognitivo finito que se desgasta ao longo do dia. Indivíduos que precisam tomar centenas de decisões operacionais no trabalho chegam ao período noturno com recursos volitivos exauridos. Estudantes trabalhadores devem reservar horários de estudo antes do início do expediente de trabalho ou adotar regras predefinidas que eliminem a decisão sobre o que estudar a cada noite.",
+      "resposta": "Não é recomendável dormir só 5 horas para ter mais tempo de estudar de madrugada. Reduzir o tempo de sono para menos de 7 horas diárias deteriora a capacidade de foco, aumenta a reatividade emocional e bloqueia a potenciação de longo prazo (LTP), tornando ineficazes as horas de estudo acumuladas na madrugada [Fonte: ../api/data/artigo_05_sleep_consolidation_walker.txt | Chunk ID: 14].",
+      "latencia_s": 13.12,
+      "tokens_resposta": 114,
+      "tokens_contexto": 544,
+      "d1": 0.6377694010734558,
+      "chamou_llm": true,
+      "chamadas_llm": 1,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "buscou",
+          "detalhe": "5 trechos, d1=0.638, corte=1.026",
+          "segundos": 0.14
+        },
+        {
+          "agente": "geração",
+          "acao": "respondeu",
+          "detalhe": "387 caracteres",
+          "segundos": 12.97
+        }
+      ],
+      "avaliacao": {
+        "recusou": false,
+        "citados": [
+          "05"
+        ],
+        "tem_citacao": 1.0,
+        "cita_esperada": 1.0,
+        "precisao_citacao": 1.0,
+        "afirmacoes_contexto": [
+          {
+            "afirmacao": "Não é recomendável dormir só 5 horas para ter mais tempo de estudar de madrugada.",
+            "sustentada": false
+          },
+          {
+            "afirmacao": "Reduzir o tempo de sono para menos de 7 horas diárias deteriora a capacidade de foco, aumenta a reatividade emocional e bloqueia a potenciação de longo prazo (LTP).",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Isso torna ineficazes as horas de estudo acumuladas na madrugada.",
+            "sustentada": true
+          }
+        ],
+        "fidelidade": 0.6666666666666666,
+        "afirmacoes_relevancia": [
+          {
+            "afirmacao": "Não é recomendável dormir só 5 horas para ter mais tempo de estudar de madrugada.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Reduzir o tempo de sono para menos de 7 horas diárias deteriora a capacidade de foco.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Reduzir o tempo de sono para menos de 7 horas diárias aumenta a reatividade emocional.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Reduzir o tempo de sono para menos de 7 horas diárias bloqueia a potenciação de longo prazo (LTP).",
+            "relevante": true
+          },
+          {
+            "afirmacao": "A LTP bloqueada torna ineficazes as horas de estudo acumuladas na madrugada.",
+            "relevante": true
+          }
+        ],
+        "relevancia": 1.0,
+        "fidelidade_base": 0.6666666666666666,
+        "origem_fidelidade_base": "piso: fidelidade ao contexto",
+        "pontos_cobertos": [
+          true,
+          true
+        ],
+        "completude": 1.0,
+        "sucesso": false
+      }
+    },
+    {
+      "id": "q10",
+      "tipo": "direta",
+      "pergunta": "O que é trabalho profundo e quantas horas por dia consigo manter esse foco?",
+      "esperadas": [
+        "artigo_06_deep_work_newport.txt"
+      ],
+      "pontos_chave": [
+        "Atividade intelectual em foco ininterrupto, sem distrações",
+        "Capacidade de sustentar de 2 a 4 horas diárias de trabalho profundo"
+      ],
+      "recuperados": [
+        "artigo_06_deep_work_newport.txt",
+        "artigo_19_dual_burden_clt_martins.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_06_deep_work_newport.txt | Chunk ID: 16] ---\nO trabalho profundo (Deep Work) consiste em atividades profissionais ou intelectuais realizadas em estado de foco ininterrupto, empurrando as capacidades cognitivas ao limite. Essas sessões criam novo valor e aprimoram habilidades difíceis de replicar. Por outro lado, o trabalho superficial (responder mensagens, reorganizar itens estéticos) não exige esforço sustentado e cria a ilusão de produtividade\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_06_deep_work_newport.txt | Chunk ID: 17] ---\n. A capacidade de sustentar de 2 a 4 horas de trabalho profundo diário com zero distrações digitais é o diferencial crítico para alto rendimento acadêmico e técnico.\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_06_deep_work_newport.txt | Chunk ID: 15] ---\nTÍTULO: Deep Work: Rules for Focused Success in a Distracted World\nAUTORES: Cal Newport (2016, MIT Press / Grand Central Publishing)\nTEMA: Trabalho Profundo vs. Fragmentação Cognitiva\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 45] ---\nTrabalhadores em regime integral que estudam à noite ou aos finais de semana enfrentam a 'pobreza crônica de tempo'. O estresse acumulado no trabalho reduz a capacidade de concentração estendida. O planejamento para esse perfil não pode pressupor rotinas ideais de 6 horas de estudo diário\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 46] ---\n. A recomendação consiste em adotar micro-blocos matinais protegidos de 45 a 60 minutos e utilizar fins de semana para blocos de aprofundamento prático, preservando descanso para prevenção de esgotamento (burnout).",
+      "resposta": "**Trabalho Profundo**  \nO trabalho profundo consiste em atividades profissionais ou intelectuais realizadas em estado de foco ininterrupto, empurrando as capacidades cognitivas ao limite. Essas sessões criam novo valor e aprimoram habilidades difíceis de replicar. ([Fonte: ../api/data/artigo_06_deep_work_newport.txt | Chunk ID: 16])\n\n**Quantas horas por dia consigo manter esse foco?**  \nA capacidade de sustentar de 2 a 4 horas de trabalho profundo diário com zero distrações digitais é o diferencial crítico para alto rendimento acadêmico e técnico. ([Fonte: ../api/data/artigo_06_deep_work_newport.txt | Chunk ID: 17])",
+      "latencia_s": 17.38,
+      "tokens_resposta": 174,
+      "tokens_contexto": 505,
+      "d1": 0.5952271223068237,
+      "chamou_llm": true,
+      "chamadas_llm": 1,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "buscou",
+          "detalhe": "5 trechos, d1=0.595, corte=1.026",
+          "segundos": 0.15
+        },
+        {
+          "agente": "geração",
+          "acao": "respondeu",
+          "detalhe": "623 caracteres",
+          "segundos": 17.24
+        }
+      ],
+      "avaliacao": {
+        "recusou": false,
+        "citados": [
+          "06"
+        ],
+        "tem_citacao": 1.0,
+        "cita_esperada": 1.0,
+        "precisao_citacao": 1.0,
+        "afirmacoes_contexto": [
+          {
+            "afirmacao": "O trabalho profundo consiste em atividades profissionais ou intelectuais realizadas em estado de foco ininterrupto, empurrando as capacidades cognitivas ao limite.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Essas sessões criam novo valor e aprimoram habilidades difíceis de replicar.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "A capacidade de sustentar de 2 a 4 horas de trabalho profundo diário com zero distrações digitais é o diferencial crítico para alto rendimento acadêmico e técnico.",
+            "sustentada": true
+          }
+        ],
+        "fidelidade": 1.0,
+        "afirmacoes_relevancia": [
+          {
+            "afirmacao": "O trabalho profundo consiste em atividades profissionais ou intelectuais realizadas em estado de foco ininterrupto.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Essas sessões criam novo valor e aprimoram habilidades difíceis de replicar.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "A capacidade de sustentar de 2 a 4 horas de trabalho profundo diário com zero distrações digitais é o diferencial crítico para alto rendimento acadêmico e técnico.",
+            "relevante": true
+          }
+        ],
+        "relevancia": 1.0,
+        "fidelidade_base": 1.0,
+        "origem_fidelidade_base": "piso: fidelidade ao contexto",
+        "pontos_cobertos": [
+          true,
+          true
+        ],
+        "completude": 1.0,
+        "sucesso": true
+      }
+    },
+    {
+      "id": "q11",
+      "tipo": "parafraseada",
+      "pergunta": "Por que, depois de olhar o celular no meio do estudo, eu demoro tanto para voltar a me concentrar?",
+      "esperadas": [
+        "artigo_07_attention_residue_leroy.txt"
+      ],
+      "pontos_chave": [
+        "Resíduo de atenção: parte da atenção fica presa na tarefa anterior",
+        "O efeito é maior quando a tarefa foi interrompida antes de concluir"
+      ],
+      "recuperados": [
+        "artigo_07_attention_residue_leroy.txt",
+        "artigo_02_spaced_repetition_cepeda.txt",
+        "artigo_05_sleep_consolidation_walker.txt",
+        "artigo_19_dual_burden_clt_martins.txt",
+        "artigo_12_perfectionism_flett.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_07_attention_residue_leroy.txt | Chunk ID: 19] ---\nQuando uma pessoa muda o foco de uma Tarefa A para uma Tarefa B, a atenção não migra instantaneamente. Uma parcela significativa da atenção permanece fixada na tarefa anterior (resíduo de atenção). Esse efeito é acentuado se a Tarefa A foi interrompida antes da conclusão. Alternar frequentemente entre celular, notificações e estudo técnico gera dispersão cumulativa crônica, degradando o desempenho e a velocidade de raciocínio lógico.\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_02_spaced_repetition_cepeda.txt | Chunk ID: 4] ---\nA prática distribuída (repetição espaçada) supera consistentemente a prática concentrada (estudo intensivo de última hora). O intervalo ideal entre sessões de estudo depende do intervalo de retenção desejado: quanto mais distante for o momento da avaliação final, maior deve ser o espaçamento temporal entre as revisões. Sessões de estudo espaçadas forçam o cérebro a reconstruir o traço de memória quase esquecido, o que fortalece a estabilidade do armazenamento a longo prazo\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_05_sleep_consolidation_walker.txt | Chunk ID: 14] ---\n. Reduzir o tempo de sono para menos de 7 horas diárias deteriora a capacidade de foco, aumenta a reatividade emocional e bloqueia a potenciação de longo prazo (LTP), tornando ineficazes as horas de estudo acumuladas na madrugada.\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 45] ---\nTrabalhadores em regime integral que estudam à noite ou aos finais de semana enfrentam a 'pobreza crônica de tempo'. O estresse acumulado no trabalho reduz a capacidade de concentração estendida. O planejamento para esse perfil não pode pressupor rotinas ideais de 6 horas de estudo diário\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_12_perfectionism_flett.txt | Chunk ID: 30] ---\nO perfeccionismo desadaptativo está correlacionado à procrastinação crônica e à paralisia por análise. O medo do fracasso e a intolerância a erros fazem com que o indivíduo sobrecarregue a fase de planejamento como forma inconsciente de adiar o confronto prático com a tarefa. Esse mecanismo se manifesta na customização obsessiva de notas, cronogramas irrealistas e relutância em submeter seus conhecimentos a testes simulados.",
+      "resposta": "**Por que, depois de olhar o celular no meio do estudo, você demora tanto para voltar a se concentrar?**\n\n- **Resíduo de atenção**: Quando você muda o foco de uma tarefa (como estudo) para outra (como o celular), uma parcela significativa da atenção permanece fixada na tarefa anterior, resultando em um resíduo de atenção. Esse efeito é acentuado se a tarefa original foi interrompida antes da conclusão. Isso faz com que você demore para voltar ao foco original, pois a mente ainda está parcialmente ligada à tarefa anterior ([Fonte: ../api/data/artigo_07_attention_residue_leroy.txt | Chunk ID: 19]). \n\n- **Dispersão cumulativa**: Alternar frequentemente entre celular, notificações e estudo técnico gera uma dispersão cumulativa crônica, que degrada o desempenho e a velocidade de raciocínio lógico. Isso também contribui para a dificuldade de recuperação da concentração após interrupções ([Fonte: ../api/data/artigo_07_attention_residue_leroy.txt | Chunk ID: 19]).",
+      "latencia_s": 25.92,
+      "tokens_resposta": 276,
+      "tokens_contexto": 683,
+      "d1": 0.6463181972503662,
+      "chamou_llm": true,
+      "chamadas_llm": 1,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "buscou",
+          "detalhe": "5 trechos, d1=0.646, corte=1.026",
+          "segundos": 0.14
+        },
+        {
+          "agente": "geração",
+          "acao": "respondeu",
+          "detalhe": "970 caracteres",
+          "segundos": 25.78
+        }
+      ],
+      "avaliacao": {
+        "recusou": false,
+        "citados": [
+          "07"
+        ],
+        "tem_citacao": 1.0,
+        "cita_esperada": 1.0,
+        "precisao_citacao": 1.0,
+        "afirmacoes_contexto": [
+          {
+            "afirmacao": "Quando você muda o foco de uma tarefa (como estudo) para outra (como o celular), uma parcela significativa da atenção permanece fixada na tarefa anterior, resultando em um resíduo de atenção.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Esse efeito é acentuado se a tarefa original foi interrompida antes da conclusão.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Isso faz com que você demore para voltar ao foco original, pois a mente ainda está parcialmente ligada à tarefa anterior.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Alternar frequentemente entre celular, notificações e estudo técnico gera uma dispersão cumulativa crônica, que degrada o desempenho e a velocidade de raciocínio lógico.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Isso também contribui para a dificuldade de recuperação da concentração após interrupções.",
+            "sustentada": true
+          }
+        ],
+        "fidelidade": 1.0,
+        "afirmacoes_relevancia": [
+          {
+            "afirmacao": "Quando você muda o foco de uma tarefa (como estudo) para outra (como o celular), uma parcela significativa da atenção permanece fixada na tarefa anterior, resultando em um resíduo de atenção.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Esse efeito é acentuado se a tarefa original foi interrompida antes da conclusão.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Isso faz com que você demore para voltar ao foco original, pois a mente ainda está parcialmente ligada à tarefa anterior.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Alternar frequentemente entre celular, notificações e estudo técnico gera uma dispersão cumulativa crônica, que degrada o desempenho e a velocidade de raciocínio lógico.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Isso também contribui para a dificuldade de recuperação da concentração após interrupções.",
+            "relevante": true
+          }
+        ],
+        "relevancia": 1.0,
+        "fidelidade_base": 1.0,
+        "origem_fidelidade_base": "piso: fidelidade ao contexto",
+        "pontos_cobertos": [
+          true,
+          true
+        ],
+        "completude": 1.0,
+        "sucesso": true
+      }
+    },
+    {
+      "id": "q12",
+      "tipo": "parafraseada",
+      "pergunta": "Como faço para sair do \"vou estudar amanhã\" e realmente começar?",
+      "esperadas": [
+        "artigo_08_implementation_intentions_gollwitzer.txt"
+      ],
+      "pontos_chave": [
+        "Usar intenção de implementação no formato 'Se X ocorrer, então faço Y'",
+        "Definir quando, onde e como a ação será iniciada"
+      ],
+      "recuperados": [
+        "artigo_08_implementation_intentions_gollwitzer.txt",
+        "artigo_14_willpower_depletion_baumeister.txt",
+        "artigo_13_habit_loop_wood.txt",
+        "artigo_17_study_cycle_perez.txt",
+        "artigo_04_cognitive_load_sweller.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_08_implementation_intentions_gollwitzer.txt | Chunk ID: 21] ---\nMetas vagas como 'estudarei amanhã' falham devido à fadiga decisória diária. A formulação de intenções de implementação baseadas na estrutura 'Se a situação X ocorrer, então executarei a ação Y' automatiza o início da conduta. Definir com precisão 'Quando', 'Onde' e 'Como' uma ação será iniciada transfere o controle do comportamento para pistas ambientais, reduzindo a necessidade de força de vontade voluntária e acelerando a adesão à rotina.\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_14_willpower_depletion_baumeister.txt | Chunk ID: 34] ---\nO autocontrole e a capacidade de tomada de decisão consciente operam como um recurso cognitivo finito que se desgasta ao longo do dia. Indivíduos que precisam tomar centenas de decisões operacionais no trabalho chegam ao período noturno com recursos volitivos exauridos. Estudantes trabalhadores devem reservar horários de estudo antes do início do expediente de trabalho ou adotar regras predefinidas que eliminem a decisão sobre o que estudar a cada noite.\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_13_habit_loop_wood.txt | Chunk ID: 32] ---\nAproximadamente 43% dos comportamentos diários são executados por hábito enquanto a mente divaga sobre outros pensamentos. Hábitos são formados pelo loop Estímulo-Resposta-Recompensa ancorado em pistas de contexto estáveis (mesmo horário, mesmo local físico). Para consolidar o hábito de estudo independente, deve-se padronizar os estímulos iniciais e eliminar a fricção do ambiente, evitando depender unicamente da força de vontade.\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_17_study_cycle_perez.txt | Chunk ID: 41] ---\n. Se o estudante for interrompido em uma terça-feira, ele retoma o ciclo exatamente de onde parou no próximo bloco livre, mantendo o equilíbrio de contato com todas as matérias sem a necessidade de reestruturar cronogramas.\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_04_cognitive_load_sweller.txt | Chunk ID: 11] ---\n. Ferramentas de estudo eficientes devem minimizar a carga extrínseca (telas poluídas, excesso de configurações) para liberar largura de banda cognitiva voltada à assimilação do conteúdo complexo.",
+      "resposta": "Para sair do \"vou estudar amanhã\" e realmente começar, você pode adotar estratégias baseadas em intenções de implementação e hábitos, conforme descrito abaixo:\n\n1. **Defina intenções de implementação**  \n   Formule intenções específicas com a estrutura \"Se a situação X ocorrer, então executarei a ação Y\". Por exemplo: \"Se for 19h, então iniciarei a estudo\". Isso automatiza o início da conduta e reduz a necessidade de força de vontade voluntária [Fonte: ../api/data/artigo_08_implementation_intentions_gollwitzer.txt | Chunk ID: 21].\n\n2. **Padronize o ambiente de estudo**  \n   Estabeleça um ambiente consistente para o estudo, como um horário fixo e um local específico. Isso ajuda a formar hábitos, já que os hábitos são baseados em pistas de contexto estáveis [Fonte: ../api/data/artigo_13_habit_loop_wood.txt | Chunk ID: 32].\n\n3. **Evite a dependência exclusiva da força de vontade**  \n   A força de vontade é um recurso limitado que se esgota ao longo do dia. Por isso, é importante transferir o controle do comportamento para pistas ambientais, como horários e locais predefinidos [Fonte: ../api/data/artigo_08_implementation_intentions_gollwitzer.txt | Chunk ID: 21].\n\n4. **Evite interrupções e mantenha a rotina**  \n   Se o estudante for interrompido, ele retoma o ciclo exatamente de onde parou no próximo bloco livre, mantendo o equilíbrio de contato com todas as matérias sem a necessidade de reestruturar cronogramas [Fonte: ../api/data/artigo_17_study_cycle_perez.txt | Chunk ID: 41].\n\n5. **Minimize a carga cognitiva**  \n   Utilize ferramentas de estudo que minimizem a carga extrínseca, como telas poluídas e excesso de configurações, para liberar largura de banda cognitiva voltada à assimilação do conteúdo [Fonte: ../api/data/artigo_04_cognitive_load_sweller.txt | Chunk ID: 11].",
+      "latencia_s": 44.51,
+      "tokens_resposta": 528,
+      "tokens_contexto": 652,
+      "d1": 0.8440222144126892,
+      "chamou_llm": true,
+      "chamadas_llm": 1,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "buscou",
+          "detalhe": "5 trechos, d1=0.844, corte=1.026",
+          "segundos": 0.15
+        },
+        {
+          "agente": "geração",
+          "acao": "respondeu",
+          "detalhe": "1800 caracteres",
+          "segundos": 44.36
+        }
+      ],
+      "avaliacao": {
+        "recusou": false,
+        "citados": [
+          "08",
+          "13",
+          "17",
+          "04"
+        ],
+        "tem_citacao": 1.0,
+        "cita_esperada": 1.0,
+        "precisao_citacao": 1.0,
+        "afirmacoes_contexto": [
+          {
+            "afirmacao": "Metas vagas como 'estudarei amanhã' falham devido à fadiga decisória diária.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "A formulação de intenções de implementação baseadas na estrutura 'Se a situação X ocorrer, então executarei a ação Y' automatiza o início da conduta.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Definir com precisão 'Quando', 'Onde' e 'Como' uma ação será iniciada transfere o controle do comportamento para pistas ambientais.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "A força de vontade é um recurso limitado que se esgota ao longo do dia.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Hábitos são formados pelo loop Estímulo-Resposta-Recompensa ancorado em pistas de contexto estáveis.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Para consolidar o hábito de estudo independente, deve-se padronizar os estímulos iniciais e eliminar a fricção do ambiente.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Se o estudante for interrompido, ele retoma o ciclo exatamente de onde parou no próximo bloco livre.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Ferramentas de estudo eficientes devem minimizar a carga extrínseca para liberar largura de banda cognitiva voltada à assimilação do conteúdo complexo.",
+            "sustentada": true
+          }
+        ],
+        "fidelidade": 1.0,
+        "afirmacoes_relevancia": [
+          {
+            "afirmacao": "Defina intenções de implementação com a estrutura \"Se a situação X ocorrer, então executarei a ação Y\".",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Por exemplo: \"Se for 19h, então iniciarei o estudo\".",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Isso automatiza o início da conduta e reduz a necessidade de força de vontade voluntária.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Estabeleça um ambiente consistente para o estudo, como um horário fixo e um local específico.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Isso ajuda a formar hábitos, já que os hábitos são baseados em pistas de contexto estáveis.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Evite a dependência exclusiva da força de vontade.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "A força de vontade é um recurso limitado que se esgota ao longo do dia.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "É importante transferir o controle do comportamento para pistas ambientais, como horários e locais predefinidos.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Se o estudante for interrompido, ele retoma o ciclo exatamente de onde parou no próximo bloco livre.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Isso mantém o equilíbrio de contato com todas as matérias sem a necessidade de reestruturar cronogramas.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Utilize ferramentas de estudo que minimizem a carga extrínseca, como telas poluídas e excesso de configurações.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Isso libera largura de banda cognitiva voltada à assimilação do conteúdo.",
+            "relevante": true
+          }
+        ],
+        "relevancia": 1.0,
+        "fidelidade_base": 1.0,
+        "origem_fidelidade_base": "piso: fidelidade ao contexto",
+        "pontos_cobertos": [
+          true,
+          false
+        ],
+        "completude": 0.5,
+        "sucesso": false
+      }
+    },
+    {
+      "id": "q13",
+      "tipo": "direta",
+      "pergunta": "O que é a Lei de Parkinson e como definir um tempo fixo para cada tarefa me ajuda?",
+      "esperadas": [
+        "artigo_09_timeboxing_allen.txt"
+      ],
+      "pontos_chave": [
+        "O trabalho se expande para preencher o tempo disponível",
+        "Timeboxing fixa um bloco com início e fim e elimina a ruminação sobre o que fazer em seguida"
+      ],
+      "recuperados": [
+        "artigo_09_timeboxing_allen.txt",
+        "artigo_19_dual_burden_clt_martins.txt",
+        "artigo_10_pomodoro_cirillo.txt",
+        "artigo_11_temporal_motivation_steel.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_09_timeboxing_allen.txt | Chunk ID: 23] ---\nA Lei de Parkinson postula que o trabalho se expande para preencher o tempo disponível para sua conclusão. O método de Timeboxing estabelece um limite temporal rígido e pré-alocado no calendário para a execução de uma tarefa específica. Ao transformar uma tarefa aberta em um bloco com início e fim demarcados, elimina-se a ruminação mental sobre o que fazer em seguida, forçando o indivíduo a focar nas entregas essenciais dentro do prazo delimitado.\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_09_timeboxing_allen.txt | Chunk ID: 22] ---\nTÍTULO: Temporal Bounding and Productivity: An Analysis of Timeboxing in Technical Workflows\nAUTORES: David Allen, Robert C. Pozen (2012, Harvard Business Review / Productivity Studies)\nTEMA: Timeboxing e Lei de Parkinson\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 46] ---\n. A recomendação consiste em adotar micro-blocos matinais protegidos de 45 a 60 minutos e utilizar fins de semana para blocos de aprofundamento prático, preservando descanso para prevenção de esgotamento (burnout).\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_10_pomodoro_cirillo.txt | Chunk ID: 25] ---\nA Técnica Pomodoro utiliza intervalos de esforço sustentado (tradicionalmente 25 minutos) intercalados por pausas curtas (5 minutos) para aliviar a ansiedade associada à percepção contínua do tempo. Ao transformar o tempo em um aliado métrico de esforço concluído, e não em um fator de cobrança, a técnica reduz o atrito de inicialização da tarefa. O registro dos pomodoros finalizados provê feedback visual tangível de progresso diário.\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_11_temporal_motivation_steel.txt | Chunk ID: 27] ---\nA Teoria da Motivação Temporal define a utilidade de uma tarefa como uma equação matemática: Utilidade = (Expectativa x Valor) / (1 + Impulsividade x Atraso). Tarefas cujo resultado está distante no tempo (provas no fim do semestre, concursos) sofrem um desconto hiperbólico acentuado, perdendo apelo motivacional. Estudantes com alta impulsividade adiam o estudo em favor de recompensas de gratificação instantânea",
+      "resposta": "**Lei de Parkinson**  \nA Lei de Parkinson postula que o trabalho se expande para preencher o tempo disponível para sua conclusão [Fonte: ../api/data/artigo_09_timeboxing_allen.txt | Chunk ID: 23].\n\n**Como definir um tempo fixo para cada tarefa me ajuda?**  \nDefinir um tempo fixo para cada tarefa, conforme o método de Timeboxing, estabelece um limite temporal rígido e pré-alocado no calendário para a execução de uma tarefa específica. Ao transformar uma tarefa aberta em um bloco com início e fim demarcados, elimina-se a ruminação mental sobre o que fazer em seguida, forçando o indivíduo a focar nas entregas essenciais dentro do prazo delimitado [Fonte: ../api/data/artigo_09_timeboxing_allen.txt | Chunk ID: 23].",
+      "latencia_s": 20.71,
+      "tokens_resposta": 203,
+      "tokens_contexto": 642,
+      "d1": 0.5468486547470093,
+      "chamou_llm": true,
+      "chamadas_llm": 1,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "buscou",
+          "detalhe": "5 trechos, d1=0.547, corte=1.026",
+          "segundos": 0.14
+        },
+        {
+          "agente": "geração",
+          "acao": "respondeu",
+          "detalhe": "719 caracteres",
+          "segundos": 20.57
+        }
+      ],
+      "avaliacao": {
+        "recusou": false,
+        "citados": [
+          "09"
+        ],
+        "tem_citacao": 1.0,
+        "cita_esperada": 1.0,
+        "precisao_citacao": 1.0,
+        "afirmacoes_contexto": [
+          {
+            "afirmacao": "A Lei de Parkinson postula que o trabalho se expande para preencher o tempo disponível para sua conclusão.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "O método de Timeboxing estabelece um limite temporal rígido e pré-alocado no calendário para a execução de uma tarefa específica.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Ao transformar uma tarefa aberta em um bloco com início e fim demarcados, elimina-se a ruminação mental sobre o que fazer em seguida.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Isso força o indivíduo a focar nas entregas essenciais dentro do prazo delimitado.",
+            "sustentada": true
+          }
+        ],
+        "fidelidade": 1.0,
+        "afirmacoes_relevancia": [
+          {
+            "afirmacao": "A Lei de Parkinson postula que o trabalho se expande para preencher o tempo disponível para sua conclusão.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Definir um tempo fixo para cada tarefa, conforme o método de Timeboxing, estabelece um limite temporal rígido e pré-alocado no calendário para a execução de uma tarefa específica.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Ao transformar uma tarefa aberta em um bloco com início e fim demarcados, elimina-se a ruminação mental sobre o que fazer em seguida.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Isso força o indivíduo a focar nas entregas essenciais dentro do prazo delimitado.",
+            "relevante": true
+          }
+        ],
+        "relevancia": 1.0,
+        "fidelidade_base": 1.0,
+        "origem_fidelidade_base": "piso: fidelidade ao contexto",
+        "pontos_cobertos": [
+          true,
+          true
+        ],
+        "completude": 1.0,
+        "sucesso": true
+      }
+    },
+    {
+      "id": "q14",
+      "tipo": "direta",
+      "pergunta": "Como funciona a técnica Pomodoro? Quanto tempo dura cada intervalo?",
+      "esperadas": [
+        "artigo_10_pomodoro_cirillo.txt"
+      ],
+      "pontos_chave": [
+        "Intervalos de esforço de 25 minutos com pausas curtas de 5 minutos",
+        "Registrar os pomodoros dá feedback visual de progresso"
+      ],
+      "recuperados": [
+        "artigo_10_pomodoro_cirillo.txt",
+        "artigo_19_dual_burden_clt_martins.txt",
+        "artigo_17_study_cycle_perez.txt",
+        "artigo_02_spaced_repetition_cepeda.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_10_pomodoro_cirillo.txt | Chunk ID: 25] ---\nA Técnica Pomodoro utiliza intervalos de esforço sustentado (tradicionalmente 25 minutos) intercalados por pausas curtas (5 minutos) para aliviar a ansiedade associada à percepção contínua do tempo. Ao transformar o tempo em um aliado métrico de esforço concluído, e não em um fator de cobrança, a técnica reduz o atrito de inicialização da tarefa. O registro dos pomodoros finalizados provê feedback visual tangível de progresso diário.\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_10_pomodoro_cirillo.txt | Chunk ID: 24] ---\nTÍTULO: The Pomodoro Technique: The Acclaimed Time-Management System\nAUTORES: Francesco Cirillo (2006, Technical Report / Monograph)\nTEMA: Intervalos Cronometrados e Mitigação da Ansiedade Temporal\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 46] ---\n. A recomendação consiste em adotar micro-blocos matinais protegidos de 45 a 60 minutos e utilizar fins de semana para blocos de aprofundamento prático, preservando descanso para prevenção de esgotamento (burnout).\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_17_study_cycle_perez.txt | Chunk ID: 40] ---\nGrades horárias fixas (ex.: Segunda: Matéria X, Terça: Matéria Y) quebram sistematicamente quando surgem imprevistos na rotina adulta, gerando frustração e sensação de atraso. O modelo de Ciclo de Estudos organiza as matérias em uma sequência circular contínua com blocos de 60 a 90 minutos\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_02_spaced_repetition_cepeda.txt | Chunk ID: 4] ---\nA prática distribuída (repetição espaçada) supera consistentemente a prática concentrada (estudo intensivo de última hora). O intervalo ideal entre sessões de estudo depende do intervalo de retenção desejado: quanto mais distante for o momento da avaliação final, maior deve ser o espaçamento temporal entre as revisões. Sessões de estudo espaçadas forçam o cérebro a reconstruir o traço de memória quase esquecido, o que fortalece a estabilidade do armazenamento a longo prazo",
+      "resposta": "**Como funciona a técnica Pomodoro?**  \nA Técnica Pomodoro utiliza intervalos de esforço sustentado, tradicionalmente de 25 minutos, intercalados por pausas curtas de 5 minutos, para aliviar a ansiedade associada à percepção contínua do tempo. Ao transformar o tempo em um aliado métrico de esforço concluído, e não em um fator de cobrança, a técnica reduz o atrito de inicialização da tarefa. O registro dos pomodoros finalizados provê feedback visual tangível de progresso diário [Fonte: ../api/data/artigo_10_pomodoro_cirillo.txt | Chunk ID: 25].\n\n**Quanto tempo dura cada intervalo?**  \nCada intervalo de esforço sustentado dura tradicionalmente 25 minutos [Fonte: ../api/data/artigo_10_pomodoro_cirillo.txt | Chunk ID: 25].",
+      "latencia_s": 22.06,
+      "tokens_resposta": 220,
+      "tokens_contexto": 625,
+      "d1": 0.5173361301422119,
+      "chamou_llm": true,
+      "chamadas_llm": 1,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "buscou",
+          "detalhe": "5 trechos, d1=0.517, corte=1.026",
+          "segundos": 0.15
+        },
+        {
+          "agente": "geração",
+          "acao": "respondeu",
+          "detalhe": "728 caracteres",
+          "segundos": 21.91
+        }
+      ],
+      "avaliacao": {
+        "recusou": false,
+        "citados": [
+          "10"
+        ],
+        "tem_citacao": 1.0,
+        "cita_esperada": 1.0,
+        "precisao_citacao": 1.0,
+        "afirmacoes_contexto": [
+          {
+            "afirmacao": "A Técnica Pomodoro utiliza intervalos de esforço sustentado, tradicionalmente de 25 minutos, intercalados por pausas curtas de 5 minutos.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Isso alivia a ansiedade associada à percepção contínua do tempo.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "A técnica transforma o tempo em um aliado métrico de esforço concluído, e não em um fator de cobrança.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Isso reduz o atrito de inicialização da tarefa.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "O registro dos pomodoros finalizados provê feedback visual tangível de progresso diário.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Cada intervalo de esforço sustentado dura tradicionalmente 25 minutos.",
+            "sustentada": true
+          }
+        ],
+        "fidelidade": 1.0,
+        "afirmacoes_relevancia": [
+          {
+            "afirmacao": "A Técnica Pomodoro utiliza intervalos de esforço sustentado, tradicionalmente de 25 minutos.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Os intervalos são intercalados por pausas curtas de 5 minutos.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "A técnica alivia a ansiedade associada à percepção contínua do tempo.",
+            "relevante": false
+          },
+          {
+            "afirmacao": "A técnica transforma o tempo em um aliado métrico de esforço concluído.",
+            "relevante": false
+          },
+          {
+            "afirmacao": "A técnica reduz o atrito de inicialização da tarefa.",
+            "relevante": false
+          },
+          {
+            "afirmacao": "O registro dos pomodoros finalizados provê feedback visual tangível de progresso diário.",
+            "relevante": false
+          },
+          {
+            "afirmacao": "Cada intervalo de esforço sustentado dura tradicionalmente 25 minutos.",
+            "relevante": true
+          }
+        ],
+        "relevancia": 0.42857142857142855,
+        "fidelidade_base": 1.0,
+        "origem_fidelidade_base": "piso: fidelidade ao contexto",
+        "pontos_cobertos": [
+          true,
+          true
+        ],
+        "completude": 1.0,
+        "sucesso": true
+      }
+    },
+    {
+      "id": "q15",
+      "tipo": "parafraseada",
+      "pergunta": "Por que eu vou empurrando o estudo quando a prova ainda está longe? Como resolver isso?",
+      "esperadas": [
+        "artigo_11_temporal_motivation_steel.txt"
+      ],
+      "pontos_chave": [
+        "Metas distantes sofrem desconto hiperbólico e perdem apelo motivacional",
+        "Decompor metas longas em marcos semanais com feedback rápido"
+      ],
+      "recuperados": [
+        "artigo_11_temporal_motivation_steel.txt",
+        "artigo_02_spaced_repetition_cepeda.txt",
+        "artigo_03_interleaving_rohwer.txt",
+        "artigo_12_perfectionism_flett.txt",
+        "artigo_15_self_efficacy_bandura.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_11_temporal_motivation_steel.txt | Chunk ID: 27] ---\nA Teoria da Motivação Temporal define a utilidade de uma tarefa como uma equação matemática: Utilidade = (Expectativa x Valor) / (1 + Impulsividade x Atraso). Tarefas cujo resultado está distante no tempo (provas no fim do semestre, concursos) sofrem um desconto hiperbólico acentuado, perdendo apelo motivacional. Estudantes com alta impulsividade adiam o estudo em favor de recompensas de gratificação instantânea\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_02_spaced_repetition_cepeda.txt | Chunk ID: 4] ---\nA prática distribuída (repetição espaçada) supera consistentemente a prática concentrada (estudo intensivo de última hora). O intervalo ideal entre sessões de estudo depende do intervalo de retenção desejado: quanto mais distante for o momento da avaliação final, maior deve ser o espaçamento temporal entre as revisões. Sessões de estudo espaçadas forçam o cérebro a reconstruir o traço de memória quase esquecido, o que fortalece a estabilidade do armazenamento a longo prazo\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_03_interleaving_rohwer.txt | Chunk ID: 8] ---\n. O estudante aprende a identificar qual estratégia ou fórmula aplicar diante de problemas novos, mimetizando a realidade das provas e do ambiente profissional.\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_12_perfectionism_flett.txt | Chunk ID: 30] ---\nO perfeccionismo desadaptativo está correlacionado à procrastinação crônica e à paralisia por análise. O medo do fracasso e a intolerância a erros fazem com que o indivíduo sobrecarregue a fase de planejamento como forma inconsciente de adiar o confronto prático com a tarefa. Esse mecanismo se manifesta na customização obsessiva de notas, cronogramas irrealistas e relutância em submeter seus conhecimentos a testes simulados.\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_15_self_efficacy_bandura.txt | Chunk ID: 36] ---\nA crença do indivíduo em sua capacidade intrínseca de concluir tarefas com sucesso determina o nível de persistência diante de obstáculos. A autoeficácia é fortalecida principalmente por experiências de domínio (sucessos práticos acumulados em microtarefas), modelagem social e redução de estados emocionais negativos de estresse. Plataformas de estudo devem fornecer registros explícitos de progressão incremental para elevar a percepção de competência do aluno.",
+      "resposta": "**Por que você vai empurrando o estudo quando a prova ainda está longe?**\n\n- **Motivação Temporal e Impulsividade**: A Teoria da Motivação Temporal sugere que tarefas com resultados distantes no tempo sofrem um desconto hiperbólico, perdendo apelo motivacional. Estudantes com alta impulsividade tendem a adiar o estudo em favor de recompensas de gratificação imediata [Fonte: ../api/data/artigo_11_temporal_motivation_steel.txt].\n\n- **Perfeccionismo Desadaptativo**: O medo do fracasso e a intolerância a erros podem levar a uma sobrecarga na fase de planejamento, resultando em procrastinação crônica e paralisia por análise [Fonte: ../api/data/artigo_12_perfectionism_flett.txt].\n\n- **Autoeficácia e Persistência**: A crença na própria capacidade de concluir tarefas com sucesso influencia a persistência diante de obstáculos. A falta de autoeficácia pode contribuir para a procrastinação, já que o estudante pode acreditar que não será capaz de realizar a tarefa com sucesso [Fonte: ../api/data/artigo_15_self_efficacy_bandura.txt].\n\n**Como resolver isso?**\n\n- **Prática Distribuída (Repetição Espaçada)**: Estude em sessões espaçadas ao longo do tempo, aumentando o intervalo entre as revisões conforme o tempo até a prova. Isso fortalece a memória a longo prazo e evita a necessidade de estudo intensivo de última hora [Fonte: ../api/data/artigo_02_spaced_repetition_cepeda.txt].\n\n- **Interleaving (Alternância de Tópicos)**: Misture diferentes tópicos ou estratégias durante as sessões de estudo para que o cérebro aprenda a identificar qual estratégia aplicar em situações novas, aumentando a flexibilidade cognitiva [Fonte: ../api/data/artigo_03_interleaving_rohwer.txt].\n\n- **Planejamento Realista e Progressivo**: Evite cronogramas irrealistas e foque em microtarefas que sejam alcançáveis. Registre o progresso para fortalecer a percepção de competência e aumentar a autoeficácia [Fonte: ../api/data/artigo_15_self_efficacy_bandura.txt].\n\n- **Redução de Estresse e Ansiedade**: Trabalhe com estados emocionais negativos de estresse, pois eles podem contribuir para a procrastinação. Pratique técnicas de relaxamento e concentração para manter o foco no estudo.",
+      "latencia_s": 49.11,
+      "tokens_resposta": 610,
+      "tokens_contexto": 692,
+      "d1": 0.8712730407714844,
+      "chamou_llm": true,
+      "chamadas_llm": 1,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "buscou",
+          "detalhe": "5 trechos, d1=0.871, corte=1.026",
+          "segundos": 0.14
+        },
+        {
+          "agente": "geração",
+          "acao": "respondeu",
+          "detalhe": "2172 caracteres",
+          "segundos": 48.96
+        }
+      ],
+      "avaliacao": {
+        "recusou": false,
+        "citados": [
+          "11",
+          "12",
+          "15",
+          "02",
+          "03"
+        ],
+        "tem_citacao": 1.0,
+        "cita_esperada": 1.0,
+        "precisao_citacao": 1.0,
+        "afirmacoes_contexto": [
+          {
+            "afirmacao": "A Teoria da Motivação Temporal sugere que tarefas com resultados distantes no tempo sofrem um desconto hiperbólico, perdendo apelo motivacional.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Estudantes com alta impulsividade tendem a adiar o estudo em favor de recompensas de gratificação imediata",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "O medo do fracasso e a intolerância a erros podem levar a uma sobrecarga na fase de planejamento, resultando em procrastinação crônica e paralisia por análise",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "A crença na própria capacidade de concluir tarefas com sucesso influencia a persistência diante de obstáculos.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "A falta de autoeficácia pode contribuir para a procrastinação, já que o estudante pode acreditar que não será capaz de realizar a tarefa com sucesso",
+            "sustentada": false
+          },
+          {
+            "afirmacao": "Estude em sessões espaçadas ao longo do tempo, aumentando o intervalo entre as revisões conforme o tempo até a prova.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Isso fortalece a memória a longo prazo e evita a necessidade de estudo intensivo de última hora",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Misture diferentes tópicos ou estratégias durante as sessões de estudo para que o cérebro aprenda a identificar qual estratégia aplicar em situações novas, aumentando a flexibilidade cognitiva",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Evite cronogramas irrealistas e foque em microtarefas que sejam alcançáveis.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Registre o progresso para fortalecer a percepção de competência e aumentar a autoeficácia",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Trabalhe com estados emocionais negativos de estresse, pois eles podem contribuir para a procrastinação.",
+            "sustentada": true
+          }
+        ],
+        "fidelidade": 0.9090909090909091,
+        "afirmacoes_relevancia": [
+          {
+            "afirmacao": "A Teoria da Motivação Temporal sugere que tarefas com resultados distantes no tempo sofrem um desconto hiperbólico, perdendo apelo motivacional.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Estudantes com alta impulsividade tendem a adiar o estudo em favor de recompensas de gratificação imediata.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "O medo do fracasso e a intolerância a erros podem levar a uma sobrecarga na fase de planejamento, resultando em procrastinação crônica e paralisia por análise.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "A crença na própria capacidade de concluir tarefas com sucesso influencia a persistência diante de obstáculos.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "A falta de autoeficácia pode contribuir para a procrastinação, já que o estudante pode acreditar que não será capaz de realizar a tarefa com sucesso.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Estude em sessões espaçadas ao longo do tempo, aumentando o intervalo entre as revisões conforme o tempo até a prova.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Isso fortalece a memória a longo prazo e evita a necessidade de estudo intensivo de última hora.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Misture diferentes tópicos ou estratégias durante as sessões de estudo para que o cérebro aprenda a identificar qual estratégia aplicar em situações novas, aumentando a flexibilidade cognitiva.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Evite cronogramas irrealistas e foque em microtarefas que sejam alcançáveis.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Registre o progresso para fortalecer a percepção de competência e aumentar a autoeficácia.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Trabalhe com estados emocionais negativos de estresse, pois eles podem contribuir para a procrastinação.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Pratique técnicas de relaxamento e concentração para manter o foco no estudo.",
+            "relevante": true
+          }
+        ],
+        "relevancia": 1.0,
+        "fidelidade_base": 0.9090909090909091,
+        "origem_fidelidade_base": "piso: fidelidade ao contexto",
+        "pontos_cobertos": [
+          true,
+          false
+        ],
+        "completude": 0.5,
+        "sucesso": false
+      }
+    },
+    {
+      "id": "q16",
+      "tipo": "multi_fonte",
+      "pergunta": "Como criar o hábito de estudar todos os dias sem depender de força de vontade?",
+      "esperadas": [
+        "artigo_13_habit_loop_wood.txt",
+        "artigo_08_implementation_intentions_gollwitzer.txt"
+      ],
+      "pontos_chave": [
+        "Ancorar o estudo em pistas de contexto estáveis (mesmo horário e local)",
+        "Eliminar a fricção do ambiente",
+        "Automatizar o início com um plano 'Se-Então'"
+      ],
+      "recuperados": [
+        "artigo_13_habit_loop_wood.txt",
+        "artigo_08_implementation_intentions_gollwitzer.txt",
+        "artigo_17_study_cycle_perez.txt",
+        "artigo_14_willpower_depletion_baumeister.txt",
+        "artigo_06_deep_work_newport.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_13_habit_loop_wood.txt | Chunk ID: 32] ---\nAproximadamente 43% dos comportamentos diários são executados por hábito enquanto a mente divaga sobre outros pensamentos. Hábitos são formados pelo loop Estímulo-Resposta-Recompensa ancorado em pistas de contexto estáveis (mesmo horário, mesmo local físico). Para consolidar o hábito de estudo independente, deve-se padronizar os estímulos iniciais e eliminar a fricção do ambiente, evitando depender unicamente da força de vontade.\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_08_implementation_intentions_gollwitzer.txt | Chunk ID: 21] ---\nMetas vagas como 'estudarei amanhã' falham devido à fadiga decisória diária. A formulação de intenções de implementação baseadas na estrutura 'Se a situação X ocorrer, então executarei a ação Y' automatiza o início da conduta. Definir com precisão 'Quando', 'Onde' e 'Como' uma ação será iniciada transfere o controle do comportamento para pistas ambientais, reduzindo a necessidade de força de vontade voluntária e acelerando a adesão à rotina.\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_17_study_cycle_perez.txt | Chunk ID: 41] ---\n. Se o estudante for interrompido em uma terça-feira, ele retoma o ciclo exatamente de onde parou no próximo bloco livre, mantendo o equilíbrio de contato com todas as matérias sem a necessidade de reestruturar cronogramas.\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_14_willpower_depletion_baumeister.txt | Chunk ID: 34] ---\nO autocontrole e a capacidade de tomada de decisão consciente operam como um recurso cognitivo finito que se desgasta ao longo do dia. Indivíduos que precisam tomar centenas de decisões operacionais no trabalho chegam ao período noturno com recursos volitivos exauridos. Estudantes trabalhadores devem reservar horários de estudo antes do início do expediente de trabalho ou adotar regras predefinidas que eliminem a decisão sobre o que estudar a cada noite.\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_06_deep_work_newport.txt | Chunk ID: 17] ---\n. A capacidade de sustentar de 2 a 4 horas de trabalho profundo diário com zero distrações digitais é o diferencial crítico para alto rendimento acadêmico e técnico.",
+      "resposta": "**Como criar o hábito de estudar todos os dias sem depender de força de vontade:**\n\n1. **Padronize os estímulos iniciais do hábito de estudo**  \n   - Utilize pistas de contexto estáveis, como o mesmo horário e o mesmo local físico para estudar. Isso ajuda a formar o loop Estímulo-Resposta-Recompensa, que é essencial para a formação de hábitos.  \n   [Fonte: ../api/data/artigo_13_habit_loop_wood.txt | Chunk ID: 32]\n\n2. **Adote intenções de implementação para automatizar o início do estudo**  \n   - Defina com precisão 'Quando', 'Onde' e 'Como' você iniciará o estudo. Isso transfere o controle do comportamento para pistas ambientais, reduzindo a necessidade de força de vontade voluntária.  \n   [Fonte: ../api/data/artigo_08_implementation_intentions_gollwitzer.txt | Chunk ID: 21]\n\n3. **Evite a exaustão da força de vontade**  \n   - Reserve horários de estudo antes do início do expediente de trabalho ou adote regras predefinidas que eliminem a decisão sobre o que estudar a cada noite. Isso evita o esgotamento do recurso cognitivo finito de autocontrole.  \n   [Fonte: ../api/data/artigo_14_willpower_depletion_baumeister.txt | Chunk ID: 34]\n\n4. **Mantenha a continuidade do ciclo de estudo**  \n   - Se interrompido, retome o ciclo exatamente de onde parou no próximo bloco livre, mantendo o equilíbrio de contato com todas as matérias sem a necessidade de reestruturar cronogramas.  \n   [Fonte: ../api/data/artigo_17_study_cycle_perez.txt | Chunk ID: 41]",
+      "latencia_s": 40.2,
+      "tokens_resposta": 446,
+      "tokens_contexto": 639,
+      "d1": 0.7065905928611755,
+      "chamou_llm": true,
+      "chamadas_llm": 1,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "buscou",
+          "detalhe": "5 trechos, d1=0.707, corte=1.026",
+          "segundos": 0.15
+        },
+        {
+          "agente": "geração",
+          "acao": "respondeu",
+          "detalhe": "1462 caracteres",
+          "segundos": 40.05
+        }
+      ],
+      "avaliacao": {
+        "recusou": false,
+        "citados": [
+          "13",
+          "08",
+          "14",
+          "17"
+        ],
+        "tem_citacao": 1.0,
+        "cita_esperada": 1.0,
+        "precisao_citacao": 1.0,
+        "afirmacoes_contexto": [
+          {
+            "afirmacao": "Aproximadamente 43% dos comportamentos diários são executados por hábito enquanto a mente divaga sobre outros pensamentos.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Hábitos são formados pelo loop Estímulo-Resposta-Recompensa ancorado em pistas de contexto estáveis (mesmo horário, mesmo local físico).",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Para consolidar o hábito de estudo independente, deve-se padronizar os estímulos iniciais e eliminar a fricção do ambiente, evitando depender unicamente da força de vontade.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Metas vagas como 'estudarei amanhã' falham devido à fadiga decisória diária.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "A formulação de intenções de implementação baseadas na estrutura 'Se a situação X ocorrer, então executarei a ação Y' automatiza o início da conduta.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Definir com precisão 'Quando', 'Onde' e 'Como' uma ação será iniciada transfere o controle do comportamento para pistas ambientais, reduzindo a necessidade de força de vontade voluntária e acelerando a adesão à rotina.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Se o estudante for interrompido em uma terça-feira, ele retoma o ciclo exatamente de onde parou no próximo bloco livre, mantendo o equilíbrio de contato com todas as matérias sem a necessidade de reestruturar cronogramas.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "O autocontrole e a capacidade de tomada de decisão consciente operam como um recurso cognitivo finito que se desgasta ao longo do dia.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Indivíduos que precisam tomar centenas de decisões operacionais no trabalho chegam ao período noturno com recursos volitivos exauridos.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Estudantes trabalhadores devem reservar horários de estudo antes do início do expediente de trabalho ou adotar regras predefinidas que eliminem a decisão sobre o que estudar a cada noite.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "A capacidade de sustentar de 2 a 4 horas de trabalho profundo diário com zero distrações digitais é o diferencial crítico para alto rendimento acadêmico e técnico.",
+            "sustentada": true
+          }
+        ],
+        "fidelidade": 1.0,
+        "afirmacoes_relevancia": [
+          {
+            "afirmacao": "Utilize pistas de contexto estáveis, como o mesmo horário e o mesmo local físico para estudar.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Isso ajuda a formar o loop Estímulo-Resposta-Recompensa, que é essencial para a formação de hábitos.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Defina com precisão 'Quando', 'Onde' e 'Como' você iniciará o estudo.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Isso transfere o controle do comportamento para pistas ambientais, reduzindo a necessidade de força de vontade voluntária.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Reserve horários de estudo antes do início do expediente de trabalho ou adote regras predefinidas que eliminem a decisão sobre o que estudar a cada noite.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Isso evita o esgotamento do recurso cognitivo finito de autocontrole.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Se interrompido, retome o ciclo exatamente de onde parou no próximo bloco livre, mantendo o equilíbrio de contato com todas as matérias sem a necessidade de reestruturar cronogramas.",
+            "relevante": true
+          }
+        ],
+        "relevancia": 1.0,
+        "fidelidade_base": 1.0,
+        "origem_fidelidade_base": "piso: fidelidade ao contexto",
+        "pontos_cobertos": [
+          true,
+          true,
+          true
+        ],
+        "completude": 1.0,
+        "sucesso": true
+      }
+    },
+    {
+      "id": "q17",
+      "tipo": "parafraseada",
+      "pergunta": "Como ganho mais confiança de que vou conseguir terminar meus estudos, mesmo quando as coisas ficam difíceis?",
+      "esperadas": [
+        "artigo_15_self_efficacy_bandura.txt"
+      ],
+      "pontos_chave": [
+        "Acumular experiências de domínio em microtarefas",
+        "Registrar a progressão incremental para elevar a percepção de competência"
+      ],
+      "recuperados": [
+        "artigo_15_self_efficacy_bandura.txt",
+        "artigo_03_interleaving_rohwer.txt",
+        "artigo_04_cognitive_load_sweller.txt",
+        "artigo_17_study_cycle_perez.txt",
+        "artigo_06_deep_work_newport.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_15_self_efficacy_bandura.txt | Chunk ID: 36] ---\nA crença do indivíduo em sua capacidade intrínseca de concluir tarefas com sucesso determina o nível de persistência diante de obstáculos. A autoeficácia é fortalecida principalmente por experiências de domínio (sucessos práticos acumulados em microtarefas), modelagem social e redução de estados emocionais negativos de estresse. Plataformas de estudo devem fornecer registros explícitos de progressão incremental para elevar a percepção de competência do aluno.\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_03_interleaving_rohwer.txt | Chunk ID: 8] ---\n. O estudante aprende a identificar qual estratégia ou fórmula aplicar diante de problemas novos, mimetizando a realidade das provas e do ambiente profissional.\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_04_cognitive_load_sweller.txt | Chunk ID: 11] ---\n. Ferramentas de estudo eficientes devem minimizar a carga extrínseca (telas poluídas, excesso de configurações) para liberar largura de banda cognitiva voltada à assimilação do conteúdo complexo.\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_17_study_cycle_perez.txt | Chunk ID: 40] ---\nGrades horárias fixas (ex.: Segunda: Matéria X, Terça: Matéria Y) quebram sistematicamente quando surgem imprevistos na rotina adulta, gerando frustração e sensação de atraso. O modelo de Ciclo de Estudos organiza as matérias em uma sequência circular contínua com blocos de 60 a 90 minutos\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_06_deep_work_newport.txt | Chunk ID: 17] ---\n. A capacidade de sustentar de 2 a 4 horas de trabalho profundo diário com zero distrações digitais é o diferencial crítico para alto rendimento acadêmico e técnico.",
+      "resposta": "**Como ganho mais confiança de que vou conseguir terminar meus estudos, mesmo quando as coisas ficam difíceis?**\n\n- **Fortaleça sua autoeficácia através de experiências de domínio**: A crença em sua capacidade de concluir tarefas com sucesso é essencial para a persistência diante de obstáculos. A autoeficácia é fortalecida por experiências de domínio, ou seja, sucessos práticos acumulados em microtarefas. Portanto, foque em pequenas conquistas e registre seu progresso para elevar sua percepção de competência ([Fonte: ../api/data/artigo_15_self_efficacy_bandura.txt | Chunk ID: 36]).\n\n- **Minimize a carga cognitiva para melhorar a assimilação do conteúdo**: Ferramentas de estudo eficientes devem minimizar a carga extrínseca, como telas poluídas e excesso de configurações, para liberar largura de banda cognitiva voltada à assimilação do conteúdo complexo. Isso ajuda a manter a concentração e a confiança em sua capacidade de aprender ([Fonte: ../api/data/artigo_04_cognitive_load_sweller.txt | Chunk ID: 11]).\n\n- **Adote um modelo de Ciclo de Estudos para manter a consistência**: O modelo de Ciclo de Estudos organiza as matérias em uma sequência circular contínua com blocos de 60 a 90 minutos, o que ajuda a manter a rotina de estudos sem que imprevistos quebrem sistematicamente a sua produtividade. Isso contribui para a sensação de controle e confiança em sua capacidade de concluir os estudos ([Fonte: ../api/data/artigo_17_study_cycle_perez.txt | Chunk ID: 40]).",
+      "latencia_s": 38.28,
+      "tokens_resposta": 424,
+      "tokens_contexto": 511,
+      "d1": 0.8253833651542664,
+      "chamou_llm": true,
+      "chamadas_llm": 1,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "buscou",
+          "detalhe": "5 trechos, d1=0.825, corte=1.026",
+          "segundos": 0.15
+        },
+        {
+          "agente": "geração",
+          "acao": "respondeu",
+          "detalhe": "1480 caracteres",
+          "segundos": 38.13
+        }
+      ],
+      "avaliacao": {
+        "recusou": false,
+        "citados": [
+          "15",
+          "04",
+          "17"
+        ],
+        "tem_citacao": 1.0,
+        "cita_esperada": 1.0,
+        "precisao_citacao": 1.0,
+        "afirmacoes_contexto": [
+          {
+            "afirmacao": "A crença do indivíduo em sua capacidade intrínseca de concluir tarefas com sucesso determina o nível de persistência diante de obstáculos.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "A autoeficácia é fortalecida principalmente por experiências de domínio (sucessos práticos acumulados em microtarefas).",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Plataformas de estudo devem fornecer registros explícitos de progressão incremental para elevar a percepção de competência do aluno.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Ferramentas de estudo eficientes devem minimizar a carga extrínseca (telas poluídas, excesso de configurações) para liberar largura de banda cognitiva voltada à assimilação do conteúdo complexo.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Grades horárias fixas quebram sistematicamente quando surgem imprevistos na rotina adulta, gerando frustração e sensação de atraso.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "O modelo de Ciclo de Estudos organiza as matérias em uma sequência circular contínua com blocos de 60 a 90 minutos",
+            "sustentada": true
+          }
+        ],
+        "fidelidade": 1.0,
+        "afirmacoes_relevancia": [
+          {
+            "afirmacao": "Fortaleça sua autoeficácia através de experiências de domínio.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "A crença em sua capacidade de concluir tarefas com sucesso é essencial para a persistência diante de obstáculos.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "A autoeficácia é fortalecida por experiências de domínio, ou seja, sucessos práticos acumulados em microtarefas.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Portanto, foque em pequenas conquistas e registre seu progresso para elevar sua percepção de competência.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Minimize a carga cognitiva para melhorar a assimilação do conteúdo.",
+            "relevante": false
+          },
+          {
+            "afirmacao": "Ferramentas de estudo eficientes devem minimizar a carga extrínseca, como telas poluídas e excesso de configurações, para liberar largura de banda cognitiva voltada à assimilação do conteúdo complexo.",
+            "relevante": false
+          },
+          {
+            "afirmacao": "Isso ajuda a manter a concentração e a confiança em sua capacidade de aprender.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Adote um modelo de Ciclo de Estudos para manter a consistência.",
+            "relevante": false
+          },
+          {
+            "afirmacao": "O modelo de Ciclo de Estudos organiza as matérias em uma sequência circular contínua com blocos de 60 a 90 minutos, o que ajuda a manter a rotina de estudos sem que imprevistos quebrem sistematicamente a sua produtividade.",
+            "relevante": false
+          },
+          {
+            "afirmacao": "Isso contribui para a sensação de controle e confiança em sua capacidade de concluir os estudos.",
+            "relevante": true
+          }
+        ],
+        "relevancia": 0.6,
+        "fidelidade_base": 1.0,
+        "origem_fidelidade_base": "piso: fidelidade ao contexto",
+        "pontos_cobertos": [
+          true,
+          true
+        ],
+        "completude": 1.0,
+        "sucesso": true
+      }
+    },
+    {
+      "id": "q18",
+      "tipo": "parafraseada",
+      "pergunta": "Como saber se eu realmente entendi um assunto ou só decorei?",
+      "esperadas": [
+        "artigo_20_feynman_technique_gleick.txt"
+      ],
+      "pontos_chave": [
+        "Explicar o conceito em linguagem simples, como para um leigo, sem jargões",
+        "Travar ou usar termos vazios revela a lacuna que exige revisão da fonte"
+      ],
+      "recuperados": [
+        "artigo_20_feynman_technique_gleick.txt",
+        "artigo_06_deep_work_newport.txt",
+        "artigo_03_interleaving_rohwer.txt",
+        "artigo_18_project_based_learning_thomas.txt",
+        "artigo_13_habit_loop_wood.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_20_feynman_technique_gleick.txt | Chunk ID: 48] ---\nA Técnica Feynman estabelece que o verdadeiro domínio de um conceito é demonstrado pela capacidade de explicá-lo em linguagem clara, simples e acessível a um leigo, sem o uso de jargões técnicos evasivos. Sempre que o estudante trava ou recorre a termos vazios durante a explicação mental, identifica-se com precisão uma lacuna de compreensão conceitual que exige revisão imediata da fonte primária.\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_06_deep_work_newport.txt | Chunk ID: 16] ---\nO trabalho profundo (Deep Work) consiste em atividades profissionais ou intelectuais realizadas em estado de foco ininterrupto, empurrando as capacidades cognitivas ao limite. Essas sessões criam novo valor e aprimoram habilidades difíceis de replicar. Por outro lado, o trabalho superficial (responder mensagens, reorganizar itens estéticos) não exige esforço sustentado e cria a ilusão de produtividade\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_03_interleaving_rohwer.txt | Chunk ID: 8] ---\n. O estudante aprende a identificar qual estratégia ou fórmula aplicar diante de problemas novos, mimetizando a realidade das provas e do ambiente profissional.\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_18_project_based_learning_thomas.txt | Chunk ID: 43] ---\nO aprendizado autodidata de ciências exatas e tecnologia ganha eficácia superior quando ancorado na construção de projetos reais. A resolução de problemas autênticos estimula o raciocínio diagnóstico e a autonomia intelectual. O estudante passa da assimilação passiva de sintaxe para a aplicação contextualizada, construindo artefatos práticos verificáveis (código, modelos de machine learning, pipelines de dados) que validam o domínio conceitual.\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_13_habit_loop_wood.txt | Chunk ID: 32] ---\nAproximadamente 43% dos comportamentos diários são executados por hábito enquanto a mente divaga sobre outros pensamentos. Hábitos são formados pelo loop Estímulo-Resposta-Recompensa ancorado em pistas de contexto estáveis (mesmo horário, mesmo local físico). Para consolidar o hábito de estudo independente, deve-se padronizar os estímulos iniciais e eliminar a fricção do ambiente, evitando depender unicamente da força de vontade.",
+      "resposta": "**Como saber se você realmente entende um assunto ou só decorei?**\n\n- **Explicar o conceito em linguagem simples:** A verdadeira compreensão de um conceito é demonstrada pela capacidade de explicá-lo em linguagem clara, sem recorrer a jargões técnicos ou termos evasivos. Se você se encontrar travado ou precisar de palavras vazias para descrever o assunto, isso pode indicar uma lacuna de compreensão conceitual ([Fonte: ../api/data/artigo_20_feynman_technique_gleick.txt | Chunk ID: 48]).\n\n- **Aplicar o conhecimento em contextos novos:** Um sinal de que você realmente entende um assunto é a capacidade de identificar e aplicar a estratégia ou fórmula adequada para resolver problemas novos, imitando a realidade das provas e do ambiente profissional ([Fonte: ../api/data/artigo_03_interleaving_rohwer.txt | Chunk ID: 8]).\n\n- **Construir projetos reais:** A eficácia do aprendizado autodidata em ciências exatas e tecnologia é maior quando o conhecimento é aplicado na construção de projetos reais. A resolução de problemas autênticos estimula o raciocínio diagnóstico e a autonomia intelectual, validando o domínio conceitual ([Fonte: ../api/data/artigo_18_project_based_learning_thomas.txt | Chunk ID: 43]).",
+      "latencia_s": 36.99,
+      "tokens_resposta": 344,
+      "tokens_contexto": 657,
+      "d1": 0.9010729193687439,
+      "chamou_llm": true,
+      "chamadas_llm": 1,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "buscou",
+          "detalhe": "5 trechos, d1=0.901, corte=1.026",
+          "segundos": 0.15
+        },
+        {
+          "agente": "geração",
+          "acao": "respondeu",
+          "detalhe": "1212 caracteres",
+          "segundos": 36.84
+        }
+      ],
+      "avaliacao": {
+        "recusou": false,
+        "citados": [
+          "20",
+          "03",
+          "18"
+        ],
+        "tem_citacao": 1.0,
+        "cita_esperada": 1.0,
+        "precisao_citacao": 1.0,
+        "afirmacoes_contexto": [
+          {
+            "afirmacao": "A verdadeira compreensão de um conceito é demonstrada pela capacidade de explicá-lo em linguagem clara, sem recorrer a jargões técnicos ou termos evasivos.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Se você se encontrar travado ou precisar de palavras vazias para descrever o assunto, isso pode indicar uma lacuna de compreensão conceitual.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "Um sinal de que você realmente entende um assunto é a capacidade de identificar e aplicar a estratégia ou fórmula adequada para resolver problemas novos, imitando a realidade das provas e do ambiente profissional.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "A eficácia do aprendizado autodidata em ciências exatas e tecnologia é maior quando o conhecimento é aplicado na construção de projetos reais.",
+            "sustentada": true
+          },
+          {
+            "afirmacao": "A resolução de problemas autênticos estimula o raciocínio diagnóstico e a autonomia intelectual, validando o domínio conceitual.",
+            "sustentada": true
+          }
+        ],
+        "fidelidade": 1.0,
+        "afirmacoes_relevancia": [
+          {
+            "afirmacao": "A verdadeira compreensão de um conceito é demonstrada pela capacidade de explicá-lo em linguagem clara, sem recorrer a jargões técnicos ou termos evasivos.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Se você se encontrar travado ou precisar de palavras vazias para descrever o assunto, isso pode indicar uma lacuna de compreensão conceitual.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Um sinal de que você realmente entende um assunto é a capacidade de identificar e aplicar a estratégia ou fórmula adequada para resolver problemas novos.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "Resolver problemas novos deve imitar a realidade das provas e do ambiente profissional.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "A eficácia do aprendizado autodidata em ciências exatas e tecnologia é maior quando o conhecimento é aplicado na construção de projetos reais.",
+            "relevante": true
+          },
+          {
+            "afirmacao": "A resolução de problemas autênticos estimula o raciocínio diagnóstico e a autonomia intelectual, validando o domínio conceitual.",
+            "relevante": true
+          }
+        ],
+        "relevancia": 1.0,
+        "fidelidade_base": 1.0,
+        "origem_fidelidade_base": "piso: fidelidade ao contexto",
+        "pontos_cobertos": [
+          true,
+          true
+        ],
+        "completude": 1.0,
+        "sucesso": true
+      }
+    },
+    {
+      "id": "q19",
+      "tipo": "fora_de_escopo",
+      "pergunta": "Qual a melhor forma de investir meu dinheiro em ações?",
+      "esperadas": [],
+      "pontos_chave": [],
+      "recuperados": [
+        "artigo_02_spaced_repetition_cepeda.txt",
+        "artigo_08_implementation_intentions_gollwitzer.txt",
+        "artigo_19_dual_burden_clt_martins.txt",
+        "artigo_16_pareto_engineering_box.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_02_spaced_repetition_cepeda.txt | Chunk ID: 4] ---\nA prática distribuída (repetição espaçada) supera consistentemente a prática concentrada (estudo intensivo de última hora). O intervalo ideal entre sessões de estudo depende do intervalo de retenção desejado: quanto mais distante for o momento da avaliação final, maior deve ser o espaçamento temporal entre as revisões. Sessões de estudo espaçadas forçam o cérebro a reconstruir o traço de memória quase esquecido, o que fortalece a estabilidade do armazenamento a longo prazo\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_08_implementation_intentions_gollwitzer.txt | Chunk ID: 21] ---\nMetas vagas como 'estudarei amanhã' falham devido à fadiga decisória diária. A formulação de intenções de implementação baseadas na estrutura 'Se a situação X ocorrer, então executarei a ação Y' automatiza o início da conduta. Definir com precisão 'Quando', 'Onde' e 'Como' uma ação será iniciada transfere o controle do comportamento para pistas ambientais, reduzindo a necessidade de força de vontade voluntária e acelerando a adesão à rotina.\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 46] ---\n. A recomendação consiste em adotar micro-blocos matinais protegidos de 45 a 60 minutos e utilizar fins de semana para blocos de aprofundamento prático, preservando descanso para prevenção de esgotamento (burnout).\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_16_pareto_engineering_box.txt | Chunk ID: 38] ---\nEm ementas extensas, matrizes curriculares e editais de concursos, cerca de 80% das questões e desafios práticos concentram-se em aproximadamente 20% do conteúdo programático nuclear. Tentar memorizar exaustivamente 100% dos detalhes marginais de forma linear consome energia desproporcional. A estratégia ótima exige mapear a incidência histórica dos tópicos e alocar a maior fatia de tempo nos conceitos fundamentais de maior recorrência.\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_08_implementation_intentions_gollwitzer.txt | Chunk ID: 20] ---\nTÍTULO: Implementation Intentions: Strong Effects of Simple Plans\nAUTORES: Peter M. Gollwitzer (1999, American Psychologist)\nTEMA: Intenções de Implementação e Planejamento 'Se-Então'",
+      "resposta": "Não encontrei informações suficientes na base de conhecimento para responder a essa pergunta.",
+      "latencia_s": 0.32,
+      "tokens_resposta": 20,
+      "tokens_contexto": 668,
+      "d1": 1.1689988374710083,
+      "chamou_llm": false,
+      "chamadas_llm": 0,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "barrou",
+          "detalhe": "5 trechos, d1=1.169, corte=1.026",
+          "segundos": 0.32
+        }
+      ],
+      "avaliacao": {
+        "recusou": true,
+        "citados": [],
+        "sucesso": true
+      }
+    },
+    {
+      "id": "q20",
+      "tipo": "fora_de_escopo",
+      "pergunta": "Quanto café posso tomar para me concentrar melhor nos estudos?",
+      "esperadas": [],
+      "pontos_chave": [],
+      "recuperados": [
+        "artigo_06_deep_work_newport.txt",
+        "artigo_05_sleep_consolidation_walker.txt",
+        "artigo_19_dual_burden_clt_martins.txt",
+        "artigo_02_spaced_repetition_cepeda.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_06_deep_work_newport.txt | Chunk ID: 17] ---\n. A capacidade de sustentar de 2 a 4 horas de trabalho profundo diário com zero distrações digitais é o diferencial crítico para alto rendimento acadêmico e técnico.\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_05_sleep_consolidation_walker.txt | Chunk ID: 14] ---\n. Reduzir o tempo de sono para menos de 7 horas diárias deteriora a capacidade de foco, aumenta a reatividade emocional e bloqueia a potenciação de longo prazo (LTP), tornando ineficazes as horas de estudo acumuladas na madrugada.\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 46] ---\n. A recomendação consiste em adotar micro-blocos matinais protegidos de 45 a 60 minutos e utilizar fins de semana para blocos de aprofundamento prático, preservando descanso para prevenção de esgotamento (burnout).\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 45] ---\nTrabalhadores em regime integral que estudam à noite ou aos finais de semana enfrentam a 'pobreza crônica de tempo'. O estresse acumulado no trabalho reduz a capacidade de concentração estendida. O planejamento para esse perfil não pode pressupor rotinas ideais de 6 horas de estudo diário\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_02_spaced_repetition_cepeda.txt | Chunk ID: 4] ---\nA prática distribuída (repetição espaçada) supera consistentemente a prática concentrada (estudo intensivo de última hora). O intervalo ideal entre sessões de estudo depende do intervalo de retenção desejado: quanto mais distante for o momento da avaliação final, maior deve ser o espaçamento temporal entre as revisões. Sessões de estudo espaçadas forçam o cérebro a reconstruir o traço de memória quase esquecido, o que fortalece a estabilidade do armazenamento a longo prazo",
+      "resposta": "Não encontrei informações suficientes na base de conhecimento para responder a essa pergunta.",
+      "latencia_s": 7.8,
+      "tokens_resposta": 20,
+      "tokens_contexto": 547,
+      "d1": 0.9308760762214661,
+      "chamou_llm": true,
+      "chamadas_llm": 1,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "buscou",
+          "detalhe": "5 trechos, d1=0.931, corte=1.026",
+          "segundos": 0.27
+        },
+        {
+          "agente": "geração",
+          "acao": "respondeu",
+          "detalhe": "93 caracteres",
+          "segundos": 7.53
+        }
+      ],
+      "avaliacao": {
+        "recusou": true,
+        "citados": [],
+        "sucesso": true
+      }
+    },
+    {
+      "id": "q21",
+      "tipo": "fora_de_escopo",
+      "pergunta": "Qual o melhor remédio para dormir quando estou ansioso antes da prova?",
+      "esperadas": [],
+      "pontos_chave": [],
+      "recuperados": [
+        "artigo_19_dual_burden_clt_martins.txt",
+        "artigo_05_sleep_consolidation_walker.txt",
+        "artigo_02_spaced_repetition_cepeda.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 46] ---\n. A recomendação consiste em adotar micro-blocos matinais protegidos de 45 a 60 minutos e utilizar fins de semana para blocos de aprofundamento prático, preservando descanso para prevenção de esgotamento (burnout).\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_05_sleep_consolidation_walker.txt | Chunk ID: 14] ---\n. Reduzir o tempo de sono para menos de 7 horas diárias deteriora a capacidade de foco, aumenta a reatividade emocional e bloqueia a potenciação de longo prazo (LTP), tornando ineficazes as horas de estudo acumuladas na madrugada.\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_05_sleep_consolidation_walker.txt | Chunk ID: 12] ---\nTÍTULO: The Role of Sleep in Cognition and Emotion\nAUTORES: Matthew P. Walker (2009, Annals of the New York Academy of Sciences)\nTEMA: Sono e Consolidação da Memória\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_02_spaced_repetition_cepeda.txt | Chunk ID: 4] ---\nA prática distribuída (repetição espaçada) supera consistentemente a prática concentrada (estudo intensivo de última hora). O intervalo ideal entre sessões de estudo depende do intervalo de retenção desejado: quanto mais distante for o momento da avaliação final, maior deve ser o espaçamento temporal entre as revisões. Sessões de estudo espaçadas forçam o cérebro a reconstruir o traço de memória quase esquecido, o que fortalece a estabilidade do armazenamento a longo prazo\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 45] ---\nTrabalhadores em regime integral que estudam à noite ou aos finais de semana enfrentam a 'pobreza crônica de tempo'. O estresse acumulado no trabalho reduz a capacidade de concentração estendida. O planejamento para esse perfil não pode pressupor rotinas ideais de 6 horas de estudo diário",
+      "resposta": "Não encontrei informações suficientes na base de conhecimento para responder a essa pergunta.",
+      "latencia_s": 3.26,
+      "tokens_resposta": 20,
+      "tokens_contexto": 557,
+      "d1": 1.0111734867095947,
+      "chamou_llm": true,
+      "chamadas_llm": 1,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "buscou",
+          "detalhe": "5 trechos, d1=1.011, corte=1.026",
+          "segundos": 0.16
+        },
+        {
+          "agente": "geração",
+          "acao": "respondeu",
+          "detalhe": "93 caracteres",
+          "segundos": 3.1
+        }
+      ],
+      "avaliacao": {
+        "recusou": true,
+        "citados": [],
+        "sucesso": true
+      }
+    },
+    {
+      "id": "q22",
+      "tipo": "fora_de_escopo",
+      "pergunta": "Quanto ganha um engenheiro de software no Brasil?",
+      "esperadas": [],
+      "pontos_chave": [],
+      "recuperados": [
+        "artigo_06_deep_work_newport.txt",
+        "artigo_04_cognitive_load_sweller.txt",
+        "artigo_16_pareto_engineering_box.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_06_deep_work_newport.txt | Chunk ID: 17] ---\n. A capacidade de sustentar de 2 a 4 horas de trabalho profundo diário com zero distrações digitais é o diferencial crítico para alto rendimento acadêmico e técnico.\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_04_cognitive_load_sweller.txt | Chunk ID: 10] ---\nA memória de trabalho humana possui capacidade estritamente limitada, manipulando cerca de 4 a 7 elementos simultâneos. A carga cognitiva é dividida em intrínseca (dificuldade natural do conteúdo), germana (esforço útil para construir esquemas mentais) e extrínseca (ruído provocado por material desorganizado ou interfaces complexas)\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_06_deep_work_newport.txt | Chunk ID: 16] ---\nO trabalho profundo (Deep Work) consiste em atividades profissionais ou intelectuais realizadas em estado de foco ininterrupto, empurrando as capacidades cognitivas ao limite. Essas sessões criam novo valor e aprimoram habilidades difíceis de replicar. Por outro lado, o trabalho superficial (responder mensagens, reorganizar itens estéticos) não exige esforço sustentado e cria a ilusão de produtividade\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_04_cognitive_load_sweller.txt | Chunk ID: 11] ---\n. Ferramentas de estudo eficientes devem minimizar a carga extrínseca (telas poluídas, excesso de configurações) para liberar largura de banda cognitiva voltada à assimilação do conteúdo complexo.\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_16_pareto_engineering_box.txt | Chunk ID: 38] ---\nEm ementas extensas, matrizes curriculares e editais de concursos, cerca de 80% das questões e desafios práticos concentram-se em aproximadamente 20% do conteúdo programático nuclear. Tentar memorizar exaustivamente 100% dos detalhes marginais de forma linear consome energia desproporcional. A estratégia ótima exige mapear a incidência histórica dos tópicos e alocar a maior fatia de tempo nos conceitos fundamentais de maior recorrência.",
+      "resposta": "Não encontrei informações suficientes na base de conhecimento para responder a essa pergunta.",
+      "latencia_s": 0.24,
+      "tokens_resposta": 20,
+      "tokens_contexto": 577,
+      "d1": 1.1378111839294434,
+      "chamou_llm": false,
+      "chamadas_llm": 0,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "barrou",
+          "detalhe": "5 trechos, d1=1.138, corte=1.026",
+          "segundos": 0.24
+        }
+      ],
+      "avaliacao": {
+        "recusou": true,
+        "citados": [],
+        "sucesso": true
+      }
+    },
+    {
+      "id": "q23",
+      "tipo": "fora_de_escopo",
+      "pergunta": "Qual é a fórmula de Bhaskara?",
+      "esperadas": [],
+      "pontos_chave": [],
+      "recuperados": [
+        "artigo_17_study_cycle_perez.txt",
+        "artigo_11_temporal_motivation_steel.txt",
+        "artigo_04_cognitive_load_sweller.txt",
+        "artigo_08_implementation_intentions_gollwitzer.txt",
+        "artigo_13_habit_loop_wood.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_17_study_cycle_perez.txt | Chunk ID: 40] ---\nGrades horárias fixas (ex.: Segunda: Matéria X, Terça: Matéria Y) quebram sistematicamente quando surgem imprevistos na rotina adulta, gerando frustração e sensação de atraso. O modelo de Ciclo de Estudos organiza as matérias em uma sequência circular contínua com blocos de 60 a 90 minutos\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_11_temporal_motivation_steel.txt | Chunk ID: 28] ---\n. Para neutralizar esse mecanismo, deve-se decompor metas longas em marcos semanais com feedback rápido.\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_04_cognitive_load_sweller.txt | Chunk ID: 10] ---\nA memória de trabalho humana possui capacidade estritamente limitada, manipulando cerca de 4 a 7 elementos simultâneos. A carga cognitiva é dividida em intrínseca (dificuldade natural do conteúdo), germana (esforço útil para construir esquemas mentais) e extrínseca (ruído provocado por material desorganizado ou interfaces complexas)\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_08_implementation_intentions_gollwitzer.txt | Chunk ID: 21] ---\nMetas vagas como 'estudarei amanhã' falham devido à fadiga decisória diária. A formulação de intenções de implementação baseadas na estrutura 'Se a situação X ocorrer, então executarei a ação Y' automatiza o início da conduta. Definir com precisão 'Quando', 'Onde' e 'Como' uma ação será iniciada transfere o controle do comportamento para pistas ambientais, reduzindo a necessidade de força de vontade voluntária e acelerando a adesão à rotina.\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_13_habit_loop_wood.txt | Chunk ID: 32] ---\nAproximadamente 43% dos comportamentos diários são executados por hábito enquanto a mente divaga sobre outros pensamentos. Hábitos são formados pelo loop Estímulo-Resposta-Recompensa ancorado em pistas de contexto estáveis (mesmo horário, mesmo local físico). Para consolidar o hábito de estudo independente, deve-se padronizar os estímulos iniciais e eliminar a fricção do ambiente, evitando depender unicamente da força de vontade.",
+      "resposta": "Não encontrei informações suficientes na base de conhecimento para responder a essa pergunta.",
+      "latencia_s": 0.26,
+      "tokens_resposta": 20,
+      "tokens_contexto": 616,
+      "d1": 1.2490966320037842,
+      "chamou_llm": false,
+      "chamadas_llm": 0,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "barrou",
+          "detalhe": "5 trechos, d1=1.249, corte=1.026",
+          "segundos": 0.26
+        }
+      ],
+      "avaliacao": {
+        "recusou": true,
+        "citados": [],
+        "sucesso": true
+      }
+    },
+    {
+      "id": "q24",
+      "tipo": "fora_de_escopo",
+      "pergunta": "Me ajuda a escrever um código em Python que ordena uma lista?",
+      "esperadas": [],
+      "pontos_chave": [],
+      "recuperados": [
+        "artigo_02_spaced_repetition_cepeda.txt",
+        "artigo_17_study_cycle_perez.txt",
+        "artigo_11_temporal_motivation_steel.txt",
+        "artigo_08_implementation_intentions_gollwitzer.txt",
+        "artigo_09_timeboxing_allen.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_02_spaced_repetition_cepeda.txt | Chunk ID: 5] ---\n. Sistemas de repetição espaçada devem priorizar itens com menor taxa de acerto recente, recalculando dinamicamente os intervalos de revisão.\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_17_study_cycle_perez.txt | Chunk ID: 40] ---\nGrades horárias fixas (ex.: Segunda: Matéria X, Terça: Matéria Y) quebram sistematicamente quando surgem imprevistos na rotina adulta, gerando frustração e sensação de atraso. O modelo de Ciclo de Estudos organiza as matérias em uma sequência circular contínua com blocos de 60 a 90 minutos\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_11_temporal_motivation_steel.txt | Chunk ID: 28] ---\n. Para neutralizar esse mecanismo, deve-se decompor metas longas em marcos semanais com feedback rápido.\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_08_implementation_intentions_gollwitzer.txt | Chunk ID: 21] ---\nMetas vagas como 'estudarei amanhã' falham devido à fadiga decisória diária. A formulação de intenções de implementação baseadas na estrutura 'Se a situação X ocorrer, então executarei a ação Y' automatiza o início da conduta. Definir com precisão 'Quando', 'Onde' e 'Como' uma ação será iniciada transfere o controle do comportamento para pistas ambientais, reduzindo a necessidade de força de vontade voluntária e acelerando a adesão à rotina.\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_09_timeboxing_allen.txt | Chunk ID: 23] ---\nA Lei de Parkinson postula que o trabalho se expande para preencher o tempo disponível para sua conclusão. O método de Timeboxing estabelece um limite temporal rígido e pré-alocado no calendário para a execução de uma tarefa específica. Ao transformar uma tarefa aberta em um bloco com início e fim demarcados, elimina-se a ruminação mental sobre o que fazer em seguida, forçando o indivíduo a focar nas entregas essenciais dentro do prazo delimitado.",
+      "resposta": "Não encontrei informações suficientes na base de conhecimento para responder a essa pergunta.",
+      "latencia_s": 0.27,
+      "tokens_resposta": 20,
+      "tokens_contexto": 565,
+      "d1": 1.0284124612808228,
+      "chamou_llm": false,
+      "chamadas_llm": 0,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "barrou",
+          "detalhe": "5 trechos, d1=1.028, corte=1.026",
+          "segundos": 0.27
+        }
+      ],
+      "avaliacao": {
+        "recusou": true,
+        "citados": [],
+        "sucesso": true
+      }
+    },
+    {
+      "id": "q25",
+      "tipo": "fora_de_escopo",
+      "pergunta": "Qual a capital da Austrália?",
+      "esperadas": [],
+      "pontos_chave": [],
+      "recuperados": [
+        "artigo_06_deep_work_newport.txt",
+        "artigo_07_attention_residue_leroy.txt",
+        "artigo_19_dual_burden_clt_martins.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_06_deep_work_newport.txt | Chunk ID: 17] ---\n. A capacidade de sustentar de 2 a 4 horas de trabalho profundo diário com zero distrações digitais é o diferencial crítico para alto rendimento acadêmico e técnico.\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_07_attention_residue_leroy.txt | Chunk ID: 18] ---\nTÍTULO: Why Is It So Hard to Do My Work? The Challenge of Attention Residue\nAUTORES: Sophie Leroy (2009, Organizational Behavior and Human Decision Processes)\nTEMA: Resíduo de Atenção e Custos da Troca de Tarefas\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_07_attention_residue_leroy.txt | Chunk ID: 19] ---\nQuando uma pessoa muda o foco de uma Tarefa A para uma Tarefa B, a atenção não migra instantaneamente. Uma parcela significativa da atenção permanece fixada na tarefa anterior (resíduo de atenção). Esse efeito é acentuado se a Tarefa A foi interrompida antes da conclusão. Alternar frequentemente entre celular, notificações e estudo técnico gera dispersão cumulativa crônica, degradando o desempenho e a velocidade de raciocínio lógico.\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_06_deep_work_newport.txt | Chunk ID: 15] ---\nTÍTULO: Deep Work: Rules for Focused Success in a Distracted World\nAUTORES: Cal Newport (2016, MIT Press / Grand Central Publishing)\nTEMA: Trabalho Profundo vs. Fragmentação Cognitiva\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 46] ---\n. A recomendação consiste em adotar micro-blocos matinais protegidos de 45 a 60 minutos e utilizar fins de semana para blocos de aprofundamento prático, preservando descanso para prevenção de esgotamento (burnout).",
+      "resposta": "Não encontrei informações suficientes na base de conhecimento para responder a essa pergunta.",
+      "latencia_s": 0.23,
+      "tokens_resposta": 20,
+      "tokens_contexto": 508,
+      "d1": 1.4661810398101807,
+      "chamou_llm": false,
+      "chamadas_llm": 0,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "barrou",
+          "detalhe": "5 trechos, d1=1.466, corte=1.026",
+          "segundos": 0.23
+        }
+      ],
+      "avaliacao": {
+        "recusou": true,
+        "citados": [],
+        "sucesso": true
+      }
+    },
+    {
+      "id": "q26",
+      "tipo": "fora_de_escopo",
+      "pergunta": "Como faço para emagrecer mesmo passando o dia sentado estudando?",
+      "esperadas": [],
+      "pontos_chave": [],
+      "recuperados": [
+        "artigo_19_dual_burden_clt_martins.txt",
+        "artigo_04_cognitive_load_sweller.txt",
+        "artigo_02_spaced_repetition_cepeda.txt",
+        "artigo_05_sleep_consolidation_walker.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 45] ---\nTrabalhadores em regime integral que estudam à noite ou aos finais de semana enfrentam a 'pobreza crônica de tempo'. O estresse acumulado no trabalho reduz a capacidade de concentração estendida. O planejamento para esse perfil não pode pressupor rotinas ideais de 6 horas de estudo diário\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 46] ---\n. A recomendação consiste em adotar micro-blocos matinais protegidos de 45 a 60 minutos e utilizar fins de semana para blocos de aprofundamento prático, preservando descanso para prevenção de esgotamento (burnout).\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_04_cognitive_load_sweller.txt | Chunk ID: 11] ---\n. Ferramentas de estudo eficientes devem minimizar a carga extrínseca (telas poluídas, excesso de configurações) para liberar largura de banda cognitiva voltada à assimilação do conteúdo complexo.\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_02_spaced_repetition_cepeda.txt | Chunk ID: 4] ---\nA prática distribuída (repetição espaçada) supera consistentemente a prática concentrada (estudo intensivo de última hora). O intervalo ideal entre sessões de estudo depende do intervalo de retenção desejado: quanto mais distante for o momento da avaliação final, maior deve ser o espaçamento temporal entre as revisões. Sessões de estudo espaçadas forçam o cérebro a reconstruir o traço de memória quase esquecido, o que fortalece a estabilidade do armazenamento a longo prazo\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_05_sleep_consolidation_walker.txt | Chunk ID: 14] ---\n. Reduzir o tempo de sono para menos de 7 horas diárias deteriora a capacidade de foco, aumenta a reatividade emocional e bloqueia a potenciação de longo prazo (LTP), tornando ineficazes as horas de estudo acumuladas na madrugada.",
+      "resposta": "Não encontrei informações suficientes na base de conhecimento para responder a essa pergunta.",
+      "latencia_s": 6.79,
+      "tokens_resposta": 20,
+      "tokens_contexto": 561,
+      "d1": 0.915479302406311,
+      "chamou_llm": true,
+      "chamadas_llm": 1,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "buscou",
+          "detalhe": "5 trechos, d1=0.915, corte=1.026",
+          "segundos": 0.22
+        },
+        {
+          "agente": "geração",
+          "acao": "respondeu",
+          "detalhe": "93 caracteres",
+          "segundos": 6.58
+        }
+      ],
+      "avaliacao": {
+        "recusou": true,
+        "citados": [],
+        "sucesso": true
+      }
+    },
+    {
+      "id": "q27",
+      "tipo": "fora_de_escopo",
+      "pergunta": "Como pedir aumento para o meu chefe?",
+      "esperadas": [],
+      "pontos_chave": [],
+      "recuperados": [
+        "artigo_11_temporal_motivation_steel.txt",
+        "artigo_19_dual_burden_clt_martins.txt",
+        "artigo_10_pomodoro_cirillo.txt",
+        "artigo_03_interleaving_rohwer.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_11_temporal_motivation_steel.txt | Chunk ID: 28] ---\n. Para neutralizar esse mecanismo, deve-se decompor metas longas em marcos semanais com feedback rápido.\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 46] ---\n. A recomendação consiste em adotar micro-blocos matinais protegidos de 45 a 60 minutos e utilizar fins de semana para blocos de aprofundamento prático, preservando descanso para prevenção de esgotamento (burnout).\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_10_pomodoro_cirillo.txt | Chunk ID: 25] ---\nA Técnica Pomodoro utiliza intervalos de esforço sustentado (tradicionalmente 25 minutos) intercalados por pausas curtas (5 minutos) para aliviar a ansiedade associada à percepção contínua do tempo. Ao transformar o tempo em um aliado métrico de esforço concluído, e não em um fator de cobrança, a técnica reduz o atrito de inicialização da tarefa. O registro dos pomodoros finalizados provê feedback visual tangível de progresso diário.\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_03_interleaving_rohwer.txt | Chunk ID: 8] ---\n. O estudante aprende a identificar qual estratégia ou fórmula aplicar diante de problemas novos, mimetizando a realidade das provas e do ambiente profissional.\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_11_temporal_motivation_steel.txt | Chunk ID: 27] ---\nA Teoria da Motivação Temporal define a utilidade de uma tarefa como uma equação matemática: Utilidade = (Expectativa x Valor) / (1 + Impulsividade x Atraso). Tarefas cujo resultado está distante no tempo (provas no fim do semestre, concursos) sofrem um desconto hiperbólico acentuado, perdendo apelo motivacional. Estudantes com alta impulsividade adiam o estudo em favor de recompensas de gratificação instantânea",
+      "resposta": "Não encontrei informações suficientes na base de conhecimento para responder a essa pergunta.",
+      "latencia_s": 0.22,
+      "tokens_resposta": 20,
+      "tokens_contexto": 538,
+      "d1": 1.066906452178955,
+      "chamou_llm": false,
+      "chamadas_llm": 0,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "barrou",
+          "detalhe": "5 trechos, d1=1.067, corte=1.026",
+          "segundos": 0.22
+        }
+      ],
+      "avaliacao": {
+        "recusou": true,
+        "citados": [],
+        "sucesso": true
+      }
+    },
+    {
+      "id": "q28",
+      "tipo": "fora_de_escopo",
+      "pergunta": "Qual cadeira ergonômica é melhor para estudar muitas horas?",
+      "esperadas": [],
+      "pontos_chave": [],
+      "recuperados": [
+        "artigo_19_dual_burden_clt_martins.txt",
+        "artigo_02_spaced_repetition_cepeda.txt",
+        "artigo_04_cognitive_load_sweller.txt",
+        "artigo_17_study_cycle_perez.txt"
+      ],
+      "contexto": "--- [Fragmento #1 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 45] ---\nTrabalhadores em regime integral que estudam à noite ou aos finais de semana enfrentam a 'pobreza crônica de tempo'. O estresse acumulado no trabalho reduz a capacidade de concentração estendida. O planejamento para esse perfil não pode pressupor rotinas ideais de 6 horas de estudo diário\n\n--- [Fragmento #2 | Fonte: ../api/data/artigo_02_spaced_repetition_cepeda.txt | Chunk ID: 4] ---\nA prática distribuída (repetição espaçada) supera consistentemente a prática concentrada (estudo intensivo de última hora). O intervalo ideal entre sessões de estudo depende do intervalo de retenção desejado: quanto mais distante for o momento da avaliação final, maior deve ser o espaçamento temporal entre as revisões. Sessões de estudo espaçadas forçam o cérebro a reconstruir o traço de memória quase esquecido, o que fortalece a estabilidade do armazenamento a longo prazo\n\n--- [Fragmento #3 | Fonte: ../api/data/artigo_04_cognitive_load_sweller.txt | Chunk ID: 11] ---\n. Ferramentas de estudo eficientes devem minimizar a carga extrínseca (telas poluídas, excesso de configurações) para liberar largura de banda cognitiva voltada à assimilação do conteúdo complexo.\n\n--- [Fragmento #4 | Fonte: ../api/data/artigo_17_study_cycle_perez.txt | Chunk ID: 39] ---\nTÍTULO: Dynamic Study Cycles vs. Fixed Timetables in High-Stakes Exam Preparation\nAUTORES: Alexandre Meirelles, Carlos R. Perez (2015, Educational Management Review)\nTEMA: Ciclo de Estudos Flexível vs. Grade Horária Rígida\n\n--- [Fragmento #5 | Fonte: ../api/data/artigo_19_dual_burden_clt_martins.txt | Chunk ID: 46] ---\n. A recomendação consiste em adotar micro-blocos matinais protegidos de 45 a 60 minutos e utilizar fins de semana para blocos de aprofundamento prático, preservando descanso para prevenção de esgotamento (burnout).",
+      "resposta": "Não encontrei informações suficientes na base de conhecimento para responder a essa pergunta.",
+      "latencia_s": 6.87,
+      "tokens_resposta": 20,
+      "tokens_contexto": 553,
+      "d1": 0.9877879619598389,
+      "chamou_llm": true,
+      "chamadas_llm": 1,
+      "diagnostico": null,
+      "rastro": [
+        {
+          "agente": "busca",
+          "acao": "buscou",
+          "detalhe": "5 trechos, d1=0.988, corte=1.026",
+          "segundos": 0.24
+        },
+        {
+          "agente": "geração",
+          "acao": "respondeu",
+          "detalhe": "93 caracteres",
+          "segundos": 6.63
+        }
+      ],
+      "avaliacao": {
+        "recusou": true,
+        "citados": [],
+        "sucesso": true
+      }
+    }
+  ]
+}
