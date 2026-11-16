@@ -6,7 +6,7 @@ Uso (a partir de pesquisa/):
     python -m metricas.geracao.runner --nome qwen3_bge --so-avaliar    # reavalia respostas já geradas
     python -m metricas.geracao.runner --nome teste --limite 3          # rodada rápida com 3 perguntas
 
-Fase 1 (gerar): executa o notebook até a chain RAG (reindexa api/chroma_db) e responde todas as
+Fase 1 (gerar): executa o notebook até a chain RAG (índice temporário) e responde todas as
 perguntas do gabarito. Salva pergunta, chunks recuperados, contexto exato enviado ao LLM e resposta
 em relatorios/geracao_respostas_<nome>.json.
 
