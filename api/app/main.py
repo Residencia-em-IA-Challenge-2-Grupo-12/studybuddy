@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
+from app.modules.assistente.router import router as assistente_router
 from app.modules.example.router import router as example_router
 
 app = FastAPI(title=settings.app_name, debug=settings.debug)
@@ -14,6 +15,7 @@ app.add_middleware(
 )
 
 app.include_router(example_router)
+app.include_router(assistente_router)
 
 
 @app.get("/health")
