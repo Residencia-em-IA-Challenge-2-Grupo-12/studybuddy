@@ -22,7 +22,8 @@ def vectorstore():
 
     if not settings.chroma_dir.exists():
         raise RuntimeError(f"Índice não encontrado em {settings.chroma_dir}. Rode o notebook pesquisa/rag_pipeline_semana2.ipynb.")
-    emb = OllamaEmbeddings(model=settings.ollama_embedding_model, base_url=settings.ollama_base_url)
+    emb = OllamaEmbeddings(model=settings.ollama_embedding_model, base_url=settings.ollama_base_url,
+                           client_kwargs={"timeout": settings.ollama_timeout_embedding})
     vs = Chroma(collection_name=settings.chroma_collection, embedding_function=emb,
                 persist_directory=str(settings.chroma_dir))
     logger.info("ChromaDB aberto: %s (%s trechos)", settings.chroma_dir, vs._collection.count())

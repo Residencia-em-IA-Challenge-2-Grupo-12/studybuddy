@@ -11,7 +11,7 @@ def gerador():
     from langchain_ollama import ChatOllama
 
     return ChatOllama(model=settings.ollama_llm_model, temperature=0, reasoning=False,
-                      base_url=settings.ollama_base_url)
+                      base_url=settings.ollama_base_url, client_kwargs={"timeout": settings.ollama_timeout_llm})
 
 
 @lru_cache
@@ -22,4 +22,5 @@ def triagem():
     from app.modules.agentes.triagem import ESQUEMA_DIAGNOSTICO
 
     return ChatOllama(model=settings.ollama_triagem_model, temperature=0, reasoning=False,
-                      format=ESQUEMA_DIAGNOSTICO, base_url=settings.ollama_base_url)
+                      format=ESQUEMA_DIAGNOSTICO, base_url=settings.ollama_base_url,
+                      client_kwargs={"timeout": settings.ollama_timeout_llm})

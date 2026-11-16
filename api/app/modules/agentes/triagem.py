@@ -105,11 +105,16 @@ def interpretar(bruto: str) -> Diagnostico:
     o Planejador ainda responde com a busca pela pergunta, como o pipeline clássico."""
     try:
         d = json.loads(bruto)
-        consultas = [c.strip() for c in d.get("consultas", []) if isinstance(c, str) and c.strip()]
+        # O modelo às vezes foge do esquema: string no lugar de lista, null no lugar de texto.
+        # Sem as checagens de tipo, "sono" virava ['s','o','n','o'] e null virava o texto 'None'.
+        consultas = d.get("consultas")
+        consultas = [c.strip() for c in consultas if isinstance(c, str) and c.strip()] if isinstance(consultas, list) else []
+        objetivo = d.get("objetivo")
+        restricoes = d.get("restricoes")
         return Diagnostico(
             problema_principal=d.get("problema_principal") if d.get("problema_principal") in PROBLEMAS else "outro",
-            objetivo=str(d.get("objetivo", "")).strip(),
-            restricoes={k: str(v) for k, v in (d.get("restricoes") or {}).items()},
+            objetivo=objetivo.strip() if isinstance(objetivo, str) else "",
+            restricoes={k: v for k, v in restricoes.items() if isinstance(v, str)} if isinstance(restricoes, dict) else {},
             tipo_resposta=d.get("tipo_resposta") if d.get("tipo_resposta") in (PLANO, EXPLICACAO) else EXPLICACAO,
             consultas=consultas[:MAX_CONSULTAS],
         )

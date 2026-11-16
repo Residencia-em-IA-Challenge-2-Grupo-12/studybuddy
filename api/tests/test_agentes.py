@@ -145,3 +145,58 @@ def test_fluxo_completo_passa_o_diagnostico_e_as_evidencias(monkeypatch):
     assert r.resposta == "plano com 3 trechos" and r.chamadas_llm == 2
     assert r.diagnostico["tipo_resposta"] == PLANO
     assert [e.agente for e in r.rastro] == ["Planejador", "Triagem", "Planejador", "Planejador"]
+
+
+# ---------------------------------------------------------------- Triagem: JSON fora do esquema
+def test_interpretar_consultas_string_nao_vira_letras():
+    d = interpretar(diag_json(consultas="sono"))
+    assert d.consultas == []
+
+
+def test_interpretar_null_nao_vira_texto_none():
+    d = interpretar(diag_json(objetivo=None, restricoes={"prazo": None, "contexto": "CLT"}))
+    assert d.objetivo == ""
+    assert d.restricoes_ditas() == {"contexto": "CLT"}
+
+
+def test_interpretar_restricoes_que_nao_sao_dict():
+    assert interpretar(diag_json(restricoes=["2 horas"])).restricoes == {}
+
+
+# ---------------------------------------------------------------- API: erros do Ollama viram 503/504
+def _cliente_com_erro(monkeypatch, exc):
+    from fastapi.testclient import TestClient
+
+    from app.main import app
+    from app.modules.assistente import service
+
+    def falha(*_a, **_k):
+        raise exc
+
+    monkeypatch.setattr(service, "responder", falha)
+    return TestClient(app)
+
+
+def test_ollama_fora_do_ar_responde_503(monkeypatch):
+    c = _cliente_com_erro(monkeypatch, ConnectionError("Failed to connect to Ollama"))
+    assert c.post("/assistente/perguntar", json={"pergunta": "Como estudar melhor?"}).status_code == 503
+
+
+def test_modelo_nao_baixado_responde_503(monkeypatch):
+    import ollama
+
+    c = _cliente_com_erro(monkeypatch, ollama.ResponseError("model 'qwen3:8b' not found", 404))
+    assert c.post("/assistente/perguntar", json={"pergunta": "Como estudar melhor?"}).status_code == 503
+
+
+def test_ollama_lento_responde_504(monkeypatch):
+    import httpx
+
+    c = _cliente_com_erro(monkeypatch, httpx.ReadTimeout("timed out"))
+    assert c.post("/assistente/perguntar", json={"pergunta": "Como estudar melhor?"}).status_code == 504
+
+
+def test_env_lido_de_api_independente_do_diretorio():
+    from app.core.config import API_DIR, Settings
+
+    assert Settings.model_config["env_file"] == API_DIR / ".env"
