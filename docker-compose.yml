@@ -1,0 +1,40 @@
+# Dois ambientes da mesma imagem, para comparar os pipelines lado a lado:
+#   http://localhost:8001/docs  -> clássico (T3 + porteiro)
+#   http://localhost:8002/docs  -> multiagente (Triagem + Planejador)
+#
+# O Ollama roda no Mac, FORA do Docker: dentro de container ele não usa a GPU (Metal) e fica lento demais.
+# Antes de subir: Ollama aberto com bge-m3 e qwen3:8b, e o índice gerado em api/chroma_db
+# (pesquisa/rag_pipeline_semana2.ipynb).
+#
+# Atenção ao medir latência: os dois containers dividem o mesmo Ollama. Rode as perguntas em um de cada vez.
+
+x-api: &api
+  build: ./api
+  volumes:
+    - ./api/chroma_db:/indice:ro
+  extra_hosts:
+    - "host.docker.internal:host-gateway"
+  environment: &env
+    OLLAMA_BASE_URL: http://host.docker.internal:11434
+    OLLAMA_EMBEDDING_MODEL: bge-m3
+    OLLAMA_LLM_MODEL: qwen3:8b
+    OLLAMA_TRIAGEM_MODEL: qwen3:8b
+    TOP_K: "5"
+    CORS_ORIGINS: '["http://localhost:3000"]'
+
+services:
+  api-classico:
+    <<: *api
+    container_name: studybuddy-classico
+    ports: ["8001:8000"]
+    environment:
+      <<: *env
+      PIPELINE: classico
+
+  api-agentes:
+    <<: *api
+    container_name: studybuddy-agentes
+    ports: ["8002:8000"]
+    environment:
+      <<: *env
+      PIPELINE: agentes
