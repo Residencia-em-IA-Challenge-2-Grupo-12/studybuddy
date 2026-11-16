@@ -7,6 +7,8 @@ Uso (a partir de pesquisa/):
     python -m metricas.comparacao.modos rag_llm               # T3: RAG + LLM (k=5, prompt do notebook)
     python -m metricas.comparacao.modos rag_otimizado         # T4: porteiro de distância + prompt revisado
     python -m metricas.comparacao.modos rag_llm_k3            # referência: rodada k=3 da semana passada
+    python -m metricas.comparacao.modos classico_api          # T3 + porteiro, pelo código da API (api/app)
+    python -m metricas.comparacao.modos multiagente           # T5: Triagem + Planejador (api/app/modules/agentes)
     python -m metricas.comparacao.modos llm_puro --limite 3   # teste rápido
 
 T3 reaproveita relatorios/geracao_respostas_qwen3_bge_k5.json (mesma configuração, temperature=0).
@@ -20,6 +22,8 @@ import argparse
 import json
 import os
 import time
+from dataclasses import asdict
+from pathlib import Path
 from typing import Dict, List, Optional, Sequence, Tuple
 
 from metricas.dataset.loader import Pergunta, load_gabarito, nome_fonte
@@ -31,6 +35,9 @@ K = 5
 RECUSA = FRASE_RECUSA + " para responder a essa pergunta."
 MODOS = ("llm_puro", "so_busca", "rag_llm", "rag_otimizado")
 REFERENCIA = "rag_llm_k3"  # rodada da semana passada (k=3), só como referência
+# Semana 4: os dois pipelines da API. Leem o índice atual de api/chroma_db sem reindexar.
+MODOS_API = {"classico_api": "classico", "multiagente": "agentes"}
+API_DIR = Path(__file__).resolve().parents[3] / "api"
 
 # T1: mesmo papel e mesmas regras de forma do notebook, mas sem contexto. Ele ganha a mesma
 # chance de recusar (frase exata), para a comparação de recusa ser justa.
@@ -216,9 +223,40 @@ def rag_llm_reaproveitado(perguntas: Sequence[Pergunta], arquivo: str = "geracao
     return {**dados["config"], "prompt": "RAG_SYSTEM_PROMPT (notebook)", "reaproveitado_de": arquivo}, regs
 
 
+def modo_api(perguntas: Sequence[Pergunta], pipeline: str) -> Tuple[Dict, List[Dict]]:
+    """Roda um pipeline da API (clássico ou multiagente) e grava no formato dos outros modos.
+
+    Além dos campos de sempre, guarda chamadas_llm (o multiagente faz duas por pergunta: Triagem e
+    Planejador), o diagnóstico da Triagem e o rastro de cada agente, para auditoria.
+    """
+    import sys
+
+    sys.path.insert(0, str(API_DIR))
+    from app.core.config import settings
+    from app.modules.agentes import orquestrador
+    from app.modules.rag import classico, repository
+    from app.modules.rag.fontes import formatar_trechos
+
+    responder = {"classico": classico.responder, "agentes": orquestrador.responder}[pipeline]
+    regs = []
+    for n, p in enumerate(perguntas, 1):
+        print(f"  [{n}/{len(perguntas)}] {p.id}", flush=True)
+        r = responder(p.pergunta)
+        reg = _registro(p, formatar_trechos(r.trechos), r.resposta, r.fontes, r.latencia_s, r.d1,
+                        chamou_llm=r.chamadas_llm > 0)
+        reg.update(chamadas_llm=r.chamadas_llm, diagnostico=r.diagnostico, rastro=[asdict(e) for e in r.rastro])
+        regs.append(reg)
+    cfg = {"llm": settings.ollama_llm_model, "embedding": settings.ollama_embedding_model,
+           "chunk_size": 500, "top_k": settings.top_k, "tau": repository.corte_porteiro(),
+           "prompt": "RAG_SYSTEM_PROMPT (api/app/modules/rag/prompts.py)", "pipeline": pipeline}
+    if pipeline == "agentes":
+        cfg.update(triagem=settings.ollama_triagem_model)
+    return cfg, regs
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("modo", choices=("calibrar", *MODOS, REFERENCIA))
+    ap.add_argument("modo", choices=("calibrar", *MODOS, REFERENCIA, *MODOS_API))
     ap.add_argument("--limite", type=int)
     ap.add_argument("--regerar", action="store_true", help="rag_llm: gera de novo em vez de reaproveitar")
     args = ap.parse_args()
@@ -228,7 +266,9 @@ def main() -> None:
     if args.modo == "calibrar":
         calibrar()
         return
-    if args.modo == "llm_puro":
+    if args.modo in MODOS_API:
+        cfg, regs = modo_api(perguntas, MODOS_API[args.modo])
+    elif args.modo == "llm_puro":
         cfg, regs = modo_llm_puro(perguntas)
     elif args.modo == REFERENCIA:
         cfg, regs = rag_llm_reaproveitado(perguntas, "geracao_respostas_qwen3_bge.json")
