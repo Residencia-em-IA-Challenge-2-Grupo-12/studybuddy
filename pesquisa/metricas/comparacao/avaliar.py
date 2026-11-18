@@ -31,13 +31,15 @@ from metricas.geracao import metrics as mg
 from metricas.recuperacao import metrics as mr
 from metricas.recuperacao.runner import RELATORIOS_DIR
 
-ORDEM = ["llm_puro", "so_busca", "rag_llm", "rag_otimizado", "rag_llm_k3"]
+ORDEM = ["llm_puro", "so_busca", "rag_llm", "rag_otimizado", "rag_llm_k3", "classico_api", "multiagente"]
 ROTULOS = {
     "llm_puro": "T1 · Só LLM (sem RAG)",
     "so_busca": "T2 · Só busca (sem LLM)",
     "rag_llm": "T3 · RAG + LLM (k=5)",
     "rag_otimizado": "T4 · RAG + LLM otimizado",
     "rag_llm_k3": "Ref · RAG + LLM k=3 (semana passada)",
+    "classico_api": "T3 + porteiro (API)",
+    "multiagente": "T5 · Multiagente (Triagem + Planejador)",
 }
 
 # Limiares da taxa de sucesso (por pergunta em escopo)
@@ -143,7 +145,8 @@ def agregar(regs: List[Dict]) -> Dict:
         "latencia_p50_respostas": round(mr.percentil([r["latencia_s"] for r in respondidas], 50), 2) if respondidas else None,
         "tokens_resposta": round(mr.media(r["tokens_resposta"] for r in dentro)),
         "tokens_contexto": round(mr.media(r.get("tokens_contexto", 0) for r in regs)),
-        "chamadas_llm": sum(1 for r in regs if r.get("chamou_llm", True)),
+        # Modos antigos: 1 chamada por resposta. O multiagente grava quantas fez (Triagem + Planejador).
+        "chamadas_llm": sum(r.get("chamadas_llm", 1 if r.get("chamou_llm", True) else 0) for r in regs),
         "por_tipo": {},
     }
     for tipo in ("direta", "parafraseada", "multi_fonte"):

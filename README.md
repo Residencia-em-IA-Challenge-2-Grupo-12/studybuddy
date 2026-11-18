@@ -55,8 +55,10 @@ Challenge2-project/
 ├── web/                            # Frontend (Next.js, módulos em src/modules/)
 ├── pesquisa/
 │   ├── rag_pipeline_semana2.ipynb  # Notebook principal com as 5 etapas do pipeline RAG
-│   └── Entrega2.md                 # Documento de apoio da entrega da Semana 2
-├── .github/workflows/ci.yml        # CI: backend e frontend
+│   ├── Entrega2.md                 # Documento de apoio da entrega da Semana 2
+│   └── Entrega4.md                 # Sistema multiagente: arquitetura, agentes, demonstração e comparação
+├── docker-compose.yml              # Dois ambientes: pipeline clássico (8001) e multiagente (8002)
+├── .github/workflows/ci.yml        # CI: backend (com testes) e frontend
 └── README.md                       # Documentação do repositório
 ```
 
@@ -157,6 +159,18 @@ cd web && npm install && npm run dev
 ```
 
 O notebook deve ser executado de dentro de `pesquisa/` (é o que o Jupyter e o VS Code fazem por padrão).
+
+### Sistema multiagente (Semana 4)
+
+A API tem dois pipelines: o **clássico** (T3 + porteiro) e o **multiagente** (Agente de Triagem + Agente Planejador). Arquitetura, responsabilidades, fluxo e comparação em [`pesquisa/Entrega4.md`](pesquisa/Entrega4.md).
+
+```bash
+# Demonstração no terminal (a partir de api/, com o Ollama aberto e o índice gerado)
+python demo.py
+
+# Os dois pipelines em containers separados
+docker compose up -d --build   # clássico em :8001, multiagente em :8002
+```
 
 ---
 

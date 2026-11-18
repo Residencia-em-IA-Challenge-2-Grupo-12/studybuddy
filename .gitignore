@@ -9,8 +9,15 @@ node_modules/
 next-env.d.ts
 .env*.local
 
-# Banco vetorial local (regenerado pelo notebook em pesquisa/)
-api/chroma_db/
+# Banco vetorial local (regenerado pelo notebook em pesquisa/), em qualquer pasta
+chroma_db/
 
 # Build / cache
 *.tsbuildinfo
+
+# Sistema / Jupyter
+.DS_Store
+.ipynb_checkpoints/
+
+# Progresso parcial do juiz (apagado ao terminar cada modo)
+*.parcial.json

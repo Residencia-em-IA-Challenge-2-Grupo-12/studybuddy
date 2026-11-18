@@ -295,7 +295,6 @@ Para priorizar editais extensos e trilhas autodidatas, deve-se mapear a incidên
 | Artefato | Caminho no Repositório | Descrição |
 | :--- | :--- | :--- |
 | **Notebook de Experimentos (Semana 3)** | [`pesquisa/experimentos_semana3_llm_vs_rag.ipynb`](experimentos_semana3_llm_vs_rag.ipynb) | Implementação interativa dos 4 cenários (Vanilla LLM, Busca Pura, RAG Baseline e RAG Otimizado) e avaliação RAGAS. |
-| **Script de Avaliação Automatizada** | [`pesquisa/experimentos_semana3_llm_vs_rag.py`](experimentos_semana3_llm_vs_rag.py) | Script Python autônomo para execução reprodutível dos 12 experimentos e geração de relatórios. |
 | **Relatório Consolidado (Markdown)** | [`pesquisa/RELATORIO_COMPARACAO_SEMANA3.md`](RELATORIO_COMPARACAO_SEMANA3.md) | Documento completo com metodologia, tabelas comparativas, respostas empíricas e veredito técnico. |
 | **Planilha de Métricas (CSV)** | [`pesquisa/relatorio_experimentos_semana3.csv`](relatorio_experimentos_semana3.csv) | Dados brutos tabulados das 12 execuções (`Faithfulness`, `Answer Relevance`, `Context Precision`, Latência, Tokens e Custo). |
 | **Notebook Pipeline RAG (Semana 2)** | [`pesquisa/rag_pipeline_semana2.ipynb`](rag_pipeline_semana2.ipynb) | Construção da base de conhecimento, *chunking*, indexação no ChromaDB e *chain* LCEL inicial. |

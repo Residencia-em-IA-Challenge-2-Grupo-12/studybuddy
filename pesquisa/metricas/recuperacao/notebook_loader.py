@@ -7,7 +7,8 @@ Células executadas (identificadas pelo conteúdo, não pelo índice, para sobre
   - setup do ambiente      -> define ACTIVE_PROVIDER
   - ingestão               -> define raw_documents
   - chunking               -> define document_chunks, CHUNK_SIZE, CHUNK_OVERLAP
-  - embeddings + ChromaDB  -> define embedding_model, vectorstore, TOP_K (REINDEXA api/chroma_db)
+  - embeddings + ChromaDB  -> define embedding_model, vectorstore, TOP_K (indexa numa pasta temporária;
+                              o índice da API, api/chroma_db, só muda com chroma_dir explícito)
   - chain RAG (opcional)   -> define llm, rag_chain, RAG_SYSTEM_PROMPT, PORTEIRO_TAU (só com ate="geracao")
 
 Células ignoradas de propósito:
@@ -16,12 +17,15 @@ Células ignoradas de propósito:
   - a da demonstração com as 3 personas (chama o LLM só para exibir respostas)
 """
 
+import atexit
 import contextlib
 import io
 import json
 import os
+import shutil
+import tempfile
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 NOTEBOOK_PATH = Path(__file__).resolve().parents[2] / "rag_pipeline_semana2.ipynb"
 
@@ -52,18 +56,31 @@ def selecionar_celulas(path: Path = NOTEBOOK_PATH) -> List[Dict[str, str]]:
     return selecionadas
 
 
-def executar_notebook(path: Path = NOTEBOOK_PATH, silencioso: bool = True, ate: str = "indice") -> Dict[str, Any]:
+def _pasta_temporaria() -> str:
+    pasta = tempfile.mkdtemp(prefix="chroma_experimento_")
+    atexit.register(shutil.rmtree, pasta, ignore_errors=True)
+    return pasta
+
+
+def executar_notebook(path: Path = NOTEBOOK_PATH, silencioso: bool = True, ate: str = "indice",
+                      chroma_dir: Optional[str] = None) -> Dict[str, Any]:
     """Executa as etapas num namespace único e devolve esse namespace.
 
     O notebook usa caminhos relativos a `pesquisa/` (ex.: ../api/data), então o diretório
     de trabalho é trocado para lá durante a execução e restaurado depois.
     `ate` para depois da etapa indicada (ex.: "chunking" devolve os chunks sem reindexar o ChromaDB).
+
+    O índice vai para uma pasta temporária (apagada ao sair), passada ao notebook em RAG_CHROMA_DIR:
+    rodar um experimento não muda o api/chroma_db que a API lê. Para regerar o índice da API,
+    passe chroma_dir=<caminho de api/chroma_db> (ou rode o notebook no Jupyter).
     """
     rotulos = [r for r, _, _ in ETAPAS]
     etapas = ETAPAS[: rotulos.index(ate) + 1]
     celulas = selecionar_celulas(path)[: len(etapas)]
     ns: Dict[str, Any] = {"__name__": "__notebook__"}
     cwd = os.getcwd()
+    anterior = os.environ.get("RAG_CHROMA_DIR")
+    os.environ["RAG_CHROMA_DIR"] = str(chroma_dir) if chroma_dir else _pasta_temporaria()
     os.chdir(path.parent)
     try:
         for c in celulas:
@@ -73,6 +90,10 @@ def executar_notebook(path: Path = NOTEBOOK_PATH, silencioso: bool = True, ate: 
                 exec(compile(c["codigo"], f"<notebook:{c['rotulo']}>", "exec"), ns)
     finally:
         os.chdir(cwd)
+        if anterior is None:
+            os.environ.pop("RAG_CHROMA_DIR", None)
+        else:
+            os.environ["RAG_CHROMA_DIR"] = anterior
 
     faltando = [nome for _, _, nome in etapas if nome not in ns]
     if faltando:
