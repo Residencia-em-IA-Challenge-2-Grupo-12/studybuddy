@@ -113,6 +113,31 @@ def _chat_padrao():
     return llm.analysis()
 
 
+def consulta(m: Material) -> str:
+    return CONSULTA[m.carga].format(disciplina=m.disciplina)
+
+
+def montar_prompt(m: Material, blocos: list[BlocoEstudo], ctx: ContextoEstudante, trechos: list[Document],
+                  estado: str = "normal") -> str:
+    """O prompt exato que vai ao LLM (também usado pela comparação de modelos da [3.0])."""
+    b0 = blocos[0]
+    return PROMPT_JUSTIFICATIVA.format(
+        titulo=m.titulo, disciplina=m.disciplina, carga=m.carga, tecnicas=TECNICAS_ADEQUADAS[m.carga],
+        horarios=_horarios(blocos, ctx), foco=b0.foco_min, pausa=b0.pausa_min, estado=estado,
+        trechos=formatar_trechos(trechos))
+
+
+def estado_da_proposta(proposta: PropostaGrade, ctx: ContextoEstudante) -> str:
+    return ritmo(ctx.indice_capacidade, reducao_danos=proposta.modo == "reducao_danos").estado.replace("_", " ")
+
+
+def fontes_citadas(citadas: list[str], trechos: list[Document]) -> list[str]:
+    """["artigo_03"] -> ["artigo_03_interleaving_rohwer.txt"], com o nome do arquivo dos trechos recebidos."""
+    por_numero = {m_.group(1): nome_fonte(d.metadata.get("source", ""))
+                  for d in trechos if (m_ := _ARTIGO.search(nome_fonte(d.metadata.get("source", ""))))}
+    return [por_numero[c.removeprefix("artigo_")] for c in citadas if c.removeprefix("artigo_") in por_numero]
+
+
 def justificar_material(
     m: Material, blocos: list[BlocoEstudo], ctx: ContextoEstudante, *, chat, buscar: Callable[[str], list[Document]],
     estado: str = "normal",
@@ -120,14 +145,11 @@ def justificar_material(
     relato = Relato(m.id)
     inicio = time.perf_counter()
     try:
-        trechos = buscar(CONSULTA[m.carga].format(disciplina=m.disciplina))
+        trechos = buscar(consulta(m))
         if not trechos:
             relato.motivo_padrao = "nenhum trecho da base perto o bastante"
             return blocos, relato
-        b0 = blocos[0]
-        prompt = PROMPT_JUSTIFICATIVA.format(
-            titulo=m.titulo, disciplina=m.disciplina, carga=m.carga, tecnicas=TECNICAS_ADEQUADAS[m.carga], horarios=_horarios(blocos, ctx),
-            foco=b0.foco_min, pausa=b0.pausa_min, estado=estado, trechos=formatar_trechos(trechos))
+        prompt = montar_prompt(m, blocos, ctx, trechos, estado)
         saida = JustificativaLLM.model_validate_json(chat.invoke(prompt).content)
     except ValidationError as exc:
         relato.motivo_padrao = f"JSON fora do esquema: {exc.error_count()} erro(s)"
@@ -146,9 +168,7 @@ def justificar_material(
         relato.motivo_padrao = "nenhuma citação válida"
         return blocos, relato
 
-    por_numero = {m_.group(1): nome_fonte(d.metadata.get("source", ""))
-                  for d in trechos if (m_ := _ARTIGO.search(nome_fonte(d.metadata.get("source", ""))))}
-    fontes = [por_numero[c.removeprefix("artigo_")] for c in v.citadas if c.removeprefix("artigo_") in por_numero]
+    fontes = fontes_citadas(v.citadas, trechos)
     relato.usou_llm, relato.citadas = True, fontes
     novos = [b.model_copy(update={"tecnica": saida.tecnica.strip(), "justificativa": texto, "fontes": fontes})
              for b in blocos]
@@ -163,8 +183,7 @@ def justificar(
     chat = chat or _chat_padrao()
     buscar = buscar or _buscar_padrao
     materiais = {m.id: m for m in ctx.materiais}
-    reducao = proposta.modo == "reducao_danos"
-    estado = ritmo(ctx.indice_capacidade, reducao_danos=reducao).estado.replace("_", " ")
+    estado = estado_da_proposta(proposta, ctx)
     trocados: dict[str, BlocoEstudo] = {}
     relatos = []
     for mid in dict.fromkeys(b.material_id for b in proposta.blocos):
