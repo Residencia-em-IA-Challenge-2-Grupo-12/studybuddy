@@ -69,3 +69,8 @@ def test_tecnica_adequada_pela_carga():
     assert not tecnica_adequada("Flashcards com repetição espaçada", "alta")
     assert tecnica_adequada("Flashcards com repetição espaçada", "baixa")
     assert not tecnica_adequada("Prática intercalada", "baixa")
+
+
+def test_juiz_nao_julga_a_propria_familia():
+    assert rodar.familia("gemma4:e4b") == rodar.familia("gemma3:12b") == "gemma"
+    assert rodar.familia("qwen3.5:9b") == "qwen" and rodar.familia("ministral-3:8b") == "ministral"

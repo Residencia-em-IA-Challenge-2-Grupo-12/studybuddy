@@ -11,7 +11,7 @@ Fase 1 (gerar): para cada configuração × caso, salva a saída bruta, o tempo,
 Ollama), se o JSON validou no contrato e o erro. Um JSONL por configuração em resultados/<agente>/.
 A primeira chamada de cada modelo é de aquecimento (carrega o modelo) e não entra na latência.
 Fase 2 (--juiz): fidelidade de cada resposta ao contexto, com o juiz de metricas/geracao/juiz.py.
-O juiz é sempre diferente do modelo julgado (padrão gemma3:12b; para o gemma3, OLLAMA_JUIZ_ALT=qwen3:8b).
+O juiz nunca é da mesma família do julgado (padrão gemma3:12b; para os gemma, OLLAMA_JUIZ_ALT=qwen3:8b).
 Fase 3 (resumo): <agente>.csv e <agente>.md em experimentos/modelos/, uma linha por configuração.
 
 Plugar um agente novo: criar agentes/<nome>.py com uma classe que segue o Protocol `Agente` abaixo e
@@ -23,6 +23,7 @@ import csv
 import json
 import os
 import platform
+import re
 import statistics
 import subprocess
 import sys
@@ -211,6 +212,11 @@ def reavaliar(agente: Agente, casos: list[Caso]) -> None:
 
 
 # ---------------------------------------------------------------- fase 2: juiz
+def familia(modelo: str) -> str:
+    """gemma3:12b e gemma4:e4b -> "gemma": o juiz não julga modelos da própria família."""
+    return re.match(r"[a-z]+", modelo.lower()).group(0)
+
+
 def julgar(agente: Agente, casos: list[Caso], juiz_padrao: str, juiz_alt: str, so: list[str] | None = None) -> None:
     """Grava cada veredito na hora: interromper não perde nada, e rodar de novo continua de onde parou.
     `so` escolhe e ordena as configurações (rótulos); sem isso, julga todas."""
@@ -226,7 +232,7 @@ def julgar(agente: Agente, casos: list[Caso], juiz_padrao: str, juiz_alt: str, s
             continue
         registros = carregar(caminho)
         modelo = registros[0]["config"]["modelo"] if registros else ""
-        nome_juiz = juiz_alt if modelo.split(":")[0] == juiz_padrao.split(":")[0] else juiz_padrao
+        nome_juiz = juiz_alt if familia(modelo) == familia(juiz_padrao) else juiz_padrao
         juiz = juizes.setdefault(nome_juiz, Juiz(nome_juiz))
         mudou = False
         for reg in registros:
