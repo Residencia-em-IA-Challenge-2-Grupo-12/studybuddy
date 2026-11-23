@@ -24,3 +24,37 @@ def triagem():
     return ChatOllama(model=settings.ollama_triagem_model, temperature=0, reasoning=False,
                       format=ESQUEMA_DIAGNOSTICO, base_url=settings.ollama_base_url,
                       client_kwargs={"timeout": settings.ollama_timeout_llm})
+
+
+@lru_cache
+def guardrails():
+    """Modelo classificador principal dos Guardrails (barreiras 4.4 a 4.7), com saída JSON estruturada."""
+    from langchain_ollama import ChatOllama
+
+    from app.modules.agentes.guardrails import ESQUEMA_GUARDRAILS
+
+    return ChatOllama(
+        model=settings.ollama_guardrails_model,
+        temperature=0.0,
+        reasoning=False,
+        format=ESQUEMA_GUARDRAILS,
+        base_url=settings.ollama_base_url,
+        client_kwargs={"timeout": settings.ollama_timeout_guardrails},
+    )
+
+
+@lru_cache
+def guardrails_fallback():
+    """Alternativa mais leve para os Guardrails (menor RAM e latência)."""
+    from langchain_ollama import ChatOllama
+
+    from app.modules.agentes.guardrails import ESQUEMA_GUARDRAILS
+
+    return ChatOllama(
+        model=settings.ollama_guardrails_fallback_model,
+        temperature=0.0,
+        reasoning=False,
+        format=ESQUEMA_GUARDRAILS,
+        base_url=settings.ollama_base_url,
+        client_kwargs={"timeout": settings.ollama_timeout_guardrails},
+    )

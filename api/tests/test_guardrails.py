@@ -89,3 +89,39 @@ def test_pergunta_no_limite_e_aceita(monkeypatch):
     monkeypatch.setattr(service, "responder", lambda *a, **k: (_ for _ in ()).throw(ConnectionError("sem Ollama")))
     resp = TestClient(app).post("/assistente/perguntar", json={"pergunta": "a" * MAX_PERGUNTA})
     assert resp.status_code == 503  # passou da validação e chegou ao pipeline
+
+
+# ---------------------------------------------------------------- contrato e config dos guardrails (LLM)
+def test_guardrails_interpretar_json_valido_e_bloqueios():
+    from app.modules.agentes.guardrails import interpretar
+
+    seguro = interpretar('{"permitido": true, "categoria": "SAFE", "motivo": "Pedido de agenda de estudos."}')
+    assert seguro.permitido and seguro.categoria == "SAFE" and seguro.json_valido
+
+    inj = interpretar('{"permitido": false, "categoria": "INJECTION", "motivo": "Tentativa de override."}')
+    assert (not inj.permitido) and inj.categoria == "INJECTION" and inj.json_valido
+
+    # Se o modelo devolver permitido=true junto com categoria de bloqueio, a categoria prevalece (fail-closed)
+    inconsistente = interpretar('{"permitido": true, "categoria": "MEDICAL_ADVICE", "motivo": "Dosagem."}')
+    assert (not inconsistente.permitido) and inconsistente.categoria == "MEDICAL_ADVICE"
+
+
+def test_guardrails_interpretar_json_em_bloco_markdown_e_invalido():
+    from app.modules.agentes.guardrails import interpretar
+
+    bloco = '```json\n{"permitido": false, "categoria": "OFF_TOPIC", "motivo": "Receita."}\n```'
+    dec = interpretar(bloco)
+    assert (not dec.permitido) and dec.categoria == "OFF_TOPIC" and dec.json_valido
+
+    quebrado = interpretar("resposta fora do formato")
+    assert (not quebrado.permitido) and (not quebrado.json_valido)
+
+
+def test_modelo_guardrails_configuravel_por_variavel_de_ambiente(monkeypatch):
+    from app.core.config import Settings
+
+    monkeypatch.setenv("OLLAMA_GUARDRAILS_MODEL", "gemma3:4b")
+    monkeypatch.setenv("OLLAMA_GUARDRAILS_FALLBACK_MODEL", "llama-guard3:1b")
+    s = Settings()
+    assert s.ollama_guardrails_model == "gemma3:4b"
+    assert s.ollama_guardrails_fallback_model == "llama-guard3:1b"
