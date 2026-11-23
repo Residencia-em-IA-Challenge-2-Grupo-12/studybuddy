@@ -65,28 +65,28 @@ def test_tabela_de_tons(nome, tom):
 
 
 def test_grade_aprovada_igual_e_na_mesma_ordem_nas_duas_chamadas(monkeypatch):
-    modelo = usar_modelo(monkeypatch)
-    communication.montar_mensagem(GRADE, checkin("fadiga"), EVIDENCIAS)
-    communication.montar_mensagem(GRADE, checkin("energia"), EVIDENCIAS)
-    assert len(modelo.chamadas) == 2
-    for mensagens in modelo.chamadas:
-        prompt = mensagens[1].content
+    usar_modelo(monkeypatch)
+    primeira = communication.montar_mensagem(GRADE, checkin("fadiga"), EVIDENCIAS)
+    segunda = communication.montar_mensagem(GRADE, checkin("energia"), EVIDENCIAS)
+    for mensagem in (primeira, segunda):
         cursor = 0
         for bloco in GRADE.blocos:
-            for valor in (bloco.dia, bloco.inicio, bloco.fim, bloco.disciplina):
-                indice = prompt.index(valor, cursor)
-                cursor = indice + len(valor)
+            cabecalho = f"{bloco.dia}, {bloco.inicio}-{bloco.fim}"
+            indice = mensagem.markdown.index(cabecalho, cursor)
+            cursor = indice + len(cabecalho)
+            assert bloco.disciplina in mensagem.markdown
 
 
 def test_saida_registra_o_tom_escolhido(monkeypatch):
     usar_modelo(monkeypatch)
     mensagem = communication.montar_mensagem(GRADE, checkin("fadiga"), EVIDENCIAS)
     assert mensagem.tom == ACOLHEDOR
-    assert mensagem.markdown == "mensagem do mentor"
     assert mensagem.links == [
         "https://example.org/materiais/matematica",
         "https://example.org/materiais/historia",
     ]
+    assert mensagem.markdown.startswith("mensagem do mentor")
+    assert "## Seu plano da semana" in mensagem.markdown
 
 
 def test_prompt_so_tem_as_evidencias_passadas(monkeypatch):
