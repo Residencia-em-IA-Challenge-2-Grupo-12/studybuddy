@@ -217,9 +217,12 @@ def familia(modelo: str) -> str:
     return re.match(r"[a-z]+", modelo.lower()).group(0)
 
 
-def julgar(agente: Agente, casos: list[Caso], juiz_padrao: str, juiz_alt: str, so: list[str] | None = None) -> None:
+def julgar(agente: Agente, casos: list[Caso], juiz_padrao: str, juiz_alt: str, so: list[str] | None = None,
+           juiz_unico: str | None = None, chave: str = "fidelidade") -> None:
     """Grava cada veredito na hora: interromper não perde nada, e rodar de novo continua de onde parou.
-    `so` escolhe e ordena as configurações (rótulos); sem isso, julga todas."""
+    `so` escolhe e ordena as configurações (rótulos); sem isso, julga todas.
+    Calibração: `juiz_unico` julga todas com o mesmo modelo e grava em `chave` (ex.: fidelidade_ministral),
+    sem mexer na fidelidade do juiz padrão. O juiz único não pode ser da família de nenhum julgado."""
     from metricas.geracao.juiz import Juiz
 
     por_caso = {c.id: c for c in casos}
@@ -232,15 +235,22 @@ def julgar(agente: Agente, casos: list[Caso], juiz_padrao: str, juiz_alt: str, s
             continue
         registros = carregar(caminho)
         modelo = registros[0]["config"]["modelo"] if registros else ""
-        nome_juiz = juiz_alt if familia(modelo) == familia(juiz_padrao) else juiz_padrao
+        if juiz_unico:
+            if familia(modelo) == familia(juiz_unico):
+                print(f"  {caminho.name}: mesma família do juiz {juiz_unico}, pulando")
+                continue
+            nome_juiz = juiz_unico
+        else:
+            nome_juiz = juiz_alt if familia(modelo) == familia(juiz_padrao) else juiz_padrao
         juiz = juizes.setdefault(nome_juiz, Juiz(nome_juiz))
         mudou = False
         for reg in registros:
-            if "fidelidade" in reg or not reg.get("resposta") or reg["caso"] not in por_caso:
+            if chave in reg or not reg.get("resposta") or reg["caso"] not in por_caso:
                 continue
             afirmacoes = juiz.fidelidade(por_caso[reg["caso"]].contexto, reg["resposta"])
-            reg["fidelidade"] = (sum(bool(a["sustentada"]) for a in afirmacoes) / len(afirmacoes)) if afirmacoes else 0.0
-            reg["juiz"], reg["afirmacoes"] = nome_juiz, afirmacoes
+            reg[chave] = (sum(bool(a["sustentada"]) for a in afirmacoes) / len(afirmacoes)) if afirmacoes else 0.0
+            sufixo = "" if chave == "fidelidade" else chave.removeprefix("fidelidade")
+            reg[f"juiz{sufixo}"], reg[f"afirmacoes{sufixo}"] = nome_juiz, afirmacoes
             mudou = True
             caminho.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in registros), encoding="utf-8")
         print(f"  juiz {nome_juiz} -> {caminho.name}{'' if mudou else ' (já julgado)'}")
@@ -273,6 +283,7 @@ def resumir(agente: Agente) -> tuple[Path, Path]:
             "json_valido": _media([float(r["json_valido"]) for r in regs]),
             "fidelidade": _media([r["fidelidade"] for r in regs if "fidelidade" in r]),
             "juiz": next((r["juiz"] for r in regs if "juiz" in r), ""),
+            "fidelidade_ministral": _media([r["fidelidade_ministral"] for r in regs if "fidelidade_ministral" in r]),
         }
         for m in agente.metricas():
             linha[m] = _media([float(r["metricas"][m]) for r in regs if r["metricas"].get(m) is not None])
@@ -287,7 +298,7 @@ def resumir(agente: Agente) -> tuple[Path, Path]:
             w = csv.DictWriter(f, fieldnames=list(linhas[0]))
             w.writeheader()
             w.writerows(linhas)
-    colunas = ["rotulo", "json_valido", "fidelidade", *agente.metricas(), "latencia_media_s", "latencia_p95_s",
+    colunas = ["rotulo", "json_valido", "fidelidade", "fidelidade_ministral", *agente.metricas(), "latencia_media_s", "latencia_p95_s",
                "tokens_s", "ram_gb", "ollama"]
 
     def fmt(v):
@@ -325,6 +336,7 @@ def main() -> None:
     p.add_argument("--refazer", action="store_true", help="roda de novo configurações que já têm resultado")
     p.add_argument("--juiz", action="store_true", help="fase 2: fidelidade com o LLM-juiz")
     p.add_argument("--so", nargs="*", help="com --juiz: só estes rótulos, nesta ordem")
+    p.add_argument("--juiz-unico", help="com --juiz: calibração com este juiz para todos (grava em fidelidade_<nome>)")
     p.add_argument("--resumo", action="store_true", help="só refaz o CSV e o Markdown")
     p.add_argument("--reavaliar", action="store_true", help="recalcula as métricas do agente sobre as saídas salvas")
     a = p.parse_args()
@@ -334,7 +346,8 @@ def main() -> None:
     if a.reavaliar:
         reavaliar(agente, casos)
     elif a.juiz:
-        julgar(agente, casos, os.getenv("OLLAMA_JUIZ_MODEL", "gemma3:12b"), os.getenv("OLLAMA_JUIZ_ALT", "qwen3:8b"), a.so)
+        julgar(agente, casos, os.getenv("OLLAMA_JUIZ_MODEL", "gemma3:12b"), os.getenv("OLLAMA_JUIZ_ALT", "qwen3:8b"), a.so,
+               juiz_unico=a.juiz_unico, chave=f"fidelidade_{familia(a.juiz_unico)}" if a.juiz_unico else "fidelidade")
     elif not a.resumo:
         configs = ([Config(m, a.temperature, a.reasoning, not a.sem_format, a.rotulo if len(a.modelos) == 1 else "")
                     for m in a.modelos] if a.modelos else agente.configs_padrao)
