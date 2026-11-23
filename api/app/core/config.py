@@ -25,6 +25,8 @@ class Settings(BaseSettings):
     ollama_llm_model: str = "qwen3:8b"
     # Triagem (diagnóstico em JSON). Por padrão, o mesmo modelo do gerador
     ollama_triagem_model: str = "qwen3:8b"
+    # Analysis (técnica + justificativa de cada material, em JSON). A alocação não usa LLM
+    ollama_analysis_model: str = "qwen3:8b"
     # Timeouts (s) das chamadas ao Ollama: sem eles, uma geração travada prende a thread para sempre
     ollama_timeout_llm: float = 300
     ollama_timeout_embedding: float = 30

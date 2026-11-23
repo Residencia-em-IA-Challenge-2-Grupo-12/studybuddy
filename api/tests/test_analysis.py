@@ -255,3 +255,110 @@ def test_violacao_sem_bloco_usa_os_invariantes_do_dia():
     depois = AgenteAnalysis().reajustar(antes, [v], ctx)
     assert "b2" not in {b.id for b in depois.blocos}
     assert {"b1", "b3", "b4"} <= {b.id for b in depois.blocos}  # outros dias não foram apontados
+
+
+# ---------------------------------------------------------------- justificativa por LLM (chat e busca falsos)
+import json as _json  # noqa: E402
+from types import SimpleNamespace  # noqa: E402
+
+from langchain_core.documents import Document  # noqa: E402
+
+from app.core.config import Settings  # noqa: E402
+from app.modules.agentes.analysis.tecnicas import TECNICA_PADRAO  # noqa: E402
+
+ARTIGO_INTERCALADA = "artigo_03_interleaving_rohwer.txt"
+
+
+def buscar_fake(consulta: str) -> list[Document]:
+    return [Document(page_content="prática intercalada...", metadata={"source": f"../api/data/{ARTIGO_INTERCALADA}"})]
+
+
+class ChatFake:
+    """Devolve sempre a mesma saída e conta as chamadas."""
+
+    def __init__(self, saida):
+        self.saida, self.prompts = saida, []
+
+    def invoke(self, prompt):
+        self.prompts.append(prompt)
+        if isinstance(self.saida, Exception):
+            raise self.saida
+        return SimpleNamespace(content=self.saida if isinstance(self.saida, str) else _json.dumps(self.saida))
+
+
+BOA = {"tecnica": "Prática intercalada",
+       "justificativa": f"Alternar tipos de problema melhora a discriminação [Fonte: {ARTIGO_INTERCALADA}]."}
+
+
+def justificar(saida, nome="matutino", buscar=buscar_fake):
+    ctx = contexto(nome)
+    p = AgenteAnalysis().propor(ctx)
+    chat = ChatFake(saida)
+    pj, relatos = AgenteAnalysis().justificar(p, ctx, chat=chat, buscar=buscar)
+    return p, pj, relatos, chat
+
+
+def campos_fixos(p):
+    return [(b.id, b.dia, b.inicio, b.fim, b.carga, b.material_id, b.foco_min, b.pausa_min) for b in p.blocos]
+
+
+def test_justificativa_valida_entra_nos_blocos_sem_mexer_na_grade():
+    p, pj, relatos, chat = justificar(BOA)
+    assert campos_fixos(pj) == campos_fixos(p)
+    assert all(b.tecnica == "Prática intercalada" and b.fontes == [ARTIGO_INTERCALADA] for b in pj.blocos)
+    assert all(r.usou_llm for r in relatos)
+    assert len(chat.prompts) == len({b.material_id for b in p.blocos})  # uma chamada por material
+    assert PropostaGrade.model_validate_json(pj.model_dump_json()) == pj
+
+
+def test_prompt_traz_a_carga_as_tecnicas_e_os_trechos():
+    _, _, _, chat = justificar(BOA)
+    prompt = chat.prompts[0]
+    assert "CARGA COGNITIVA: alta" in prompt and "active recall" in prompt and ARTIGO_INTERCALADA in prompt
+
+
+def test_citacao_inventada_e_removida_e_sem_nenhuma_valida_fica_o_padrao():
+    inventada = {"tecnica": "Prática intercalada",
+                 "justificativa": "Funciona muito bem para exatas [Fonte: artigo_99_inventado.txt]."}
+    p, pj, relatos, _ = justificar(inventada)
+    assert pj.blocos == p.blocos  # técnica padrão mantida
+    assert all(r.motivo_padrao == "nenhuma citação válida" and r.removidas == ["artigo_99"] for r in relatos)
+
+
+def test_citacao_inventada_sai_do_texto_quando_sobra_uma_valida():
+    mista = {"tecnica": "Prática intercalada",
+             "justificativa": f"Alternar ajuda [Fonte: {ARTIGO_INTERCALADA}]. Dormir cura tudo [Fonte: artigo_99_x.txt]."}
+    _, pj, relatos, _ = justificar(mista)
+    assert "artigo_99" not in pj.blocos[0].justificativa
+    assert relatos[0].usou_llm and relatos[0].removidas == ["artigo_99"]
+
+
+@pytest.mark.parametrize("saida,motivo", [
+    ("isto não é json", "JSON fora do esquema"),
+    ({"tecnica": "X"}, "JSON fora do esquema"),                         # falta a justificativa
+    ({**BOA, "dia": "2026-12-01"}, "JSON fora do esquema"),             # tentou mexer na grade
+    (ConnectionError("ollama fora do ar"), "falha ao chamar o LLM: ConnectionError"),
+])
+def test_falha_do_llm_mantem_a_tecnica_padrao(saida, motivo):
+    p, pj, relatos, _ = justificar(saida)
+    assert pj.blocos == p.blocos
+    assert all(r.motivo_padrao.startswith(motivo) and not r.usou_llm for r in relatos)
+    assert {b.tecnica for b in pj.blocos} <= {t for t, _, _ in TECNICA_PADRAO.values()}
+
+
+def test_sem_trechos_na_base_nao_chama_o_llm():
+    _, _, relatos, chat = justificar(BOA, buscar=lambda consulta: [])
+    assert chat.prompts == [] and all(r.motivo_padrao for r in relatos)
+
+
+def test_reducao_de_danos_aparece_no_estado_do_prompt():
+    ctx = contexto("fadiga")
+    p = AgenteAnalysis().propor(ctx, REDUCAO)
+    chat = ChatFake(BOA)
+    AgenteAnalysis().justificar(p, ctx, chat=chat, buscar=buscar_fake)
+    assert "reducao danos" in chat.prompts[0]
+
+
+def test_modelo_do_analysis_e_configuravel_por_variavel_de_ambiente(monkeypatch):
+    monkeypatch.setenv("OLLAMA_ANALYSIS_MODEL", "gemma3:12b")
+    assert Settings().ollama_analysis_model == "gemma3:12b"

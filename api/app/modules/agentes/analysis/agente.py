@@ -5,7 +5,8 @@
 - Rota "reducao_danos" do Maestro: dia leve, só baixa carga, pausas maiores, poucos blocos por dia.
   A alta carga vai inteira para fora_da_grade.
 - reajustar: refaz só os blocos e dias apontados pelo Validation ([3.3], reajuste.py).
-A justificativa por LLM entra depois.
+- justificar: técnica + justificativa por LLM, citando a base (justificativa.py). Só depois que o
+  Validation aprova, para o loop de reajuste não gastar chamadas ao LLM.
 """
 
 from app.core.config import settings
@@ -13,6 +14,7 @@ from app.modules.agentes.contratos import ContextoEstudante, DiretivaMaestro, Pr
 
 from . import prioridade
 from .alocacao import alocar
+from .justificativa import Relato, justificar
 from .pomodoro import ritmo
 from .reajuste import reajustar
 
@@ -42,3 +44,6 @@ class AgenteAnalysis:
 
     def reajustar(self, proposta: PropostaGrade, violacoes: list[Violacao], ctx: ContextoEstudante) -> PropostaGrade:
         return reajustar(proposta, violacoes, ctx)
+
+    def justificar(self, proposta: PropostaGrade, ctx: ContextoEstudante, **kw) -> tuple[PropostaGrade, list[Relato]]:
+        return justificar(proposta, ctx, **kw)

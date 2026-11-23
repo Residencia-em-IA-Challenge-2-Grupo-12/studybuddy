@@ -9,8 +9,9 @@
 | `pomodoro.py` | Tamanho do bloco e da pausa pelo índice de capacidade |
 | `prioridade.py` | Ordem por prazo e dificuldade, blocos extras |
 | `invariantes.py` | Regras que toda proposta cumpre (usadas pelos testes e pelas métricas) |
+| `justificativa.py` | Técnica + justificativa por LLM, uma chamada por material, com citações conferidas |
 | `reajuste.py` | Refaz só os blocos e dias apontados pelas violações do Validation |
-| `agente.py` | `AgenteAnalysis.propor(ctx, diretiva)` e `AgenteAnalysis.reajustar(proposta, violacoes, ctx)` |
+| `agente.py` | `AgenteAnalysis.propor(ctx, diretiva)` e `AgenteAnalysis.reajustar(proposta, violacoes, ctx)` e `AgenteAnalysis.justificar(proposta, ctx)` |
 
 ## Pomodoro adaptativo
 
@@ -41,3 +42,13 @@ Quando a `DiretivaMaestro.rota` é `reducao_danos`: só baixa carga (a alta vai 
 | `SOBRECARGA` | Corta do dia, começando pelo bloco de menor prioridade, até somar `excesso_min` de foco. Os cortados só vão para outros dias |
 
 Nenhum dia que recebe bloco novo passa do limite: o maior dia da proposta original ou, havendo `SOBRECARGA`, o que sobrou no dia cortado. O que não couber vai para `fora_da_grade`. Os blocos novos ganham o id `r<iteracao>-NN`, e a `iteracao` sobe 1.
+
+## Justificativa por LLM
+
+`justificar(proposta, ctx)` devolve a proposta com técnica e justificativa em cada bloco, mais um `Relato` por material: se usou o LLM, citações válidas e removidas, tempo e o motivo quando ficou a técnica padrão.
+
+- O LLM só escreve texto. Dia, horário, carga e pausa não mudam, e um campo a mais no JSON (ex.: `"dia"`) é rejeitado.
+- Uma chamada por material. A busca e as técnicas aceitas dependem da carga: alta → active recall, prática intercalada, Feynman; baixa → flashcards, repetição espaçada.
+- O verificador de citações (`rag/verificador.py`) tira `[Fonte: ...]` de artigos que o modelo não recebeu. Se não sobrar nenhuma citação válida, fica a técnica padrão (`tecnicas.py`), o mesmo que acontece se o Ollama falhar ou o JSON vier inválido.
+- Modelo em `OLLAMA_ANALYSIS_MODEL` (padrão `qwen3:8b`), separado do gerador e da Triagem.
+- O Maestro chama só depois que o Validation aprova, para o loop de reajuste não gastar chamadas ao LLM.
