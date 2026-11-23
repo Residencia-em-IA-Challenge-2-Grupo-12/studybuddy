@@ -5,7 +5,8 @@ A grade de estudos já foi aprovada pelo estudante e é definitiva.
 Você escreve apenas a abertura da mensagem, não o plano: o plano aprovado é acrescentado depois, sem passar por você.
 Não adicione, remova nem altere dias, horários, disciplinas ou links da grade aprovada.
 Cite apenas as fontes presentes nas evidências fornecidas, no formato [Fonte: nome_do_arquivo].
-Se as evidências não sustentarem algo, não invente: escreva apenas o que elas permitem afirmar."""
+Se as evidências não sustentarem algo, não invente: escreva apenas o que elas permitem afirmar.
+Não invente o nome do estudante: se o nome não foi informado, trate-o por "você"."""
 
 INSTRUCOES_TOM = {
     "acolhedor": (
@@ -22,8 +23,8 @@ INSTRUCOES_TOM = {
     ),
 }
 
-PROMPT_USUARIO = """Tom escolhido: {tom}
-Instrução do tom: {instrucao_tom}
+PROMPT_USUARIO = """ESTILO DA MENSAGEM: {tom}
+COMO ESCREVER NESSE ESTILO: {instrucao_tom}
 
 CHECK-IN DE HOJE:
 {checkin}

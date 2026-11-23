@@ -4,6 +4,8 @@ Recebe somente a PropostaGrade aprovada, o CheckIn e as Evidencia citáveis. O t
 uma tabela ordenada de regras; a grade nunca é alterada pelo agente.
 """
 
+import re
+
 from langchain_core.documents import Document
 from langchain_core.messages import HumanMessage, SystemMessage
 
@@ -29,6 +31,17 @@ def escolher_tom(checkin: CheckIn) -> Tom:
         if condicao(checkin):
             return tom
     return TOM_PADRAO
+
+
+_BLOCO_DE_RACIOCINIO = re.compile(r"<think\b[^>]*>.*?</think\b[^>]*>", re.DOTALL | re.IGNORECASE)
+_FECHAMENTO_ORFAO = re.compile(r"^.*?</think\b[^>]*>", re.DOTALL | re.IGNORECASE)
+
+
+def limpar_raciocinio(texto: str) -> str:
+    """Remove o rastro de raciocínio que alguns modelos emitem mesmo com reasoning=False."""
+    texto = _BLOCO_DE_RACIOCINIO.sub("", texto)
+    texto = _FECHAMENTO_ORFAO.sub("", texto)
+    return texto.strip()
 
 
 def montar_plano_markdown(grade: PropostaGrade) -> str:
@@ -70,7 +83,8 @@ def montar_prompt(checkin: CheckIn, tom: str, evidencias: list[Evidencia]) -> st
 def montar_mensagem(grade: PropostaGrade, checkin: CheckIn, evidencias: list[Evidencia]) -> MensagemFinal:
     tom = escolher_tom(checkin)
     pedido = montar_prompt(checkin, tom, evidencias)
-    abertura = llm.gerador().invoke([SystemMessage(PROMPT_SISTEMA), HumanMessage(pedido)]).content.strip()
+    resposta = llm.communication().invoke([SystemMessage(PROMPT_SISTEMA), HumanMessage(pedido)])
+    abertura = limpar_raciocinio(resposta.content)
     plano = montar_plano_markdown(grade)
     texto = f"{abertura}\n\n{plano}"
     documentos = [Document(page_content=e.trecho, metadata={"source": e.fonte}) for e in evidencias]

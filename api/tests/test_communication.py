@@ -42,7 +42,7 @@ class ModeloFalso:
 
 def usar_modelo(monkeypatch, resposta: str = "mensagem do mentor") -> ModeloFalso:
     modelo = ModeloFalso(resposta)
-    monkeypatch.setattr(communication.llm, "gerador", lambda: modelo)
+    monkeypatch.setattr(communication.llm, "communication", lambda: modelo)
     return modelo
 
 
@@ -103,3 +103,38 @@ def test_modelo_recebe_a_instrucao_do_tom(monkeypatch):
     prompt = modelo.chamadas[0][1].content
     assert DESAFIADOR in prompt
     assert INSTRUCOES_TOM[DESAFIADOR] in prompt
+
+
+def test_prompt_nao_entrega_tom_como_nome_do_estudante(monkeypatch):
+    modelo = usar_modelo(monkeypatch)
+    communication.montar_mensagem(GRADE, checkin("energia"), EVIDENCIAS)
+    prompt = modelo.chamadas[0][1].content
+    assert "Tom escolhido" not in prompt
+    assert prompt.startswith("ESTILO DA MENSAGEM: desafiador")
+
+
+def test_bloco_de_raciocinio_sai_da_abertura(monkeypatch):
+    usar_modelo(monkeypatch, "Olá! <think>peso os dados</think> Vamos começar.")
+    mensagem = communication.montar_mensagem(GRADE, checkin("equilibrado"), EVIDENCIAS)
+    assert "<think" not in mensagem.markdown
+    assert "peso os dados" not in mensagem.markdown
+    assert mensagem.markdown.startswith("Olá!")
+
+
+def test_fechamento_orfao_descarta_o_raciocinio_anterior(monkeypatch):
+    usar_modelo(monkeypatch, "vou montar a abertura\n</think]> Abertura final")
+    mensagem = communication.montar_mensagem(GRADE, checkin("equilibrado"), EVIDENCIAS)
+    assert "vou montar" not in mensagem.markdown
+    assert mensagem.markdown.startswith("Abertura final")
+
+
+def test_modelo_do_communication_vem_da_configuracao(monkeypatch):
+    from app.core.config import settings
+    from app.modules.rag import llm
+
+    monkeypatch.setattr(settings, "ollama_communication_model", "gemma3:12b")
+    llm.communication.cache_clear()
+    try:
+        assert llm.communication().model == "gemma3:12b"
+    finally:
+        llm.communication.cache_clear()

@@ -41,7 +41,7 @@ class ModeloFalso:
 
 def usar_modelo(monkeypatch, resposta: str = "mensagem do mentor") -> ModeloFalso:
     modelo = ModeloFalso(resposta)
-    monkeypatch.setattr(communication.llm, "gerador", lambda: modelo)
+    monkeypatch.setattr(communication.llm, "communication", lambda: modelo)
     return modelo
 
 
