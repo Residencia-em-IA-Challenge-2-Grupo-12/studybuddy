@@ -1,6 +1,6 @@
-# Residência em IA — Semana 2: Base de Conhecimento e Recuperação (Primeiro Mecanismo RAG)
+# StudyBuddy — Mentor de Estudos com RAG, Multiagente e Guardrails Locais
 
-Este repositório contém a entrega da **Semana 2 da Residência em IA**, implementando um pipeline modular, auditável e resiliente de **Retrieval-Augmented Generation (RAG)** voltado para orientação de estudos, produtividade sustentável e preparação estratégica por editais e trilhas autodidatas.
+O **StudyBuddy** é um mentor de estudos com IA focado em **estudo monitorado por agenda**: ajuda o estudante a organizar materiais por dia da semana, montar seu calendário de estudos respeitando o **ciclo circadiano** e adaptar a carga conforme o **check-in de bem-estar**, sempre com orientações fundamentadas em literatura científica (*grounded generation*) e executadas com **modelos locais no Ollama**.
 
 ---
 
@@ -9,34 +9,42 @@ Este repositório contém a entrega da **Semana 2 da Residência em IA**, implem
 1. [Visão Geral e Arquitetura](#1-visão-geral-e-arquitetura)
 2. [Estrutura do Repositório](#2-estrutura-do-repositório)
 3. [Base de Conhecimento Curada (20 Artigos Científicos)](#3-base-de-conhecimento-curada-20-artigos-científicos)
-4. [Decisões Técnicas do Pipeline RAG](#4-decisões-técnicas-do-pipeline-rag)
-5. [Personas e Cenários de Validação](#5-personas-e-cenários-de-validação)
-6. [Como Configurar e Executar](#6-como-configurar-e-executar)
-7. [Documentação](#7-documentação)
+4. [Pipelines da API (Clássico e Multiagente)](#4-pipelines-da-api-clássico-e-multiagente)
+5. [Validation e Guardrails (Experimentação de Modelos Locais)](#5-validation-e-guardrails-experimentação-de-modelos-locais)
+6. [Personas e Cenários de Validação](#6-personas-e-cenários-de-validação)
+7. [Como Configurar e Executar](#7-como-configurar-e-executar)
+8. [Documentação](#8-documentação)
 
 ---
 
 ## 1. Visão Geral e Arquitetura
 
-O sistema conecta uma base de conhecimento científica a um Grande Modelo de Linguagem (LLM), garantindo respostas fundamentadas (*grounded generation*) com citação explícita das fontes e mitigação de alucinações.
+O sistema combina uma base científica curada em **ChromaDB**, dois pipelines de resposta (**Clássico** e **Multiagente**) e camadas de **Validation determinística** e **Guardrails com modelos locais** via Ollama.
 
 ```mermaid
 flowchart TD
-    subgraph Ingestao ["1. Pipeline de Ingestão e Indexação"]
-        A["20 Artigos Científicos em api/data"] --> B["TextLoader / PyPDFLoader"]
-        B --> C["RecursiveCharacterTextSplitter (chunk_size=500, overlap=50)"]
-        C --> D["Modelo de Embeddings (text-embedding-004 / 3-small)"]
+    subgraph Ingestao ["1. Ingestão e Indexação"]
+        A["20 Artigos Científicos (api/data)"] --> B["TextLoader / PyPDFLoader"]
+        B --> C["RecursiveCharacterTextSplitter (chunk=500, overlap=50)"]
+        C --> D["Embeddings locais (bge-m3 / Ollama)"]
         D --> E[("ChromaDB Local Persistente")]
     end
 
-    subgraph Recuperacao ["2. Recuperação e Geração Fundamentada"]
-        F["Consulta da Persona"] --> G["Retriever Top-K=3 (Busca Semântica L2 no ChromaDB)"]
-        E -.-> G
-        G --> H["Chunks Relevantes + Metadados"]
-        H --> I["Prompt Estruturado com Grounding"]
-        F --> I
-        I --> J["LLM (Gemini / GPT-4o-mini, temp=0.0)"]
-        J --> K["Resposta Fundamentada + Citação de Fontes"]
+    subgraph Seguranca ["2. Validation e Guardrails"]
+        F["Mensagem do Estudante"] --> V["Validation determinística (tamanho 3..1000)"]
+        V --> G["Guardrails LLM (qwen3:4b-q8_0 / phi4-mini, JSON Schema)"]
+        G -- "Bloqueado (INJECTION / HATE / MEDICAL / OFF_TOPIC)" --> B1["Recusa segura"]
+        G -- "SAFE" --> P{"Porteiro L2 (d1 > 1,026?)"}
+        P -- "Sim" --> B2["Recusa padrão (0 chamadas LLM)"]
+    end
+
+    subgraph Orquestracao ["3. Pipeline Multiagente + Verificação"]
+        P -- "Não" --> T["Agente de Triagem (qwen3:8b, JSON)"]
+        T --> PL["Agente Planejador (busca extra + plano ou explicação)"]
+        E -.-> P
+        E -.-> PL
+        PL --> VC["Verificador de Citações (determinístico)"]
+        VC --> R["Resposta Fundamentada + Rastro"]
     end
 ```
 
@@ -45,30 +53,47 @@ flowchart TD
 ## 2. Estrutura do Repositório
 
 ```text
-Challenge2-project/
-├── api/                            # Backend (FastAPI, camadas por módulo)
-│   ├── app/                        # Código da API (core/, modules/)
-│   ├── data/                       # Base de conhecimento: 20 documentos científicos (.txt)
-│   ├── chroma_db/                  # Banco vetorial ChromaDB (gerado localmente, ignorado no git)
-│   ├── .env.example                # Variáveis de ambiente (copie para api/.env)
+studybuddy/
+├── api/                                      # Backend (FastAPI, arquitetura em camadas)
+│   ├── app/
+│   │   ├── core/config.py                    # Configurações e modelos Ollama via variáveis de ambiente
+│   │   └── modules/
+│   │       ├── assistente/                   # Rotas HTTP (/assistente/perguntar, /assistente/info)
+│   │       ├── rag/                          # Núcleo RAG: ChromaDB, porteiro, prompts, llm.py, verificador.py
+│   │       └── agentes/                      # Multiagente: triagem.py, planejador.py, orquestrador.py, guardrails.py
+│   ├── data/                                 # Base de conhecimento: 20 artigos científicos (.txt)
+│   ├── chroma_db/                            # Índice vetorial ChromaDB (gerado localmente, ignorado no git)
+│   ├── tests/                                # Testes unitários sem LLM (rodam no CI)
+│   ├── demo.py                               # Demonstração interativa e comparativa dos pipelines
+│   ├── .env.example                          # Variáveis de ambiente (copie para api/.env)
 │   └── requirements.txt
-├── web/                            # Frontend (Next.js, módulos em src/modules/)
+├── web/                                      # Frontend (Next.js, módulos em src/modules/)
 ├── pesquisa/
-│   ├── rag_pipeline_semana2.ipynb  # Notebook principal com as 5 etapas do pipeline RAG
-│   ├── Entrega2.md                 # Documento de apoio da entrega da Semana 2
-│   └── Entrega4.md                 # Sistema multiagente: arquitetura, agentes, demonstração e comparação
-├── docker-compose.yml              # Dois ambientes: pipeline clássico (8001) e multiagente (8002)
-├── .github/workflows/ci.yml        # CI: backend (com testes) e frontend
-└── README.md                       # Documentação do repositório
+│   ├── rag_pipeline_semana2.ipynb            # Notebook de ingestão, indexação e pipeline RAG
+│   ├── rag_avaliacao_semana3.ipynb           # Avaliação de recuperação e geração (Semana 3)
+│   ├── experimentos_semana3_llm_vs_rag.ipynb # Comparação LLM puro vs RAG
+│   ├── metricas/                             # Pacote de métricas (recuperação, geração, comparação)
+│   ├── experimentos/
+│   │   └── modelos/                          # Experimento de modelos locais nos Guardrails
+│   │       ├── guardrails.md                 # Tabela comparativa, variações e recomendação final
+│   │       ├── harness_guardrails.py         # Harness reproduzível (Ollama HTTP API, sem deps extras)
+│   │       ├── fixtures_guardrails.json      # 48 fixtures (4 barreiras + válidos + limítrofes)
+│   │       ├── resultados_guardrails.csv     # Métricas consolidadas em CSV
+│   │       └── resultados_guardrails.json    # Resultados completos por caso e hardware
+│   ├── Entrega2.md                           # Resumo da entrega da Semana 2
+│   └── Entrega4.md                           # Sistema multiagente: arquitetura, agentes e comparação
+├── docker-compose.yml                        # Dois ambientes: pipeline clássico (8001) e multiagente (8002)
+├── .github/workflows/ci.yml                  # CI: backend (sintaxe, imports e pytest) e frontend (tsc e build)
+└── README.md                                 # Documentação principal do repositório
 ```
 
-> O notebook lê `api/data/` e grava o índice em `api/chroma_db/`, que é o que a API consome.
+> O notebook `pesquisa/rag_pipeline_semana2.ipynb` lê `api/data/` e grava o índice em `api/chroma_db/`, consumido pela API.
 
 ---
 
 ## 3. Base de Conhecimento Curada (20 Artigos Científicos)
 
-A base de conhecimento em `api/data/` é composta por **20 documentos baseados em literatura científica** de psicologia cognitiva, neurociência do aprendizado e engenharia de produtividade, organizados em **4 blocos temáticos**:
+A base em `api/data/` reúne **20 documentos baseados em literatura científica** de psicologia cognitiva, neurociência do aprendizado e engenharia de produtividade, segmentados com `RecursiveCharacterTextSplitter` (`chunk_size = 500`, `chunk_overlap = 50`, gerando **49 chunks** rastreáveis):
 
 | Bloco Temático | Documentos | Referências Principais |
 | :--- | :--- | :--- |
@@ -77,78 +102,95 @@ A base de conhecimento em `api/data/` é composta por **20 documentos baseados e
 | **3. Comportamento e Procrastinação** | Docs `11` a `15` | Teoria da Motivação Temporal (Steel, 2007), Perfeccionismo e *Overplanning* (Flett & Hewitt, 2002), Loop do Hábito (Wood & Rünger, 2016), Esgotamento do Ego/Fadiga Decisória (Baumeister et al., 1998) e Autoeficácia (Bandura, 1977). |
 | **4. Planejamento Autodidata e Editais** | Docs `16` a `20` | Princípio de Pareto 80/20 (Box et al., 1987), Ciclos de Estudo Flexíveis (Meirelles & Perez, 2015), *Project-Based Learning* (Thomas, 2000), Dupla Jornada CLT e Pobreza de Tempo (Martins & Silveira, 2020) e Técnica Feynman (Gleick & Goodstein, 1992). |
 
-> **Resiliência:** Caso a pasta `api/data/` esteja vazia ou inacessível, o pipeline aciona automaticamente um *fallback* sintético em memória (`get_synthetic_fallback_documents()`).
+---
+
+## 4. Pipelines da API (Clássico e Multiagente)
+
+A API oferece dois pipelines sobre o mesmo núcleo RAG (`bge-m3`, `qwen3:8b`, `Top-K = 5`, porteiro `τ = 1,026`, `temperature = 0.0`):
+
+| Pipeline | Fluxo | Código |
+| :--- | :--- | :--- |
+| **Clássico** | Busca `k=5` → porteiro L2 → geração fundamentada → verificador de citações | `api/app/modules/rag/classico.py` |
+| **Multiagente** | Planejador verifica escopo → **Triagem** diagnostica restrições e consultas (JSON) → **Planejador** reúne evidências extras e gera plano ou explicação → verificador de citações | `api/app/modules/agentes/` |
+
+Detalhes completos de arquitetura, rastro dos agentes e métricas em [`pesquisa/Entrega4.md`](pesquisa/Entrega4.md).
 
 ---
 
-## 4. Decisões Técnicas do Pipeline RAG
+## 5. Validation e Guardrails (Experimentação de Modelos Locais)
 
-1. **Ingestão Multi-formato Resiliente (`load_knowledge_base`)**:
-   - Suporte nativo para arquivos `.txt` (`TextLoader` com UTF-8) e `.pdf` (`PyPDFLoader`), com tratamento isolado de exceções por arquivo.
-2. **Segmentação Hierárquica (`split_documents`)**:
-   - `RecursiveCharacterTextSplitter` com separadores `["\n\n", "\n", ". ", " ", ""]`.
-   - `chunk_size = 500` caracteres e `chunk_overlap = 50` caracteres (10%), gerando **49 chunks** a partir dos 20 documentos originais.
-   - Rastreabilidade completa via `add_start_index=True` e atribuição sequencial de `chunk_id` nos metadados.
-3. **Vetorização e Persistência Idempotente (`ChromaDB`)**:
-   - Suporte automático a `OpenAIEmbeddings` (`text-embedding-3-small`) e `GoogleGenerativeAIEmbeddings` (`models/text-embedding-004`).
-   - **Modo Offline Integrado:** Inclui `LocalKeywordHashEmbeddings` (vetores de 256 dimensões normalizados em $L_2$) e `GroundedExtractiveFallbackLLM` para permitir a execução completa do notebook mesmo sem chave de API configurada.
-   - Persistência local em `api/chroma_db` (coleção `residencia_ia_semana2`) com limpeza prévia de IDs para evitar duplicatas em reexecuções.
-4. **Recuperação e Chain RAG (`LCEL`)**:
-   - Busca semântica por Distância Euclidiana ($L_2$) com `Top-K = 3`.
-   - Orquestração via `RunnableParallel` e `RunnablePassthrough`, preservando tanto os documentos recuperados (`context_docs`) quanto a resposta final (`answer`).
-   - Prompt de sistema restritivo (`temperature=0.0`) que exige citação de fonte (`[Fonte: ...]`) e bloqueia extrapolações fora do contexto recuperado.
+A proteção da API é dividida em duas camadas complementares:
 
----
+- **Validation (determinística, sem LLM):** limite de tamanho da pergunta (`3` a `1000` caracteres em `assistente/schemas.py`), porteiro de distância L2 (`d1 > 1,026` em `rag/repository.py`), verificador de citações (`rag/verificador.py`) e tratamento de erros/timeouts do Ollama (`503`/`504`).
+- **Guardrails (classificadores LLM locais — barreiras `[4.4]` a `[4.7]`):** classificam cada entrada em `SAFE`, `INJECTION`, `HATE_SPEECH`, `MEDICAL_ADVICE` ou `OFF_TOPIC` com saída JSON estruturada (`ESQUEMA_GUARDRAILS`) e parser *fail-closed* em `api/app/modules/agentes/guardrails.py`.
 
-## 5. Personas e Cenários de Validação
+### Resultados do benchmark local (`Apple M4, 10 núcleos, 24 GB RAM`)
 
-O pipeline é validado no final do notebook com **3 consultas reais** simulando as necessidades das personas do projeto:
+Foram avaliados **5 modelos candidatos + 4 variações** (`temperature`, `reasoning`, quantização `Q4_K_M` vs `Q8_0` e saída estruturada `format`) sobre **48 fixtures** (8 por barreira + 8 válidos de estudo/agenda/ciclo circadiano/bem-estar + 8 limítrofes):
 
-- **Persona 1 — Lucas (Trabalhador CLT / Concurseiro):**
-  - *Dor:* Conciliar expediente de 8h diárias com blocos de estudo eficientes sem sacrificar o sono.
-- **Persona 2 — Lisa (Estudante de Engenharia / Estagiária):**
-  - *Dor:* Superar o *overplanning* (excesso de planejamento em planilhas e cronogramas rígidos que quebram com imprevistos).
-- **Persona 3 — Bob (Universitário / Autodidata em Tecnologia):**
-  - *Dor:* Priorizar estrategicamente conteúdos extensos/editais em vez de estudar de forma linear e validar o aprendizado na prática.
+| Modelo (Quantização) | Tipo | Recall `INJ` | Recall `HATE` | Recall `MED` | Recall `OFF` | FP Total | F1 | Latência Média (p95) | Memória |
+| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **`qwen3:4b-q8_0`** (`Q8_0`) ⭐ | Gatekeeper | **100%** | **100%** | **100%** | **100%** | **0,0%** | **1,000** | 5,94 s (7,88 s) | 4,70 GB |
+| **`phi4-mini`** (`Q4_K_M`) 🪶 | Gatekeeper | **100%** | **100%** | **100%** | **100%** | 6,2% | 0,985 | **3,89 s (5,23 s)** | **2,88 GB** |
+| **`gemma3:4b`** (`Q4_K_M`) | Gatekeeper | 87,5% | **100%** | **100%** | **100%** | **0,0%** | 0,984 | 8,38 s (9,76 s) | 2,70 GB |
+| **`qwen3:4b`** (`Q4_K_M`) | Gatekeeper | 100% | 100% | 100% | 100% | 68,8% | 0,853 | 9,44 s (18,01 s) | 2,95 GB |
+| **`llama-guard3:1b`** (`Q8_0`) | Moderação | 37,5% | **100%** | **100%** | 12,5% | **0,0%** | 0,769 | **0,41 s (0,49 s)** | **1,67 GB** |
+| **`llama-guard3:8b`** (`Q4_K_M`) | Moderação | 12,5% | **100%** | **100%** | 12,5% | **0,0%** | 0,727 | 1,79 s (2,22 s) | 5,18 GB |
+
+### Modelos configurados em `api/app/core/config.py` (sem mexer no código)
+
+- **Principal (`OLLAMA_GUARDRAILS_MODEL`):** `qwen3:4b-q8_0` — único com **48/48 acertos (`F1 = 1,000`)**, `0%` de falso positivo (inclusive em casos limítrofes de sono, bem-estar e ciclo circadiano) e `p95 = 7,88 s`.
+- **Alternativa mais leve (`OLLAMA_GUARDRAILS_FALLBACK_MODEL`):** `phi4-mini` — **100% de recall** nas 4 barreiras, `0%` de FP em pedidos válidos, **3,89 s** de latência média e apenas **2,88 GB** de memória.
+- **Parâmetros obrigatórios (`api/app/modules/rag/llm.py`):** `temperature=0.0`, `reasoning=False`, `format=ESQUEMA_GUARDRAILS` e `timeout=15.0`.
+
+Relatório completo (incluindo análise de erros e recomendações por barreira `[4.4]`–`[4.7]`) em [`pesquisa/experimentos/modelos/guardrails.md`](pesquisa/experimentos/modelos/guardrails.md).
 
 ---
 
-## 6. Como Configurar e Executar
+## 6. Personas e Cenários de Validação
+
+- **Persona 1 — Lucas (Trabalhador CLT / Concurseiro):** conciliar expediente de 8h diárias com 2h de estudo noturno sem sacrificar o sono e o ritmo circadiano.
+- **Persona 2 — Lisa (Estudante de Engenharia / Estagiária):** superar o *overplanning* com ciclos flexíveis na agenda semanal.
+- **Persona 3 — Bob (Universitário / Autodidata em Tecnologia):** priorizar editais extensos (80/20) e consolidar o aprendizado na prática.
+
+---
+
+## 7. Como Configurar e Executar
 
 ### Pré-requisitos
-- Python `3.10+`
-- Jupyter Notebook, JupyterLab ou VS Code com extensão Jupyter
+- Python `3.10+` (CI usa `3.12`)
+- [Ollama](https://ollama.com/) rodando localmente (`http://localhost:11434`)
+- Node.js `22+` (para o frontend)
 
-### Passo a Passo
+### 1. Baixar os modelos locais no Ollama
 
-1. **Clone o repositório e acesse a pasta do projeto:**
-   ```bash
-   git clone <url-do-repositorio>
-   cd Challenge2-project
-   ```
+```bash
+# Núcleo RAG e Multiagente
+ollama pull bge-m3
+ollama pull qwen3:8b
 
-2. **(Opcional) Crie e ative um ambiente virtual:**
-   ```bash
-   python -m venv .venv
-   # Windows (PowerShell)
-   .\.venv\Scripts\Activate.ps1
-   # Linux / macOS
-   source .venv/bin/activate
-   ```
+# Guardrails (principal + alternativa mais leve)
+ollama pull qwen3:4b-q8_0
+ollama pull phi4-mini
+```
 
-3. **(Opcional) Configure sua chave de API em um arquivo `api/.env`:**
-   ```env
-   # Escolha um dos provedores abaixo:
-   OPENAI_API_KEY="sua-chave-openai"
-   # ou
-   GOOGLE_API_KEY="sua-chave-google-gemini"
-   ```
-   *Observação: Caso nenhum arquivo `.env` seja configurado, o notebook executará automaticamente em modo de demonstração offline utilizando os componentes determinísticos locais.*
+### 2. Configurar variáveis de ambiente (`api/.env`)
 
-4. **Execute o Notebook:**
-   Abra o arquivo [`pesquisa/rag_pipeline_semana2.ipynb`](pesquisa/rag_pipeline_semana2.ipynb) e execute todas as células sequencialmente (*Run All*). As dependências necessárias serão instaladas automaticamente na Etapa 1.
+Copie `api/.env.example` para `api/.env`. Os modelos são configuráveis sem alterar código:
 
-### Rodando a API e o frontend
+```env
+APP_NAME=desafio2-api
+DEBUG=true
+CORS_ORIGINS=["http://localhost:3000"]
+OLLAMA_GUARDRAILS_MODEL=qwen3:4b-q8_0
+OLLAMA_GUARDRAILS_FALLBACK_MODEL=phi4-mini
+```
+
+### 3. Gerar o índice vetorial (ChromaDB)
+
+Execute todas as células do notebook [`pesquisa/rag_pipeline_semana2.ipynb`](pesquisa/rag_pipeline_semana2.ipynb) a partir de `pesquisa/` para criar `api/chroma_db/`.
+
+### 4. Subir API, Frontend e Demonstração
 
 ```bash
 # Backend (http://localhost:8000/docs)
@@ -156,24 +198,29 @@ cd api && pip install -r requirements.txt && uvicorn app.main:app --reload
 
 # Frontend (http://localhost:3000)
 cd web && npm install && npm run dev
+
+# Demonstração interativa no terminal (a partir de api/)
+python demo.py -i
+
+# Os dois pipelines em containers separados (clássico :8001 | multiagente :8002)
+docker compose up -d --build
 ```
 
-O notebook deve ser executado de dentro de `pesquisa/` (é o que o Jupyter e o VS Code fazem por padrão).
-
-### Sistema multiagente (Semana 4)
-
-A API tem dois pipelines: o **clássico** (T3 + porteiro) e o **multiagente** (Agente de Triagem + Agente Planejador). Arquitetura, responsabilidades, fluxo e comparação em [`pesquisa/Entrega4.md`](pesquisa/Entrega4.md).
+### 5. Rodar testes e reproduzir o benchmark dos Guardrails
 
 ```bash
-# Demonstração no terminal (a partir de api/, com o Ollama aberto e o índice gerado)
-python demo.py
+# Testes unitários (sem LLM, mesmos do CI — a partir de api/)
+python -m pytest -q
 
-# Os dois pipelines em containers separados
-docker compose up -d --build   # clássico em :8001, multiagente em :8002
+# Reproduzir o experimento de modelos locais dos Guardrails
+python3 pesquisa/experimentos/modelos/harness_guardrails.py --suite completa
 ```
 
 ---
 
-## 7. Documentação
+## 8. Documentação
 
-A documentação técnica do RAG (arquitetura, pipeline de ingestão, estratégias de chunking e embeddings, validação com as personas) fica no repositório [Challenge2-documentation](https://github.com/Residencia-em-IA-Challenge-2-Grupo-12/Challenge2-documentation/tree/main/docs/semana-2). Este repositório guarda apenas o código e o resumo em [`pesquisa/Entrega2.md`](pesquisa/Entrega2.md).
+- **Documentação do projeto:** [Challenge2-documentation](https://github.com/Residencia-em-IA-Challenge-2-Grupo-12/Challenge2-documentation)
+- **Entrega 2 (RAG):** [`pesquisa/Entrega2.md`](pesquisa/Entrega2.md)
+- **Entrega 4 (Multiagente):** [`pesquisa/Entrega4.md`](pesquisa/Entrega4.md)
+- **Experimento de Modelos nos Guardrails:** [`pesquisa/experimentos/modelos/guardrails.md`](pesquisa/experimentos/modelos/guardrails.md)
