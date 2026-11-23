@@ -17,6 +17,7 @@
 import math
 from collections import Counter
 from collections.abc import Callable
+from datetime import date
 
 from app.modules.agentes.contratos import BlocoEstudo, CargaCognitiva, ContextoEstudante, Material
 
@@ -43,17 +44,19 @@ def alocar(
     urgentes: set[str] = frozenset(),
     max_blocos_dia: int | None = None,
     fatias_base: list[Fatia] | None = None,
+    carga_inicial: dict[date, int] | None = None,
 ) -> tuple[list[BlocoEstudo], list[str]]:
     """Devolve (blocos ordenados por dia e horário, ids dos materiais que não couberam inteiros).
 
     `materiais` já vem na ordem de prioridade (padrão: os do contexto, por id). `necessidade` e `urgentes`
-    são os ganchos da [3.2]; `fatias_base` permite realocar só no que sobrou de uma proposta ([3.3]).
+    são os ganchos da [3.2]. No reajuste ([3.3]), `fatias_base` é o que sobrou da proposta anterior e
+    `carga_inicial` conta os blocos que já estão em cada dia (para o `max_blocos_dia` valer no total).
     """
     materiais = list(materiais) if materiais is not None else sorted(ctx.materiais, key=lambda m: m.id)
     faltam = {m.id: (necessidade or (lambda m: blocos_necessarios(m, foco_min)))(m) for m in materiais}
     livres = [Fatia(f.dia, f.ini, f.fim, f.tipo) for f in (fatias_base if fatias_base is not None else fatias(ctx))]
     do_material: Counter = Counter()  # (material_id, dia) -> blocos já postos
-    do_dia: Counter = Counter()       # dia -> blocos já postos
+    do_dia: Counter = Counter(carga_inicial or {})  # dia -> blocos já postos
     colocados: list[tuple[Fatia, Material]] = []
     precisa = foco_min + pausa_min
 

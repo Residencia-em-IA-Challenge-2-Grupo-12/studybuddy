@@ -9,7 +9,8 @@
 | `pomodoro.py` | Tamanho do bloco e da pausa pelo índice de capacidade |
 | `prioridade.py` | Ordem por prazo e dificuldade, blocos extras |
 | `invariantes.py` | Regras que toda proposta cumpre (usadas pelos testes e pelas métricas) |
-| `agente.py` | `AgenteAnalysis.propor(ctx, diretiva)` |
+| `reajuste.py` | Refaz só os blocos e dias apontados pelas violações do Validation |
+| `agente.py` | `AgenteAnalysis.propor(ctx, diretiva)` e `AgenteAnalysis.reajustar(proposta, violacoes, ctx)` |
 
 ## Pomodoro adaptativo
 
@@ -29,3 +30,14 @@
 ## Redução de danos
 
 Quando a `DiretivaMaestro.rota` é `reducao_danos`: só baixa carga (a alta vai para `fora_da_grade`), pausa de 15 min e no máximo `ANALYSIS_REDUCAO_MAX_BLOCOS_DIA` (3) blocos por dia.
+
+## Reajuste
+
+`reajustar(proposta, violacoes, ctx)` mexe **só** no que foi apontado. Os outros blocos ficam com o mesmo id, dia e horário.
+
+| Regra | O que o reajuste faz |
+| :-- | :-- |
+| `CONFLITO_AGENDA`, `INTEGRIDADE_CIRCADIANA` | Tira o bloco e o realoca no tempo que sobrou. O horário reprovado fica proibido. Sem `bloco_id`, saem os blocos do dia que os invariantes acusam |
+| `SOBRECARGA` | Corta do dia, começando pelo bloco de menor prioridade, até somar `excesso_min` de foco. Os cortados só vão para outros dias |
+
+Nenhum dia que recebe bloco novo passa do limite: o maior dia da proposta original ou, havendo `SOBRECARGA`, o que sobrou no dia cortado. O que não couber vai para `fora_da_grade`. Os blocos novos ganham o id `r<iteracao>-NN`, e a `iteracao` sobe 1.

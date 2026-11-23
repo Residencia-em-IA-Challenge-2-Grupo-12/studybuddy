@@ -4,15 +4,17 @@
 - Prioridade por prazo e dificuldade: urgentes primeiro e com mais blocos (prioridade.py).
 - Rota "reducao_danos" do Maestro: dia leve, só baixa carga, pausas maiores, poucos blocos por dia.
   A alta carga vai inteira para fora_da_grade.
-O reajuste ([3.3]) e a justificativa por LLM entram depois.
+- reajustar: refaz só os blocos e dias apontados pelo Validation ([3.3], reajuste.py).
+A justificativa por LLM entra depois.
 """
 
 from app.core.config import settings
-from app.modules.agentes.contratos import ContextoEstudante, DiretivaMaestro, PropostaGrade
+from app.modules.agentes.contratos import ContextoEstudante, DiretivaMaestro, PropostaGrade, Violacao
 
 from . import prioridade
 from .alocacao import alocar
 from .pomodoro import ritmo
+from .reajuste import reajustar
 
 
 class AgenteAnalysis:
@@ -37,3 +39,6 @@ class AgenteAnalysis:
             modo="reducao_danos" if reducao else "normal",
             blocos=blocos, fora_da_grade=cortados + fora,
         )
+
+    def reajustar(self, proposta: PropostaGrade, violacoes: list[Violacao], ctx: ContextoEstudante) -> PropostaGrade:
+        return reajustar(proposta, violacoes, ctx)

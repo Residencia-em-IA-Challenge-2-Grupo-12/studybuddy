@@ -90,3 +90,9 @@ def fatias(ctx: ContextoEstudante) -> list[Fatia]:
         n = subtrair(subtrair(livre, v), p)
         out += [Fatia(dia, a, b, t) for t, ivs in (("vale", v), ("pico", p), ("neutro", n)) for a, b in ivs]
     return sorted(out, key=lambda f: (f.dia, f.ini))
+
+
+def recortar(base: list[Fatia], cortes: dict[date, list[Intervalo]]) -> list[Fatia]:
+    """Fatias menos os intervalos já usados ou proibidos de cada dia, mantendo o tipo de cada pedaço."""
+    out = [Fatia(f.dia, a, b, f.tipo) for f in base for a, b in subtrair([(f.ini, f.fim)], cortes.get(f.dia, []))]
+    return sorted(out, key=lambda f: (f.dia, f.ini))

@@ -169,3 +169,89 @@ def test_reducao_de_danos_gera_um_dia_mais_leve():
 def test_reducao_de_danos_respeita_as_regras(nome):
     ctx = contexto(nome)
     assert inv.todas(AgenteAnalysis().propor(ctx, REDUCAO), ctx) == {}
+
+
+# ---------------------------------------------------------------- [3.3] Reajuste a partir das violações
+from collections import Counter  # noqa: E402
+
+from app.modules.agentes.contratos import ResultadoValidacao, Violacao  # noqa: E402
+
+
+def resultado(nome: str) -> ResultadoValidacao:
+    return ResultadoValidacao.model_validate_json((FIXTURES / "resultado" / f"{nome}.json").read_text(encoding="utf-8"))
+
+
+def foco_no_dia(p: PropostaGrade, dia) -> int:
+    return sum(b.foco_min for b in p.blocos if b.dia == dia)
+
+
+def test_reajuste_remove_as_violacoes_plantadas_sem_criar_outras():
+    ctx, antes = contexto("matutino"), proposta("violacoes")
+    assert inv.todas(antes, ctx)  # a fixture começa errada
+    depois = AgenteAnalysis().reajustar(antes, resultado("reprovado").violacoes, ctx)
+    assert inv.todas(depois, ctx) == {}
+    assert PropostaGrade.model_validate_json(depois.model_dump_json()) == depois
+    assert depois.iteracao == antes.iteracao + 1
+
+
+def test_reajuste_mexe_so_no_que_foi_apontado():
+    ctx, antes = contexto("matutino"), proposta("violacoes")
+    depois = AgenteAnalysis().reajustar(antes, resultado("reprovado").violacoes, ctx)
+    ids = {b.id for b in depois.blocos}
+    assert {"b1", "b2", "b3"}.isdisjoint(ids)
+    b4 = next(b for b in antes.blocos if b.id == "b4")
+    assert b4 in depois.blocos  # intacto: mesmo dia, horário e conteúdo
+    novos = [b for b in depois.blocos if b.id.startswith("r1-")]
+    assert Counter(b.material_id for b in novos) == Counter({"calc-01": 2, "prog-01": 1})
+    saidos = {(b.dia, b.inicio) for b in antes.blocos if b.id in {"b1", "b2", "b3"}}
+    assert all((b.dia, b.inicio) not in saidos for b in novos)  # não volta para o horário reprovado
+
+
+def test_reajuste_sem_violacoes_nao_mexe_nos_blocos():
+    ctx = contexto("matutino")
+    p = AgenteAnalysis().propor(ctx)
+    assert AgenteAnalysis().reajustar(p, [], ctx).blocos == p.blocos
+
+
+def test_sobrecarga_corta_o_excesso_e_nao_sobrecarrega_outro_dia():
+    ctx = contexto("matutino")
+    antes = AgenteAnalysis().propor(ctx)
+    v = resultado("sobrecarga").violacoes[0]  # quarta-feira, excesso de 120 min
+    depois = AgenteAnalysis().reajustar(antes, [v], ctx)
+    assert foco_no_dia(depois, v.dia) <= foco_no_dia(antes, v.dia) - v.excesso_min
+    assert not any(b.id.startswith("r1-") and b.dia == v.dia for b in depois.blocos)  # nada novo no dia cortado
+    limite = sum(1 for b in depois.blocos if b.dia == v.dia)
+    for dia in {b.dia for b in depois.blocos if b.id.startswith("r1-")}:
+        assert sum(1 for b in depois.blocos if b.dia == dia) <= limite
+    assert inv.todas(depois, ctx) == {}
+
+
+def test_sobrecarga_corta_primeiro_o_menos_prioritario():
+    ctx = contexto("matutino")
+    antes = AgenteAnalysis().propor(ctx)
+    v = Violacao(regra="SOBRECARGA", dia=ctx.semana_inicio, mensagem="excesso", excesso_min=25)
+    depois = AgenteAnalysis().reajustar(antes, [v], ctx)
+    cortado = ({b.id for b in antes.blocos} - {b.id for b in depois.blocos}).pop()
+    assert next(b for b in antes.blocos if b.id == cortado).material_id == "ing-01"  # sem prazo, dificuldade 1
+
+
+def test_sem_como_resolver_reduz_a_carga_e_diz_o_que_ficou_de_fora():
+    ctx = contexto("agenda_cheia")
+    for m in ctx.materiais:
+        m.horas_estimadas = 40  # lota todas as janelas
+    antes = AgenteAnalysis().propor(ctx)
+    alvo = antes.blocos[0]
+    v = Violacao(regra="CONFLITO_AGENDA", dia=alvo.dia, bloco_id=alvo.id, mensagem="conflito")
+    depois = AgenteAnalysis().reajustar(antes, [v], ctx)
+    assert len(depois.blocos) == len(antes.blocos) - 1
+    assert alvo.material_id in depois.fora_da_grade
+    assert inv.todas(depois, ctx) == {}
+
+
+def test_violacao_sem_bloco_usa_os_invariantes_do_dia():
+    ctx, antes = contexto("matutino"), proposta("violacoes")
+    b2 = next(b for b in antes.blocos if b.id == "b2")
+    v = Violacao(regra="INTEGRIDADE_CIRCADIANA", dia=b2.dia, mensagem="alta carga no vale")
+    depois = AgenteAnalysis().reajustar(antes, [v], ctx)
+    assert "b2" not in {b.id for b in depois.blocos}
+    assert {"b1", "b3", "b4"} <= {b.id for b in depois.blocos}  # outros dias não foram apontados
