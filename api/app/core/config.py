@@ -29,6 +29,15 @@ class Settings(BaseSettings):
     ollama_timeout_llm: float = 300
     ollama_timeout_embedding: float = 30
 
+    # Analysis Agent: limiares do Pomodoro adaptativo (índice de capacidade do check-in, 0 a 1)
+    analysis_indice_alto: float = 0.7    # >= isto: blocos longos (50/10)
+    analysis_indice_baixo: float = 0.4   # < isto: fadiga (25/10)
+    # Prioridade: prazo a até N dias do início da semana conta como urgente (entra primeiro e ganha +1 bloco)
+    analysis_dias_urgencia: int = 3
+    # Redução de danos (rota pedida pelo Maestro): só baixa carga, pausas maiores, poucos blocos por dia
+    analysis_reducao_pausa_min: int = 15
+    analysis_reducao_max_blocos_dia: int = 3
+
     # Porteiro: vazio = corte calibrado do embedding ativo; número = corte manual; "desligado" = sem porteiro
     porteiro_tau: str = ""
 
