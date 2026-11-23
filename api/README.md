@@ -29,6 +29,21 @@ Docs: http://localhost:8000/docs
 O pipeline padrão vem de `PIPELINE` (`classico` ou `agentes`); o corpo do `POST` pode sobrescrever.
 Precisa do Ollama com `bge-m3` e `qwen3:8b`. Detalhes em `pesquisa/Entrega4.md`.
 
+## Contratos entre os agentes
+`app/modules/agentes/contratos.py` (Pydantic). A comunicação interna é só JSON validado. Cada contrato tem um dono, e mudanças entram só por PR, com o aval do dono e de quem consome.
+
+| Modelo | Dono (produz) | Quem consome |
+| :-- | :-- | :-- |
+| `Veredito` | Validation (guardrails) | Maestro |
+| `DiretivaMaestro` | Maestro | todos |
+| `ContextoEstudante` | Research | Analysis, Validation, Communication |
+| `PropostaGrade`, `BlocoEstudo` | Analysis | Validation, Communication |
+| `ResultadoValidacao`, `Violacao` | Validation | Maestro, Analysis |
+| `MensagemFinal` | Communication | Maestro, web |
+| `ProvedorAgenda` (interface) | Research | Maestro |
+
+Fixtures de exemplo ficam em `tests/fixtures/<contrato>/`, e `tests/test_contratos.py` valida todas. `esquema(Modelo)` gera o JSON Schema para o `format` do Ollama.
+
 ## Guardrails
 Todos por regra, sem LLM, nos dois pipelines:
 
