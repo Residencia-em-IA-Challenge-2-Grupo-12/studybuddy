@@ -196,6 +196,20 @@ def carregar(caminho: Path) -> list[dict]:
     return [json.loads(linha) for linha in caminho.read_text(encoding="utf-8").splitlines() if linha.strip()]
 
 
+def reavaliar(agente: Agente, casos: list[Caso]) -> None:
+    """Recalcula as métricas do agente sobre as saídas já salvas (ex.: depois de mudar o verificador)."""
+    por_caso = {c.id: c for c in casos}
+    for caminho in sorted((RESULTADOS / agente.nome).glob("*.jsonl")):
+        registros = carregar(caminho)
+        for reg in registros:
+            if reg["caso"] not in por_caso:
+                continue
+            objeto = agente.contrato.model_validate_json(reg["bruto"]) if reg.get("json_valido") else None
+            reg["metricas"] = agente.avaliar(por_caso[reg["caso"]], objeto)
+        caminho.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in registros), encoding="utf-8")
+        print(f"  reavaliado: {caminho.name}")
+
+
 # ---------------------------------------------------------------- fase 2: juiz
 def julgar(agente: Agente, casos: list[Caso], juiz_padrao: str, juiz_alt: str, so: list[str] | None = None) -> None:
     """Grava cada veredito na hora: interromper não perde nada, e rodar de novo continua de onde parou.
@@ -306,11 +320,14 @@ def main() -> None:
     p.add_argument("--juiz", action="store_true", help="fase 2: fidelidade com o LLM-juiz")
     p.add_argument("--so", nargs="*", help="com --juiz: só estes rótulos, nesta ordem")
     p.add_argument("--resumo", action="store_true", help="só refaz o CSV e o Markdown")
+    p.add_argument("--reavaliar", action="store_true", help="recalcula as métricas do agente sobre as saídas salvas")
     a = p.parse_args()
 
     agente = _agentes()[a.agente]()
     casos = agente.casos()[: a.limite] if a.limite else agente.casos()
-    if a.juiz:
+    if a.reavaliar:
+        reavaliar(agente, casos)
+    elif a.juiz:
         julgar(agente, casos, os.getenv("OLLAMA_JUIZ_MODEL", "gemma3:12b"), os.getenv("OLLAMA_JUIZ_ALT", "qwen3:8b"), a.so)
     elif not a.resumo:
         configs = ([Config(m, a.temperature, a.reasoning, not a.sem_format, a.rotulo if len(a.modelos) == 1 else "")

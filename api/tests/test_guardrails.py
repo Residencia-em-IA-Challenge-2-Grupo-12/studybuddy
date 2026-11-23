@@ -58,6 +58,24 @@ def test_citacao_sem_numero_de_artigo_nao_e_removida():
     assert texto.startswith("Ponto [Fonte: Fragmento #2]") and v.fora_do_contexto == [] and v.sem_citacao
 
 
+def test_citacao_copiada_do_cabecalho_e_reescrita_no_formato_padrao():
+    resposta = ("Durma bem [Fragmento #1 | Fonte: ../api/data/artigo_05_sleep.txt]. "
+                "Concilie [Fragmento #2: ../api/data/artigo_19_clt.txt].")
+    texto, v = verificar(resposta, TRECHOS)
+    assert texto == "Durma bem [Fonte: artigo_05_sleep.txt]. Concilie [Fonte: artigo_19_clt.txt]."
+    assert v.citadas == ["artigo_05", "artigo_19"] and v.normalizadas == 2 and not v.sem_citacao
+
+
+def test_citacao_em_outro_formato_de_artigo_nao_recebido_sai():
+    texto, v = verificar("Use Pomodoro [Fragmento #1 | Fonte: ../api/data/artigo_10_pomodoro.txt]", TRECHOS)
+    assert "artigo_10" not in texto.split("\n")[0] and v.fora_do_contexto == ["artigo_10"] and v.sem_citacao
+
+
+def test_colchete_sem_fonte_nao_e_tocado():
+    texto, v = verificar("Veja [nota 1] e durma [Fonte: artigo_05_sleep.txt]", TRECHOS)
+    assert texto == "Veja [nota 1] e durma [Fonte: artigo_05_sleep.txt]" and v.normalizadas == 0
+
+
 def test_recusa_passa_sem_alteracao():
     texto, v = verificar(FRASE_RECUSA, TRECHOS)
     assert texto == FRASE_RECUSA and v.recusa and not v.alterou
