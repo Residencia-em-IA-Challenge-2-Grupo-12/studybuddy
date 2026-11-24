@@ -174,6 +174,13 @@ Complementando as regras de agenda e ciclo circadiano, o `validation.py` aplica 
 - **Ajuste dinâmico pelo check-in (`calcular_limiares`):** com um sinal moderado (ex.: estresse `4/5` ou sono entre `5h` e `6h`), aplica metade do corte (`15%`, teto cai para `204 min/dia` e `76 min` contínuos); com sinal severo (`estresse == 5` ou `horas_sono < 5h`) ou ambos presentes (como na fixture `contexto/fadiga.json`), aplica o corte completo de **`30%`** (teto cai para **`168 min/dia`** e **`63 min`** contínuos).
 - **Retorno para reajuste:** violações de carga diária devolvem `bloco_id=None` e `excesso_min` calculado (ex.: um dia com 6h seguidas de estudo noturno devolve `SOBRECARGA` com `excesso_min=120`), permitindo ao Analysis cortar apenas o excedente.
 
+#### Relatório Estruturado de Violações (`ResultadoValidacao`)
+
+Toda execução de `validar()` devolve o contrato `ResultadoValidacao` (`APROVADO`/`REPROVADO` + lista de `Violacao` com `regra`, `dia`, `bloco_id`, `mensagem` e `excesso_min`) e conta com `formatar_relatorio(resultado)` para visualização legível:
+
+- **Mensagens acionáveis para o Analysis:** cada violação identifica explicitamente o dia da semana, o bloco/faixa violada, o motivo (compromisso, sono, higiene do sono, refeição, vale pós-prandial ou sobrecarga diária/noturna ininterrupta) e **quanto precisa cortar ou mover** (em minutos).
+- **Cobertura por fixtures com violações plantadas (`api/tests/fixtures/proposta/`):** `violacoes.json`, `higiene_sono.json`, `refeicao.json`, `sobrecarga_fadiga.json` e `sobrecarga_noturna.json`, todas validadas tanto nos contratos (`test_contratos.py`) quanto nos testes parametrizados de dia, bloco e ação (`test_validation.py`).
+
 ---
 
 ## 6. Personas e Cenários de Validação

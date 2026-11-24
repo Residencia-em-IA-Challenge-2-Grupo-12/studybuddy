@@ -8,6 +8,8 @@ import inspect
 from datetime import date, time
 from pathlib import Path
 
+import pytest
+
 from app.core.config import Settings
 from app.modules.agentes import validation
 from app.modules.agentes.contratos import (
@@ -24,6 +26,7 @@ from app.modules.agentes.validation import (
     REGRA_SOBRECARGA,
     AgenteValidation,
     calcular_limiares,
+    formatar_relatorio,
     validar,
     verificar_conflito_agenda,
     verificar_integridade_circadiana,
@@ -116,13 +119,96 @@ def test_fixture_violacoes_reprovada_igual_ao_contrato_esperado():
     esperado = carregar_resultado("reprovado")
 
     res = validar(proposta, ctx)
-    assert res == esperado
-    assert res.status == "REPROVADO"
-    assert [(v.regra, v.bloco_id) for v in res.violacoes] == [
-        (REGRA_CONFLITO_AGENDA, "b1"),
-        (REGRA_INTEGRIDADE_CIRCADIANA, "b2"),
-        (REGRA_INTEGRIDADE_CIRCADIANA, "b3"),
+    assert res.status == esperado.status == "REPROVADO"
+    assert [(v.regra, v.dia, v.bloco_id, v.excesso_min) for v in res.violacoes] == [
+        (v.regra, v.dia, v.bloco_id, v.excesso_min) for v in esperado.violacoes
     ]
+    assert all("mover 25 min" in v.mensagem for v in res.violacoes)
+
+
+# ---------------------------------------------------------------- relatório estruturado: todas as fixtures plantadas
+FIXTURES_COM_VIOLACAO_PLANTADA = [
+    (
+        "violacoes",
+        "matutino",
+        [
+            (REGRA_CONFLITO_AGENDA, date(2026, 11, 30), "b1", None),
+            (REGRA_INTEGRIDADE_CIRCADIANA, date(2026, 12, 1), "b2", None),
+            (REGRA_INTEGRIDADE_CIRCADIANA, date(2026, 12, 2), "b3", None),
+        ],
+    ),
+    (
+        "higiene_sono",
+        "matutino",
+        [
+            (REGRA_INTEGRIDADE_CIRCADIANA, date(2026, 11, 30), "b_higiene", None),
+        ],
+    ),
+    (
+        "refeicao",
+        "matutino",
+        [
+            (REGRA_INTEGRIDADE_CIRCADIANA, date(2026, 12, 3), "b_refeicao", None),
+        ],
+    ),
+    (
+        "sobrecarga_fadiga",
+        "fadiga",
+        [
+            (REGRA_SOBRECARGA, date(2026, 11, 30), None, 32),
+        ],
+    ),
+    (
+        "sobrecarga_noturna",
+        "noturno",
+        [
+            (REGRA_INTEGRIDADE_CIRCADIANA, date(2026, 12, 2), "n1", None),
+            (REGRA_SOBRECARGA, date(2026, 12, 2), None, 120),
+            (REGRA_SOBRECARGA, date(2026, 12, 2), None, 270),
+        ],
+    ),
+]
+
+
+@pytest.mark.parametrize(
+    "nome_proposta,nome_contexto,esperadas",
+    FIXTURES_COM_VIOLACAO_PLANTADA,
+    ids=[f"{p}_em_{c}" for p, c, _ in FIXTURES_COM_VIOLACAO_PLANTADA],
+)
+def test_todas_as_fixtures_com_violacao_plantada_geram_violacao_esperada(nome_proposta, nome_contexto, esperadas):
+    """Critério de aceite: toda fixture com violação plantada gera regra, dia, bloco e ação úteis ao Analysis."""
+    ctx = carregar_contexto(nome_contexto)
+    proposta = carregar_proposta(nome_proposta)
+
+    res = validar(proposta, ctx)
+    assert res.status == "REPROVADO"
+    # Contrato Pydantic ida e volta pelo JSON
+    assert ResultadoValidacao.model_validate_json(res.model_dump_json()) == res
+    # Exatamente as violações esperadas no dia e bloco certos
+    obtidas = [(v.regra, v.dia, v.bloco_id, v.excesso_min) for v in res.violacoes]
+    assert obtidas == esperadas
+
+    # Cada mensagem precisa ser legível e indicar ao Analysis o que violou e quanto cortar/mover
+    for v in res.violacoes:
+        assert any(
+            dia in v.mensagem
+            for dia in ("Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira")
+        )
+        assert ("mover " in v.mensagem) or ("cortar " in v.mensagem)
+
+
+def test_formatar_relatorio_estruturado_aprovado_e_reprovado():
+    ctx = carregar_contexto("matutino")
+    aprovado = validar(carregar_proposta("valida"), ctx)
+    assert formatar_relatorio(aprovado).startswith("APROVADO:")
+
+    reprovado = validar(carregar_proposta("sobrecarga_noturna"), carregar_contexto("noturno"))
+    relatorio = formatar_relatorio(reprovado)
+    assert "REPROVADO" in relatorio
+    assert "[SOBRECARGA]" in relatorio
+    assert "estudo noturno ininterrupto" in relatorio
+    assert "violando o descanso circadiano" in relatorio
+    assert "excesso=120 min" in relatorio
 
 
 # ---------------------------------------------------------------- CONFLITO_AGENDA (aprova e reprova + Google Agenda)

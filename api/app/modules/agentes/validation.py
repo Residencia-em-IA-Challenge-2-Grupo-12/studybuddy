@@ -228,6 +228,31 @@ def janelas_higiene_sono(
     return resultado
 
 
+def _encontrar_sobreposta(iv_bloco: Intervalo, janelas: list[Intervalo]) -> Intervalo | None:
+    for iv in janelas:
+        if _sobrepoe(iv_bloco, iv):
+            return iv
+    return None
+
+
+def _eh_noturno(seq: list[BlocoEstudo]) -> bool:
+    """Identifica estudo contínuo em período noturno (início >= 18h ou término >= 20h)."""
+    return _para_segundos(seq[0].inicio) >= 18 * 3600 or _para_segundos(seq[-1].fim) >= 20 * 3600
+
+
+def formatar_relatorio(resultado: ResultadoValidacao) -> str:
+    """Formata um `ResultadoValidacao` em relatório legível para logs, demonstração ou reajuste."""
+    if resultado.status == "APROVADO":
+        return "APROVADO: nenhuma violação encontrada."
+
+    linhas = [f"REPROVADO ({len(resultado.violacoes)} violação(ões)):"]
+    for v in resultado.violacoes:
+        alvo = f"bloco={v.bloco_id}" if v.bloco_id else "dia inteiro"
+        excesso = f" | excesso={v.excesso_min} min" if v.excesso_min is not None else ""
+        linhas.append(f"- [{v.regra}] {v.dia.isoformat()} ({alvo}{excesso}): {v.mensagem}")
+    return "\n".join(linhas)
+
+
 def verificar_conflito_agenda(
     proposta: PropostaGrade,
     contexto: ContextoEstudante,
@@ -242,6 +267,7 @@ def verificar_conflito_agenda(
 
     for bloco in proposta.blocos:
         iv_bloco = _intervalo_bloco(bloco)
+        faixa_bloco = f"{_formatar_hora(bloco.inicio)}–{_formatar_hora(bloco.fim)}"
         for occ_ini, occ_fim in ocupados_por_dia.get(bloco.dia, []):
             if _sobrepoe(iv_bloco, (occ_ini, occ_fim)):
                 violacoes.append(
@@ -250,9 +276,9 @@ def verificar_conflito_agenda(
                         dia=bloco.dia,
                         bloco_id=bloco.id,
                         mensagem=(
-                            f"{_nome_dia(bloco.dia)}: o bloco das {_formatar_hora(bloco.inicio)} "
-                            f"de {bloco.disciplina} se sobrepõe a um compromisso das "
-                            f"{_formatar_segundos(occ_ini)} às {_formatar_segundos(occ_fim)}."
+                            f"{_nome_dia(bloco.dia)}: o bloco {bloco.id} ({faixa_bloco}, {bloco.disciplina}) "
+                            f"se sobrepõe ao compromisso das {_formatar_segundos(occ_ini)} às "
+                            f"{_formatar_segundos(occ_fim)}; mover {bloco.foco_min} min para um horário livre."
                         ),
                         excesso_min=None,
                     )
@@ -279,54 +305,73 @@ def verificar_integridade_circadiana(
         alta = bloco.carga == "alta"
         rotulo_carga = "alta carga" if alta else "baixa carga"
         dia_txt = _nome_dia(bloco.dia)
-        hora_txt = _formatar_hora(bloco.inicio)
+        faixa_bloco = f"{_formatar_hora(bloco.inicio)}–{_formatar_hora(bloco.fim)}"
 
-        em_sono = any(_sobrepoe(iv_bloco, iv) for iv in sono_por_dia.get(bloco.dia, []))
-        if em_sono:
-            violacoes.append(
-                Violacao(
-                    regra=REGRA_INTEGRIDADE_CIRCADIANA,
-                    dia=bloco.dia,
-                    bloco_id=bloco.id,
-                    mensagem=f"{dia_txt}: bloco de {rotulo_carga} às {hora_txt}, dentro da janela de sono.",
-                    excesso_min=None,
-                )
-            )
-        elif alta and any(_sobrepoe(iv_bloco, iv) for iv in higiene_por_dia.get(bloco.dia, [])):
+        iv_sono = _encontrar_sobreposta(iv_bloco, sono_por_dia.get(bloco.dia, []))
+        if iv_sono is not None:
             violacoes.append(
                 Violacao(
                     regra=REGRA_INTEGRIDADE_CIRCADIANA,
                     dia=bloco.dia,
                     bloco_id=bloco.id,
                     mensagem=(
-                        f"{dia_txt}: bloco de alta carga às {hora_txt}, na janela de higiene do sono "
-                        f"({margem} min antes de dormir)."
+                        f"{dia_txt}: bloco {bloco.id} de {rotulo_carga} ({faixa_bloco}) invade a janela de sono "
+                        f"({_formatar_segundos(iv_sono[0])}–{_formatar_segundos(iv_sono[1])}), violando o descanso "
+                        f"circadiano; mover {bloco.foco_min} min para fora do horário de sono."
+                    ),
+                    excesso_min=None,
+                )
+            )
+        elif alta:
+            iv_higiene = _encontrar_sobreposta(iv_bloco, higiene_por_dia.get(bloco.dia, []))
+            if iv_higiene is not None:
+                violacoes.append(
+                    Violacao(
+                        regra=REGRA_INTEGRIDADE_CIRCADIANA,
+                        dia=bloco.dia,
+                        bloco_id=bloco.id,
+                        mensagem=(
+                            f"{dia_txt}: bloco {bloco.id} de alta carga ({faixa_bloco}) cai na janela de higiene do "
+                            f"sono ({margem} min antes de dormir, "
+                            f"{_formatar_segundos(iv_higiene[0])}–{_formatar_segundos(iv_higiene[1])}); "
+                            f"mover {bloco.foco_min} min para um horário anterior ou trocar por baixa carga."
+                        ),
+                        excesso_min=None,
+                    )
+                )
+
+        iv_refeicao = _encontrar_sobreposta(iv_bloco, refeicoes_por_dia.get(bloco.dia, []))
+        if iv_refeicao is not None:
+            violacoes.append(
+                Violacao(
+                    regra=REGRA_INTEGRIDADE_CIRCADIANA,
+                    dia=bloco.dia,
+                    bloco_id=bloco.id,
+                    mensagem=(
+                        f"{dia_txt}: bloco {bloco.id} de {rotulo_carga} ({faixa_bloco}) invade a janela de refeição "
+                        f"({_formatar_segundos(iv_refeicao[0])}–{_formatar_segundos(iv_refeicao[1])}); "
+                        f"mover {bloco.foco_min} min para fora do horário de refeição."
                     ),
                     excesso_min=None,
                 )
             )
 
-        if any(_sobrepoe(iv_bloco, iv) for iv in refeicoes_por_dia.get(bloco.dia, [])):
-            violacoes.append(
-                Violacao(
-                    regra=REGRA_INTEGRIDADE_CIRCADIANA,
-                    dia=bloco.dia,
-                    bloco_id=bloco.id,
-                    mensagem=f"{dia_txt}: bloco de {rotulo_carga} às {hora_txt}, durante a janela de refeição.",
-                    excesso_min=None,
+        if alta:
+            iv_vale = _encontrar_sobreposta(iv_bloco, vales_por_dia.get(bloco.dia, []))
+            if iv_vale is not None:
+                violacoes.append(
+                    Violacao(
+                        regra=REGRA_INTEGRIDADE_CIRCADIANA,
+                        dia=bloco.dia,
+                        bloco_id=bloco.id,
+                        mensagem=(
+                            f"{dia_txt}: bloco {bloco.id} de alta carga ({faixa_bloco}) está no vale pós-prandial "
+                            f"({_formatar_segundos(iv_vale[0])}–{_formatar_segundos(iv_vale[1])}); "
+                            f"mover {bloco.foco_min} min para uma janela de pico ou neutra."
+                        ),
+                        excesso_min=None,
+                    )
                 )
-            )
-
-        if alta and any(_sobrepoe(iv_bloco, iv) for iv in vales_por_dia.get(bloco.dia, [])):
-            violacoes.append(
-                Violacao(
-                    regra=REGRA_INTEGRIDADE_CIRCADIANA,
-                    dia=bloco.dia,
-                    bloco_id=bloco.id,
-                    mensagem=f"{dia_txt}: bloco de alta carga às {hora_txt}, no vale pós-prandial.",
-                    excesso_min=None,
-                )
-            )
 
     return violacoes
 
@@ -391,8 +436,9 @@ def verificar_sobrecarga(
                     dia=dia,
                     bloco_id=None,
                     mensagem=(
-                        f"{dia_txt}: carga diária de {_formatar_duracao(total_dia)} excede o limite de "
-                        f"{_formatar_duracao(limiares.carga_max_diaria_min)}{sufixo_corte}."
+                        f"{dia_txt} possui {_formatar_duracao(total_dia)} de estudo, excedendo o limite diário de "
+                        f"{_formatar_duracao(limiares.carga_max_diaria_min)}{sufixo_corte}; "
+                        f"cortar ou mover {excesso_dia} min para outro dia."
                     ),
                     excesso_min=excesso_dia,
                 )
@@ -404,15 +450,20 @@ def verificar_sobrecarga(
                 excesso_seq = duracao_seq - limiares.bloco_continuo_max_min
                 ini_txt = _formatar_hora(seq[0].inicio)
                 fim_txt = _formatar_hora(seq[-1].fim)
+                tipo_estudo = (
+                    "estudo noturno ininterrupto" if _eh_noturno(seq) else "estudo contínuo ininterrupto"
+                )
+                impacto = ", violando o descanso circadiano" if _eh_noturno(seq) else ""
                 violacoes.append(
                     Violacao(
                         regra=REGRA_SOBRECARGA,
                         dia=dia,
                         bloco_id=seq[0].id if len(seq) == 1 else None,
                         mensagem=(
-                            f"{dia_txt}: estudo contínuo das {ini_txt} às {fim_txt}, com "
-                            f"{_formatar_duracao(duracao_seq)}, excede o máximo contínuo de "
-                            f"{_formatar_duracao(limiares.bloco_continuo_max_min)}{sufixo_corte}."
+                            f"{dia_txt} possui {_formatar_duracao(duracao_seq)} de {tipo_estudo} "
+                            f"({ini_txt}–{fim_txt}), excedendo o máximo contínuo de "
+                            f"{_formatar_duracao(limiares.bloco_continuo_max_min)}{sufixo_corte}{impacto}; "
+                            f"cortar {excesso_seq} min ou dividir com pausas."
                         ),
                         excesso_min=excesso_seq,
                     )
