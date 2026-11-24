@@ -160,6 +160,20 @@ A validação de grade em `api/app/modules/agentes/validation.py` opera de forma
   - Demonstração dos 5 cenários automáticos: `python demo_validation.py`
   - Modo interativo para testar horários e cargas no terminal: `python demo_validation.py -i`
 
+#### Regra `SOBRECARGA` e Corte Automático pelo Check-in
+
+Complementando as regras de agenda e ciclo circadiano, o `validation.py` aplica a regra **`SOBRECARGA`** (também 100% determinística, zero chamadas a LLM) com limiares configuráveis em `api/app/core/config.py` (e sobrescrevíveis via `api/.env`):
+
+| Parâmetro (`config.py` / `.env`) | Padrão | Função |
+| :--- | :---: | :--- |
+| `VALIDATION_CARGA_MAX_DIARIA_MIN` | `240` min (4h) | Carga máxima diária de foco em condições normais |
+| `VALIDATION_BLOCO_CONTINUO_MAX_MIN` | `90` min (1h30) | Tempo máximo de estudo contínuo sem pausa (bloco único ou blocos colados sem intervalo) |
+| `VALIDATION_PERCENTUAL_CORTE` | `0.30` (30%) | Redução máxima automática dos limiares em caso de estresse alto (`estresse >= 4`) ou privação de sono (`horas_sono < 6h`) |
+| `VALIDATION_MARGEM_SONO_MIN` | `60` min (1h) | Margem de higiene do sono antes de dormir usada na `INTEGRIDADE_CIRCADIANA` |
+
+- **Ajuste dinâmico pelo check-in (`calcular_limiares`):** com um sinal moderado (ex.: estresse `4/5` ou sono entre `5h` e `6h`), aplica metade do corte (`15%`, teto cai para `204 min/dia` e `76 min` contínuos); com sinal severo (`estresse == 5` ou `horas_sono < 5h`) ou ambos presentes (como na fixture `contexto/fadiga.json`), aplica o corte completo de **`30%`** (teto cai para **`168 min/dia`** e **`63 min`** contínuos).
+- **Retorno para reajuste:** violações de carga diária devolvem `bloco_id=None` e `excesso_min` calculado (ex.: um dia com 6h seguidas de estudo noturno devolve `SOBRECARGA` com `excesso_min=120`), permitindo ao Analysis cortar apenas o excedente.
+
 ---
 
 ## 6. Personas e Cenários de Validação
