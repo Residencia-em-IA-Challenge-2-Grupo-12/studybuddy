@@ -117,8 +117,46 @@ def rodar_cenarios() -> None:
         AgenteValidation(provedor_agenda=agenda).validar(carregar_proposta("valida"), ctx_mat),
     )
 
+    # Corte automático de 30% na fixture de estresse alto / privação de sono (fadiga.json)
+    blocos_200 = [
+        bloco("s1", date(2026, 11, 30), time(7, 0), time(7, 50), carga="alta"),
+        bloco("s2", date(2026, 11, 30), time(8, 0), time(8, 50), carga="alta"),
+        bloco("s3", date(2026, 11, 30), time(10, 0), time(10, 50), carga="alta"),
+        bloco("s4", date(2026, 11, 30), time(15, 0), time(15, 50), carga="baixa", disc="História"),
+    ]
+    imprimir_resultado(
+        "6) SOBRECARGA por corte do check-in: 200 min/dia reprovados em fadiga.json (teto cai de 240 para 168 min)",
+        validar(PropostaGrade(estudante_id=ctx_fad.estudante_id, semana_inicio=ctx_fad.semana_inicio, blocos=blocos_200), ctx_fad),
+    )
+
+    # Dia com 6h seguidas de estudo noturno (reprovado por SOBRECARGA)
+    dia_6h = date(2026, 12, 2)
+    blocos_6h = [
+        bloco("n1", dia_6h, time(18, 0), time(19, 0), carga="alta").model_copy(update={"pausa_min": 0}),
+        bloco("n2", dia_6h, time(19, 0), time(20, 0), carga="alta").model_copy(update={"pausa_min": 0}),
+        bloco("n3", dia_6h, time(20, 0), time(21, 0), carga="alta").model_copy(update={"pausa_min": 0}),
+        bloco("n4", dia_6h, time(21, 0), time(22, 0), carga="alta").model_copy(update={"pausa_min": 0}),
+        bloco("n5", dia_6h, time(22, 0), time(23, 0), carga="alta").model_copy(update={"pausa_min": 0}),
+        BlocoEstudo(
+            id="n6",
+            dia=dia_6h,
+            inicio=time(23, 0),
+            fim=time(23, 59),
+            disciplina="Cálculo I",
+            material_id="demo-01",
+            carga="alta",
+            tecnica="Pomodoro",
+            foco_min=60,
+            pausa_min=0,
+        ),
+    ]
+    imprimir_resultado(
+        "7) SOBRECARGA: 6h seguidas de estudo noturno (18:00-23:59) na quarta-feira",
+        validar(PropostaGrade(estudante_id=ctx_mat.estudante_id, semana_inicio=ctx_mat.semana_inicio, blocos=blocos_6h), ctx_mat),
+    )
+
     print(f"\n{'=' * 72}")
-    print("Concluído: 5 cenários validados de forma 100% determinística (0 chamadas a LLM).")
+    print("Concluído: 7 cenários validados de forma 100% determinística (0 chamadas a LLM).")
 
 
 def _ler_hora(texto: str) -> time:

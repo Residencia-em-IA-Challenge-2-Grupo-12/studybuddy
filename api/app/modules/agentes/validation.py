@@ -1,25 +1,32 @@
 """Camada de Validation determinística da grade de estudos. Só regras, sem LLM.
 
 Recebe uma `PropostaGrade` e um `ContextoEstudante` (com janelas livres/ocupadas vindas
-da integração com o Google Agenda via `ProvedorAgenda`, além de sono, refeições e vales
-circadianos) e devolve um `ResultadoValidacao`.
+da integração com o Google Agenda via `ProvedorAgenda`, além de sono, refeições, vales
+circadianos e check-in) e devolve um `ResultadoValidacao`.
 
 Regras verificadas:
   - `CONFLITO_AGENDA`: nenhum bloco de estudo pode se sobrepor a eventos ocupados
     (intervalos semiabertos `[inicio, fim)` — eventos adjacentes não conflitam).
     Aceita opcionalmente um `ProvedorAgenda` para conferir compromissos atualizados
     diretamente na agenda (ex.: Google Calendar) antes da gravação.
-  - `INTEGRIDADE_CIRCADIANA`: protege sono, higiene do sono (padrão: 60 min antes de
-    dormir para blocos de alta carga), janelas de refeição e vales circadianos/pós-prandiais
-    (blocos de alta carga).
+  - `INTEGRIDADE_CIRCADIANA`: protege sono, higiene do sono (margem configurável em
+    `config.py`, padrão 60 min antes de dormir para blocos de alta carga), janelas de
+    refeição e vales circadianos/pós-prandiais (blocos de alta carga).
+  - `SOBRECARGA`: limita a carga total diária e o tamanho máximo de foco contínuo sem
+    pausa, aplicando corte automático (até `validation_percentual_corte`, padrão 30%)
+    quando o check-in indica estresse alto ou privação de sono.
 """
 
 from collections import defaultdict
 from collections.abc import Iterable
+from dataclasses import dataclass
 from datetime import date, time, timedelta
+
+from app.core.config import settings
 
 from .contratos import (
     BlocoEstudo,
+    CheckIn,
     ContextoEstudante,
     Janela,
     PropostaGrade,
@@ -30,8 +37,9 @@ from .contratos import (
 
 REGRA_CONFLITO_AGENDA = "CONFLITO_AGENDA"
 REGRA_INTEGRIDADE_CIRCADIANA = "INTEGRIDADE_CIRCADIANA"
+REGRA_SOBRECARGA = "SOBRECARGA"
 
-HIGIENE_SONO_PADRAO_MIN = 60
+HIGIENE_SONO_PADRAO_MIN = settings.validation_margem_sono_min
 
 _SEGUNDOS_DIA = 24 * 60 * 60
 _FIM_DIA_SONO_SEG = 23 * 3600 + 59 * 60  # convenção de contratos.py: sono cruzando meia-noite termina em 23:59
@@ -49,6 +57,16 @@ _DIAS_SEMANA = (
 Intervalo = tuple[int, int]  # [inicio_seg, fim_seg) dentro do dia
 
 
+@dataclass(frozen=True)
+class LimiaresEfetivos:
+    """Limiares de sobrecarga após aplicar eventual corte automático do check-in."""
+
+    carga_max_diaria_min: int
+    bloco_continuo_max_min: int
+    percentual_corte_aplicado: float
+    motivos_corte: tuple[str, ...] = ()
+
+
 def _para_segundos(t: time) -> int:
     return t.hour * 3600 + t.minute * 60 + t.second
 
@@ -63,6 +81,15 @@ def _formatar_segundos(seg: int) -> str:
     horas, resto = divmod(seg, 3600)
     minutos, segundos = divmod(resto, 60)
     return f"{horas:02d}:{minutos:02d}" if segundos == 0 else f"{horas:02d}:{minutos:02d}:{segundos:02d}"
+
+
+def _formatar_duracao(minutos: int) -> str:
+    horas, resto = divmod(minutos, 60)
+    if horas and resto:
+        return f"{horas}h{resto:02d} ({minutos} min)"
+    if horas:
+        return f"{horas}h ({minutos} min)"
+    return f"{minutos} min"
 
 
 def _nome_dia(dia: date) -> str:
@@ -110,10 +137,59 @@ def _intervalo_bloco(bloco: BlocoEstudo) -> Intervalo:
     return _para_segundos(bloco.inicio), _para_segundos(bloco.fim)
 
 
+def calcular_limiares(
+    checkin: CheckIn,
+    *,
+    carga_max_diaria_min: int | None = None,
+    bloco_continuo_max_min: int | None = None,
+    percentual_corte: float | None = None,
+    estresse_alto: int | None = None,
+    sono_min_horas: float | None = None,
+) -> LimiaresEfetivos:
+    """Calcula os limiares efetivos de carga diária e foco contínuo a partir do check-in.
+
+    - Sem estresse alto nem privação de sono: aplica 100% dos limiares de `config.py`.
+    - Com 1 sinal moderado (ex.: estresse == 4 ou sono entre 5h e 6h): metade do corte configurado.
+    - Com sinal severo (estresse >= 5 ou sono < 5h) ou ambos os sinais presentes: aplica o corte
+      completo (`validation_percentual_corte`, padrão 30%).
+    """
+    base_diaria = settings.validation_carga_max_diaria_min if carga_max_diaria_min is None else carga_max_diaria_min
+    base_continuo = (
+        settings.validation_bloco_continuo_max_min if bloco_continuo_max_min is None else bloco_continuo_max_min
+    )
+    teto_corte = settings.validation_percentual_corte if percentual_corte is None else percentual_corte
+    teto_corte = max(0.0, min(0.9, teto_corte))
+    limiar_estresse = settings.validation_estresse_alto if estresse_alto is None else estresse_alto
+    limiar_sono = settings.validation_sono_min_horas if sono_min_horas is None else sono_min_horas
+
+    motivos: list[str] = []
+    severidade = 0.0
+
+    if checkin.estresse >= limiar_estresse:
+        motivos.append(f"estresse alto ({checkin.estresse}/5)")
+        severidade += 1.0 if checkin.estresse > limiar_estresse else 0.5
+
+    if checkin.horas_sono < limiar_sono:
+        motivos.append(f"privação de sono ({checkin.horas_sono:g}h)")
+        severidade += 1.0 if checkin.horas_sono < (limiar_sono - 1.0) else 0.5
+
+    fator = min(1.0, severidade)
+    corte_aplicado = round(teto_corte * fator, 4)
+
+    diaria_efetiva = max(1, round(base_diaria * (1.0 - corte_aplicado)))
+    continuo_efetivo = max(1, round(base_continuo * (1.0 - corte_aplicado)))
+    return LimiaresEfetivos(
+        carga_max_diaria_min=diaria_efetiva,
+        bloco_continuo_max_min=continuo_efetivo,
+        percentual_corte_aplicado=corte_aplicado,
+        motivos_corte=tuple(motivos),
+    )
+
+
 def janelas_higiene_sono(
     sono: Iterable[Janela],
     *,
-    higiene_sono_min: int = HIGIENE_SONO_PADRAO_MIN,
+    higiene_sono_min: int | None = None,
 ) -> dict[date, list[Intervalo]]:
     """Calcula a janela de higiene do sono (ex.: 60 min antes de dormir) para cada início de sono.
 
@@ -121,10 +197,11 @@ def janelas_higiene_sono(
     termina dormindo (fim >= 23:59) e o dia seguinte começa dormindo em 00:00, trata 00:00
     como continuação do mesmo sono, sem gerar higiene falsa no meio da madrugada.
     """
-    if higiene_sono_min <= 0:
+    margem = settings.validation_margem_sono_min if higiene_sono_min is None else higiene_sono_min
+    if margem <= 0:
         return {}
 
-    higiene_seg = higiene_sono_min * 60
+    higiene_seg = margem * 60
     sono_por_dia = _por_dia(sono, unir_adjacentes=True)
     dias_cruza_meia_noite = {
         dia for dia, ivs in sono_por_dia.items() if any(fim >= _FIM_DIA_SONO_SEG for _, fim in ivs)
@@ -187,11 +264,12 @@ def verificar_integridade_circadiana(
     proposta: PropostaGrade,
     contexto: ContextoEstudante,
     *,
-    higiene_sono_min: int = HIGIENE_SONO_PADRAO_MIN,
+    higiene_sono_min: int | None = None,
 ) -> list[Violacao]:
     """Regra `INTEGRIDADE_CIRCADIANA`: protege sono, higiene do sono, refeições e vales circadianos."""
+    margem = settings.validation_margem_sono_min if higiene_sono_min is None else higiene_sono_min
     sono_por_dia = _por_dia(contexto.sono, unir_adjacentes=True)
-    higiene_por_dia = janelas_higiene_sono(contexto.sono, higiene_sono_min=higiene_sono_min)
+    higiene_por_dia = janelas_higiene_sono(contexto.sono, higiene_sono_min=margem)
     refeicoes_por_dia = _por_dia(contexto.refeicoes, unir_adjacentes=True)
     vales_por_dia = _por_dia(contexto.vales, unir_adjacentes=True)
 
@@ -222,7 +300,7 @@ def verificar_integridade_circadiana(
                     bloco_id=bloco.id,
                     mensagem=(
                         f"{dia_txt}: bloco de alta carga às {hora_txt}, na janela de higiene do sono "
-                        f"({higiene_sono_min} min antes de dormir)."
+                        f"({margem} min antes de dormir)."
                     ),
                     excesso_min=None,
                 )
@@ -253,11 +331,104 @@ def verificar_integridade_circadiana(
     return violacoes
 
 
+def _sequencias_continuas(blocos_do_dia: list[BlocoEstudo]) -> list[list[BlocoEstudo]]:
+    """Agrupa blocos do mesmo dia sem intervalo de pausa entre o fim de um e o início do próximo."""
+    ordenados = sorted(blocos_do_dia, key=lambda b: (_para_segundos(b.inicio), _para_segundos(b.fim)))
+    if not ordenados:
+        return []
+
+    grupos: list[list[BlocoEstudo]] = [[ordenados[0]]]
+    fim_atual = _para_segundos(ordenados[0].fim)
+    for b in ordenados[1:]:
+        ini_b = _para_segundos(b.inicio)
+        fim_b = _para_segundos(b.fim)
+        if ini_b <= fim_atual:
+            grupos[-1].append(b)
+            fim_atual = max(fim_atual, fim_b)
+        else:
+            grupos.append([b])
+            fim_atual = fim_b
+    return grupos
+
+
+def verificar_sobrecarga(
+    proposta: PropostaGrade,
+    contexto: ContextoEstudante,
+    *,
+    carga_max_diaria_min: int | None = None,
+    bloco_continuo_max_min: int | None = None,
+    percentual_corte: float | None = None,
+) -> list[Violacao]:
+    """Regra `SOBRECARGA`: limita carga diária total e foco contínuo sem pausa, com corte pelo check-in."""
+    limiares = calcular_limiares(
+        contexto.checkin,
+        carga_max_diaria_min=carga_max_diaria_min,
+        bloco_continuo_max_min=bloco_continuo_max_min,
+        percentual_corte=percentual_corte,
+    )
+
+    sufixo_corte = ""
+    if limiares.percentual_corte_aplicado > 0:
+        pct = round(limiares.percentual_corte_aplicado * 100)
+        motivos_txt = " e ".join(limiares.motivos_corte)
+        sufixo_corte = f" (limiar reduzido em {pct}% por {motivos_txt})"
+
+    blocos_por_dia: dict[date, list[BlocoEstudo]] = defaultdict(list)
+    for b in proposta.blocos:
+        blocos_por_dia[b.dia].append(b)
+
+    violacoes: list[Violacao] = []
+    for dia in sorted(blocos_por_dia):
+        blocos_dia = blocos_por_dia[dia]
+        dia_txt = _nome_dia(dia)
+
+        total_dia = sum(b.foco_min for b in blocos_dia)
+        if total_dia > limiares.carga_max_diaria_min:
+            excesso_dia = total_dia - limiares.carga_max_diaria_min
+            violacoes.append(
+                Violacao(
+                    regra=REGRA_SOBRECARGA,
+                    dia=dia,
+                    bloco_id=None,
+                    mensagem=(
+                        f"{dia_txt}: carga diária de {_formatar_duracao(total_dia)} excede o limite de "
+                        f"{_formatar_duracao(limiares.carga_max_diaria_min)}{sufixo_corte}."
+                    ),
+                    excesso_min=excesso_dia,
+                )
+            )
+
+        for seq in _sequencias_continuas(blocos_dia):
+            duracao_seq = sum(b.foco_min for b in seq)
+            if duracao_seq > limiares.bloco_continuo_max_min:
+                excesso_seq = duracao_seq - limiares.bloco_continuo_max_min
+                ini_txt = _formatar_hora(seq[0].inicio)
+                fim_txt = _formatar_hora(seq[-1].fim)
+                violacoes.append(
+                    Violacao(
+                        regra=REGRA_SOBRECARGA,
+                        dia=dia,
+                        bloco_id=seq[0].id if len(seq) == 1 else None,
+                        mensagem=(
+                            f"{dia_txt}: estudo contínuo das {ini_txt} às {fim_txt}, com "
+                            f"{_formatar_duracao(duracao_seq)}, excede o máximo contínuo de "
+                            f"{_formatar_duracao(limiares.bloco_continuo_max_min)}{sufixo_corte}."
+                        ),
+                        excesso_min=excesso_seq,
+                    )
+                )
+
+    return violacoes
+
+
 def validar(
     proposta: PropostaGrade,
     contexto: ContextoEstudante,
     *,
-    higiene_sono_min: int = HIGIENE_SONO_PADRAO_MIN,
+    higiene_sono_min: int | None = None,
+    carga_max_diaria_min: int | None = None,
+    bloco_continuo_max_min: int | None = None,
+    percentual_corte: float | None = None,
     provedor_agenda: ProvedorAgenda | None = None,
 ) -> ResultadoValidacao:
     """Valida `PropostaGrade` + `ContextoEstudante` de forma 100% determinística (zero LLM)."""
@@ -269,6 +440,13 @@ def validar(
     violacoes = [
         *verificar_conflito_agenda(proposta, contexto, ocupados_extras=ocupados_extras),
         *verificar_integridade_circadiana(proposta, contexto, higiene_sono_min=higiene_sono_min),
+        *verificar_sobrecarga(
+            proposta,
+            contexto,
+            carga_max_diaria_min=carga_max_diaria_min,
+            bloco_continuo_max_min=bloco_continuo_max_min,
+            percentual_corte=percentual_corte,
+        ),
     ]
 
     ordem_bloco = {b.id: idx for idx, b in enumerate(proposta.blocos)}
@@ -286,10 +464,16 @@ class AgenteValidation:
     def __init__(
         self,
         *,
-        higiene_sono_min: int = HIGIENE_SONO_PADRAO_MIN,
+        higiene_sono_min: int | None = None,
+        carga_max_diaria_min: int | None = None,
+        bloco_continuo_max_min: int | None = None,
+        percentual_corte: float | None = None,
         provedor_agenda: ProvedorAgenda | None = None,
     ) -> None:
         self.higiene_sono_min = higiene_sono_min
+        self.carga_max_diaria_min = carga_max_diaria_min
+        self.bloco_continuo_max_min = bloco_continuo_max_min
+        self.percentual_corte = percentual_corte
         self.provedor_agenda = provedor_agenda
 
     def validar(self, proposta: PropostaGrade, contexto: ContextoEstudante) -> ResultadoValidacao:
@@ -297,5 +481,8 @@ class AgenteValidation:
             proposta,
             contexto,
             higiene_sono_min=self.higiene_sono_min,
+            carga_max_diaria_min=self.carga_max_diaria_min,
+            bloco_continuo_max_min=self.bloco_continuo_max_min,
+            percentual_corte=self.percentual_corte,
             provedor_agenda=self.provedor_agenda,
         )
