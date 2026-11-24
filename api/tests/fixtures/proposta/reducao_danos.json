@@ -1,0 +1,42 @@
+{
+  "estudante_id": "est-fadiga",
+  "semana_inicio": "2026-11-30",
+  "modo": "reducao_danos",
+  "iteracao": 0,
+  "fora_da_grade": [
+    "calc-01",
+    "prog-01"
+  ],
+  "blocos": [
+    {
+      "id": "b1",
+      "dia": "2026-11-30",
+      "inicio": "13:00",
+      "fim": "13:25",
+      "disciplina": "Inglês",
+      "material_id": "ing-01",
+      "carga": "baixa",
+      "tecnica": "Flashcards com repetição espaçada",
+      "foco_min": 25,
+      "pausa_min": 10,
+      "justificativa": "",
+      "fontes": [
+        "artigo_02_spaced_repetition_cepeda.txt"
+      ]
+    },
+    {
+      "id": "b2",
+      "dia": "2026-12-01",
+      "inicio": "13:00",
+      "fim": "13:25",
+      "disciplina": "História",
+      "material_id": "hist-01",
+      "carga": "baixa",
+      "tecnica": "Leitura com resumo",
+      "foco_min": 25,
+      "pausa_min": 10,
+      "justificativa": "",
+      "fontes": []
+    }
+  ]
+}

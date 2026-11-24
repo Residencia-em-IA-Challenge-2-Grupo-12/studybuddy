@@ -145,6 +145,21 @@ Foram avaliados **5 modelos candidatos + 4 variações** (`temperature`, `reason
 
 Relatório completo (incluindo análise de erros e recomendações por barreira `[4.4]`–`[4.7]`) em [`pesquisa/experimentos/modelos/guardrails.md`](pesquisa/experimentos/modelos/guardrails.md).
 
+### Validation Determinística da Grade (Agenda e Integridade Circadiana)
+
+A validação de grade em `api/app/modules/agentes/validation.py` opera de forma **100% determinística (zero chamadas a LLM)**, recebendo `PropostaGrade` + `ContextoEstudante` (contratos Pydantic em `api/app/modules/agentes/contratos.py`) e devolvendo `ResultadoValidacao` (`APROVADO` ou `REPROVADO` com a lista de `Violacao`).
+
+| Regra | O que verifica | Detalhes de funcionamento |
+| :--- | :--- | :--- |
+| **`CONFLITO_AGENDA`** | Nenhum bloco sobreposto a eventos ocupados | Compara intervalos semiabertos `[inicio, fim)` contra `ContextoEstudante.ocupados` (eventos do Google Agenda) e aceita opcionalmente um `ProvedorAgenda` para conferir compromissos recém-adicionados antes da gravação. Compromissos adjacentes (ex.: `09:00–10:00` e `10:00–10:25`) não conflitam, e eventos sobrepostos no Google Agenda são unificados para evitar violações duplicadas. |
+| **`INTEGRIDADE_CIRCADIANA`** | Proteção do sono, higiene do sono, refeições e vales circadianos | Bloqueia qualquer estudo em janelas de **sono** (`sono`) ou **refeição** (`refeicoes`); bloqueia blocos de **alta carga** na **higiene do sono** (padrão: `60 min` antes do início do sono, tratando corretamente sono que cruza a meia-noite) e nos **vales circadianos/pós-prandiais** (`vales`), mantendo permitidos blocos de **baixa carga** (revisões leves/flashcards) nessas faixas. |
+
+- **Fluxo de alteração de horários:** o Validation nunca edita a grade diretamente — ao reprovar, devolve o `bloco_id`, `dia`, `regra` e `mensagem` para o Maestro encaminhar ao **Analysis** realocar apenas os blocos violados. Os blocos só são gravados no Google Agenda (`ProvedorAgenda.gravar_blocos`) quando o resultado é `APROVADO`.
+- **Testes e demonstração (sem LLM e sem Ollama, a partir de `api/`):**
+  - Testes unitários com fixtures (`api/tests/fixtures/`) e garantia testada de zero chamadas a LLM: `python -m pytest tests/test_validation.py -v`
+  - Demonstração dos 5 cenários automáticos: `python demo_validation.py`
+  - Modo interativo para testar horários e cargas no terminal: `python demo_validation.py -i`
+
 ---
 
 ## 6. Personas e Cenários de Validação
