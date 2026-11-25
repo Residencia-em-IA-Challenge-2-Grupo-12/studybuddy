@@ -11,11 +11,16 @@ import pytest
 from pydantic import ValidationError
 
 from app.modules.agentes.contratos import (
-    BlocoEstudo, ContextoEstudante, Janela, PropostaGrade, ResultadoValidacao, Violacao, esquema,
+    BlocoEstudo, ContextoEstudante, Janela, PropostaGrade, ResultadoValidacao, Veredito, Violacao, esquema,
 )
 
 FIXTURES = Path(__file__).parent / "fixtures"
-CONTRATO_DA_PASTA = {"contexto": ContextoEstudante, "proposta": PropostaGrade, "resultado": ResultadoValidacao}
+CONTRATO_DA_PASTA = {
+    "contexto": ContextoEstudante,
+    "proposta": PropostaGrade,
+    "resultado": ResultadoValidacao,
+    "veredito": Veredito,
+}
 
 
 def carregar(pasta: str, nome: str):

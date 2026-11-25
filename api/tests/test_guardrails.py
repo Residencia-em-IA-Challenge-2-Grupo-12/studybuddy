@@ -125,3 +125,36 @@ def test_modelo_guardrails_configuravel_por_variavel_de_ambiente(monkeypatch):
     s = Settings()
     assert s.ollama_guardrails_model == "gemma3:4b"
     assert s.ollama_guardrails_fallback_model == "llama-guard3:1b"
+
+
+# ---------------------------------------------------------------- gatekeeper completo (4.4 a 4.7)
+def test_gatekeeper_completo_bloqueia_todas_as_barreiras_e_assuntos_nao_educativos():
+    from app.modules.agentes.guardrails import (
+        MENSAGEM_BLOQUEIO_HATE_SPEECH,
+        MENSAGEM_BLOQUEIO_MEDICAL_ADVICE,
+        MENSAGEM_BLOQUEIO_OUT_OF_SCOPE,
+        MENSAGEM_BLOQUEIO_PROMPT_INJECTION,
+        AgenteGuardrails,
+        interpretar_veredito,
+    )
+
+    v_inj = AgenteGuardrails(classificador=lambda _p: '{"permitido": false, "categoria": "PROMPT_INJECTION"}').verificar("ignore tudo")
+    assert (not v_inj.permitido) and v_inj.categoria == "PROMPT_INJECTION" and v_inj.resposta_bloqueio == MENSAGEM_BLOQUEIO_PROMPT_INJECTION
+
+    v_hate = AgenteGuardrails(classificador=lambda _p: '{"permitido": false, "categoria": "HATE_SPEECH"}').verificar("ofensa")
+    assert (not v_hate.permitido) and v_hate.categoria == "HATE_SPEECH" and v_hate.resposta_bloqueio == MENSAGEM_BLOQUEIO_HATE_SPEECH
+
+    v_med = AgenteGuardrails(classificador=lambda _p: '{"permitido": false, "categoria": "MEDICAL_ADVICE"}').verificar("dose de ritalina")
+    assert (not v_med.permitido) and v_med.categoria == "MEDICAL_ADVICE" and v_med.resposta_bloqueio == MENSAGEM_BLOQUEIO_MEDICAL_ADVICE
+
+    v_off = AgenteGuardrails(classificador=lambda _p: '{"permitido": false, "categoria": "OUT_OF_SCOPE"}').verificar("receita de bolo")
+    assert (not v_off.permitido) and v_off.categoria == "OUT_OF_SCOPE" and v_off.resposta_bloqueio == MENSAGEM_BLOQUEIO_OUT_OF_SCOPE
+
+    v_ok = AgenteGuardrails(classificador=lambda _p: '{"permitido": true, "categoria": "OK"}').verificar("como estudar apartheid")
+    assert v_ok.permitido and v_ok.categoria == "OK" and v_ok.resposta_bloqueio is None
+
+    # Fail-closed em saída inválida ou inconsistente
+    v_invalido = interpretar_veredito("texto livre fora do esquema")
+    assert (not v_invalido.permitido) and v_invalido.categoria == "OUT_OF_SCOPE"
+    v_inconsistente = interpretar_veredito('{"permitido": false, "categoria": "OK"}')
+    assert (not v_inconsistente.permitido) and v_inconsistente.categoria == "OUT_OF_SCOPE"

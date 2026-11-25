@@ -58,3 +58,51 @@ def guardrails_fallback():
         base_url=settings.ollama_base_url,
         client_kwargs={"timeout": settings.ollama_timeout_guardrails},
     )
+
+
+@lru_cache
+def guardrails_veredito():
+    """Gatekeeper unificado das barreiras 4.4 a 4.7 no contrato `Veredito` (esquema JSON compacto)."""
+    from langchain_ollama import ChatOllama
+
+    from app.modules.agentes.guardrails import ESQUEMA_VEREDITO_GATEKEEPER
+
+    return ChatOllama(
+        model=settings.ollama_guardrails_model,
+        temperature=0.0,
+        reasoning=False,
+        format=ESQUEMA_VEREDITO_GATEKEEPER,
+        num_predict=160,
+        base_url=settings.ollama_base_url,
+        client_kwargs={"timeout": settings.ollama_timeout_guardrails},
+    )
+
+
+@lru_cache
+def moderacao():
+    """Classificador da barreira 4.5 (HATE_SPEECH): qwen3:4b-q8_0 com esquema JSON compacto.
+
+    Suporta também modelos nativos de moderação (ex.: `llama-guard3:1b`) caso o operador
+    troque `OLLAMA_MODERACAO_MODEL` no `.env`.
+    """
+    from langchain_ollama import ChatOllama
+
+    from app.modules.agentes.guardrails import ESQUEMA_HATE_SPEECH, eh_modelo_llama_guard
+
+    modelo = settings.ollama_moderacao_model
+    if eh_modelo_llama_guard(modelo):
+        return ChatOllama(
+            model=modelo,
+            temperature=0.0,
+            base_url=settings.ollama_base_url,
+            client_kwargs={"timeout": settings.ollama_timeout_guardrails},
+        )
+    return ChatOllama(
+        model=modelo,
+        temperature=0.0,
+        reasoning=False,
+        format=ESQUEMA_HATE_SPEECH,
+        num_predict=160,
+        base_url=settings.ollama_base_url,
+        client_kwargs={"timeout": settings.ollama_timeout_guardrails},
+    )

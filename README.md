@@ -30,20 +30,21 @@ flowchart TD
         D --> E[("ChromaDB Local Persistente")]
     end
 
-    subgraph Seguranca ["2. Validation e Guardrails"]
-        F["Mensagem do Estudante"] --> V["Validation determinística (tamanho 3..1000)"]
-        V --> G["Guardrails LLM (qwen3:4b-q8_0 / phi4-mini, JSON Schema)"]
-        G -- "Bloqueado (INJECTION / HATE / MEDICAL / OFF_TOPIC)" --> B1["Recusa segura"]
-        G -- "SAFE" --> P{"Porteiro L2 (d1 > 1,026?)"}
+    subgraph Seguranca ["2. Guardrails (Veredito) e Escopo"]
+        F["Mensagem do Estudante"] --> V["Validação de entrada (tamanho 3..1000)"]
+        V --> G["AgenteGuardrails (qwen3:4b-q8_0, JSON Schema)"]
+        G -- "PROMPT_INJECTION / HATE_SPEECH / MEDICAL_ADVICE / OUT_OF_SCOPE" --> B1["Hard stop com mensagem fixa"]
+        G -- "OK" --> P{"Porteiro L2 (d1 > 1,026?)"}
         P -- "Sim" --> B2["Recusa padrão (0 chamadas LLM)"]
     end
 
-    subgraph Orquestracao ["3. Pipeline Multiagente + Verificação"]
+    subgraph Orquestracao ["3. Pipeline Multiagente + Validation Determinística"]
         P -- "Não" --> T["Agente de Triagem (qwen3:8b, JSON)"]
         T --> PL["Agente Planejador (busca extra + plano ou explicação)"]
         E -.-> P
         E -.-> PL
-        PL --> VC["Verificador de Citações (determinístico)"]
+        PL --> VD["Validation da Grade (agenda, circadiano, sobrecarga)"]
+        VD --> VC["Verificador de Citações (determinístico)"]
         VC --> R["Resposta Fundamentada + Rastro"]
     end
 ```
@@ -60,11 +61,12 @@ studybuddy/
 │   │   └── modules/
 │   │       ├── assistente/                   # Rotas HTTP (/assistente/perguntar, /assistente/info)
 │   │       ├── rag/                          # Núcleo RAG: ChromaDB, porteiro, prompts, llm.py, verificador.py
-│   │       └── agentes/                      # Multiagente: triagem.py, planejador.py, orquestrador.py, guardrails.py
+│   │       └── agentes/                      # Multiagente, contratos.py, guardrails.py e validation.py
 │   ├── data/                                 # Base de conhecimento: 20 artigos científicos (.txt)
 │   ├── chroma_db/                            # Índice vetorial ChromaDB (gerado localmente, ignorado no git)
-│   ├── tests/                                # Testes unitários sem LLM (rodam no CI)
+│   ├── tests/                                # Testes unitários (CI) + fixtures/ (contexto, proposta, resultado, veredito)
 │   ├── demo.py                               # Demonstração interativa e comparativa dos pipelines
+│   ├── demo_validation.py                    # Demonstração determinística do Validation (7 cenários + modo -i)
 │   ├── .env.example                          # Variáveis de ambiente (copie para api/.env)
 │   └── requirements.txt
 ├── web/                                      # Frontend (Next.js, módulos em src/modules/)
@@ -74,10 +76,15 @@ studybuddy/
 │   ├── experimentos_semana3_llm_vs_rag.ipynb # Comparação LLM puro vs RAG
 │   ├── metricas/                             # Pacote de métricas (recuperação, geração, comparação)
 │   ├── experimentos/
-│   │   └── modelos/                          # Experimento de modelos locais nos Guardrails
+│   │   └── modelos/                          # Experimentos de modelos locais e validação dos Guardrails
 │   │       ├── guardrails.md                 # Tabela comparativa, variações e recomendação final
-│   │       ├── harness_guardrails.py         # Harness reproduzível (Ollama HTTP API, sem deps extras)
+│   │       ├── barreira_hate_speech.md       # Decisão arquitetural da barreira 4.5 e resultados Dev/Holdout/Inéditos
+│   │       ├── harness_guardrails.py         # Harness reproduzível das 4 barreiras (Ollama HTTP API)
+│   │       ├── avaliar_hate_speech.py        # Benchmark dedicado da barreira 4.5 (direto, disfarçado, estudo sensível)
 │   │       ├── fixtures_guardrails.json      # 48 fixtures (4 barreiras + válidos + limítrofes)
+│   │       ├── fixtures_hate_speech.json     # 32 fixtures da barreira 4.5 (inclui sutis em PT-BR)
+│   │       ├── holdout_hate_speech.json      # 25 casos independentes (holdout anti-overfitting, grupos A–E)
+│   │       ├── validacao_subtexto_ineditos.json # 12 casos inéditos de duplo sentido, ironia e perguntas retóricas
 │   │       ├── resultados_guardrails.csv     # Métricas consolidadas em CSV
 │   │       └── resultados_guardrails.json    # Resultados completos por caso e hardware
 │   ├── Entrega2.md                           # Resumo da entrega da Semana 2
@@ -121,8 +128,8 @@ Detalhes completos de arquitetura, rastro dos agentes e métricas em [`pesquisa/
 
 A proteção da API é dividida em duas camadas complementares:
 
-- **Validation (determinística, sem LLM):** limite de tamanho da pergunta (`3` a `1000` caracteres em `assistente/schemas.py`), porteiro de distância L2 (`d1 > 1,026` em `rag/repository.py`), verificador de citações (`rag/verificador.py`) e tratamento de erros/timeouts do Ollama (`503`/`504`).
-- **Guardrails (classificadores LLM locais — barreiras `[4.4]` a `[4.7]`):** classificam cada entrada em `SAFE`, `INJECTION`, `HATE_SPEECH`, `MEDICAL_ADVICE` ou `OFF_TOPIC` com saída JSON estruturada (`ESQUEMA_GUARDRAILS`) e parser *fail-closed* em `api/app/modules/agentes/guardrails.py`.
+- **Validation (determinística, sem LLM):** limite de tamanho da pergunta (`3` a `1000` caracteres em `assistente/schemas.py`), porteiro de distância L2 (`d1 > 1,026` em `rag/repository.py`), verificador de citações (`rag/verificador.py`), auditoria completa da grade (`CONFLITO_AGENDA`, `INTEGRIDADE_CIRCADIANA` e `SOBRECARGA` em `agentes/validation.py`) e tratamento de erros/timeouts do Ollama (`503`/`504`).
+- **Guardrails (classificador LLM local — barreiras `[4.4]` a `[4.7]`):** `AgenteGuardrails` e `BarreiraHateSpeech` em `api/app/modules/agentes/guardrails.py` classificam cada entrada no contrato oficial **`Veredito`** (`OK`, `PROMPT_INJECTION`, `HATE_SPEECH`, `MEDICAL_ADVICE` ou `OUT_OF_SCOPE`) com *hard stop* de mensagem fixa (sem debate) e parser *fail-closed*.
 
 ### Resultados do benchmark local (`Apple M4, 10 núcleos, 24 GB RAM`)
 
@@ -139,11 +146,26 @@ Foram avaliados **5 modelos candidatos + 4 variações** (`temperature`, `reason
 
 ### Modelos configurados em `api/app/core/config.py` (sem mexer no código)
 
-- **Principal (`OLLAMA_GUARDRAILS_MODEL`):** `qwen3:4b-q8_0` — único com **48/48 acertos (`F1 = 1,000`)**, `0%` de falso positivo (inclusive em casos limítrofes de sono, bem-estar e ciclo circadiano) e `p95 = 7,88 s`.
+- **Principal (`OLLAMA_GUARDRAILS_MODEL` / `OLLAMA_MODERACAO_MODEL`):** `qwen3:4b-q8_0` — único com **48/48 acertos (`F1 = 1,000`)** no benchmark geral, `0%` de falso positivo e **0 GB de RAM extra** ao unificar o gatekeeper e a barreira `[4.5]`.
 - **Alternativa mais leve (`OLLAMA_GUARDRAILS_FALLBACK_MODEL`):** `phi4-mini` — **100% de recall** nas 4 barreiras, `0%` de FP em pedidos válidos, **3,89 s** de latência média e apenas **2,88 GB** de memória.
-- **Parâmetros obrigatórios (`api/app/modules/rag/llm.py`):** `temperature=0.0`, `reasoning=False`, `format=ESQUEMA_GUARDRAILS` e `timeout=15.0`.
+- **Parâmetros obrigatórios (`api/app/modules/rag/llm.py`):** `temperature=0.0`, `reasoning=False`, saída estruturada via `format` e `timeout=30.0` (`OLLAMA_TIMEOUT_GUARDRAILS`).
 
 Relatório completo (incluindo análise de erros e recomendações por barreira `[4.4]`–`[4.7]`) em [`pesquisa/experimentos/modelos/guardrails.md`](pesquisa/experimentos/modelos/guardrails.md).
+
+#### Barreira `[4.5]` `HATE_SPEECH` — Classificação Contextual e Validação Independente
+
+A barreira `[4.5]` bloqueia racismo, xenofobia, misoginia, homofobia, intolerância religiosa, capacitismo, gordofobia e assédio (diretos e disfarçados) com **hard stop** sem debate (`categoria = "HATE_SPEECH"` e mensagem fixa `MENSAGEM_BLOQUEIO_HATE_SPEECH`), preservando denúncias, críticas, pesquisas acadêmicas e citações em contexto educativo:
+
+- **Decisão local vs. APIs externas:** avaliamos primeiro `llama-guard3:1b` e `llama-guard3:8b` no Ollama (evitando dependência externa da OpenAI Moderation API / Gemini Safety). Ambos acertaram 100% dos ataques literais, mas falharam em `0/4` de casos sutis em português do Brasil (trocadilhos e estereótipos indiretos). Por isso adotamos **`qwen3:4b-q8_0`** com a **`REGRA_FUNDAMENTAL_HATE_SPEECH`** (princípio geral de **Uso vs. Menção**) e raciocínio curto estruturado interno (`subtexto` → `intencao_autor` → `categoria` → `permitido`), nunca exposto ao usuário.
+- **Validação sem *overfitting* (`Dev` vs. `Holdout` independente vs. `Inéditos`):** a bateria automatizada em `api/tests/test_hate_speech_validacao.py` cobre 5 grupos (A: discriminatórios, B: denúncias/críticas, C: acadêmico/educativo, D: citações legítimas vs. citação + endosso, E: ambíguas) com teste anti-vazamento entre `dev`, `holdout` e prompt:
+
+| Conjunto (`qwen3:4b-q8_0`) | Acurácia Geral | Grupos A–D | Falsos Positivos | Latência Média |
+| :--- | :---: | :---: | :---: | :---: |
+| **`DEV`** (30 casos) | **29/30 (96,7%)** | **24/24 (100%)** | **0/20 (0,0%)** | 7,33 s |
+| **`HOLDOUT` independente** (25 casos inéditos) | **24/25 (96,0%)** | **20/20 (100%)** | **0/16 (0,0%)** | 7,60 s |
+| **`INÉDITOS` extremos** (12 casos de duplo sentido/ironia) | **10/12 (83,3%)** | **4/4 (100%)** | **0/6 (0,0%)** | 8,03 s |
+
+Decisão completa, metodologia anti-*overfitting* e limites conhecidos em [`pesquisa/experimentos/modelos/barreira_hate_speech.md`](pesquisa/experimentos/modelos/barreira_hate_speech.md).
 
 ### Validation Determinística da Grade (Agenda e Integridade Circadiana)
 
@@ -157,7 +179,7 @@ A validação de grade em `api/app/modules/agentes/validation.py` opera de forma
 - **Fluxo de alteração de horários:** o Validation nunca edita a grade diretamente — ao reprovar, devolve o `bloco_id`, `dia`, `regra` e `mensagem` para o Maestro encaminhar ao **Analysis** realocar apenas os blocos violados. Os blocos só são gravados no Google Agenda (`ProvedorAgenda.gravar_blocos`) quando o resultado é `APROVADO`.
 - **Testes e demonstração (sem LLM e sem Ollama, a partir de `api/`):**
   - Testes unitários com fixtures (`api/tests/fixtures/`) e garantia testada de zero chamadas a LLM: `python -m pytest tests/test_validation.py -v`
-  - Demonstração dos 5 cenários automáticos: `python demo_validation.py`
+  - Demonstração dos 7 cenários automáticos: `python demo_validation.py`
   - Modo interativo para testar horários e cargas no terminal: `python demo_validation.py -i`
 
 #### Regra `SOBRECARGA` e Corte Automático pelo Check-in
@@ -220,6 +242,7 @@ DEBUG=true
 CORS_ORIGINS=["http://localhost:3000"]
 OLLAMA_GUARDRAILS_MODEL=qwen3:4b-q8_0
 OLLAMA_GUARDRAILS_FALLBACK_MODEL=phi4-mini
+OLLAMA_MODERACAO_MODEL=qwen3:4b-q8_0
 ```
 
 ### 3. Gerar o índice vetorial (ChromaDB)
@@ -235,18 +258,22 @@ cd api && pip install -r requirements.txt && uvicorn app.main:app --reload
 # Frontend (http://localhost:3000)
 cd web && npm install && npm run dev
 
-# Demonstração interativa no terminal (a partir de api/)
+# Demonstrações interativas no terminal (a partir de api/)
 python demo.py -i
+python demo_validation.py -i
 
 # Os dois pipelines em containers separados (clássico :8001 | multiagente :8002)
 docker compose up -d --build
 ```
 
-### 5. Rodar testes e reproduzir o benchmark dos Guardrails
+### 5. Rodar testes e reproduzir os benchmarks dos Guardrails
 
 ```bash
 # Testes unitários (sem LLM, mesmos do CI — a partir de api/)
 python -m pytest -q
+
+# Validação contextual ao vivo da barreira 4.5 (holdout independente — a partir de api/)
+python3 tests/test_hate_speech_validacao.py --live --conjunto holdout
 
 # Reproduzir o experimento de modelos locais dos Guardrails
 python3 pesquisa/experimentos/modelos/harness_guardrails.py --suite completa
@@ -260,3 +287,4 @@ python3 pesquisa/experimentos/modelos/harness_guardrails.py --suite completa
 - **Entrega 2 (RAG):** [`pesquisa/Entrega2.md`](pesquisa/Entrega2.md)
 - **Entrega 4 (Multiagente):** [`pesquisa/Entrega4.md`](pesquisa/Entrega4.md)
 - **Experimento de Modelos nos Guardrails:** [`pesquisa/experimentos/modelos/guardrails.md`](pesquisa/experimentos/modelos/guardrails.md)
+- **Barreira `[4.5]` `HATE_SPEECH` (Decisão e Validação Independente):** [`pesquisa/experimentos/modelos/barreira_hate_speech.md`](pesquisa/experimentos/modelos/barreira_hate_speech.md)

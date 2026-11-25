@@ -1,0 +1,5 @@
+{
+  "permitido": false,
+  "categoria": "HATE_SPEECH",
+  "resposta_bloqueio": "Não posso processar solicitações que contenham conteúdo ofensivo, discriminatório ou discurso de ódio."
+}

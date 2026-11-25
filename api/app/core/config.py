@@ -26,10 +26,11 @@ class Settings(BaseSettings):
     # Triagem (diagnóstico em JSON). Por padrão, o mesmo modelo do gerador
     ollama_triagem_model: str = "qwen3:8b"
     # Guardrails (barreiras 4.4 a 4.7: injection, ódio, saúde e domínio).
-    # Escolha justificada em pesquisa/experimentos/modelos/guardrails.md
+    # Escolha justificada em pesquisa/experimentos/modelos/guardrails.md e barreira_hate_speech.md
     ollama_guardrails_model: str = "qwen3:4b-q8_0"
     ollama_guardrails_fallback_model: str = "phi4-mini"
-    ollama_timeout_guardrails: float = 15.0
+    ollama_moderacao_model: str = "qwen3:4b-q8_0"
+    ollama_timeout_guardrails: float = 30.0
     # Timeouts (s) das chamadas ao Ollama: sem eles, uma geração travada prende a thread para sempre
     ollama_timeout_llm: float = 300
     ollama_timeout_embedding: float = 30

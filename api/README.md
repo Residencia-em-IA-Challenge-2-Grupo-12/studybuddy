@@ -55,15 +55,17 @@ Camadas determinísticas por regra, sem LLM:
 | `CONFLITO_AGENDA` | `agentes/validation.py` | Garante que nenhum bloco da `PropostaGrade` se sobreponha a compromissos ocupados (`ContextoEstudante.ocupados` e, opcionalmente, `ProvedorAgenda` do Google Agenda) |
 | `INTEGRIDADE_CIRCADIANA` | `agentes/validation.py` | Garante que nenhum bloco viole janelas de sono ou refeição e nenhum bloco de alta carga caia na higiene do sono (`VALIDATION_MARGEM_SONO_MIN`, padrão 60 min) ou em vales circadianos |
 | `SOBRECARGA` | `agentes/validation.py` | Limita a carga diária (`VALIDATION_CARGA_MAX_DIARIA_MIN`, 240 min) e o bloco contínuo máximo (`VALIDATION_BLOCO_CONTINUO_MAX_MIN`, 90 min), reduzindo os limiares em até `VALIDATION_PERCENTUAL_CORTE` (30%) quando o check-in indica estresse alto ou privação de sono |
+| `HATE_SPEECH` (barreira 4.5) | `agentes/guardrails.py` | Classificador local (`OLLAMA_MODERACAO_MODEL=qwen3:4b-q8_0`, esquema JSON compacto) que bloqueia racismo, xenofobia, misoginia, homofobia e assédio (diretos, disfarçados e sutis em PT-BR) com *hard stop* e mensagem fixa, preservando estudo legítimo de temas sensíveis |
+| Gatekeeper completo (4.4–4.7) | `agentes/guardrails.py` | `AgenteGuardrails` / `verificar_entrada()` (`OLLAMA_GUARDRAILS_MODEL=qwen3:4b-q8_0`) que aplica *hard stop* em `PROMPT_INJECTION`, `HATE_SPEECH`, `MEDICAL_ADVICE` e `OUT_OF_SCOPE` (qualquer assunto fora do escopo educativo do StudyBuddy) |
 | Erros do Ollama | `assistente/router.py` | Fora do ar ou modelo ausente: 503; lento demais (`OLLAMA_TIMEOUT_*`): 504 |
 
 As regras do prompt (não inventar, recusar com a frase fixa, citar a fonte) continuam valendo, mas são só instrução: os guardrails acima não dependem de o modelo obedecer.
 
 ## Testes e demonstração
 ```
-python -m pytest -q           # agentes, contratos, validation e guardrails, sem LLM (rodam no CI)
-python demo_validation.py     # demonstração determinística do Validation (5 cenários, sem LLM)
-python demo_validation.py -i  # modo interativo do Validation para testar horários
-python demo.py                # os agentes colaborando, nos dois pipelines
-python demo.py -i             # interativo: digite perguntas até "sair" (:ambos compara os pipelines)
+python -m pytest -q             # agentes, contratos, validation e guardrails, sem LLM (rodam no CI)
+python demo_validation.py       # demonstração determinística do Validation (7 cenários, sem LLM)
+python demo_validation.py -i    # modo interativo do Validation para testar horários
+python demo.py                  # os agentes colaborando, nos dois pipelines
+python demo.py -i               # interativo: digite perguntas até "sair" (:ambos compara os pipelines)
 ```

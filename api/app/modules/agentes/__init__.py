@@ -6,6 +6,6 @@
                      Triagem e escreve a resposta no formato decidido, dentro das restrições, citando a fonte
 - orquestrador.py -> chama os dois em ordem e aplica o atalho do porteiro
 - contratos.py    -> contratos JSON (Pydantic) trocados entre os agentes e o provedor de agenda
-- guardrails.py   -> contrato e parser fail-closed dos guardrails via LLM (barreiras 4.4 a 4.7)
-- validation.py   -> validação determinística (sem LLM) da grade: CONFLITO_AGENDA e INTEGRIDADE_CIRCADIANA
+- guardrails.py   -> contrato, parser fail-closed e barreira 4.5 (HATE_SPEECH) via modelo local (Llama Guard 3)
+- validation.py   -> validação determinística (sem LLM) da grade: CONFLITO_AGENDA, INTEGRIDADE_CIRCADIANA e SOBRECARGA
 """
