@@ -21,3 +21,8 @@ chroma_db/
 
 # Progresso parcial do juiz (apagado ao terminar cada modo)
 *.parcial.json
+
+# Skills instaladas localmente (npx skills add)
+.agents/
+.claude/skills/
+skills-lock.json

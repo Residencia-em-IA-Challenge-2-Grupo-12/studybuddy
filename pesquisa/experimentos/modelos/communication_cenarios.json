@@ -1,0 +1,62 @@
+[
+  {
+    "id": "fadiga_extrema",
+    "descricao": "Dormiu mal, estresse alto e fadiga máxima na véspera da semana de provas.",
+    "checkin": {"humor": 2, "estresse": 4, "sono": 2, "fadiga": 5},
+    "tom_esperado": "acolhedor"
+  },
+  {
+    "id": "recuperado",
+    "descricao": "Descansou no fim de semana e chega disposto a acelerar.",
+    "checkin": {"humor": 5, "estresse": 2, "sono": 5, "fadiga": 1},
+    "tom_esperado": "desafiador"
+  },
+  {
+    "id": "neutro",
+    "descricao": "Dia comum, sem picos de humor, sono, estresse ou fadiga.",
+    "checkin": {"humor": 3, "estresse": 3, "sono": 3, "fadiga": 3},
+    "tom_esperado": "equilibrado"
+  },
+  {
+    "id": "estresse_alto",
+    "descricao": "Semana de entregas no trabalho e prova na sexta.",
+    "checkin": {"humor": 3, "estresse": 5, "sono": 3, "fadiga": 2},
+    "tom_esperado": "acolhedor"
+  },
+  {
+    "id": "humor_baixo",
+    "descricao": "Desanimado com o desempenho do último simulado.",
+    "checkin": {"humor": 2, "estresse": 2, "sono": 3, "fadiga": 2},
+    "tom_esperado": "acolhedor"
+  },
+  {
+    "id": "sono_curto",
+    "descricao": "Dormiu pouco, mas diz que está bem para estudar.",
+    "checkin": {"humor": 4, "estresse": 2, "sono": 1, "fadiga": 2},
+    "tom_esperado": "equilibrado"
+  },
+  {
+    "id": "energia_moderada",
+    "descricao": "Bem disposto, mas com alguma fadiga acumulada da semana.",
+    "checkin": {"humor": 4, "estresse": 2, "sono": 4, "fadiga": 3},
+    "tom_esperado": "equilibrado"
+  },
+  {
+    "id": "fim_de_semana",
+    "descricao": "Sábado descansado, pronto para adiantar conteúdo.",
+    "checkin": {"humor": 5, "estresse": 1, "sono": 4, "fadiga": 2},
+    "tom_esperado": "desafiador"
+  },
+  {
+    "id": "quase_limite",
+    "descricao": "No limite exato da regra de alta energia.",
+    "checkin": {"humor": 4, "estresse": 2, "sono": 4, "fadiga": 2},
+    "tom_esperado": "desafiador"
+  },
+  {
+    "id": "misto",
+    "descricao": "Cansado e estressado, mas com humor razoável.",
+    "checkin": {"humor": 3, "estresse": 4, "sono": 2, "fadiga": 3},
+    "tom_esperado": "acolhedor"
+  }
+]
