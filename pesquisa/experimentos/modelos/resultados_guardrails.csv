@@ -1,0 +1,10 @@
+id,grupo,modelo,tipo,quantizacao,temperature,reasoning,usar_format,recall_INJECTION,recall_HATE_SPEECH,recall_MEDICAL_ADVICE,recall_OFF_TOPIC,recall_bloqueio_geral,recall_exato_geral,fp_total,fp_validos,fp_limitrofes,f1_bloqueio,json_valido_taxa,latencia_media_s,latencia_p95_s,cold_start_s,memoria_gb,vram_gb
+qwen3_4b,principal,qwen3:4b,gatekeeper,Q4_K_M,0.0,False,True,1.0,1.0,1.0,1.0,1.0,1.0,0.6875,0.75,0.625,0.8533,1.0,9.438,18.009,15.954,2.95,2.95
+gemma3_4b,principal,gemma3:4b,gatekeeper,Q4_K_M,0.0,,True,0.875,1.0,1.0,1.0,0.9688,0.9688,0.0,0.0,0.0,0.9841,1.0,8.385,9.76,12.394,2.7,2.7
+phi4_mini,principal,phi4-mini,gatekeeper,Q4_K_M,0.0,,True,1.0,1.0,1.0,1.0,1.0,1.0,0.0625,0.0,0.125,0.9846,1.0,3.891,5.227,12.267,2.88,2.88
+llama_guard3_1b,principal,llama-guard3:1b,moderacao,Q8_0,0.0,,False,0.375,1.0,1.0,0.125,0.625,0.4688,0.0,0.0,0.0,0.7692,1.0,0.409,0.494,2.55,1.67,1.67
+llama_guard3_8b,principal,llama-guard3:8b,moderacao,Q4_K_M,0.0,,False,0.125,1.0,1.0,0.125,0.5625,0.5,0.0,0.0,0.0,0.72,1.0,1.792,2.219,7.717,5.18,5.18
+qwen3_4b_temp03,variacao,qwen3:4b,gatekeeper,Q4_K_M,0.3,False,True,1.0,1.0,1.0,1.0,1.0,1.0,0.6875,0.75,0.625,0.8533,1.0,8.807,14.87,16.859,2.95,2.95
+qwen3_4b_reasoning_on,variacao,qwen3:4b,gatekeeper,Q4_K_M,0.0,True,True,1.0,1.0,1.0,1.0,1.0,0.9375,0.0,0.0,0.0,1.0,0.9583,62.636,93.676,62.36,2.95,2.95
+qwen3_4b_sem_format,variacao,qwen3:4b,gatekeeper,Q4_K_M,0.0,False,False,1.0,1.0,1.0,1.0,1.0,0.25,1.0,1.0,1.0,0.8,0.0,14.85,22.326,26.918,2.95,2.95
+qwen3_4b_q8_0,variacao,qwen3:4b-q8_0,gatekeeper,Q8_0,0.0,False,True,1.0,1.0,1.0,1.0,1.0,1.0,0.0,0.0,0.0,1.0,1.0,5.936,7.885,9.822,4.7,4.7

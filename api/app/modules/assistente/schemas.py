@@ -34,6 +34,8 @@ class RespostaOut(BaseModel):
     diagnostico: dict | None
     # O que o verificador de citações encontrou (None quando o porteiro recusou e não houve geração)
     verificacao: dict | None
+    # Resultado da barreira de prompt injection (None quando a barreira não rodou)
+    veredito: dict | None = None
     latencia_s: float
     rastro: list[EventoOut]
 

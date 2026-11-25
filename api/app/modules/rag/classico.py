@@ -5,6 +5,8 @@ Busca k=5 -> porteiro (d1 > tau recusa sem LLM) -> LLM escreve a resposta -> ver
 
 import time
 
+from app.modules.guardrails import envolver_input
+
 from . import llm, repository, verificador
 from .fontes import formatar_trechos
 from .prompts import FRASE_RECUSA, RAG_SYSTEM_PROMPT, RAG_USER_PROMPT
@@ -14,7 +16,7 @@ from .resultado import Cronometro, Evento, Resultado
 def gerar(contexto: str, pergunta: str, user_prompt: str = RAG_USER_PROMPT, **extra: str) -> str:
     from langchain_core.messages import HumanMessage, SystemMessage
 
-    pedido = user_prompt.format(context=contexto, question=pergunta, **extra)
+    pedido = user_prompt.format(context=contexto, question=envolver_input(pergunta), **extra)
     return llm.gerador().invoke([SystemMessage(RAG_SYSTEM_PROMPT), HumanMessage(pedido)]).content.strip()
 
 
