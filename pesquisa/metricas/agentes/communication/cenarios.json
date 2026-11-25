@@ -1,0 +1,177 @@
+[
+  {
+    "id": "fadiga_extrema",
+    "descricao": "Dormiu mal, estresse alto e fadiga máxima na véspera da semana de provas.",
+    "checkin": {"humor": 2, "estresse": 4, "sono": 2, "fadiga": 5},
+    "tom_esperado": "acolhedor",
+    "expectativa": "Reconhecer o cansaço, propor metas pequenas e evitar cobrança."
+  },
+  {
+    "id": "estresse_alto",
+    "descricao": "Semana de entregas no trabalho e prova na sexta.",
+    "checkin": {"humor": 3, "estresse": 5, "sono": 3, "fadiga": 2},
+    "tom_esperado": "acolhedor",
+    "expectativa": "Acalmar, reduzir a sensação de sobrecarga e destacar o que já é possível fazer."
+  },
+  {
+    "id": "humor_baixo",
+    "descricao": "Desanimado com o desempenho do último simulado.",
+    "checkin": {"humor": 2, "estresse": 2, "sono": 3, "fadiga": 2},
+    "tom_esperado": "acolhedor",
+    "expectativa": "Encorajar sem minimizar a frustração e valorizar pequenas conquistas."
+  },
+  {
+    "id": "fadiga_limite",
+    "descricao": "Cansaço exatamente no limite da regra de acolhimento, com humor e sono medianos.",
+    "checkin": {"humor": 3, "estresse": 3, "sono": 3, "fadiga": 4},
+    "tom_esperado": "acolhedor",
+    "expectativa": "Ajustar o ritmo ao cansaço, sem transformar o dia em cobrança."
+  },
+  {
+    "id": "estresse_limite",
+    "descricao": "Estresse no limite da regra, com os demais indicadores neutros.",
+    "checkin": {"humor": 3, "estresse": 4, "sono": 3, "fadiga": 3},
+    "tom_esperado": "acolhedor",
+    "expectativa": "Transmitir calma e organização diante da pressão."
+  },
+  {
+    "id": "humor_limite_alta_energia",
+    "descricao": "Dormiu bem e está sem fadiga, mas o humor está no limite baixo: o acolhimento tem precedência.",
+    "checkin": {"humor": 2, "estresse": 1, "sono": 5, "fadiga": 1},
+    "tom_esperado": "acolhedor",
+    "expectativa": "Não confundir energia física com disposição emocional; acolher primeiro."
+  },
+  {
+    "id": "misto",
+    "descricao": "Cansado e estressado, mas com humor razoável.",
+    "checkin": {"humor": 3, "estresse": 4, "sono": 2, "fadiga": 3},
+    "tom_esperado": "acolhedor",
+    "expectativa": "Priorizar o bem-estar e propor um plano realista para o dia."
+  },
+  {
+    "id": "recuperado",
+    "descricao": "Descansou no fim de semana e chega disposto a acelerar.",
+    "checkin": {"humor": 5, "estresse": 2, "sono": 5, "fadiga": 1},
+    "tom_esperado": "desafiador",
+    "expectativa": "Propor um desafio ambicioso e reconhecer a energia disponível."
+  },
+  {
+    "id": "fim_de_semana",
+    "descricao": "Sábado descansado, pronto para adiantar conteúdo.",
+    "checkin": {"humor": 5, "estresse": 1, "sono": 4, "fadiga": 2},
+    "tom_esperado": "desafiador",
+    "expectativa": "Convidar a aproveitar o embalo para adiantar uma matéria difícil."
+  },
+  {
+    "id": "quase_limite",
+    "descricao": "Todos os indicadores exatamente no limite da regra de alta energia.",
+    "checkin": {"humor": 4, "estresse": 2, "sono": 4, "fadiga": 2},
+    "tom_esperado": "desafiador",
+    "expectativa": "Reconhecer que a energia é suficiente e propor uma meta mais exigente."
+  },
+  {
+    "id": "energia_moderada",
+    "descricao": "Bem disposto, mas com alguma fadiga acumulada da semana.",
+    "checkin": {"humor": 4, "estresse": 2, "sono": 4, "fadiga": 3},
+    "tom_esperado": "equilibrado",
+    "expectativa": "Manter um tom estável, sem pressionar nem superproteger."
+  },
+  {
+    "id": "sono_curto",
+    "descricao": "Dormiu pouco, mas diz que está bem para estudar.",
+    "checkin": {"humor": 4, "estresse": 2, "sono": 1, "fadiga": 2},
+    "tom_esperado": "equilibrado",
+    "expectativa": "Seguir o plano sem ignorar o sono curto; não é caso de desafio nem de acolhimento."
+  },
+  {
+    "id": "neutro",
+    "descricao": "Dia comum, sem picos de humor, sono, estresse ou fadiga.",
+    "checkin": {"humor": 3, "estresse": 3, "sono": 3, "fadiga": 3},
+    "tom_esperado": "equilibrado",
+    "expectativa": "Mensagem objetiva e estável, focada no plano do dia."
+  },
+  {
+    "id": "um_pouco_cansado",
+    "descricao": "Humor bom e pouco estresse, com sono apenas mediano.",
+    "checkin": {"humor": 4, "estresse": 2, "sono": 3, "fadiga": 2},
+    "tom_esperado": "equilibrado",
+    "expectativa": "Tom neutro; o sono mediano impede o tom desafiador."
+  },
+  {
+    "id": "stress_leve",
+    "descricao": "Dormiu muito bem e está sem fadiga, mas com estresse acima do limite do desafio.",
+    "checkin": {"humor": 4, "estresse": 3, "sono": 5, "fadiga": 1},
+    "tom_esperado": "equilibrado",
+    "expectativa": "Reconhecer a energia sem ignorar um estresse que já pede atenção."
+  },
+  {
+    "id": "humor_bom_cansado",
+    "descricao": "Humor alto e sono ótimo, mas com fadiga acima do limite do desafio.",
+    "checkin": {"humor": 4, "estresse": 2, "sono": 5, "fadiga": 3},
+    "tom_esperado": "equilibrado",
+    "expectativa": "Não transformar bom humor em cobrança quando há fadiga acumulada."
+  },
+  {
+    "id": "desafiador_limite",
+    "descricao": "Alta energia em todos os indicadores, no limite exato da regra.",
+    "checkin": {"humor": 5, "estresse": 2, "sono": 5, "fadiga": 1},
+    "tom_esperado": "desafiador",
+    "expectativa": "Propor uma meta desafiadora, coerente com a energia relatada."
+  },
+  {
+    "id": "sono_ruim_humor_bom",
+    "descricao": "Dormiu muito pouco, mas acordou de bom humor e sem fadiga.",
+    "checkin": {"humor": 4, "estresse": 2, "sono": 1, "fadiga": 1},
+    "tom_esperado": "equilibrado",
+    "expectativa": "Manter o tom neutro e não tratar o sono curto como sinal de alta energia."
+  },
+  {
+    "id": "tudo_no_limite_ruim",
+    "descricao": "Humor mínimo, estresse e fadiga máximos, sono mínimo.",
+    "checkin": {"humor": 1, "estresse": 5, "sono": 1, "fadiga": 5},
+    "tom_esperado": "acolhedor",
+    "expectativa": "Máximo acolhimento: validar o estado, reduzir metas e sugerir descanso."
+  },
+  {
+    "id": "energia_maxima",
+    "descricao": "Todos os indicadores no melhor valor possível.",
+    "checkin": {"humor": 5, "estresse": 1, "sono": 5, "fadiga": 1},
+    "tom_esperado": "desafiador",
+    "expectativa": "Aproveitar o pico para uma tarefa difícil, com meta clara."
+  },
+  {
+    "id": "humor_neutro",
+    "descricao": "Sono ótimo e pouco estresse, mas humor apenas neutro.",
+    "checkin": {"humor": 3, "estresse": 2, "sono": 4, "fadiga": 2},
+    "tom_esperado": "equilibrado",
+    "expectativa": "Tom estável; o humor neutro não sustenta um desafio."
+  },
+  {
+    "id": "prova_amanha",
+    "descricao": "Prova amanhã, dormiu mal e está muito estressado.",
+    "checkin": {"humor": 2, "estresse": 5, "sono": 2, "fadiga": 4},
+    "tom_esperado": "acolhedor",
+    "expectativa": "Acalmar, priorizar o essencial e evitar sobrecarga na véspera."
+  },
+  {
+    "id": "pos_descanso",
+    "descricao": "Voltou de um período de descanso, com boa energia e estresse baixo.",
+    "checkin": {"humor": 5, "estresse": 2, "sono": 4, "fadiga": 1},
+    "tom_esperado": "desafiador",
+    "expectativa": "Retomar o ritmo com uma meta ambiciosa, sem exagerar no volume."
+  },
+  {
+    "id": "rotina_estavel",
+    "descricao": "Rotina sem alterações, indicadores todos medianos.",
+    "checkin": {"humor": 3, "estresse": 2, "sono": 3, "fadiga": 2},
+    "tom_esperado": "equilibrado",
+    "expectativa": "Manter a constância e reforçar o valor da rotina."
+  },
+  {
+    "id": "exausto_fim_de_semana",
+    "descricao": "Chegou ao fim de semana exausto e com humor baixo.",
+    "checkin": {"humor": 2, "estresse": 3, "sono": 2, "fadiga": 5},
+    "tom_esperado": "acolhedor",
+    "expectativa": "Priorizar recuperação e propor blocos curtos, se houver estudo."
+  }
+]

@@ -14,6 +14,7 @@ O RAG medido é o do notebook `rag_pipeline_semana2.ipynb`: o `recuperacao/noteb
 | `recuperacao/` | Hit Rate@K, MRR, Precision@K, Recall@K | não |
 | `geracao/` | Citação válida (regex), fidelidade, completude e fidelidade à base + relevância (LLM-juiz) | parcial |
 | `comparacao/` | Os 4 modos de uso (só LLM, só busca, RAG + LLM, RAG + LLM otimizado) avaliados com as mesmas métricas | parcial |
+| `agentes/` | Métricas por agente isolado, a partir das fixtures da 0.2 (hoje: Communication) | parcial |
 | `relatorios/` | Saídas das execuções (CSV/JSON), para comparar configurações | não |
 
 ## Ordem sugerida
@@ -31,6 +32,8 @@ O RAG medido é o do notebook `rag_pipeline_semana2.ipynb`: o `recuperacao/noteb
   Rodar: `python -m metricas.geracao.runner --nome qwen3_bge`. Usa a chain do notebook, que desde a Semana 3 tem `TOP_K=5` e o porteiro de distância (`TOP_K=3 PORTEIRO_TAU=desligado` reproduz as rodadas antigas; ver `relatorio/final/04-implementacao.md`).
 - `comparacao/`: `modos.py` gera as respostas de cada modo (`calibrar`, `llm_puro`, `so_busca`, `rag_llm`, `rag_otimizado`, `rag_llm_k3`); `avaliar.py` avalia todos e monta `relatorios/comparacao.md`.
   Rodar: `python -m metricas.comparacao.modos <modo>` e depois `python -m metricas.comparacao.avaliar <modos...>`.
+- `agentes/communication/`: métricas do Communication Agent sobre as fixtures da 0.2. `METRICAS.md` define cada métrica (fórmula, meta e fonte); `cenarios.json` tem 25 check-ins rotulados; `runner.py` gera e avalia; `metrics.py` é stdlib puro; `juiz_tom.py` cobre tom (rubrica) e faithfulness.
+  Rodar: `python -m metricas.agentes.communication.runner --nome qwen3_8b` (ou `--so-avaliar` depois de gerar).
 
 ## Notas sobre o gabarito
 
