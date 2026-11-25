@@ -25,6 +25,8 @@ class Settings(BaseSettings):
     ollama_llm_model: str = "qwen3:8b"
     # Triagem (diagnóstico em JSON). Por padrão, o mesmo modelo do gerador
     ollama_triagem_model: str = "qwen3:8b"
+    # Communication (abertura da mensagem). Separado para trocar o modelo sem tocar no RAG
+    ollama_communication_model: str = "qwen3:8b"
     # Guardrails (barreiras 4.4 a 4.7: injection, ódio, saúde e domínio).
     # Escolha justificada em pesquisa/experimentos/modelos/guardrails.md
     ollama_guardrails_model: str = "qwen3:4b-q8_0"

@@ -1,0 +1,12 @@
+{
+  "fadiga_extrema-1": "qwen3:4b",
+  "recuperado-1": "qwen3:4b",
+  "neutro-1": "qwen3:4b",
+  "estresse_alto-1": "qwen3:4b",
+  "humor_baixo-1": "qwen3:4b",
+  "sono_curto-1": "qwen3:4b",
+  "energia_moderada-1": "qwen3:4b",
+  "fim_de_semana-1": "qwen3:4b",
+  "quase_limite-1": "qwen3:4b",
+  "misto-1": "qwen3:4b"
+}

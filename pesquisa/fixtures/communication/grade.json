@@ -1,0 +1,25 @@
+{
+  "blocos": [
+    {
+      "dia": "segunda",
+      "inicio": "19:00",
+      "fim": "20:00",
+      "disciplina": "Matemática",
+      "material": "https://example.org/materiais/matematica"
+    },
+    {
+      "dia": "quarta",
+      "inicio": "20:00",
+      "fim": "21:00",
+      "disciplina": "Biologia",
+      "material": null
+    },
+    {
+      "dia": "sexta",
+      "inicio": "19:30",
+      "fim": "21:00",
+      "disciplina": "História",
+      "material": "https://example.org/materiais/historia"
+    }
+  ]
+}

@@ -15,6 +15,15 @@ def gerador():
 
 
 @lru_cache
+def communication():
+    """Modelo que escreve a abertura do Communication, configurável em OLLAMA_COMMUNICATION_MODEL."""
+    from langchain_ollama import ChatOllama
+
+    return ChatOllama(model=settings.ollama_communication_model, temperature=0, reasoning=False,
+                      base_url=settings.ollama_base_url, client_kwargs={"timeout": settings.ollama_timeout_llm})
+
+
+@lru_cache
 def triagem():
     """Modelo da Triagem, com saída JSON de esquema fixo (structured output do Ollama)."""
     from langchain_ollama import ChatOllama

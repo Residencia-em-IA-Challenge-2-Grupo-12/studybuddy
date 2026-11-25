@@ -1,0 +1,20 @@
+{
+  "fadiga": {
+    "humor": 2,
+    "estresse": 4,
+    "sono": 2,
+    "fadiga": 5
+  },
+  "energia": {
+    "humor": 5,
+    "estresse": 2,
+    "sono": 5,
+    "fadiga": 1
+  },
+  "equilibrado": {
+    "humor": 3,
+    "estresse": 3,
+    "sono": 3,
+    "fadiga": 3
+  }
+}
