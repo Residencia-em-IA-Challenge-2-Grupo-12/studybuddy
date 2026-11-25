@@ -128,6 +128,25 @@ def reajuste(antes: PropostaGrade, depois: PropostaGrade, violacoes: list[Violac
             "regras": sorted(v.regra for v in violacoes)}
 
 
+# ---------------------------------------------------------------- integração com o Validation ([4.1]-[4.3])
+def ciclo_validation(p: PropostaGrade, ctx: ContextoEstudante, max_iteracoes: int = 3) -> dict:
+    """Roda o Validation real sobre a proposta e reajusta até aprovar (o loop que o Maestro fará na [1.3]).
+    Informativa, sem meta: depende dos limiares do Validation, que não são do Analysis."""
+    from app.modules.agentes.analysis import AgenteAnalysis
+    from app.modules.agentes.validation import validar
+
+    r = validar(p, ctx)
+    regras_iniciais = sorted({v.regra for v in r.violacoes})
+    atual, materiais_antes = p, {b.material_id for b in p.blocos}
+    while r.status == "REPROVADO" and atual.iteracao < max_iteracoes:
+        atual = AgenteAnalysis().reajustar(atual, r.violacoes, ctx)
+        r = validar(atual, ctx)
+    perdidos = sorted(materiais_antes - {b.material_id for b in atual.blocos})
+    return {"validation_inicial": "APROVADO" if not regras_iniciais else ";".join(regras_iniciais),
+            "validation_final": r.status, "reajustes_ate_aprovar": atual.iteracao,
+            "materiais_perdidos": ";".join(perdidos)}
+
+
 # ---------------------------------------------------------------- agregação
 @dataclass(frozen=True)
 class Meta:
@@ -148,6 +167,8 @@ METAS = [
     Meta("pausas_adequadas", "Adequação das pausas", "100%", lambda v: v == 1.0),
     Meta("reajuste", "Sucesso do reajuste", "100%", lambda v: v == 1.0),
     Meta("rotulo", "Acerto da resposta esperada", "100%", lambda v: v == 1.0),
+    Meta("aprovado_direto", "Validation: aprovado sem reajuste (informativa)", "–", lambda v: True),
+    Meta("aprovado_ate_3", "Validation: aprovado em até 3 reajustes (informativa)", "–", lambda v: True),
     Meta("json_valido", "Justificativa: JSON válido", "≥ 95%", lambda v: v >= 0.95),
     Meta("citacao_valida", "Justificativa: citação válida", "≥ 95%", lambda v: v >= 0.95),
     Meta("citacoes_mantidas", "Justificativa: precisão das citações", "≥ 95%", lambda v: v >= 0.95),
@@ -177,6 +198,8 @@ def agregar(linhas: list[dict], llm: list[dict]) -> dict[str, float | None]:
         "pausas_adequadas": _media([l["pausas_adequadas"] for l in plan]),
         "reajuste": (sum(l["resolvidas"] for l in reaj) / total_v) if total_v else None,
         "rotulo": _media([l["rotulo"] for l in linhas]),
+        "aprovado_direto": _media([float(l["validation_inicial"] == "APROVADO") for l in plan]),
+        "aprovado_ate_3": _media([float(l["validation_final"] == "APROVADO") for l in plan]),
         "json_valido": _media([r["json_valido"] for r in llm]),
         "citacao_valida": _media([r["citacao_valida"] for r in llm]),
         "citacoes_mantidas": _media([r["citacoes_mantidas"] for r in llm]),

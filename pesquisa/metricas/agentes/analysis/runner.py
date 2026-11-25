@@ -50,7 +50,8 @@ def avaliar(e: Entrada) -> tuple[dict, dict]:
              "cobertura_prazos": mt.cobertura_prazos(p, e.ctx, e.esperado.get("prazos_a_tempo", [])),
              "ocupacao": round(mt.ocupacao(p, e.ctx), 4), "pico_diario_min": mt.pico_diario(p),
              "pausas_adequadas": mt.pausas_adequadas(p, e.esperado["ritmo"]),
-             "rotulo": ok, "erros": "; ".join(erros), "blocos": len(p.blocos), "fora_da_grade": ";".join(p.fora_da_grade)}
+             "rotulo": ok, "erros": "; ".join(erros), "blocos": len(p.blocos), "fora_da_grade": ";".join(p.fora_da_grade),
+             **mt.ciclo_validation(p, e.ctx)}
     return linha, {"proposta": p.model_dump(mode="json")}
 
 
@@ -119,7 +120,7 @@ def tabela_resumo(agregado: dict) -> str:
     linhas = ["| Métrica | Meta | Resultado | Atingiu? |", "| :-- | :-- | --: | :-: |"]
     for meta in mt.METAS:
         v = agregado.get(meta.chave)
-        atingiu = "–" if v is None else ("sim" if meta.ok(v) else "**não**")
+        atingiu = "–" if v is None or meta.alvo == "–" else ("sim" if meta.ok(v) else "**não**")
         linhas.append(f"| {meta.nome} | {meta.alvo} | {_fmt(meta, v)} | {atingiu} |")
     return "\n".join(linhas)
 
