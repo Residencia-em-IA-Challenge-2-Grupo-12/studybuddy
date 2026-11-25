@@ -55,6 +55,7 @@ Camadas determinísticas por regra, sem LLM:
 | `CONFLITO_AGENDA` | `agentes/validation.py` | Garante que nenhum bloco da `PropostaGrade` se sobreponha a compromissos ocupados (`ContextoEstudante.ocupados` e, opcionalmente, `ProvedorAgenda` do Google Agenda) |
 | `INTEGRIDADE_CIRCADIANA` | `agentes/validation.py` | Garante que nenhum bloco viole janelas de sono ou refeição e nenhum bloco de alta carga caia na higiene do sono (`VALIDATION_MARGEM_SONO_MIN`, padrão 60 min) ou em vales circadianos |
 | `SOBRECARGA` | `agentes/validation.py` | Limita a carga diária (`VALIDATION_CARGA_MAX_DIARIA_MIN`, 240 min) e o bloco contínuo máximo (`VALIDATION_BLOCO_CONTINUO_MAX_MIN`, 90 min), reduzindo os limiares em até `VALIDATION_PERCENTUAL_CORTE` (30%) quando o check-in indica estresse alto ou privação de sono |
+| Limite clínico | `guardrails/clinico.py` | Barreira 3: bloqueia pedidos de remédio, suplemento, diagnóstico, dieta e tratamento com `MEDICAL_ADVICE` e a mensagem fixa do plano; cansaço, sono ruim, ansiedade com a prova e o estudo do tema (ex.: farmacologia) passam |
 | Erros do Ollama | `assistente/router.py` | Fora do ar ou modelo ausente: 503; lento demais (`OLLAMA_TIMEOUT_*`): 504 |
 
 As regras do prompt (não inventar, recusar com a frase fixa, citar a fonte) continuam valendo, mas são só instrução: os guardrails acima não dependem de o modelo obedecer.

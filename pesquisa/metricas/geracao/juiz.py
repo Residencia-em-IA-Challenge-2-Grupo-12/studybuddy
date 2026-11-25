@@ -136,11 +136,11 @@ class Juiz:
         from langchain_ollama import ChatOllama
 
         self.modelo = modelo
-        self._fid = ChatOllama(model=modelo, temperature=0, format=ESQUEMA_FIDELIDADE)
-        self._comp = ChatOllama(model=modelo, temperature=0, format=ESQUEMA_COMPLETUDE)
-        self._rel = ChatOllama(model=modelo, temperature=0, format=ESQUEMA_RELEVANCIA)
+        self._fid = ChatOllama(model=modelo, temperature=0, reasoning=False, format=ESQUEMA_FIDELIDADE)
+        self._comp = ChatOllama(model=modelo, temperature=0, reasoning=False, format=ESQUEMA_COMPLETUDE)
+        self._rel = ChatOllama(model=modelo, temperature=0, reasoning=False, format=ESQUEMA_RELEVANCIA)
         # A base inteira (~5 mil tokens) não cabe na janela padrão do Ollama: amplia só para esta tarefa
-        self._base = ChatOllama(model=modelo, temperature=0, format=ESQUEMA_BASE, num_ctx=8192)
+        self._base = ChatOllama(model=modelo, temperature=0, reasoning=False, format=ESQUEMA_BASE, num_ctx=8192)
 
     def relevancia(self, pergunta: str, resposta: str) -> List[Dict]:
         """Lista de {"afirmacao", "relevante"}. A nota é relevantes / total (calculada no avaliador)."""
