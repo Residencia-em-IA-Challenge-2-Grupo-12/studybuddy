@@ -50,5 +50,5 @@ Nenhum dia que recebe bloco novo passa do limite: o maior dia da proposta origin
 - O LLM só escreve texto. Dia, horário, carga e pausa não mudam, e um campo a mais no JSON (ex.: `"dia"`) é rejeitado.
 - Uma chamada por material. A busca e as técnicas aceitas dependem da carga: alta → active recall, prática intercalada, Feynman; baixa → flashcards, repetição espaçada.
 - O verificador de citações (`rag/verificador.py`) tira `[Fonte: ...]` de artigos que o modelo não recebeu. Se não sobrar nenhuma citação válida, fica a técnica padrão (`tecnicas.py`), o mesmo que acontece se o Ollama falhar ou o JSON vier inválido.
-- Modelo em `OLLAMA_ANALYSIS_MODEL` (padrão `qwen3:8b`), separado do gerador e da Triagem.
+- Modelo em `OLLAMA_ANALYSIS_MODEL` (padrão `llama3.1:8b`; alternativa leve `qwen3.5:4b`), separado do gerador e da Triagem. A escolha está em `pesquisa/experimentos/modelos/analysis_escolha.md`.
 - O Maestro chama só depois que o Validation aprova, para o loop de reajuste não gastar chamadas ao LLM.
