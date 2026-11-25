@@ -6,6 +6,9 @@ um artigo que não recebeu (citação inventada) ou não citar nada. O verificad
   - reconhece citações em outro formato que alguns modelos copiam do cabeçalho do trecho
     ("[Fragmento #1 | Fonte: ../api/data/artigo_03_x.txt]", "[Fragmento #1: ...artigo_03_x.txt]") e as
     reescreve no formato padrão [Fonte: artigo_03_x.txt]; as que já vêm no formato padrão ficam como estão;
+  - resolve citações só pelo número do trecho ("[Fragmento #2]", "[Fonte: Fragmento #2]"): os trechos chegam
+    numerados a partir de 1 (fontes.formatar_trechos), então #2 é o artigo do segundo trecho. Número que não
+    existe nos trechos conta como citação inventada e sai;
   - quando não sobra nenhuma citação válida, acrescenta uma linha com os artigos consultados, para o
     estudante ainda poder conferir (sem o formato [Fonte: ...]: não finge que o modelo citou);
   - não mexe em recusas.
@@ -22,9 +25,10 @@ from .fontes import nome_fonte
 from .prompts import FRASE_RECUSA
 
 # Qualquer colchete com "Fonte:" ou "Fragmento #N:" dentro. Grupo 1: espaço antes; grupo 2: o conteúdo.
-_CITACAO = re.compile(r"(\s*)\[([^\[\]]*?(?:Fonte\s*:|Fragmento\s*#\s*\d+\s*:)[^\[\]]*)\]", re.IGNORECASE)
+_CITACAO = re.compile(r"(\s*)\[([^\[\]]*?(?:Fonte\s*:|Fragmento\s*#\s*\d+)[^\[\]]*)\]", re.IGNORECASE)
 _PADRAO = re.compile(r"^\s*Fonte\s*:", re.IGNORECASE)
 _ARTIGO = re.compile(r"artigo_(\d{2})")
+_FRAGMENTO = re.compile(r"#\s*(\d+)")
 
 NOTA_SEM_CITACAO = "Trechos consultados (a resposta não citou a fonte): {fontes}."
 
@@ -71,6 +75,7 @@ def verificar(resposta: str, trechos: list[Document]) -> tuple[str, Verificacao]
     if e_recusa(resposta):
         return resposta, Verificacao(recusa=True)
 
+    ordem = [nome_fonte(d.metadata.get("source", "")) for d in trechos]  # Fragmento #1 = ordem[0]
     fontes = []
     for d in trechos:
         nome = nome_fonte(d.metadata.get("source", ""))
@@ -83,7 +88,22 @@ def verificar(resposta: str, trechos: list[Document]) -> tuple[str, Verificacao]
 
     def conferir(m: re.Match) -> str:
         numeros = _ARTIGO.findall(m.group(2))
-        if not numeros:  # "[Fonte: Fragmento #2]", título solto: não rastreável, mas não é um artigo inventado
+        if not numeros and "fragmento" in m.group(2).lower():  # "[Fragmento #2]": resolve pelo número do trecho
+            frags = [int(n) for n in _FRAGMENTO.findall(m.group(2))]
+            fora = [f"fragmento_{n}" for n in frags if not 1 <= n <= len(ordem)]
+            numeros = [a.group(1) for n in frags if 1 <= n <= len(ordem) and (a := _ARTIGO.search(ordem[n - 1]))]
+            if not numeros:
+                v.fora_do_contexto.extend(f for f in fora if f not in v.fora_do_contexto)
+                return "" if fora else m.group(0)
+            if fora:
+                v.fora_do_contexto.extend(f for f in fora if f not in v.fora_do_contexto)
+            validos = list(dict.fromkeys(numeros))
+            for n in validos:
+                if f"artigo_{n}" not in v.citadas:
+                    v.citadas.append(f"artigo_{n}")
+            v.normalizadas += 1
+            return f"{m.group(1)}[Fonte: {', '.join(dict.fromkeys(por_numero[n] for n in validos))}]"
+        if not numeros:  # título solto ou "[Fonte: livro X]": não rastreável, mas não é um artigo inventado
             return m.group(0)
         validos = [n for n in numeros if n in recebidos]
         # Com pelo menos um artigo recebido, a citação fica (o estudante consegue conferir); sem nenhum, sai.
