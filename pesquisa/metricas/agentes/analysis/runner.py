@@ -51,7 +51,7 @@ def avaliar(e: Entrada) -> tuple[dict, dict]:
              "ocupacao": round(mt.ocupacao(p, e.ctx), 4), "pico_diario_min": mt.pico_diario(p),
              "pausas_adequadas": mt.pausas_adequadas(p, e.esperado["ritmo"]),
              "rotulo": ok, "erros": "; ".join(erros), "blocos": len(p.blocos), "fora_da_grade": ";".join(p.fora_da_grade),
-             **mt.ciclo_validation(p, e.ctx)}
+             **mt.ciclo_validation(p, e.ctx, e.esperado.get("prazos_a_tempo", []))}
     return linha, {"proposta": p.model_dump(mode="json")}
 
 
