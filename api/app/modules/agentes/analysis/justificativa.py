@@ -85,6 +85,7 @@ class Relato:
     citadas: list[str] = field(default_factory=list)
     removidas: list[str] = field(default_factory=list)
     segundos: float = 0.0
+    bruto: str = ""                     # resposta crua do LLM, para auditar por que caiu na técnica padrão
 
     def para_dict(self) -> dict:
         return asdict(self)
@@ -150,7 +151,8 @@ def justificar_material(
             relato.motivo_padrao = "nenhum trecho da base perto o bastante"
             return blocos, relato
         prompt = montar_prompt(m, blocos, ctx, trechos, estado)
-        saida = JustificativaLLM.model_validate_json(chat.invoke(prompt).content)
+        relato.bruto = chat.invoke(prompt).content
+        saida = JustificativaLLM.model_validate_json(relato.bruto)
     except ValidationError as exc:
         relato.motivo_padrao = f"JSON fora do esquema: {exc.error_count()} erro(s)"
         logger.warning("Analysis: justificativa de %s fora do esquema; ficou a técnica padrão", m.id)

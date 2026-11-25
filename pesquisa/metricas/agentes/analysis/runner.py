@@ -84,7 +84,7 @@ def justificar(e: Entrada, proposta_json: dict, modelo: str, juiz, cache: dict) 
                "citacoes_mantidas": (len(rel.citadas) / total) if total and not falhou else None,
                "tecnica_adequada": float(rel.usou_llm and tecnica_adequada(bloco.tecnica, m.carga)),
                "tecnica": bloco.tecnica, "justificativa": bloco.justificativa, "fontes": bloco.fontes,
-               "removidas": rel.removidas}
+               "removidas": rel.removidas, "bruto": rel.bruto}
         if juiz is not None and rel.usou_llm:
             blocos = [b for b in proposta.blocos if b.material_id == m.id]
             trechos = buscar(j.consulta(m))
@@ -156,19 +156,21 @@ def main() -> None:
 
     agregado = mt.agregar(linhas, llm_regs)
     RELATORIOS.mkdir(parents=True, exist_ok=True)
-    base = RELATORIOS / f"analysis_{nome}"
-    _csv(base.with_suffix(".csv"), linhas)
-    _csv(base.parent / f"{base.name}_llm.csv", llm_regs, ignorar=("afirmacoes",))
-    base.with_suffix(".json").write_text(json.dumps(
+    def saida(sufixo: str) -> Path:  # sem with_suffix: "llama3.1_8b" tem ponto no nome
+        return RELATORIOS / f"analysis_{nome}{sufixo}"
+
+    _csv(saida(".csv"), linhas)
+    _csv(saida("_llm.csv"), llm_regs, ignorar=("afirmacoes", "bruto"))
+    saida(".json").write_text(json.dumps(
         {"llm": args.llm, "juiz": modelo_juiz,
          "agregado": agregado, "cenarios": brutos}, ensure_ascii=False, indent=1, default=str), encoding="utf-8")
     cmd = "python -m metricas.agentes.analysis.runner" + (f" --llm {args.llm}" if args.llm else "") + (" --juiz" if juiz else "")
-    base.with_suffix(".md").write_text(
+    saida(".md").write_text(
         f"# Métricas do Analysis: {nome}\n\nGerado por `{cmd}` (a partir de `pesquisa/`), "
         f"{len(linhas)} cenários de `metricas/agentes/analysis/cenarios.json`"
         + (f", {len(llm_regs)} justificativas do `{args.llm}`" if args.llm else "")
         + (f", juiz `{modelo_juiz}`" if juiz else "") + ".\n\n" + tabela_resumo(agregado) + "\n", encoding="utf-8")
-    print(f"\n{tabela_resumo(agregado)}\n\n{len(linhas)} cenários em {time.perf_counter() - inicio:.0f}s -> {base}.*")
+    print(f"\n{tabela_resumo(agregado)}\n\n{len(linhas)} cenários em {time.perf_counter() - inicio:.0f}s -> {saida('.*')}")
 
 
 if __name__ == "__main__":
