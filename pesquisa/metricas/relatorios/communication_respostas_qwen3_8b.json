@@ -1,0 +1,234 @@
+{
+  "config": {
+    "modelo": "qwen3:8b",
+    "cenarios": 25,
+    "maquina": "Darwin 27.0.0, arm64, 24 GB de RAM, Ollama em http://localhost:11434"
+  },
+  "respostas": [
+    {
+      "cenario": "fadiga_extrema",
+      "tom_esperado": "acolhedor",
+      "tom_gerado": "acolhedor",
+      "latencia_s": 11.335,
+      "abertura": "Olá, tudo bem? Hoje parece que o corpo e a mente estão pedindo um descanso, mas você já deu um passo importante ao se dedicar aos estudos [Fonte: artigo_19_clt.txt]. Lembre-se de que dormir bem é essencial para consolidar o que aprendeu e recarregar as energias [Fonte: artigo_05_sleep.txt]. Que tal começar o dia com uma pequena pausa para descansar e depois retomar com calma?",
+      "abertura_bruta": "Olá, tudo bem? Hoje parece que o corpo e a mente estão pedindo um descanso, mas você já deu um passo importante ao se dedicar aos estudos [Fonte: artigo_19_clt.txt]. Lembre-se de que dormir bem é essencial para consolidar o que aprendeu e recarregar as energias [Fonte: artigo_05_sleep.txt]. Que tal começar o dia com uma pequena pausa para descansar e depois retomar com calma?",
+      "markdown": "Olá, tudo bem? Hoje parece que o corpo e a mente estão pedindo um descanso, mas você já deu um passo importante ao se dedicar aos estudos [Fonte: artigo_19_clt.txt]. Lembre-se de que dormir bem é essencial para consolidar o que aprendeu e recarregar as energias [Fonte: artigo_05_sleep.txt]. Que tal começar o dia com uma pequena pausa para descansar e depois retomar com calma?\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "estresse_alto",
+      "tom_esperado": "acolhedor",
+      "tom_gerado": "acolhedor",
+      "latencia_s": 8.05,
+      "abertura": "Olá, tudo bem? Hoje parece que você está enfrentando um dia um pouco desafiador, mas já está fazendo um esforço incrível para seguir em frente [Fonte: artigo_19_clt.txt]. Lembre-se de que pequenas conquistas são importantes, e mesmo que o sono não tenha sido ideal, dormir de forma consistente ajuda a melhorar a sua capacidade de estudar e se sentir bem [Fonte: artigo_05_sleep.txt]. Que tal começar o dia com um pequeno passo, como revisar um tema que você já estudou?",
+      "abertura_bruta": "Olá, tudo bem? Hoje parece que você está enfrentando um dia um pouco desafiador, mas já está fazendo um esforço incrível para seguir em frente [Fonte: artigo_19_clt.txt]. Lembre-se de que pequenas conquistas são importantes, e mesmo que o sono não tenha sido ideal, dormir de forma consistente ajuda a melhorar a sua capacidade de estudar e se sentir bem [Fonte: artigo_05_sleep.txt]. Que tal começar o dia com um pequeno passo, como revisar um tema que você já estudou?",
+      "markdown": "Olá, tudo bem? Hoje parece que você está enfrentando um dia um pouco desafiador, mas já está fazendo um esforço incrível para seguir em frente [Fonte: artigo_19_clt.txt]. Lembre-se de que pequenas conquistas são importantes, e mesmo que o sono não tenha sido ideal, dormir de forma consistente ajuda a melhorar a sua capacidade de estudar e se sentir bem [Fonte: artigo_05_sleep.txt]. Que tal começar o dia com um pequeno passo, como revisar um tema que você já estudou?\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "humor_baixo",
+      "tom_esperado": "acolhedor",
+      "tom_gerado": "acolhedor",
+      "latencia_s": 7.713,
+      "abertura": "Hoje é um dia importante, e eu fico feliz por você estar aqui, mesmo com um pouco de cansaço. Lembre-se de que dormir de forma consistente ajuda a melhorar a sua memória e a disposição para estudar [Fonte: artigo_05_sleep.txt], e pequenos blocos de estudo podem ser muito eficazes, especialmente quando você está equilibrando trabalho e estudo [Fonte: artigo_19_clt.txt]. Vamos começar com algo simples hoje — que tal revisar um tema que você já estudou?",
+      "abertura_bruta": "Hoje é um dia importante, e eu fico feliz por você estar aqui, mesmo com um pouco de cansaço. Lembre-se de que dormir de forma consistente ajuda a melhorar a sua memória e a disposição para estudar [Fonte: artigo_05_sleep.txt], e pequenos blocos de estudo podem ser muito eficazes, especialmente quando você está equilibrando trabalho e estudo [Fonte: artigo_19_clt.txt]. Vamos começar com algo simples hoje — que tal revisar um tema que você já estudou?",
+      "markdown": "Hoje é um dia importante, e eu fico feliz por você estar aqui, mesmo com um pouco de cansaço. Lembre-se de que dormir de forma consistente ajuda a melhorar a sua memória e a disposição para estudar [Fonte: artigo_05_sleep.txt], e pequenos blocos de estudo podem ser muito eficazes, especialmente quando você está equilibrando trabalho e estudo [Fonte: artigo_19_clt.txt]. Vamos começar com algo simples hoje — que tal revisar um tema que você já estudou?\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "fadiga_limite",
+      "tom_esperado": "acolhedor",
+      "tom_gerado": "acolhedor",
+      "latencia_s": 5.451,
+      "abertura": "Hoje é um dia importante, e eu fico feliz por você estar aqui, mesmo com um pouco de fadiga [Fonte: artigo_05_sleep.txt]. Pequenas conquistas, como manter a rotina, já são grandes passos para o sucesso. Vamos aproveitar o que for possível hoje, sem se pressionar — você já está fazendo muito.",
+      "abertura_bruta": "Hoje é um dia importante, e eu fico feliz por você estar aqui, mesmo com um pouco de fadiga [Fonte: artigo_05_sleep.txt]. Pequenas conquistas, como manter a rotina, já são grandes passos para o sucesso. Vamos aproveitar o que for possível hoje, sem se pressionar — você já está fazendo muito.",
+      "markdown": "Hoje é um dia importante, e eu fico feliz por você estar aqui, mesmo com um pouco de fadiga [Fonte: artigo_05_sleep.txt]. Pequenas conquistas, como manter a rotina, já são grandes passos para o sucesso. Vamos aproveitar o que for possível hoje, sem se pressionar — você já está fazendo muito.\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "estresse_limite",
+      "tom_esperado": "acolhedor",
+      "tom_gerado": "acolhedor",
+      "latencia_s": 5.219,
+      "abertura": "Hoje parece que você está enfrentando um dia desafiador, mas já está fazendo um grande esforço para seguir em frente [Fonte: artigo_19_clt.txt]. Lembre-se de que pequenas conquistas são importantes e que cuidar da sua saúde é parte essencial do processo. Que tal começar o dia com um sono mais reparador?",
+      "abertura_bruta": "Hoje parece que você está enfrentando um dia desafiador, mas já está fazendo um grande esforço para seguir em frente [Fonte: artigo_19_clt.txt]. Lembre-se de que pequenas conquistas são importantes e que cuidar da sua saúde é parte essencial do processo. Que tal começar o dia com um sono mais reparador?",
+      "markdown": "Hoje parece que você está enfrentando um dia desafiador, mas já está fazendo um grande esforço para seguir em frente [Fonte: artigo_19_clt.txt]. Lembre-se de que pequenas conquistas são importantes e que cuidar da sua saúde é parte essencial do processo. Que tal começar o dia com um sono mais reparador?\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "humor_limite_alta_energia",
+      "tom_esperado": "acolhedor",
+      "tom_gerado": "acolhedor",
+      "latencia_s": 5.414,
+      "abertura": "Hoje parece que você está com um humor leve, mas já está dormindo bem, o que é um grande passo para manter a energia e a clareza [Fonte: artigo_05_sleep.txt]. Aproveite esse bom sono para se preparar para os estudos de hoje, que podem ser mais leves e produtivos. Vamos lá!",
+      "abertura_bruta": "Hoje parece que você está com um humor leve, mas já está dormindo bem, o que é um grande passo para manter a energia e a clareza [Fonte: artigo_05_sleep.txt]. Aproveite esse bom sono para se preparar para os estudos de hoje, que podem ser mais leves e produtivos. Vamos lá!",
+      "markdown": "Hoje parece que você está com um humor leve, mas já está dormindo bem, o que é um grande passo para manter a energia e a clareza [Fonte: artigo_05_sleep.txt]. Aproveite esse bom sono para se preparar para os estudos de hoje, que podem ser mais leves e produtivos. Vamos lá!\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "misto",
+      "tom_esperado": "acolhedor",
+      "tom_gerado": "acolhedor",
+      "latencia_s": 6.487,
+      "abertura": "Olá, tudo bem? Hoje parece que você está enfrentando um dia um pouco desafiador, mas já está fazendo um esforço incrível para seguir em frente [Fonte: artigo_19_clt.txt]. Lembre-se de que pequenas conquistas são importantes, e mesmo que o sono tenha sido difícil, você já está aqui, pronto para aprender. Que tal começar hoje com um pequeno passo, como revisar um tema que você já estudou?",
+      "abertura_bruta": "Olá, tudo bem? Hoje parece que você está enfrentando um dia um pouco desafiador, mas já está fazendo um esforço incrível para seguir em frente [Fonte: artigo_19_clt.txt]. Lembre-se de que pequenas conquistas são importantes, e mesmo que o sono tenha sido difícil, você já está aqui, pronto para aprender. Que tal começar hoje com um pequeno passo, como revisar um tema que você já estudou?",
+      "markdown": "Olá, tudo bem? Hoje parece que você está enfrentando um dia um pouco desafiador, mas já está fazendo um esforço incrível para seguir em frente [Fonte: artigo_19_clt.txt]. Lembre-se de que pequenas conquistas são importantes, e mesmo que o sono tenha sido difícil, você já está aqui, pronto para aprender. Que tal começar hoje com um pequeno passo, como revisar um tema que você já estudou?\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "recuperado",
+      "tom_esperado": "desafiador",
+      "tom_gerado": "desafiador",
+      "latencia_s": 7.775,
+      "abertura": "Hoje você está em plena forma, com humor e sono em alta, e a fadiga quase não existe — é hora de aproveitar esse momento para ir além. Vamos usar a consistência do sono [Fonte: artigo_05_sleep.txt] e a previsibilidade dos blocos de estudo [Fonte: artigo_19_clt.txt] para elevar o desempenho. O desafio? Transformar esses dias em pilares de produtividade sem comprometer o equilíbrio. Vamos lá?",
+      "abertura_bruta": "Hoje você está em plena forma, com humor e sono em alta, e a fadiga quase não existe — é hora de aproveitar esse momento para ir além. Vamos usar a consistência do sono [Fonte: artigo_05_sleep.txt] e a previsibilidade dos blocos de estudo [Fonte: artigo_19_clt.txt] para elevar o desempenho. O desafio? Transformar esses dias em pilares de produtividade sem comprometer o equilíbrio. Vamos lá?",
+      "markdown": "Hoje você está em plena forma, com humor e sono em alta, e a fadiga quase não existe — é hora de aproveitar esse momento para ir além. Vamos usar a consistência do sono [Fonte: artigo_05_sleep.txt] e a previsibilidade dos blocos de estudo [Fonte: artigo_19_clt.txt] para elevar o desempenho. O desafio? Transformar esses dias em pilares de produtividade sem comprometer o equilíbrio. Vamos lá?\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "fim_de_semana",
+      "tom_esperado": "desafiador",
+      "tom_gerado": "desafiador",
+      "latencia_s": 7.498,
+      "abertura": "Hoje você está em posição de dominar o dia com eficiência e equilíbrio — e eu quero que você prove isso. Com o sono acima da média e a consistência do sono em seu favor [Fonte: artigo_05_sleep.txt], é hora de transformar essa energia em foco. Vamos aproveitar os blocos curtos e previsíveis para maximizar o aprendizado sem sobrecarregar [Fonte: artigo_19_clt.txt]. O desafio? Fazer mais com menos, e fazer bem.",
+      "abertura_bruta": "Hoje você está em posição de dominar o dia com eficiência e equilíbrio — e eu quero que você prove isso. Com o sono acima da média e a consistência do sono em seu favor [Fonte: artigo_05_sleep.txt], é hora de transformar essa energia em foco. Vamos aproveitar os blocos curtos e previsíveis para maximizar o aprendizado sem sobrecarregar [Fonte: artigo_19_clt.txt]. O desafio? Fazer mais com menos, e fazer bem.",
+      "markdown": "Hoje você está em posição de dominar o dia com eficiência e equilíbrio — e eu quero que você prove isso. Com o sono acima da média e a consistência do sono em seu favor [Fonte: artigo_05_sleep.txt], é hora de transformar essa energia em foco. Vamos aproveitar os blocos curtos e previsíveis para maximizar o aprendizado sem sobrecarregar [Fonte: artigo_19_clt.txt]. O desafio? Fazer mais com menos, e fazer bem.\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "quase_limite",
+      "tom_esperado": "desafiador",
+      "tom_gerado": "desafiador",
+      "latencia_s": 6.871,
+      "abertura": "Hoje você tem tudo o que precisa para dominar o dia: sono e disposição acima da média [Fonte: artigo_05_sleep.txt], e um plano que já está aprovado para transformar esses recursos em resultados. Vamos aproveitar os blocos curtos e previsíveis para maximizar a produtividade [Fonte: artigo_19_clt.txt] — o desafio é fazer mais com menos, e você já tem o mapa para isso.",
+      "abertura_bruta": "Hoje você tem tudo o que precisa para dominar o dia: sono e disposição acima da média [Fonte: artigo_05_sleep.txt], e um plano que já está aprovado para transformar esses recursos em resultados. Vamos aproveitar os blocos curtos e previsíveis para maximizar a produtividade [Fonte: artigo_19_clt.txt] — o desafio é fazer mais com menos, e você já tem o mapa para isso.",
+      "markdown": "Hoje você tem tudo o que precisa para dominar o dia: sono e disposição acima da média [Fonte: artigo_05_sleep.txt], e um plano que já está aprovado para transformar esses recursos em resultados. Vamos aproveitar os blocos curtos e previsíveis para maximizar a produtividade [Fonte: artigo_19_clt.txt] — o desafio é fazer mais com menos, e você já tem o mapa para isso.\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "energia_moderada",
+      "tom_esperado": "equilibrado",
+      "tom_gerado": "equilibrado",
+      "latencia_s": 6.583,
+      "abertura": "Hoje parece que você está em um bom ritmo, com um humor e sono acima da média. [Fonte: artigo_05_sleep.txt] sugere que manter uma rotina de sono consistente pode ajudar a consolidar o que você estuda e manter a energia. Continue assim, e aproveite os blocos curtos de estudo para manter o foco [Fonte: artigo_19_clt.txt].",
+      "abertura_bruta": "Hoje parece que você está em um bom ritmo, com um humor e sono acima da média. [Fonte: artigo_05_sleep.txt] sugere que manter uma rotina de sono consistente pode ajudar a consolidar o que você estuda e manter a energia. Continue assim, e aproveite os blocos curtos de estudo para manter o foco [Fonte: artigo_19_clt.txt].",
+      "markdown": "Hoje parece que você está em um bom ritmo, com um humor e sono acima da média. [Fonte: artigo_05_sleep.txt] sugere que manter uma rotina de sono consistente pode ajudar a consolidar o que você estuda e manter a energia. Continue assim, e aproveite os blocos curtos de estudo para manter o foco [Fonte: artigo_19_clt.txt].\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "sono_curto",
+      "tom_esperado": "equilibrado",
+      "tom_gerado": "equilibrado",
+      "latencia_s": 5.731,
+      "abertura": "Hoje parece que você está em um bom momento, com um humor leve e estresse controlado [Fonte: artigo_19_clt.txt]. Aconselho a priorizar o sono, já que ele é essencial para consolidar o que você estuda e manter a energia [Fonte: artigo_05_sleep.txt]. Vamos seguir com a grade aprovada, sem pressa.",
+      "abertura_bruta": "Hoje parece que você está em um bom momento, com um humor leve e estresse controlado [Fonte: artigo_19_clt.txt]. Aconselho a priorizar o sono, já que ele é essencial para consolidar o que você estuda e manter a energia [Fonte: artigo_05_sleep.txt]. Vamos seguir com a grade aprovada, sem pressa.",
+      "markdown": "Hoje parece que você está em um bom momento, com um humor leve e estresse controlado [Fonte: artigo_19_clt.txt]. Aconselho a priorizar o sono, já que ele é essencial para consolidar o que você estuda e manter a energia [Fonte: artigo_05_sleep.txt]. Vamos seguir com a grade aprovada, sem pressa.\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "neutro",
+      "tom_esperado": "equilibrado",
+      "tom_gerado": "equilibrado",
+      "latencia_s": 6.455,
+      "abertura": "Hoje está tudo sob controle, você está mantendo um equilíbrio razoável entre os desafios do dia a dia [Fonte: artigo_19_clt.txt]. Aconselho a priorizar um sono mais consistente, já que isso pode melhorar a sua capacidade de estudar e se recuperar [Fonte: artigo_05_sleep.txt]. Vamos seguir com a grade aprovada, sem pressa.",
+      "abertura_bruta": "Hoje está tudo sob controle, você está mantendo um equilíbrio razoável entre os desafios do dia a dia [Fonte: artigo_19_clt.txt]. Aconselho a priorizar um sono mais consistente, já que isso pode melhorar a sua capacidade de estudar e se recuperar [Fonte: artigo_05_sleep.txt]. Vamos seguir com a grade aprovada, sem pressa.",
+      "markdown": "Hoje está tudo sob controle, você está mantendo um equilíbrio razoável entre os desafios do dia a dia [Fonte: artigo_19_clt.txt]. Aconselho a priorizar um sono mais consistente, já que isso pode melhorar a sua capacidade de estudar e se recuperar [Fonte: artigo_05_sleep.txt]. Vamos seguir com a grade aprovada, sem pressa.\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "um_pouco_cansado",
+      "tom_esperado": "equilibrado",
+      "tom_gerado": "equilibrado",
+      "latencia_s": 5.851,
+      "abertura": "Hoje parece que você está em um bom ritmo, com um humor leve e estresse controlado [Fonte: artigo_19_clt.txt]. A consistência no sono também está contribuindo para manter a disposição e a clareza mental [Fonte: artigo_05_sleep.txt]. Vamos aproveitar esse equilíbrio para seguir com a rotina aprovada.",
+      "abertura_bruta": "Hoje parece que você está em um bom ritmo, com um humor leve e estresse controlado [Fonte: artigo_19_clt.txt]. A consistência no sono também está contribuindo para manter a disposição e a clareza mental [Fonte: artigo_05_sleep.txt]. Vamos aproveitar esse equilíbrio para seguir com a rotina aprovada.",
+      "markdown": "Hoje parece que você está em um bom ritmo, com um humor leve e estresse controlado [Fonte: artigo_19_clt.txt]. A consistência no sono também está contribuindo para manter a disposição e a clareza mental [Fonte: artigo_05_sleep.txt]. Vamos aproveitar esse equilíbrio para seguir com a rotina aprovada.\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "stress_leve",
+      "tom_esperado": "equilibrado",
+      "tom_gerado": "equilibrado",
+      "latencia_s": 6.05,
+      "abertura": "Hoje parece que você está em um bom momento, com um humor leve e sono adequado, o que já é um bom começo para manter o ritmo. [Fonte: artigo_05_sleep.txt] e [Fonte: artigo_19_clt.txt] mostram que a consistência e a previsibilidade são aliadas importantes nesse processo. Vamos aproveitar bem o dia!",
+      "abertura_bruta": "Hoje parece que você está em um bom momento, com um humor leve e sono adequado, o que já é um bom começo para manter o ritmo. [Fonte: artigo_05_sleep.txt] e [Fonte: artigo_19_clt.txt] mostram que a consistência e a previsibilidade são aliadas importantes nesse processo. Vamos aproveitar bem o dia!",
+      "markdown": "Hoje parece que você está em um bom momento, com um humor leve e sono adequado, o que já é um bom começo para manter o ritmo. [Fonte: artigo_05_sleep.txt] e [Fonte: artigo_19_clt.txt] mostram que a consistência e a previsibilidade são aliadas importantes nesse processo. Vamos aproveitar bem o dia!\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "humor_bom_cansado",
+      "tom_esperado": "equilibrado",
+      "tom_gerado": "equilibrado",
+      "latencia_s": 6.701,
+      "abertura": "Hoje parece que você está em um bom ritmo, com um humor leve e um estresse controlado. O sono em destaque sugere que sua rotina está ajudando a consolidar o aprendizado e a manter a energia [Fonte: artigo_05_sleep.txt]. Mantenha essa consistência e aproveite os blocos curtos de estudo para avançar com clareza [Fonte: artigo_19_clt.txt].",
+      "abertura_bruta": "Hoje parece que você está em um bom ritmo, com um humor leve e um estresse controlado. O sono em destaque sugere que sua rotina está ajudando a consolidar o aprendizado e a manter a energia [Fonte: artigo_05_sleep.txt]. Mantenha essa consistência e aproveite os blocos curtos de estudo para avançar com clareza [Fonte: artigo_19_clt.txt].",
+      "markdown": "Hoje parece que você está em um bom ritmo, com um humor leve e um estresse controlado. O sono em destaque sugere que sua rotina está ajudando a consolidar o aprendizado e a manter a energia [Fonte: artigo_05_sleep.txt]. Mantenha essa consistência e aproveite os blocos curtos de estudo para avançar com clareza [Fonte: artigo_19_clt.txt].\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "desafiador_limite",
+      "tom_esperado": "desafiador",
+      "tom_gerado": "desafiador",
+      "latencia_s": 6.441,
+      "abertura": "Hoje você está em plena forma, com humor e sono em alta, e a fadiga quase não existe — é hora de aproveitar esse momento para ir além. Vamos usar a consistência do sono [Fonte: artigo_05_sleep.txt] e a previsibilidade dos blocos de estudo [Fonte: artigo_19_clt.txt] para elevar o desempenho. O desafio? Transformar esses dias em pilares de produtividade sem comprometer o equilíbrio. Vamos lá?",
+      "abertura_bruta": "Hoje você está em plena forma, com humor e sono em alta, e a fadiga quase não existe — é hora de aproveitar esse momento para ir além. Vamos usar a consistência do sono [Fonte: artigo_05_sleep.txt] e a previsibilidade dos blocos de estudo [Fonte: artigo_19_clt.txt] para elevar o desempenho. O desafio? Transformar esses dias em pilares de produtividade sem comprometer o equilíbrio. Vamos lá?",
+      "markdown": "Hoje você está em plena forma, com humor e sono em alta, e a fadiga quase não existe — é hora de aproveitar esse momento para ir além. Vamos usar a consistência do sono [Fonte: artigo_05_sleep.txt] e a previsibilidade dos blocos de estudo [Fonte: artigo_19_clt.txt] para elevar o desempenho. O desafio? Transformar esses dias em pilares de produtividade sem comprometer o equilíbrio. Vamos lá?\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "sono_ruim_humor_bom",
+      "tom_esperado": "equilibrado",
+      "tom_gerado": "equilibrado",
+      "latencia_s": 6.31,
+      "abertura": "Hoje parece que você está em um bom momento, com um humor leve e estresse controlado [Fonte: artigo_19_clt.txt]. Aconselho a priorizar o sono, já que ele é essencial para consolidar o que você estuda e manter a energia [Fonte: artigo_05_sleep.txt]. Vamos aproveitar o que está funcionando e ajustar o que pode ser melhorado.",
+      "abertura_bruta": "Hoje parece que você está em um bom momento, com um humor leve e estresse controlado [Fonte: artigo_19_clt.txt]. Aconselho a priorizar o sono, já que ele é essencial para consolidar o que você estuda e manter a energia [Fonte: artigo_05_sleep.txt]. Vamos aproveitar o que está funcionando e ajustar o que pode ser melhorado.",
+      "markdown": "Hoje parece que você está em um bom momento, com um humor leve e estresse controlado [Fonte: artigo_19_clt.txt]. Aconselho a priorizar o sono, já que ele é essencial para consolidar o que você estuda e manter a energia [Fonte: artigo_05_sleep.txt]. Vamos aproveitar o que está funcionando e ajustar o que pode ser melhorado.\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "tudo_no_limite_ruim",
+      "tom_esperado": "acolhedor",
+      "tom_gerado": "acolhedor",
+      "latencia_s": 6.645,
+      "abertura": "Olá, tudo bem? Vejo que hoje está com um humor e sono baixos, mas não desista — pequenas conquistas são importantes e já são um passo à frente [Fonte: artigo_05_sleep.txt]. Vamos começar com algo simples: aproveite o que for possível para descansar um pouco, mesmo que seja por alguns minutos, e depois retomamos juntos. Você está fazendo o que pode!",
+      "abertura_bruta": "Olá, tudo bem? Vejo que hoje está com um humor e sono baixos, mas não desista — pequenas conquistas são importantes e já são um passo à frente [Fonte: artigo_05_sleep.txt]. Vamos começar com algo simples: aproveite o que for possível para descansar um pouco, mesmo que seja por alguns minutos, e depois retomamos juntos. Você está fazendo o que pode!",
+      "markdown": "Olá, tudo bem? Vejo que hoje está com um humor e sono baixos, mas não desista — pequenas conquistas são importantes e já são um passo à frente [Fonte: artigo_05_sleep.txt]. Vamos começar com algo simples: aproveite o que for possível para descansar um pouco, mesmo que seja por alguns minutos, e depois retomamos juntos. Você está fazendo o que pode!\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "energia_maxima",
+      "tom_esperado": "desafiador",
+      "tom_gerado": "desafiador",
+      "latencia_s": 7.562,
+      "abertura": "Hoje você está em plena forma, com humor e sono no topo da escala — é hora de aproveitar esse estado de graça para dominar os blocos de estudo. [Fonte: artigo_05_sleep.txt] e [Fonte: artigo_19_clt.txt] mostram que a consistência e a previsibilidade são suas aliadas, então vamos transformar isso em resultados. O desafio? Maximizar a produtividade sem sobrecarregar. Pronto para a batalha?",
+      "abertura_bruta": "Hoje você está em plena forma, com humor e sono no topo da escala — é hora de aproveitar esse estado de graça para dominar os blocos de estudo. [Fonte: artigo_05_sleep.txt] e [Fonte: artigo_19_clt.txt] mostram que a consistência e a previsibilidade são suas aliadas, então vamos transformar isso em resultados. O desafio? Maximizar a produtividade sem sobrecarregar. Pronto para a batalha?",
+      "markdown": "Hoje você está em plena forma, com humor e sono no topo da escala — é hora de aproveitar esse estado de graça para dominar os blocos de estudo. [Fonte: artigo_05_sleep.txt] e [Fonte: artigo_19_clt.txt] mostram que a consistência e a previsibilidade são suas aliadas, então vamos transformar isso em resultados. O desafio? Maximizar a produtividade sem sobrecarregar. Pronto para a batalha?\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "humor_neutro",
+      "tom_esperado": "equilibrado",
+      "tom_gerado": "equilibrado",
+      "latencia_s": 5.847,
+      "abertura": "Hoje parece que você está em um bom momento, com um humor e sono acima da média. [Fonte: artigo_05_sleep.txt] sugere que manter uma rotina de sono consistente pode ajudar a consolidar o que você estuda e melhorar sua disposição. Vamos aproveitar esse equilíbrio para seguir com a grade aprovada.",
+      "abertura_bruta": "Hoje parece que você está em um bom momento, com um humor e sono acima da média. [Fonte: artigo_05_sleep.txt] sugere que manter uma rotina de sono consistente pode ajudar a consolidar o que você estuda e melhorar sua disposição. Vamos aproveitar esse equilíbrio para seguir com a grade aprovada.",
+      "markdown": "Hoje parece que você está em um bom momento, com um humor e sono acima da média. [Fonte: artigo_05_sleep.txt] sugere que manter uma rotina de sono consistente pode ajudar a consolidar o que você estuda e melhorar sua disposição. Vamos aproveitar esse equilíbrio para seguir com a grade aprovada.\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "prova_amanha",
+      "tom_esperado": "acolhedor",
+      "tom_gerado": "acolhedor",
+      "latencia_s": 7.29,
+      "abertura": "Olá, tudo bem? Hoje parece que o corpo e a mente estão pedindo um descanso, mas você já deu um passo importante ao se dedicar aos estudos [Fonte: artigo_19_clt.txt]. Lembre-se de que dormir bem é essencial para consolidar o que aprendeu e recarregar as energias [Fonte: artigo_05_sleep.txt]. Que tal começar o dia com um pequeno momento de relaxamento ou uma pausa curta?",
+      "abertura_bruta": "Olá, tudo bem? Hoje parece que o corpo e a mente estão pedindo um descanso, mas você já deu um passo importante ao se dedicar aos estudos [Fonte: artigo_19_clt.txt]. Lembre-se de que dormir bem é essencial para consolidar o que aprendeu e recarregar as energias [Fonte: artigo_05_sleep.txt]. Que tal começar o dia com um pequeno momento de relaxamento ou uma pausa curta?",
+      "markdown": "Olá, tudo bem? Hoje parece que o corpo e a mente estão pedindo um descanso, mas você já deu um passo importante ao se dedicar aos estudos [Fonte: artigo_19_clt.txt]. Lembre-se de que dormir bem é essencial para consolidar o que aprendeu e recarregar as energias [Fonte: artigo_05_sleep.txt]. Que tal começar o dia com um pequeno momento de relaxamento ou uma pausa curta?\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "pos_descanso",
+      "tom_esperado": "desafiador",
+      "tom_gerado": "desafiador",
+      "latencia_s": 6.263,
+      "abertura": "Hoje você está em posição de dominar o dia com eficiência e equilíbrio — e eu quero que você prove isso. Com o sono acima da média e a fadiga mínima, é hora de aproveitar a consistência do seu ritmo para consolidar o que aprendeu [Fonte: artigo_05_sleep.txt]. Vamos transformar esses números em resultados reais.",
+      "abertura_bruta": "Hoje você está em posição de dominar o dia com eficiência e equilíbrio — e eu quero que você prove isso. Com o sono acima da média e a fadiga mínima, é hora de aproveitar a consistência do seu ritmo para consolidar o que aprendeu [Fonte: artigo_05_sleep.txt]. Vamos transformar esses números em resultados reais.",
+      "markdown": "Hoje você está em posição de dominar o dia com eficiência e equilíbrio — e eu quero que você prove isso. Com o sono acima da média e a fadiga mínima, é hora de aproveitar a consistência do seu ritmo para consolidar o que aprendeu [Fonte: artigo_05_sleep.txt]. Vamos transformar esses números em resultados reais.\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "rotina_estavel",
+      "tom_esperado": "equilibrado",
+      "tom_gerado": "equilibrado",
+      "latencia_s": 6.619,
+      "abertura": "Hoje parece que você está em um bom ritmo, com um equilíbrio razoável entre energia e foco [Fonte: artigo_19_clt.txt]. Aconselho a manter a consistência no sono, já que isso reforça a capacidade de estudo e a disposição [Fonte: artigo_05_sleep.txt]. Vamos seguir com a grade aprovada e ajustar conforme a necessidade.",
+      "abertura_bruta": "Hoje parece que você está em um bom ritmo, com um equilíbrio razoável entre energia e foco [Fonte: artigo_19_clt.txt]. Aconselho a manter a consistência no sono, já que isso reforça a capacidade de estudo e a disposição [Fonte: artigo_05_sleep.txt]. Vamos seguir com a grade aprovada e ajustar conforme a necessidade.",
+      "markdown": "Hoje parece que você está em um bom ritmo, com um equilíbrio razoável entre energia e foco [Fonte: artigo_19_clt.txt]. Aconselho a manter a consistência no sono, já que isso reforça a capacidade de estudo e a disposição [Fonte: artigo_05_sleep.txt]. Vamos seguir com a grade aprovada e ajustar conforme a necessidade.\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    },
+    {
+      "cenario": "exausto_fim_de_semana",
+      "tom_esperado": "acolhedor",
+      "tom_gerado": "acolhedor",
+      "latencia_s": 7.135,
+      "abertura": "Olá, tudo bem? Hoje parece que o corpo está pedindo um pouco mais de cuidado, mas já sabemos que pequenas conquistas fazem toda a diferença [Fonte: artigo_19_clt.txt]. Que tal começar o dia com um sono mais reparador? Dormir de forma consistente ajuda a melhorar a disposição e a memória [Fonte: artigo_05_sleep.txt]. Vamos lá, um passo de cada vez!",
+      "abertura_bruta": "Olá, tudo bem? Hoje parece que o corpo está pedindo um pouco mais de cuidado, mas já sabemos que pequenas conquistas fazem toda a diferença [Fonte: artigo_19_clt.txt]. Que tal começar o dia com um sono mais reparador? Dormir de forma consistente ajuda a melhorar a disposição e a memória [Fonte: artigo_05_sleep.txt]. Vamos lá, um passo de cada vez!",
+      "markdown": "Olá, tudo bem? Hoje parece que o corpo está pedindo um pouco mais de cuidado, mas já sabemos que pequenas conquistas fazem toda a diferença [Fonte: artigo_19_clt.txt]. Que tal começar o dia com um sono mais reparador? Dormir de forma consistente ajuda a melhorar a disposição e a memória [Fonte: artigo_05_sleep.txt]. Vamos lá, um passo de cada vez!\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)"
+    }
+  ]
+}
