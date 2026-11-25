@@ -1,0 +1,26 @@
+{
+  "status": "REPROVADO",
+  "violacoes": [
+    {
+      "regra": "CONFLITO_AGENDA",
+      "dia": "2026-11-30",
+      "bloco_id": "b1",
+      "mensagem": "Segunda-feira: o bloco das 09:00 de Cálculo I se sobrepõe a um compromisso das 09:00 às 10:00.",
+      "excesso_min": null
+    },
+    {
+      "regra": "INTEGRIDADE_CIRCADIANA",
+      "dia": "2026-12-01",
+      "bloco_id": "b2",
+      "mensagem": "Terça-feira: bloco de alta carga às 13:30, no vale pós-prandial.",
+      "excesso_min": null
+    },
+    {
+      "regra": "INTEGRIDADE_CIRCADIANA",
+      "dia": "2026-12-02",
+      "bloco_id": "b3",
+      "mensagem": "Quarta-feira: bloco de alta carga às 22:30, dentro da janela de sono.",
+      "excesso_min": null
+    }
+  ]
+}
