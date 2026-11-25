@@ -32,6 +32,9 @@ O RAG medido é o do notebook `rag_pipeline_semana2.ipynb`: o `recuperacao/noteb
 - `comparacao/`: `modos.py` gera as respostas de cada modo (`calibrar`, `llm_puro`, `so_busca`, `rag_llm`, `rag_otimizado`, `rag_llm_k3`); `avaliar.py` avalia todos e monta `relatorios/comparacao.md`.
   Rodar: `python -m metricas.comparacao.modos <modo>` e depois `python -m metricas.comparacao.avaliar <modos...>`.
 
+- `agentes/analysis/`: métricas do Analysis Agent ([3.4]): 27 cenários rotulados, runner e definições em `METRICAS.md`. Relatório final em [`relatorios/RELATORIO_ANALYSIS.md`](relatorios/RELATORIO_ANALYSIS.md).
+  Rodar: `python -m metricas.agentes.analysis.runner --llm llama3.1:8b --juiz` (sem `--llm`, só a parte determinística).
+
 ## Notas sobre o gabarito
 
 - O gabarito é por **artigo** (fonte), não por chunk. Os chunks mudam quando `chunk_size` muda; os artigos não.
