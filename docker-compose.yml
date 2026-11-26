@@ -19,6 +19,7 @@ x-api: &api
     OLLAMA_EMBEDDING_MODEL: bge-m3
     OLLAMA_LLM_MODEL: qwen3:8b
     OLLAMA_TRIAGEM_MODEL: qwen3:8b
+    OLLAMA_ANALYSIS_MODEL: llama3.1:8b
     TOP_K: "5"
     CORS_ORIGINS: '["http://localhost:3000"]'
 

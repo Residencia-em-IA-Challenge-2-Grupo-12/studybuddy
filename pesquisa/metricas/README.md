@@ -35,6 +35,9 @@ O RAG medido é o do notebook `rag_pipeline_semana2.ipynb`: o `recuperacao/noteb
 - `agentes/communication/`: métricas do Communication Agent sobre as fixtures da 0.2. `METRICAS.md` define cada métrica (fórmula, meta e fonte); `cenarios.json` tem 25 check-ins rotulados; `runner.py` gera e avalia; `metrics.py` é stdlib puro; `juiz_tom.py` cobre tom (rubrica) e faithfulness.
   Rodar: `python -m metricas.agentes.communication.runner --nome qwen3_8b` (ou `--so-avaliar` depois de gerar).
 
+- `agentes/analysis/`: métricas do Analysis Agent ([3.4]): 27 cenários rotulados, runner e definições em `METRICAS.md`. Relatório final em [`relatorios/RELATORIO_ANALYSIS.md`](relatorios/RELATORIO_ANALYSIS.md).
+  Rodar: `python -m metricas.agentes.analysis.runner --llm llama3.1:8b --juiz` (sem `--llm`, só a parte determinística).
+
 ## Notas sobre o gabarito
 
 - O gabarito é por **artigo** (fonte), não por chunk. Os chunks mudam quando `chunk_size` muda; os artigos não.
