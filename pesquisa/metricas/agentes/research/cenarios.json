@@ -1,0 +1,458 @@
+{
+  "versao": 1,
+  "descricao": "Conjunto de avaliação do Research Agent ([2.6] Issue #41). Parte das 7 fixtures da [0.2] (api/tests/fixtures/contexto/), aplica ajustes de perfil circadiano, check-in, agenda e acervo, e define o rótulo esperado para montagem de contexto, sincronização de agenda e recuperação RAG. Datas: seg 2026-11-30 a sex 2026-12-04.",
+  "cenarios": [
+    {
+      "id": "matutino",
+      "descricao": "Cronotipo matutino padrão, check-in normal (índice 0,6)",
+      "contexto": "matutino",
+      "esperado": {
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.6,
+        "estado_capacidade": "normal",
+        "pico_inicio": "08:00",
+        "vale_inicio": "13:00",
+        "sono_janelas_por_dia": 2,
+        "fontes_esperadas_alguma": [
+          "artigo_10_pomodoro_cirillo.txt",
+          "artigo_17_study_cycle_perez.txt",
+          "artigo_09_timeboxing_allen.txt",
+          "artigo_16_pareto_engineering_box.txt",
+          "artigo_01_active_recall_karpicke.txt"
+        ]
+      }
+    },
+    {
+      "id": "vespertino",
+      "descricao": "Cronotipo vespertino, pico à tarde (15:30-18:30) e sono 23:30-07:30",
+      "contexto": "vespertino",
+      "esperado": {
+        "cronotipo": "vespertino",
+        "indice_capacidade": 0.6,
+        "estado_capacidade": "normal",
+        "pico_inicio": "15:30",
+        "vale_inicio": "13:30",
+        "sono_janelas_por_dia": 2,
+        "fontes_esperadas_alguma": [
+          "artigo_10_pomodoro_cirillo.txt",
+          "artigo_17_study_cycle_perez.txt",
+          "artigo_01_active_recall_karpicke.txt"
+        ]
+      }
+    },
+    {
+      "id": "noturno",
+      "descricao": "Cronotipo noturno, pico à noite (19:30-22:30) e sono contínuo 02:00-10:00",
+      "contexto": "noturno",
+      "esperado": {
+        "cronotipo": "noturno",
+        "indice_capacidade": 0.6,
+        "estado_capacidade": "normal",
+        "pico_inicio": "19:30",
+        "vale_inicio": "14:00",
+        "sono_janelas_por_dia": 1,
+        "fontes_esperadas_alguma": [
+          "artigo_10_pomodoro_cirillo.txt",
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_16_pareto_engineering_box.txt"
+        ]
+      }
+    },
+    {
+      "id": "alta_energia",
+      "descricao": "Check-in com energia plena (energia 5, sono 8h, estresse 1 -> índice 0,9)",
+      "contexto": "alta_energia",
+      "esperado": {
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.9,
+        "estado_capacidade": "alta_energia",
+        "pico_inicio": "08:00",
+        "vale_inicio": "13:00",
+        "sono_janelas_por_dia": 2,
+        "fontes_esperadas_alguma": [
+          "artigo_06_deep_work_newport.txt",
+          "artigo_01_active_recall_karpicke.txt",
+          "artigo_03_interleaving_rohwer.txt"
+        ]
+      }
+    },
+    {
+      "id": "fadiga",
+      "descricao": "Check-in com fadiga severa (energia 1, sono 4h, estresse 5 -> índice 0,2)",
+      "contexto": "fadiga",
+      "esperado": {
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.2,
+        "estado_capacidade": "fadiga",
+        "pico_inicio": "08:00",
+        "vale_inicio": "13:00",
+        "sono_janelas_por_dia": 2,
+        "fontes_esperadas_alguma": [
+          "artigo_05_sleep_consolidation_walker.txt",
+          "artigo_14_willpower_depletion_baumeister.txt"
+        ]
+      }
+    },
+    {
+      "id": "agenda_cheia",
+      "descricao": "Trabalhador CLT ocupado 08:00-17:00: realoca pico para 06:00-07:00 e 19:00-20:30",
+      "contexto": "agenda_cheia",
+      "esperado": {
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.6,
+        "estado_capacidade": "normal",
+        "pico_inicio": "06:00",
+        "vale_inicio": "21:00",
+        "sono_janelas_por_dia": 2,
+        "fontes_esperadas_alguma": [
+          "artigo_10_pomodoro_cirillo.txt",
+          "artigo_16_pareto_engineering_box.txt",
+          "artigo_19_dual_burden_clt_martins.txt"
+        ]
+      }
+    },
+    {
+      "id": "prazo_apertado",
+      "descricao": "Múltiplas disciplinas de alta carga com prazos na quarta e na sexta",
+      "contexto": "prazo_apertado",
+      "esperado": {
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.6,
+        "estado_capacidade": "normal",
+        "pico_inicio": "08:00",
+        "vale_inicio": "13:00",
+        "sono_janelas_por_dia": 2,
+        "fontes_esperadas_alguma": [
+          "artigo_16_pareto_engineering_box.txt",
+          "artigo_01_active_recall_karpicke.txt",
+          "artigo_10_pomodoro_cirillo.txt"
+        ]
+      }
+    },
+    {
+      "id": "escalas_ui_alta_energia",
+      "descricao": "Mapeamento das 4 escalas da UI (humor=5, estresse=1, sono=5, fadiga=1, 8h) -> índice 0,9",
+      "contexto": "matutino",
+      "ajustes": {
+        "escalas": {"humor": 5, "estresse": 1, "sono": 5, "fadiga": 1, "horas_sono": 8.0}
+      },
+      "esperado": {
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.9,
+        "estado_capacidade": "alta_energia",
+        "pico_inicio": "08:00",
+        "vale_inicio": "13:00",
+        "sono_janelas_por_dia": 2,
+        "fontes_esperadas_alguma": [
+          "artigo_06_deep_work_newport.txt",
+          "artigo_01_active_recall_karpicke.txt"
+        ]
+      }
+    },
+    {
+      "id": "escalas_ui_fadiga",
+      "descricao": "Mapeamento das 4 escalas da UI (humor=1, estresse=5, sono=1, fadiga=5, 4h) -> índice 0,2",
+      "contexto": "matutino",
+      "ajustes": {
+        "escalas": {"humor": 1, "estresse": 5, "sono": 1, "fadiga": 5, "horas_sono": 4.0}
+      },
+      "esperado": {
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.2,
+        "estado_capacidade": "fadiga",
+        "pico_inicio": "08:00",
+        "vale_inicio": "13:00",
+        "sono_janelas_por_dia": 2,
+        "fontes_esperadas_alguma": [
+          "artigo_05_sleep_consolidation_walker.txt",
+          "artigo_14_willpower_depletion_baumeister.txt"
+        ]
+      }
+    },
+    {
+      "id": "escalas_ui_moderado",
+      "descricao": "Mapeamento das 4 escalas da UI (humor=3, estresse=3, sono=3, fadiga=3, 6h) -> índice 0,55",
+      "contexto": "vespertino",
+      "ajustes": {
+        "escalas": {"humor": 3, "estresse": 3, "sono": 3, "fadiga": 3, "horas_sono": 6.0}
+      },
+      "esperado": {
+        "cronotipo": "vespertino",
+        "indice_capacidade": 0.55,
+        "estado_capacidade": "normal",
+        "pico_inicio": "15:30",
+        "vale_inicio": "13:30",
+        "sono_janelas_por_dia": 2,
+        "fontes_esperadas_alguma": [
+          "artigo_10_pomodoro_cirillo.txt",
+          "artigo_17_study_cycle_perez.txt"
+        ]
+      }
+    },
+    {
+      "id": "privacao_sono_energia_media",
+      "descricao": "Estudante com energia 3 mas apenas 5h de sono e estresse 4 -> gatilho de sono/fadiga",
+      "contexto": "noturno",
+      "ajustes": {
+        "checkin": {"energia": 3, "horas_sono": 5.0, "estresse": 4}
+      },
+      "esperado": {
+        "cronotipo": "noturno",
+        "indice_capacidade": 0.5,
+        "estado_capacidade": "normal",
+        "pico_inicio": "19:30",
+        "vale_inicio": "14:00",
+        "sono_janelas_por_dia": 1,
+        "fontes_esperadas_alguma": [
+          "artigo_05_sleep_consolidation_walker.txt",
+          "artigo_14_willpower_depletion_baumeister.txt"
+        ]
+      }
+    },
+    {
+      "id": "limiar_alto_capacidade",
+      "descricao": "Check-in no limiar de alta energia (energia 4, sono 8h, estresse 1 -> índice 0,77)",
+      "contexto": "vespertino",
+      "ajustes": {
+        "checkin": {"energia": 4, "horas_sono": 8.0, "estresse": 1}
+      },
+      "esperado": {
+        "cronotipo": "vespertino",
+        "indice_capacidade": 0.77,
+        "estado_capacidade": "alta_energia",
+        "pico_inicio": "15:30",
+        "vale_inicio": "13:30",
+        "sono_janelas_por_dia": 2,
+        "fontes_esperadas_alguma": [
+          "artigo_06_deep_work_newport.txt",
+          "artigo_01_active_recall_karpicke.txt"
+        ]
+      }
+    },
+    {
+      "id": "limiar_fadiga_capacidade",
+      "descricao": "Check-in abaixo de 0,4 (energia 2, sono 4h, estresse 4 -> índice 0,35)",
+      "contexto": "agenda_cheia",
+      "ajustes": {
+        "checkin": {"energia": 2, "horas_sono": 4.0, "estresse": 4}
+      },
+      "esperado": {
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.35,
+        "estado_capacidade": "fadiga",
+        "pico_inicio": "06:00",
+        "vale_inicio": "21:00",
+        "sono_janelas_por_dia": 2,
+        "fontes_esperadas_alguma": [
+          "artigo_05_sleep_consolidation_walker.txt",
+          "artigo_14_willpower_depletion_baumeister.txt"
+        ]
+      }
+    },
+    {
+      "id": "so_materiais_baixa_carga",
+      "descricao": "Acervo contendo apenas materiais de baixa carga (História e Inglês)",
+      "contexto": "matutino",
+      "ajustes": {
+        "remover_materiais": ["calc-01", "prog-01"]
+      },
+      "esperado": {
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.6,
+        "estado_capacidade": "normal",
+        "pico_inicio": "08:00",
+        "vale_inicio": "13:00",
+        "sono_janelas_por_dia": 2,
+        "fontes_esperadas_alguma": [
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_10_pomodoro_cirillo.txt"
+        ]
+      }
+    },
+    {
+      "id": "so_materiais_alta_carga",
+      "descricao": "Acervo contendo apenas materiais de alta carga (Cálculo I e Programação)",
+      "contexto": "vespertino",
+      "ajustes": {
+        "remover_materiais": ["hist-01", "ing-01"]
+      },
+      "esperado": {
+        "cronotipo": "vespertino",
+        "indice_capacidade": 0.6,
+        "estado_capacidade": "normal",
+        "pico_inicio": "15:30",
+        "vale_inicio": "13:30",
+        "sono_janelas_por_dia": 2,
+        "fontes_esperadas_alguma": [
+          "artigo_16_pareto_engineering_box.txt",
+          "artigo_01_active_recall_karpicke.txt"
+        ]
+      }
+    },
+    {
+      "id": "inferencia_carga_exatas_e_idiomas",
+      "descricao": "Cadastro de novos materiais com inferência automática de carga cognitiva",
+      "contexto": "matutino",
+      "ajustes": {
+        "novos_materiais": [
+          {"id": "alg-01", "disciplina": "Estruturas de Dados", "titulo": "Implementação de Árvores Binárias", "horas_estimadas": 3.0, "dificuldade": 4, "prazo": "2026-12-03"},
+          {"id": "esp-01", "disciplina": "Espanhol", "titulo": "Flashcards de verbos irregulares", "horas_estimadas": 1.0, "dificuldade": 2, "prazo": null}
+        ]
+      },
+      "esperado": {
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.6,
+        "estado_capacidade": "normal",
+        "pico_inicio": "08:00",
+        "vale_inicio": "13:00",
+        "sono_janelas_por_dia": 2,
+        "cargas_inferidas": {"alg-01": "alta", "esp-01": "baixa"},
+        "fontes_esperadas_alguma": [
+          "artigo_16_pareto_engineering_box.txt",
+          "artigo_02_spaced_repetition_cepeda.txt"
+        ]
+      }
+    },
+    {
+      "id": "calendar_evento_meia_noite",
+      "descricao": "Google Calendar com evento noturno cruzando meia-noite (22:00 de seg a 01:00 de ter)",
+      "contexto": "noturno",
+      "ajustes": {
+        "eventos_calendar": [
+          {
+            "id": "evt-plantao",
+            "summary": "Plantão Noturno",
+            "status": "confirmed",
+            "start": {"dateTime": "2026-11-30T22:00:00-03:00"},
+            "end": {"dateTime": "2026-12-01T01:00:00-03:00"}
+          }
+        ]
+      },
+      "esperado": {
+        "cronotipo": "noturno",
+        "indice_capacidade": 0.6,
+        "estado_capacidade": "normal",
+        "pico_inicio": "19:30",
+        "vale_inicio": "14:00",
+        "sono_janelas_por_dia": 1,
+        "ocupados_count": 2,
+        "fontes_esperadas_alguma": [
+          "artigo_10_pomodoro_cirillo.txt",
+          "artigo_16_pareto_engineering_box.txt"
+        ]
+      }
+    },
+    {
+      "id": "calendar_eventos_cancelados_ignorados",
+      "descricao": "Google Calendar ignora eventos com status=cancelled e mantém apenas confirmados",
+      "contexto": "matutino",
+      "ajustes": {
+        "eventos_calendar": [
+          {
+            "id": "evt-1",
+            "summary": "Monitoria",
+            "status": "confirmed",
+            "start": {"dateTime": "2026-12-01T10:00:00-03:00"},
+            "end": {"dateTime": "2026-12-01T11:00:00-03:00"}
+          },
+          {
+            "id": "evt-2",
+            "summary": "Cancelada",
+            "status": "cancelled",
+            "start": {"dateTime": "2026-12-01T14:00:00-03:00"},
+            "end": {"dateTime": "2026-12-01T16:00:00-03:00"}
+          }
+        ]
+      },
+      "esperado": {
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.6,
+        "estado_capacidade": "normal",
+        "pico_inicio": "08:00",
+        "vale_inicio": "13:00",
+        "sono_janelas_por_dia": 2,
+        "ocupados_count": 1,
+        "fontes_esperadas_alguma": [
+          "artigo_10_pomodoro_cirillo.txt",
+          "artigo_16_pareto_engineering_box.txt"
+        ]
+      }
+    },
+    {
+      "id": "persona_1_lucas_clt",
+      "descricao": "Persona 1 (Lucas): dupla jornada CLT 8h, dividir blocos diários e proteger o sono",
+      "contexto": "agenda_cheia",
+      "consulta_direta": "Trabalho 8 horas por dia e sinto que não consigo render nos estudos à noite. Como devo dividir meus blocos de estudo diários e cuidar do sono?",
+      "esperado": {
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.6,
+        "estado_capacidade": "normal",
+        "pico_inicio": "06:00",
+        "vale_inicio": "21:00",
+        "sono_janelas_por_dia": 2,
+        "fontes_esperadas_alguma": [
+          "artigo_19_dual_burden_clt_martins.txt",
+          "artigo_05_sleep_consolidation_walker.txt",
+          "artigo_14_willpower_depletion_baumeister.txt"
+        ]
+      }
+    },
+    {
+      "id": "persona_2_lisa_overplanning",
+      "descricao": "Persona 2 (Lisa): paralisia por overplanning e cronogramas rígidos que quebram",
+      "contexto": "vespertino",
+      "consulta_direta": "Eu perco horas montando planilhas e cronogramas que sempre atrasam quando surge um imprevisto. Quais técnicas práticas posso aplicar para evitar o overplanning?",
+      "esperado": {
+        "cronotipo": "vespertino",
+        "indice_capacidade": 0.6,
+        "estado_capacidade": "normal",
+        "pico_inicio": "15:30",
+        "vale_inicio": "13:30",
+        "sono_janelas_por_dia": 2,
+        "fontes_esperadas_alguma": [
+          "artigo_12_perfectionism_flett.txt",
+          "artigo_17_study_cycle_perez.txt",
+          "artigo_09_timeboxing_allen.txt"
+        ]
+      }
+    },
+    {
+      "id": "persona_3_bob_autodidata",
+      "descricao": "Persona 3 (Bob): priorização 80/20 de edital extenso e aprendizado baseado em projetos",
+      "contexto": "noturno",
+      "consulta_direta": "Como devo priorizar os tópicos de um edital extenso ou trilha autodidata em vez de estudar tudo de forma linear, e como validar meu aprendizado prático?",
+      "esperado": {
+        "cronotipo": "noturno",
+        "indice_capacidade": 0.6,
+        "estado_capacidade": "normal",
+        "pico_inicio": "19:30",
+        "vale_inicio": "14:00",
+        "sono_janelas_por_dia": 1,
+        "fontes_esperadas_alguma": [
+          "artigo_16_pareto_engineering_box.txt",
+          "artigo_18_project_based_learning_thomas.txt",
+          "artigo_20_feynman_technique_gleick.txt"
+        ]
+      }
+    },
+    {
+      "id": "porteiro_fora_de_escopo",
+      "descricao": "Consulta fora do domínio (receita de bolo de chocolate) barrada pelo porteiro L2",
+      "contexto": "matutino",
+      "consulta_direta": "Qual é a melhor receita de bolo de chocolate com cobertura de brigadeiro e fermento químico?",
+      "ajustes": {
+        "forcar_distancia_l2": 1.45
+      },
+      "esperado": {
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.6,
+        "estado_capacidade": "normal",
+        "pico_inicio": "08:00",
+        "vale_inicio": "13:00",
+        "sono_janelas_por_dia": 2,
+        "barrada_porteiro": true,
+        "fontes_esperadas_alguma": []
+      }
+    }
+  ]
+}

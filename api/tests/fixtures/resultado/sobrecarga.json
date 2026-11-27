@@ -1,0 +1,12 @@
+{
+  "status": "REPROVADO",
+  "violacoes": [
+    {
+      "regra": "SOBRECARGA",
+      "dia": "2026-12-02",
+      "bloco_id": null,
+      "mensagem": "Quarta-feira possui 6 horas de estudo noturno ininterrupto, violando o descanso circadiano.",
+      "excesso_min": 120
+    }
+  ]
+}

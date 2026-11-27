@@ -1,0 +1,266 @@
+{
+  "estudante_id": "est-vespertino",
+  "cronotipo": "vespertino",
+  "semana_inicio": "2026-11-30",
+  "livres": [
+    {
+      "dia": "2026-11-30",
+      "inicio": "10:00",
+      "fim": "12:30"
+    },
+    {
+      "dia": "2026-11-30",
+      "inicio": "13:30",
+      "fim": "19:00"
+    },
+    {
+      "dia": "2026-12-01",
+      "inicio": "10:00",
+      "fim": "12:30"
+    },
+    {
+      "dia": "2026-12-01",
+      "inicio": "13:30",
+      "fim": "19:00"
+    },
+    {
+      "dia": "2026-12-02",
+      "inicio": "10:00",
+      "fim": "12:30"
+    },
+    {
+      "dia": "2026-12-02",
+      "inicio": "13:30",
+      "fim": "19:00"
+    },
+    {
+      "dia": "2026-12-03",
+      "inicio": "10:00",
+      "fim": "12:30"
+    },
+    {
+      "dia": "2026-12-03",
+      "inicio": "13:30",
+      "fim": "19:00"
+    },
+    {
+      "dia": "2026-12-04",
+      "inicio": "10:00",
+      "fim": "12:30"
+    },
+    {
+      "dia": "2026-12-04",
+      "inicio": "13:30",
+      "fim": "19:00"
+    }
+  ],
+  "ocupados": [
+    {
+      "dia": "2026-12-01",
+      "inicio": "16:00",
+      "fim": "17:00"
+    }
+  ],
+  "picos": [
+    {
+      "dia": "2026-11-30",
+      "inicio": "15:30",
+      "fim": "18:30"
+    },
+    {
+      "dia": "2026-12-01",
+      "inicio": "15:30",
+      "fim": "18:30"
+    },
+    {
+      "dia": "2026-12-02",
+      "inicio": "15:30",
+      "fim": "18:30"
+    },
+    {
+      "dia": "2026-12-03",
+      "inicio": "15:30",
+      "fim": "18:30"
+    },
+    {
+      "dia": "2026-12-04",
+      "inicio": "15:30",
+      "fim": "18:30"
+    }
+  ],
+  "vales": [
+    {
+      "dia": "2026-11-30",
+      "inicio": "13:30",
+      "fim": "15:00"
+    },
+    {
+      "dia": "2026-12-01",
+      "inicio": "13:30",
+      "fim": "15:00"
+    },
+    {
+      "dia": "2026-12-02",
+      "inicio": "13:30",
+      "fim": "15:00"
+    },
+    {
+      "dia": "2026-12-03",
+      "inicio": "13:30",
+      "fim": "15:00"
+    },
+    {
+      "dia": "2026-12-04",
+      "inicio": "13:30",
+      "fim": "15:00"
+    }
+  ],
+  "sono": [
+    {
+      "dia": "2026-11-30",
+      "inicio": "23:30",
+      "fim": "23:59"
+    },
+    {
+      "dia": "2026-11-30",
+      "inicio": "00:00",
+      "fim": "07:30"
+    },
+    {
+      "dia": "2026-12-01",
+      "inicio": "23:30",
+      "fim": "23:59"
+    },
+    {
+      "dia": "2026-12-01",
+      "inicio": "00:00",
+      "fim": "07:30"
+    },
+    {
+      "dia": "2026-12-02",
+      "inicio": "23:30",
+      "fim": "23:59"
+    },
+    {
+      "dia": "2026-12-02",
+      "inicio": "00:00",
+      "fim": "07:30"
+    },
+    {
+      "dia": "2026-12-03",
+      "inicio": "23:30",
+      "fim": "23:59"
+    },
+    {
+      "dia": "2026-12-03",
+      "inicio": "00:00",
+      "fim": "07:30"
+    },
+    {
+      "dia": "2026-12-04",
+      "inicio": "23:30",
+      "fim": "23:59"
+    },
+    {
+      "dia": "2026-12-04",
+      "inicio": "00:00",
+      "fim": "07:30"
+    }
+  ],
+  "refeicoes": [
+    {
+      "dia": "2026-11-30",
+      "inicio": "12:30",
+      "fim": "13:30"
+    },
+    {
+      "dia": "2026-11-30",
+      "inicio": "20:00",
+      "fim": "21:00"
+    },
+    {
+      "dia": "2026-12-01",
+      "inicio": "12:30",
+      "fim": "13:30"
+    },
+    {
+      "dia": "2026-12-01",
+      "inicio": "20:00",
+      "fim": "21:00"
+    },
+    {
+      "dia": "2026-12-02",
+      "inicio": "12:30",
+      "fim": "13:30"
+    },
+    {
+      "dia": "2026-12-02",
+      "inicio": "20:00",
+      "fim": "21:00"
+    },
+    {
+      "dia": "2026-12-03",
+      "inicio": "12:30",
+      "fim": "13:30"
+    },
+    {
+      "dia": "2026-12-03",
+      "inicio": "20:00",
+      "fim": "21:00"
+    },
+    {
+      "dia": "2026-12-04",
+      "inicio": "12:30",
+      "fim": "13:30"
+    },
+    {
+      "dia": "2026-12-04",
+      "inicio": "20:00",
+      "fim": "21:00"
+    }
+  ],
+  "materiais": [
+    {
+      "id": "calc-01",
+      "disciplina": "Cálculo I",
+      "titulo": "Limites e derivadas: lista 3",
+      "carga": "alta",
+      "horas_estimadas": 4,
+      "dificuldade": 4,
+      "prazo": "2026-12-04"
+    },
+    {
+      "id": "prog-01",
+      "disciplina": "Programação",
+      "titulo": "Exercícios de recursão em Python",
+      "carga": "alta",
+      "horas_estimadas": 3,
+      "dificuldade": 3,
+      "prazo": null
+    },
+    {
+      "id": "hist-01",
+      "disciplina": "História",
+      "titulo": "Leitura: capítulo 5 (Era Vargas)",
+      "carga": "baixa",
+      "horas_estimadas": 2,
+      "dificuldade": 2,
+      "prazo": null
+    },
+    {
+      "id": "ing-01",
+      "disciplina": "Inglês",
+      "titulo": "Flashcards de vocabulário (unidade 4)",
+      "carga": "baixa",
+      "horas_estimadas": 1.5,
+      "dificuldade": 1,
+      "prazo": null
+    }
+  ],
+  "checkin": {
+    "energia": 3,
+    "horas_sono": 7,
+    "estresse": 2
+  },
+  "indice_capacidade": 0.6
+}
