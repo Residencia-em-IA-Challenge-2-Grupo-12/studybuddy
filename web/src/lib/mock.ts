@@ -14,8 +14,10 @@ export const ROTAS_MOCK: Record<string, (corpo?: Record<string, unknown>) => unk
     const cronotipo = corpo?.cronotipo as Cronotipo | undefined;
     return (cronotipo && CONTEXTO[cronotipo]) || CONTEXTO.matutino;
   },
-  "POST /fluxo/checkin": () => CONTEXTO.matutino.checkin,
-  "POST /fluxo/materiais": () => CONTEXTO.matutino.materiais,
+  // Check-in e materiais ecoam o que a tela enviou: quem normaliza é o backend, não a tela.
+  "POST /fluxo/checkin": (corpo) => corpo ?? CONTEXTO.matutino.checkin,
+  "POST /fluxo/materiais": (corpo) =>
+    Array.isArray(corpo?.materiais) ? corpo.materiais : CONTEXTO.matutino.materiais,
   "POST /fluxo/plano": (): PlanoResposta => ({
     proposta: PROPOSTA.valida,
     validacao: RESULTADO.aprovado,

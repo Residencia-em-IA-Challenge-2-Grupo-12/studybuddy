@@ -1,5 +1,6 @@
 "use client";
 
+import { CheckinForm } from "@/modules/checkin/components/CheckinForm";
 import { useFluxo } from "@/modules/fluxo/FluxoProvider";
 import { PassoShell, PASSOS } from "@/modules/fluxo/components/PassoShell";
 
@@ -12,7 +13,7 @@ export default function CheckInPage() {
       titulo={PASSOS[1].titulo}
       faltando={contexto ? null : { rotulo: "onboarding", href: "/onboarding" }}
     >
-      <p className="secundario">As escalas do check-in entram na Fase 3.</p>
+      <CheckinForm />
     </PassoShell>
   );
 }

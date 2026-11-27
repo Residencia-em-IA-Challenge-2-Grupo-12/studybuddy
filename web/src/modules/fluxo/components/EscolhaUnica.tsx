@@ -2,17 +2,20 @@
 
 import { useId, useRef } from "react";
 
-type Opcao<T extends string> = { valor: T; rotulo: string };
+type Opcao<T extends string | number> = { valor: T; rotulo: string };
 
-type Props<T extends string> = {
+type Props<T extends string | number> = {
   rotulo: string;
   valor: T | null;
   opcoes: Opcao<T>[];
   aoMudar: (valor: T) => void;
+  /** Explica a escala: "1 = muito baixo, 5 = muito alto". */
+  ajuda?: string;
 };
 
-/** Radiogroup com seleção única: setas mudam o valor e o foco acompanha. */
-export function EscolhaUnica<T extends string>({ rotulo, valor, opcoes, aoMudar }: Props<T>) {
+/** Radiogroup com seleção única: setas mudam o valor e o foco acompanha. Serve para escolha de
+ *  texto (cronotipo) e para escala numérica (check-in). */
+export function EscolhaUnica<T extends string | number>({ rotulo, valor, opcoes, aoMudar, ajuda }: Props<T>) {
   const id = useId();
   const botoes = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -60,6 +63,7 @@ export function EscolhaUnica<T extends string>({ rotulo, valor, opcoes, aoMudar 
           );
         })}
       </div>
+      {ajuda ? <p className="texto-menor secundario">{ajuda}</p> : null}
     </div>
   );
 }

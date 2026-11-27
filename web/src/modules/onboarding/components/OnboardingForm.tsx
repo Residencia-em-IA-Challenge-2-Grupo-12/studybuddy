@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { useFluxo } from "@/modules/fluxo/FluxoProvider";
-import { EscolhaUnica } from "./EscolhaUnica";
+import { EscolhaUnica } from "@/modules/fluxo/components/EscolhaUnica";
 import { carregarContexto } from "@/modules/fluxo/service";
 import type { Cronotipo } from "@/modules/fluxo/types";
 
