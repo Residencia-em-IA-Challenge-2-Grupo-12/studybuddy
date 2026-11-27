@@ -639,3 +639,53 @@ a.botao {
   gap: 0.75rem;
 }
 
+/* --- materiais --- */
+
+.materiais {
+  display: grid;
+  gap: 2.5rem;
+  max-width: var(--prosa);
+}
+
+.materiais__lista-area {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.materiais__lista {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.material {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--linha);
+}
+
+.material:last-child {
+  border-bottom: 1px solid var(--linha);
+}
+
+.material__titulo {
+  margin: 0;
+  font-weight: 600;
+}
+
+.material__meta {
+  margin: 0;
+}
+
+.material__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.campo__etiqueta--larga {
+  min-width: min(100%, 18rem);
+}
+
