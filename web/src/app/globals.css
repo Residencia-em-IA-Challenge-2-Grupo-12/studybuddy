@@ -590,6 +590,8 @@ a.botao {
   margin: 0;
   padding: 0;
   border: 0;
+  /* botões e controles encostam no início; sem isto, o item de grid estica na largura toda */
+  justify-items: start;
 }
 
 .campo__rotulo {
@@ -628,6 +630,7 @@ a.botao {
 .escolha {
   display: grid;
   gap: 0.5rem;
+  justify-items: start;
 }
 
 .acoes {
