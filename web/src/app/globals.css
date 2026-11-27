@@ -590,8 +590,6 @@ a.botao {
   margin: 0;
   padding: 0;
   border: 0;
-  /* botões e controles encostam no início; sem isto, o item de grid estica na largura toda */
-  justify-items: start;
 }
 
 .campo__rotulo {
@@ -630,7 +628,6 @@ a.botao {
 .escolha {
   display: grid;
   gap: 0.5rem;
-  justify-items: start;
 }
 
 .acoes {
@@ -689,3 +686,117 @@ a.botao {
   min-width: min(100%, 18rem);
 }
 
+/* --- plano da semana --- */
+
+/* a grade da semana não cabe na coluna de leitura */
+.pagina--larga {
+  max-width: 72rem;
+}
+
+.plano {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.plano__subtitulo {
+  font-size: var(--texto-corpo);
+  margin-bottom: 0.35rem;
+}
+
+.plano__mensagem {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.mensagem p,
+.mensagem__lista {
+  margin: 0 0 0.75rem;
+}
+
+.mensagem__lista {
+  padding-inline-start: 1.25rem;
+}
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.grade__dia {
+  display: grid;
+  align-content: start;
+  gap: 0.5rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--linha);
+}
+
+.grade__rotulo {
+  font-size: var(--texto-menor);
+  color: var(--tinta-secundaria);
+  font-weight: 500;
+}
+
+.grade__vazio {
+  margin: 0;
+}
+
+.grade__blocos {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bloco {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.5rem 0.55rem;
+  border-left: 2px solid var(--acento);
+  background: var(--superficie);
+}
+
+.bloco__hora,
+.bloco__disciplina,
+.bloco__tecnica {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.bloco__hora {
+  font-size: var(--texto-menor);
+  font-variant-numeric: tabular-nums;
+  color: var(--tinta-secundaria);
+}
+
+.bloco__disciplina {
+  font-size: var(--texto-menor);
+  font-weight: 600;
+}
+
+.lista-simples {
+  margin: 0;
+  padding-inline-start: 1.1rem;
+  font-size: var(--texto-menor);
+  color: var(--tinta-secundaria);
+}
+
+.violacoes {
+  padding: 0.9rem 1rem;
+  border-left: 2px solid var(--atencao);
+  border-radius: 0 var(--raio) var(--raio) 0;
+  background: #fbf6ea;
+}
+
+@media (max-width: 900px) {
+  .grade {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .grade__dia {
+    padding-top: 0.75rem;
+  }
+}

@@ -2,6 +2,7 @@
 
 import { useFluxo } from "@/modules/fluxo/FluxoProvider";
 import { PassoShell, PASSOS } from "@/modules/fluxo/components/PassoShell";
+import { PlanoSemana } from "@/modules/plano/components/PlanoSemana";
 
 export default function PlanoPage() {
   const { contexto, checkin, materiais } = useFluxo();
@@ -15,8 +16,8 @@ export default function PlanoPage() {
         : null;
 
   return (
-    <PassoShell numero={3} titulo={PASSOS[3].titulo} faltando={faltando}>
-      <p className="secundario">A grade da semana entra na Fase 5.</p>
+    <PassoShell numero={3} titulo={PASSOS[3].titulo} faltando={faltando} largura="larga">
+      <PlanoSemana />
     </PassoShell>
   );
 }
