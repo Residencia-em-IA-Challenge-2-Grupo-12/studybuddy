@@ -1,0 +1,6490 @@
+{
+  "llm": null,
+  "juiz": null,
+  "agregado": {
+    "contrato_valido": 1.0,
+    "persistencia_integra": 1.0,
+    "integridade_circadiana": 1.0,
+    "precisao_capacidade": 1.0,
+    "consistencia_agenda": 1.0,
+    "porteiro_ok": 1.0,
+    "hit_rate": 1.0,
+    "mrr": 0.8016,
+    "rotulo": 1.0,
+    "json_valido": null,
+    "citacao_valida": null,
+    "citacoes_mantidas": null,
+    "aderencia_cronotipo": null,
+    "fidelidade": null
+  },
+  "cenarios": [
+    {
+      "cenario": "matutino",
+      "linha": {
+        "cenario": "matutino",
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.6,
+        "contrato_valido": 1.0,
+        "persistencia_integra": 1.0,
+        "integridade_circadiana": 1.0,
+        "precisao_capacidade": 1.0,
+        "consistencia_agenda": 1.0,
+        "porteiro_ok": 1.0,
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "fontes_recuperadas": "artigo_10_pomodoro_cirillo.txt;artigo_01_active_recall_karpicke.txt;artigo_02_spaced_repetition_cepeda.txt;artigo_16_pareto_engineering_box.txt",
+        "rotulo": 1.0,
+        "erros": ""
+      },
+      "contexto": {
+        "estudante_id": "est-matutino",
+        "cronotipo": "matutino",
+        "semana_inicio": "2026-11-30",
+        "livres": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          }
+        ],
+        "ocupados": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "09:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          }
+        ],
+        "picos": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          }
+        ],
+        "vales": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          }
+        ],
+        "sono": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          }
+        ],
+        "refeicoes": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          }
+        ],
+        "materiais": [
+          {
+            "id": "calc-01",
+            "disciplina": "Cálculo I",
+            "titulo": "Limites e derivadas: lista 3",
+            "carga": "alta",
+            "horas_estimadas": 4.0,
+            "dificuldade": 4,
+            "prazo": "2026-12-04"
+          },
+          {
+            "id": "prog-01",
+            "disciplina": "Programação",
+            "titulo": "Exercícios de recursão em Python",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 3,
+            "prazo": null
+          },
+          {
+            "id": "hist-01",
+            "disciplina": "História",
+            "titulo": "Leitura: capítulo 5 (Era Vargas)",
+            "carga": "baixa",
+            "horas_estimadas": 2.0,
+            "dificuldade": 2,
+            "prazo": null
+          },
+          {
+            "id": "ing-01",
+            "disciplina": "Inglês",
+            "titulo": "Flashcards de vocabulário (unidade 4)",
+            "carga": "baixa",
+            "horas_estimadas": 1.5,
+            "dificuldade": 1,
+            "prazo": null
+          }
+        ],
+        "checkin": {
+          "energia": 3,
+          "horas_sono": 7.0,
+          "estresse": 2
+        },
+        "indice_capacidade": 0.6
+      },
+      "recuperacao": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "porteiro_ok": 1.0,
+        "fontes_recuperadas": [
+          "artigo_10_pomodoro_cirillo.txt",
+          "artigo_01_active_recall_karpicke.txt",
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_16_pareto_engineering_box.txt"
+        ]
+      }
+    },
+    {
+      "cenario": "vespertino",
+      "linha": {
+        "cenario": "vespertino",
+        "cronotipo": "vespertino",
+        "indice_capacidade": 0.6,
+        "contrato_valido": 1.0,
+        "persistencia_integra": 1.0,
+        "integridade_circadiana": 1.0,
+        "precisao_capacidade": 1.0,
+        "consistencia_agenda": 1.0,
+        "porteiro_ok": 1.0,
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "fontes_recuperadas": "artigo_10_pomodoro_cirillo.txt;artigo_01_active_recall_karpicke.txt;artigo_02_spaced_repetition_cepeda.txt;artigo_16_pareto_engineering_box.txt",
+        "rotulo": 1.0,
+        "erros": ""
+      },
+      "contexto": {
+        "estudante_id": "est-vespertino",
+        "cronotipo": "vespertino",
+        "semana_inicio": "2026-11-30",
+        "livres": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          }
+        ],
+        "ocupados": [
+          {
+            "dia": "2026-12-01",
+            "inicio": "16:00:00",
+            "fim": "17:00:00"
+          }
+        ],
+        "picos": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          }
+        ],
+        "vales": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          }
+        ],
+        "sono": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          }
+        ],
+        "refeicoes": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          }
+        ],
+        "materiais": [
+          {
+            "id": "calc-01",
+            "disciplina": "Cálculo I",
+            "titulo": "Limites e derivadas: lista 3",
+            "carga": "alta",
+            "horas_estimadas": 4.0,
+            "dificuldade": 4,
+            "prazo": "2026-12-04"
+          },
+          {
+            "id": "prog-01",
+            "disciplina": "Programação",
+            "titulo": "Exercícios de recursão em Python",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 3,
+            "prazo": null
+          },
+          {
+            "id": "hist-01",
+            "disciplina": "História",
+            "titulo": "Leitura: capítulo 5 (Era Vargas)",
+            "carga": "baixa",
+            "horas_estimadas": 2.0,
+            "dificuldade": 2,
+            "prazo": null
+          },
+          {
+            "id": "ing-01",
+            "disciplina": "Inglês",
+            "titulo": "Flashcards de vocabulário (unidade 4)",
+            "carga": "baixa",
+            "horas_estimadas": 1.5,
+            "dificuldade": 1,
+            "prazo": null
+          }
+        ],
+        "checkin": {
+          "energia": 3,
+          "horas_sono": 7.0,
+          "estresse": 2
+        },
+        "indice_capacidade": 0.6
+      },
+      "recuperacao": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "porteiro_ok": 1.0,
+        "fontes_recuperadas": [
+          "artigo_10_pomodoro_cirillo.txt",
+          "artigo_01_active_recall_karpicke.txt",
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_16_pareto_engineering_box.txt"
+        ]
+      }
+    },
+    {
+      "cenario": "noturno",
+      "linha": {
+        "cenario": "noturno",
+        "cronotipo": "noturno",
+        "indice_capacidade": 0.6,
+        "contrato_valido": 1.0,
+        "persistencia_integra": 1.0,
+        "integridade_circadiana": 1.0,
+        "precisao_capacidade": 1.0,
+        "consistencia_agenda": 1.0,
+        "porteiro_ok": 1.0,
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "fontes_recuperadas": "artigo_10_pomodoro_cirillo.txt;artigo_01_active_recall_karpicke.txt;artigo_02_spaced_repetition_cepeda.txt;artigo_16_pareto_engineering_box.txt",
+        "rotulo": 1.0,
+        "erros": ""
+      },
+      "contexto": {
+        "estudante_id": "est-noturno",
+        "cronotipo": "noturno",
+        "semana_inicio": "2026-11-30",
+        "livres": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "14:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:00:00",
+            "fim": "23:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "14:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:00:00",
+            "fim": "23:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "14:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:00:00",
+            "fim": "23:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "14:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:00:00",
+            "fim": "23:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "14:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:00:00",
+            "fim": "23:00:00"
+          }
+        ],
+        "ocupados": [],
+        "picos": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:30:00",
+            "fim": "22:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:30:00",
+            "fim": "22:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:30:00",
+            "fim": "22:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:30:00",
+            "fim": "22:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:30:00",
+            "fim": "22:30:00"
+          }
+        ],
+        "vales": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          }
+        ],
+        "sono": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "02:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "02:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "02:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "02:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "02:00:00",
+            "fim": "10:00:00"
+          }
+        ],
+        "refeicoes": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "14:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "14:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "14:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "14:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "14:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          }
+        ],
+        "materiais": [
+          {
+            "id": "calc-01",
+            "disciplina": "Cálculo I",
+            "titulo": "Limites e derivadas: lista 3",
+            "carga": "alta",
+            "horas_estimadas": 4.0,
+            "dificuldade": 4,
+            "prazo": "2026-12-04"
+          },
+          {
+            "id": "prog-01",
+            "disciplina": "Programação",
+            "titulo": "Exercícios de recursão em Python",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 3,
+            "prazo": null
+          },
+          {
+            "id": "hist-01",
+            "disciplina": "História",
+            "titulo": "Leitura: capítulo 5 (Era Vargas)",
+            "carga": "baixa",
+            "horas_estimadas": 2.0,
+            "dificuldade": 2,
+            "prazo": null
+          },
+          {
+            "id": "ing-01",
+            "disciplina": "Inglês",
+            "titulo": "Flashcards de vocabulário (unidade 4)",
+            "carga": "baixa",
+            "horas_estimadas": 1.5,
+            "dificuldade": 1,
+            "prazo": null
+          }
+        ],
+        "checkin": {
+          "energia": 3,
+          "horas_sono": 7.0,
+          "estresse": 2
+        },
+        "indice_capacidade": 0.6
+      },
+      "recuperacao": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "porteiro_ok": 1.0,
+        "fontes_recuperadas": [
+          "artigo_10_pomodoro_cirillo.txt",
+          "artigo_01_active_recall_karpicke.txt",
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_16_pareto_engineering_box.txt"
+        ]
+      }
+    },
+    {
+      "cenario": "alta_energia",
+      "linha": {
+        "cenario": "alta_energia",
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.9,
+        "contrato_valido": 1.0,
+        "persistencia_integra": 1.0,
+        "integridade_circadiana": 1.0,
+        "precisao_capacidade": 1.0,
+        "consistencia_agenda": 1.0,
+        "porteiro_ok": 1.0,
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "fontes_recuperadas": "artigo_06_deep_work_newport.txt;artigo_02_spaced_repetition_cepeda.txt;artigo_06_deep_work_newport.txt;artigo_02_spaced_repetition_cepeda.txt",
+        "rotulo": 1.0,
+        "erros": ""
+      },
+      "contexto": {
+        "estudante_id": "est-energia",
+        "cronotipo": "matutino",
+        "semana_inicio": "2026-11-30",
+        "livres": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          }
+        ],
+        "ocupados": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "09:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          }
+        ],
+        "picos": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          }
+        ],
+        "vales": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          }
+        ],
+        "sono": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          }
+        ],
+        "refeicoes": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          }
+        ],
+        "materiais": [
+          {
+            "id": "calc-01",
+            "disciplina": "Cálculo I",
+            "titulo": "Limites e derivadas: lista 3",
+            "carga": "alta",
+            "horas_estimadas": 4.0,
+            "dificuldade": 4,
+            "prazo": "2026-12-04"
+          },
+          {
+            "id": "prog-01",
+            "disciplina": "Programação",
+            "titulo": "Exercícios de recursão em Python",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 3,
+            "prazo": null
+          },
+          {
+            "id": "hist-01",
+            "disciplina": "História",
+            "titulo": "Leitura: capítulo 5 (Era Vargas)",
+            "carga": "baixa",
+            "horas_estimadas": 2.0,
+            "dificuldade": 2,
+            "prazo": null
+          },
+          {
+            "id": "ing-01",
+            "disciplina": "Inglês",
+            "titulo": "Flashcards de vocabulário (unidade 4)",
+            "carga": "baixa",
+            "horas_estimadas": 1.5,
+            "dificuldade": 1,
+            "prazo": null
+          }
+        ],
+        "checkin": {
+          "energia": 5,
+          "horas_sono": 8.0,
+          "estresse": 1
+        },
+        "indice_capacidade": 0.9
+      },
+      "recuperacao": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "porteiro_ok": 1.0,
+        "fontes_recuperadas": [
+          "artigo_06_deep_work_newport.txt",
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_06_deep_work_newport.txt",
+          "artigo_02_spaced_repetition_cepeda.txt"
+        ]
+      }
+    },
+    {
+      "cenario": "fadiga",
+      "linha": {
+        "cenario": "fadiga",
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.2,
+        "contrato_valido": 1.0,
+        "persistencia_integra": 1.0,
+        "integridade_circadiana": 1.0,
+        "precisao_capacidade": 1.0,
+        "consistencia_agenda": 1.0,
+        "porteiro_ok": 1.0,
+        "hit_rate": 1.0,
+        "mrr": 0.25,
+        "fontes_recuperadas": "artigo_02_spaced_repetition_cepeda.txt;artigo_02_spaced_repetition_cepeda.txt;artigo_01_active_recall_karpicke.txt;artigo_05_sleep_consolidation_walker.txt",
+        "rotulo": 1.0,
+        "erros": ""
+      },
+      "contexto": {
+        "estudante_id": "est-fadiga",
+        "cronotipo": "matutino",
+        "semana_inicio": "2026-11-30",
+        "livres": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          }
+        ],
+        "ocupados": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "09:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          }
+        ],
+        "picos": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          }
+        ],
+        "vales": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          }
+        ],
+        "sono": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          }
+        ],
+        "refeicoes": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          }
+        ],
+        "materiais": [
+          {
+            "id": "calc-01",
+            "disciplina": "Cálculo I",
+            "titulo": "Limites e derivadas: lista 3",
+            "carga": "alta",
+            "horas_estimadas": 4.0,
+            "dificuldade": 4,
+            "prazo": "2026-12-04"
+          },
+          {
+            "id": "prog-01",
+            "disciplina": "Programação",
+            "titulo": "Exercícios de recursão em Python",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 3,
+            "prazo": null
+          },
+          {
+            "id": "hist-01",
+            "disciplina": "História",
+            "titulo": "Leitura: capítulo 5 (Era Vargas)",
+            "carga": "baixa",
+            "horas_estimadas": 2.0,
+            "dificuldade": 2,
+            "prazo": null
+          },
+          {
+            "id": "ing-01",
+            "disciplina": "Inglês",
+            "titulo": "Flashcards de vocabulário (unidade 4)",
+            "carga": "baixa",
+            "horas_estimadas": 1.5,
+            "dificuldade": 1,
+            "prazo": null
+          }
+        ],
+        "checkin": {
+          "energia": 1,
+          "horas_sono": 4.0,
+          "estresse": 5
+        },
+        "indice_capacidade": 0.2
+      },
+      "recuperacao": {
+        "hit_rate": 1.0,
+        "mrr": 0.25,
+        "porteiro_ok": 1.0,
+        "fontes_recuperadas": [
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_01_active_recall_karpicke.txt",
+          "artigo_05_sleep_consolidation_walker.txt"
+        ]
+      }
+    },
+    {
+      "cenario": "agenda_cheia",
+      "linha": {
+        "cenario": "agenda_cheia",
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.6,
+        "contrato_valido": 1.0,
+        "persistencia_integra": 1.0,
+        "integridade_circadiana": 1.0,
+        "precisao_capacidade": 1.0,
+        "consistencia_agenda": 1.0,
+        "porteiro_ok": 1.0,
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "fontes_recuperadas": "artigo_10_pomodoro_cirillo.txt;artigo_01_active_recall_karpicke.txt;artigo_02_spaced_repetition_cepeda.txt;artigo_16_pareto_engineering_box.txt",
+        "rotulo": 1.0,
+        "erros": ""
+      },
+      "contexto": {
+        "estudante_id": "est-clt",
+        "cronotipo": "matutino",
+        "semana_inicio": "2026-11-30",
+        "livres": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:00:00",
+            "fim": "22:00:00"
+          }
+        ],
+        "ocupados": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "08:00:00",
+            "fim": "17:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "08:00:00",
+            "fim": "17:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "08:00:00",
+            "fim": "17:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "08:00:00",
+            "fim": "17:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "08:00:00",
+            "fim": "17:00:00"
+          }
+        ],
+        "picos": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:00:00",
+            "fim": "20:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:00:00",
+            "fim": "20:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:00:00",
+            "fim": "20:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:00:00",
+            "fim": "20:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:00:00",
+            "fim": "20:30:00"
+          }
+        ],
+        "vales": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "21:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "21:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "21:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "21:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "21:00:00",
+            "fim": "22:00:00"
+          }
+        ],
+        "sono": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "22:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "00:00:00",
+            "fim": "05:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "22:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "00:00:00",
+            "fim": "05:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "22:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "00:00:00",
+            "fim": "05:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "22:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "00:00:00",
+            "fim": "05:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "22:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "00:00:00",
+            "fim": "05:30:00"
+          }
+        ],
+        "refeicoes": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          }
+        ],
+        "materiais": [
+          {
+            "id": "calc-01",
+            "disciplina": "Cálculo I",
+            "titulo": "Limites e derivadas: lista 3",
+            "carga": "alta",
+            "horas_estimadas": 4.0,
+            "dificuldade": 4,
+            "prazo": "2026-12-04"
+          },
+          {
+            "id": "prog-01",
+            "disciplina": "Programação",
+            "titulo": "Exercícios de recursão em Python",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 3,
+            "prazo": null
+          },
+          {
+            "id": "hist-01",
+            "disciplina": "História",
+            "titulo": "Leitura: capítulo 5 (Era Vargas)",
+            "carga": "baixa",
+            "horas_estimadas": 2.0,
+            "dificuldade": 2,
+            "prazo": null
+          }
+        ],
+        "checkin": {
+          "energia": 3,
+          "horas_sono": 7.0,
+          "estresse": 2
+        },
+        "indice_capacidade": 0.6
+      },
+      "recuperacao": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "porteiro_ok": 1.0,
+        "fontes_recuperadas": [
+          "artigo_10_pomodoro_cirillo.txt",
+          "artigo_01_active_recall_karpicke.txt",
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_16_pareto_engineering_box.txt"
+        ]
+      }
+    },
+    {
+      "cenario": "prazo_apertado",
+      "linha": {
+        "cenario": "prazo_apertado",
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.6,
+        "contrato_valido": 1.0,
+        "persistencia_integra": 1.0,
+        "integridade_circadiana": 1.0,
+        "precisao_capacidade": 1.0,
+        "consistencia_agenda": 1.0,
+        "porteiro_ok": 1.0,
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "fontes_recuperadas": "artigo_10_pomodoro_cirillo.txt;artigo_01_active_recall_karpicke.txt;artigo_02_spaced_repetition_cepeda.txt;artigo_16_pareto_engineering_box.txt",
+        "rotulo": 1.0,
+        "erros": ""
+      },
+      "contexto": {
+        "estudante_id": "est-prazo",
+        "cronotipo": "matutino",
+        "semana_inicio": "2026-11-30",
+        "livres": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          }
+        ],
+        "ocupados": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "09:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          }
+        ],
+        "picos": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          }
+        ],
+        "vales": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          }
+        ],
+        "sono": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          }
+        ],
+        "refeicoes": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          }
+        ],
+        "materiais": [
+          {
+            "id": "fis-01",
+            "disciplina": "Física",
+            "titulo": "Prova de cinemática: resolver lista",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 5,
+            "prazo": "2026-12-02"
+          },
+          {
+            "id": "calc-01",
+            "disciplina": "Cálculo I",
+            "titulo": "Limites e derivadas: lista 3",
+            "carga": "alta",
+            "horas_estimadas": 4.0,
+            "dificuldade": 4,
+            "prazo": "2026-12-04"
+          },
+          {
+            "id": "prog-01",
+            "disciplina": "Programação",
+            "titulo": "Exercícios de recursão em Python",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 3,
+            "prazo": null
+          },
+          {
+            "id": "hist-01",
+            "disciplina": "História",
+            "titulo": "Leitura: capítulo 5 (Era Vargas)",
+            "carga": "baixa",
+            "horas_estimadas": 2.0,
+            "dificuldade": 2,
+            "prazo": null
+          },
+          {
+            "id": "ing-01",
+            "disciplina": "Inglês",
+            "titulo": "Flashcards de vocabulário (unidade 4)",
+            "carga": "baixa",
+            "horas_estimadas": 1.5,
+            "dificuldade": 1,
+            "prazo": null
+          }
+        ],
+        "checkin": {
+          "energia": 3,
+          "horas_sono": 7.0,
+          "estresse": 2
+        },
+        "indice_capacidade": 0.6
+      },
+      "recuperacao": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "porteiro_ok": 1.0,
+        "fontes_recuperadas": [
+          "artigo_10_pomodoro_cirillo.txt",
+          "artigo_01_active_recall_karpicke.txt",
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_16_pareto_engineering_box.txt"
+        ]
+      }
+    },
+    {
+      "cenario": "escalas_ui_alta_energia",
+      "linha": {
+        "cenario": "escalas_ui_alta_energia",
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.9,
+        "contrato_valido": 1.0,
+        "persistencia_integra": 1.0,
+        "integridade_circadiana": 1.0,
+        "precisao_capacidade": 1.0,
+        "consistencia_agenda": 1.0,
+        "porteiro_ok": 1.0,
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "fontes_recuperadas": "artigo_06_deep_work_newport.txt;artigo_02_spaced_repetition_cepeda.txt;artigo_06_deep_work_newport.txt;artigo_02_spaced_repetition_cepeda.txt",
+        "rotulo": 1.0,
+        "erros": ""
+      },
+      "contexto": {
+        "estudante_id": "est-matutino",
+        "cronotipo": "matutino",
+        "semana_inicio": "2026-11-30",
+        "livres": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          }
+        ],
+        "ocupados": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "09:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          }
+        ],
+        "picos": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          }
+        ],
+        "vales": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          }
+        ],
+        "sono": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          }
+        ],
+        "refeicoes": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          }
+        ],
+        "materiais": [
+          {
+            "id": "calc-01",
+            "disciplina": "Cálculo I",
+            "titulo": "Limites e derivadas: lista 3",
+            "carga": "alta",
+            "horas_estimadas": 4.0,
+            "dificuldade": 4,
+            "prazo": "2026-12-04"
+          },
+          {
+            "id": "prog-01",
+            "disciplina": "Programação",
+            "titulo": "Exercícios de recursão em Python",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 3,
+            "prazo": null
+          },
+          {
+            "id": "hist-01",
+            "disciplina": "História",
+            "titulo": "Leitura: capítulo 5 (Era Vargas)",
+            "carga": "baixa",
+            "horas_estimadas": 2.0,
+            "dificuldade": 2,
+            "prazo": null
+          },
+          {
+            "id": "ing-01",
+            "disciplina": "Inglês",
+            "titulo": "Flashcards de vocabulário (unidade 4)",
+            "carga": "baixa",
+            "horas_estimadas": 1.5,
+            "dificuldade": 1,
+            "prazo": null
+          }
+        ],
+        "checkin": {
+          "energia": 5,
+          "horas_sono": 8.0,
+          "estresse": 1
+        },
+        "indice_capacidade": 0.9
+      },
+      "recuperacao": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "porteiro_ok": 1.0,
+        "fontes_recuperadas": [
+          "artigo_06_deep_work_newport.txt",
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_06_deep_work_newport.txt",
+          "artigo_02_spaced_repetition_cepeda.txt"
+        ]
+      }
+    },
+    {
+      "cenario": "escalas_ui_fadiga",
+      "linha": {
+        "cenario": "escalas_ui_fadiga",
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.2,
+        "contrato_valido": 1.0,
+        "persistencia_integra": 1.0,
+        "integridade_circadiana": 1.0,
+        "precisao_capacidade": 1.0,
+        "consistencia_agenda": 1.0,
+        "porteiro_ok": 1.0,
+        "hit_rate": 1.0,
+        "mrr": 0.25,
+        "fontes_recuperadas": "artigo_02_spaced_repetition_cepeda.txt;artigo_02_spaced_repetition_cepeda.txt;artigo_01_active_recall_karpicke.txt;artigo_05_sleep_consolidation_walker.txt",
+        "rotulo": 1.0,
+        "erros": ""
+      },
+      "contexto": {
+        "estudante_id": "est-matutino",
+        "cronotipo": "matutino",
+        "semana_inicio": "2026-11-30",
+        "livres": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          }
+        ],
+        "ocupados": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "09:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          }
+        ],
+        "picos": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          }
+        ],
+        "vales": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          }
+        ],
+        "sono": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          }
+        ],
+        "refeicoes": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          }
+        ],
+        "materiais": [
+          {
+            "id": "calc-01",
+            "disciplina": "Cálculo I",
+            "titulo": "Limites e derivadas: lista 3",
+            "carga": "alta",
+            "horas_estimadas": 4.0,
+            "dificuldade": 4,
+            "prazo": "2026-12-04"
+          },
+          {
+            "id": "prog-01",
+            "disciplina": "Programação",
+            "titulo": "Exercícios de recursão em Python",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 3,
+            "prazo": null
+          },
+          {
+            "id": "hist-01",
+            "disciplina": "História",
+            "titulo": "Leitura: capítulo 5 (Era Vargas)",
+            "carga": "baixa",
+            "horas_estimadas": 2.0,
+            "dificuldade": 2,
+            "prazo": null
+          },
+          {
+            "id": "ing-01",
+            "disciplina": "Inglês",
+            "titulo": "Flashcards de vocabulário (unidade 4)",
+            "carga": "baixa",
+            "horas_estimadas": 1.5,
+            "dificuldade": 1,
+            "prazo": null
+          }
+        ],
+        "checkin": {
+          "energia": 1,
+          "horas_sono": 4.0,
+          "estresse": 5
+        },
+        "indice_capacidade": 0.2
+      },
+      "recuperacao": {
+        "hit_rate": 1.0,
+        "mrr": 0.25,
+        "porteiro_ok": 1.0,
+        "fontes_recuperadas": [
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_01_active_recall_karpicke.txt",
+          "artigo_05_sleep_consolidation_walker.txt"
+        ]
+      }
+    },
+    {
+      "cenario": "escalas_ui_moderado",
+      "linha": {
+        "cenario": "escalas_ui_moderado",
+        "cronotipo": "vespertino",
+        "indice_capacidade": 0.55,
+        "contrato_valido": 1.0,
+        "persistencia_integra": 1.0,
+        "integridade_circadiana": 1.0,
+        "precisao_capacidade": 1.0,
+        "consistencia_agenda": 1.0,
+        "porteiro_ok": 1.0,
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "fontes_recuperadas": "artigo_10_pomodoro_cirillo.txt;artigo_01_active_recall_karpicke.txt;artigo_02_spaced_repetition_cepeda.txt;artigo_16_pareto_engineering_box.txt",
+        "rotulo": 1.0,
+        "erros": ""
+      },
+      "contexto": {
+        "estudante_id": "est-vespertino",
+        "cronotipo": "vespertino",
+        "semana_inicio": "2026-11-30",
+        "livres": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          }
+        ],
+        "ocupados": [
+          {
+            "dia": "2026-12-01",
+            "inicio": "16:00:00",
+            "fim": "17:00:00"
+          }
+        ],
+        "picos": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          }
+        ],
+        "vales": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          }
+        ],
+        "sono": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          }
+        ],
+        "refeicoes": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          }
+        ],
+        "materiais": [
+          {
+            "id": "calc-01",
+            "disciplina": "Cálculo I",
+            "titulo": "Limites e derivadas: lista 3",
+            "carga": "alta",
+            "horas_estimadas": 4.0,
+            "dificuldade": 4,
+            "prazo": "2026-12-04"
+          },
+          {
+            "id": "prog-01",
+            "disciplina": "Programação",
+            "titulo": "Exercícios de recursão em Python",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 3,
+            "prazo": null
+          },
+          {
+            "id": "hist-01",
+            "disciplina": "História",
+            "titulo": "Leitura: capítulo 5 (Era Vargas)",
+            "carga": "baixa",
+            "horas_estimadas": 2.0,
+            "dificuldade": 2,
+            "prazo": null
+          },
+          {
+            "id": "ing-01",
+            "disciplina": "Inglês",
+            "titulo": "Flashcards de vocabulário (unidade 4)",
+            "carga": "baixa",
+            "horas_estimadas": 1.5,
+            "dificuldade": 1,
+            "prazo": null
+          }
+        ],
+        "checkin": {
+          "energia": 3,
+          "horas_sono": 6.0,
+          "estresse": 3
+        },
+        "indice_capacidade": 0.55
+      },
+      "recuperacao": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "porteiro_ok": 1.0,
+        "fontes_recuperadas": [
+          "artigo_10_pomodoro_cirillo.txt",
+          "artigo_01_active_recall_karpicke.txt",
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_16_pareto_engineering_box.txt"
+        ]
+      }
+    },
+    {
+      "cenario": "privacao_sono_energia_media",
+      "linha": {
+        "cenario": "privacao_sono_energia_media",
+        "cronotipo": "noturno",
+        "indice_capacidade": 0.5,
+        "contrato_valido": 1.0,
+        "persistencia_integra": 1.0,
+        "integridade_circadiana": 1.0,
+        "precisao_capacidade": 1.0,
+        "consistencia_agenda": 1.0,
+        "porteiro_ok": 1.0,
+        "hit_rate": 1.0,
+        "mrr": 0.25,
+        "fontes_recuperadas": "artigo_02_spaced_repetition_cepeda.txt;artigo_02_spaced_repetition_cepeda.txt;artigo_01_active_recall_karpicke.txt;artigo_05_sleep_consolidation_walker.txt",
+        "rotulo": 1.0,
+        "erros": ""
+      },
+      "contexto": {
+        "estudante_id": "est-noturno",
+        "cronotipo": "noturno",
+        "semana_inicio": "2026-11-30",
+        "livres": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "14:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:00:00",
+            "fim": "23:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "14:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:00:00",
+            "fim": "23:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "14:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:00:00",
+            "fim": "23:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "14:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:00:00",
+            "fim": "23:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "14:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:00:00",
+            "fim": "23:00:00"
+          }
+        ],
+        "ocupados": [],
+        "picos": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:30:00",
+            "fim": "22:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:30:00",
+            "fim": "22:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:30:00",
+            "fim": "22:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:30:00",
+            "fim": "22:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:30:00",
+            "fim": "22:30:00"
+          }
+        ],
+        "vales": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          }
+        ],
+        "sono": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "02:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "02:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "02:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "02:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "02:00:00",
+            "fim": "10:00:00"
+          }
+        ],
+        "refeicoes": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "14:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "14:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "14:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "14:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "14:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          }
+        ],
+        "materiais": [
+          {
+            "id": "calc-01",
+            "disciplina": "Cálculo I",
+            "titulo": "Limites e derivadas: lista 3",
+            "carga": "alta",
+            "horas_estimadas": 4.0,
+            "dificuldade": 4,
+            "prazo": "2026-12-04"
+          },
+          {
+            "id": "prog-01",
+            "disciplina": "Programação",
+            "titulo": "Exercícios de recursão em Python",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 3,
+            "prazo": null
+          },
+          {
+            "id": "hist-01",
+            "disciplina": "História",
+            "titulo": "Leitura: capítulo 5 (Era Vargas)",
+            "carga": "baixa",
+            "horas_estimadas": 2.0,
+            "dificuldade": 2,
+            "prazo": null
+          },
+          {
+            "id": "ing-01",
+            "disciplina": "Inglês",
+            "titulo": "Flashcards de vocabulário (unidade 4)",
+            "carga": "baixa",
+            "horas_estimadas": 1.5,
+            "dificuldade": 1,
+            "prazo": null
+          }
+        ],
+        "checkin": {
+          "energia": 3,
+          "horas_sono": 5.0,
+          "estresse": 4
+        },
+        "indice_capacidade": 0.5
+      },
+      "recuperacao": {
+        "hit_rate": 1.0,
+        "mrr": 0.25,
+        "porteiro_ok": 1.0,
+        "fontes_recuperadas": [
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_01_active_recall_karpicke.txt",
+          "artigo_05_sleep_consolidation_walker.txt"
+        ]
+      }
+    },
+    {
+      "cenario": "limiar_alto_capacidade",
+      "linha": {
+        "cenario": "limiar_alto_capacidade",
+        "cronotipo": "vespertino",
+        "indice_capacidade": 0.77,
+        "contrato_valido": 1.0,
+        "persistencia_integra": 1.0,
+        "integridade_circadiana": 1.0,
+        "precisao_capacidade": 1.0,
+        "consistencia_agenda": 1.0,
+        "porteiro_ok": 1.0,
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "fontes_recuperadas": "artigo_06_deep_work_newport.txt;artigo_02_spaced_repetition_cepeda.txt;artigo_06_deep_work_newport.txt;artigo_02_spaced_repetition_cepeda.txt",
+        "rotulo": 1.0,
+        "erros": ""
+      },
+      "contexto": {
+        "estudante_id": "est-vespertino",
+        "cronotipo": "vespertino",
+        "semana_inicio": "2026-11-30",
+        "livres": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          }
+        ],
+        "ocupados": [
+          {
+            "dia": "2026-12-01",
+            "inicio": "16:00:00",
+            "fim": "17:00:00"
+          }
+        ],
+        "picos": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          }
+        ],
+        "vales": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          }
+        ],
+        "sono": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          }
+        ],
+        "refeicoes": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          }
+        ],
+        "materiais": [
+          {
+            "id": "calc-01",
+            "disciplina": "Cálculo I",
+            "titulo": "Limites e derivadas: lista 3",
+            "carga": "alta",
+            "horas_estimadas": 4.0,
+            "dificuldade": 4,
+            "prazo": "2026-12-04"
+          },
+          {
+            "id": "prog-01",
+            "disciplina": "Programação",
+            "titulo": "Exercícios de recursão em Python",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 3,
+            "prazo": null
+          },
+          {
+            "id": "hist-01",
+            "disciplina": "História",
+            "titulo": "Leitura: capítulo 5 (Era Vargas)",
+            "carga": "baixa",
+            "horas_estimadas": 2.0,
+            "dificuldade": 2,
+            "prazo": null
+          },
+          {
+            "id": "ing-01",
+            "disciplina": "Inglês",
+            "titulo": "Flashcards de vocabulário (unidade 4)",
+            "carga": "baixa",
+            "horas_estimadas": 1.5,
+            "dificuldade": 1,
+            "prazo": null
+          }
+        ],
+        "checkin": {
+          "energia": 4,
+          "horas_sono": 8.0,
+          "estresse": 1
+        },
+        "indice_capacidade": 0.77
+      },
+      "recuperacao": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "porteiro_ok": 1.0,
+        "fontes_recuperadas": [
+          "artigo_06_deep_work_newport.txt",
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_06_deep_work_newport.txt",
+          "artigo_02_spaced_repetition_cepeda.txt"
+        ]
+      }
+    },
+    {
+      "cenario": "limiar_fadiga_capacidade",
+      "linha": {
+        "cenario": "limiar_fadiga_capacidade",
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.35,
+        "contrato_valido": 1.0,
+        "persistencia_integra": 1.0,
+        "integridade_circadiana": 1.0,
+        "precisao_capacidade": 1.0,
+        "consistencia_agenda": 1.0,
+        "porteiro_ok": 1.0,
+        "hit_rate": 1.0,
+        "mrr": 0.25,
+        "fontes_recuperadas": "artigo_02_spaced_repetition_cepeda.txt;artigo_02_spaced_repetition_cepeda.txt;artigo_01_active_recall_karpicke.txt;artigo_05_sleep_consolidation_walker.txt",
+        "rotulo": 1.0,
+        "erros": ""
+      },
+      "contexto": {
+        "estudante_id": "est-clt",
+        "cronotipo": "matutino",
+        "semana_inicio": "2026-11-30",
+        "livres": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:00:00",
+            "fim": "22:00:00"
+          }
+        ],
+        "ocupados": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "08:00:00",
+            "fim": "17:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "08:00:00",
+            "fim": "17:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "08:00:00",
+            "fim": "17:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "08:00:00",
+            "fim": "17:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "08:00:00",
+            "fim": "17:00:00"
+          }
+        ],
+        "picos": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:00:00",
+            "fim": "20:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:00:00",
+            "fim": "20:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:00:00",
+            "fim": "20:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:00:00",
+            "fim": "20:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:00:00",
+            "fim": "20:30:00"
+          }
+        ],
+        "vales": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "21:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "21:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "21:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "21:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "21:00:00",
+            "fim": "22:00:00"
+          }
+        ],
+        "sono": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "22:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "00:00:00",
+            "fim": "05:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "22:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "00:00:00",
+            "fim": "05:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "22:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "00:00:00",
+            "fim": "05:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "22:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "00:00:00",
+            "fim": "05:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "22:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "00:00:00",
+            "fim": "05:30:00"
+          }
+        ],
+        "refeicoes": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          }
+        ],
+        "materiais": [
+          {
+            "id": "calc-01",
+            "disciplina": "Cálculo I",
+            "titulo": "Limites e derivadas: lista 3",
+            "carga": "alta",
+            "horas_estimadas": 4.0,
+            "dificuldade": 4,
+            "prazo": "2026-12-04"
+          },
+          {
+            "id": "prog-01",
+            "disciplina": "Programação",
+            "titulo": "Exercícios de recursão em Python",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 3,
+            "prazo": null
+          },
+          {
+            "id": "hist-01",
+            "disciplina": "História",
+            "titulo": "Leitura: capítulo 5 (Era Vargas)",
+            "carga": "baixa",
+            "horas_estimadas": 2.0,
+            "dificuldade": 2,
+            "prazo": null
+          }
+        ],
+        "checkin": {
+          "energia": 2,
+          "horas_sono": 4.0,
+          "estresse": 4
+        },
+        "indice_capacidade": 0.35
+      },
+      "recuperacao": {
+        "hit_rate": 1.0,
+        "mrr": 0.25,
+        "porteiro_ok": 1.0,
+        "fontes_recuperadas": [
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_01_active_recall_karpicke.txt",
+          "artigo_05_sleep_consolidation_walker.txt"
+        ]
+      }
+    },
+    {
+      "cenario": "so_materiais_baixa_carga",
+      "linha": {
+        "cenario": "so_materiais_baixa_carga",
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.6,
+        "contrato_valido": 1.0,
+        "persistencia_integra": 1.0,
+        "integridade_circadiana": 1.0,
+        "precisao_capacidade": 1.0,
+        "consistencia_agenda": 1.0,
+        "porteiro_ok": 1.0,
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "fontes_recuperadas": "artigo_10_pomodoro_cirillo.txt;artigo_02_spaced_repetition_cepeda.txt;artigo_01_active_recall_karpicke.txt;artigo_07_attention_residue_leroy.txt",
+        "rotulo": 1.0,
+        "erros": ""
+      },
+      "contexto": {
+        "estudante_id": "est-matutino",
+        "cronotipo": "matutino",
+        "semana_inicio": "2026-11-30",
+        "livres": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          }
+        ],
+        "ocupados": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "09:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          }
+        ],
+        "picos": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          }
+        ],
+        "vales": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          }
+        ],
+        "sono": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          }
+        ],
+        "refeicoes": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          }
+        ],
+        "materiais": [
+          {
+            "id": "hist-01",
+            "disciplina": "História",
+            "titulo": "Leitura: capítulo 5 (Era Vargas)",
+            "carga": "baixa",
+            "horas_estimadas": 2.0,
+            "dificuldade": 2,
+            "prazo": null
+          },
+          {
+            "id": "ing-01",
+            "disciplina": "Inglês",
+            "titulo": "Flashcards de vocabulário (unidade 4)",
+            "carga": "baixa",
+            "horas_estimadas": 1.5,
+            "dificuldade": 1,
+            "prazo": null
+          }
+        ],
+        "checkin": {
+          "energia": 3,
+          "horas_sono": 7.0,
+          "estresse": 2
+        },
+        "indice_capacidade": 0.6
+      },
+      "recuperacao": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "porteiro_ok": 1.0,
+        "fontes_recuperadas": [
+          "artigo_10_pomodoro_cirillo.txt",
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_01_active_recall_karpicke.txt",
+          "artigo_07_attention_residue_leroy.txt"
+        ]
+      }
+    },
+    {
+      "cenario": "so_materiais_alta_carga",
+      "linha": {
+        "cenario": "so_materiais_alta_carga",
+        "cronotipo": "vespertino",
+        "indice_capacidade": 0.6,
+        "contrato_valido": 1.0,
+        "persistencia_integra": 1.0,
+        "integridade_circadiana": 1.0,
+        "precisao_capacidade": 1.0,
+        "consistencia_agenda": 1.0,
+        "porteiro_ok": 1.0,
+        "hit_rate": 1.0,
+        "mrr": 0.5,
+        "fontes_recuperadas": "artigo_10_pomodoro_cirillo.txt;artigo_01_active_recall_karpicke.txt;artigo_16_pareto_engineering_box.txt;artigo_07_attention_residue_leroy.txt",
+        "rotulo": 1.0,
+        "erros": ""
+      },
+      "contexto": {
+        "estudante_id": "est-vespertino",
+        "cronotipo": "vespertino",
+        "semana_inicio": "2026-11-30",
+        "livres": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          }
+        ],
+        "ocupados": [
+          {
+            "dia": "2026-12-01",
+            "inicio": "16:00:00",
+            "fim": "17:00:00"
+          }
+        ],
+        "picos": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          }
+        ],
+        "vales": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          }
+        ],
+        "sono": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          }
+        ],
+        "refeicoes": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          }
+        ],
+        "materiais": [
+          {
+            "id": "calc-01",
+            "disciplina": "Cálculo I",
+            "titulo": "Limites e derivadas: lista 3",
+            "carga": "alta",
+            "horas_estimadas": 4.0,
+            "dificuldade": 4,
+            "prazo": "2026-12-04"
+          },
+          {
+            "id": "prog-01",
+            "disciplina": "Programação",
+            "titulo": "Exercícios de recursão em Python",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 3,
+            "prazo": null
+          }
+        ],
+        "checkin": {
+          "energia": 3,
+          "horas_sono": 7.0,
+          "estresse": 2
+        },
+        "indice_capacidade": 0.6
+      },
+      "recuperacao": {
+        "hit_rate": 1.0,
+        "mrr": 0.5,
+        "porteiro_ok": 1.0,
+        "fontes_recuperadas": [
+          "artigo_10_pomodoro_cirillo.txt",
+          "artigo_01_active_recall_karpicke.txt",
+          "artigo_16_pareto_engineering_box.txt",
+          "artigo_07_attention_residue_leroy.txt"
+        ]
+      }
+    },
+    {
+      "cenario": "inferencia_carga_exatas_e_idiomas",
+      "linha": {
+        "cenario": "inferencia_carga_exatas_e_idiomas",
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.6,
+        "contrato_valido": 1.0,
+        "persistencia_integra": 1.0,
+        "integridade_circadiana": 1.0,
+        "precisao_capacidade": 1.0,
+        "consistencia_agenda": 1.0,
+        "porteiro_ok": 1.0,
+        "hit_rate": 1.0,
+        "mrr": 0.3333,
+        "fontes_recuperadas": "artigo_10_pomodoro_cirillo.txt;artigo_01_active_recall_karpicke.txt;artigo_02_spaced_repetition_cepeda.txt;artigo_16_pareto_engineering_box.txt",
+        "rotulo": 1.0,
+        "erros": ""
+      },
+      "contexto": {
+        "estudante_id": "est-matutino",
+        "cronotipo": "matutino",
+        "semana_inicio": "2026-11-30",
+        "livres": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          }
+        ],
+        "ocupados": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "09:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          }
+        ],
+        "picos": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          }
+        ],
+        "vales": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          }
+        ],
+        "sono": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          }
+        ],
+        "refeicoes": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          }
+        ],
+        "materiais": [
+          {
+            "id": "calc-01",
+            "disciplina": "Cálculo I",
+            "titulo": "Limites e derivadas: lista 3",
+            "carga": "alta",
+            "horas_estimadas": 4.0,
+            "dificuldade": 4,
+            "prazo": "2026-12-04"
+          },
+          {
+            "id": "prog-01",
+            "disciplina": "Programação",
+            "titulo": "Exercícios de recursão em Python",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 3,
+            "prazo": null
+          },
+          {
+            "id": "hist-01",
+            "disciplina": "História",
+            "titulo": "Leitura: capítulo 5 (Era Vargas)",
+            "carga": "baixa",
+            "horas_estimadas": 2.0,
+            "dificuldade": 2,
+            "prazo": null
+          },
+          {
+            "id": "ing-01",
+            "disciplina": "Inglês",
+            "titulo": "Flashcards de vocabulário (unidade 4)",
+            "carga": "baixa",
+            "horas_estimadas": 1.5,
+            "dificuldade": 1,
+            "prazo": null
+          },
+          {
+            "id": "alg-01",
+            "disciplina": "Estruturas de Dados",
+            "titulo": "Implementação de Árvores Binárias",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 4,
+            "prazo": "2026-12-03"
+          },
+          {
+            "id": "esp-01",
+            "disciplina": "Espanhol",
+            "titulo": "Flashcards de verbos irregulares",
+            "carga": "baixa",
+            "horas_estimadas": 1.0,
+            "dificuldade": 2,
+            "prazo": null
+          }
+        ],
+        "checkin": {
+          "energia": 3,
+          "horas_sono": 7.0,
+          "estresse": 2
+        },
+        "indice_capacidade": 0.6
+      },
+      "recuperacao": {
+        "hit_rate": 1.0,
+        "mrr": 0.3333,
+        "porteiro_ok": 1.0,
+        "fontes_recuperadas": [
+          "artigo_10_pomodoro_cirillo.txt",
+          "artigo_01_active_recall_karpicke.txt",
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_16_pareto_engineering_box.txt"
+        ]
+      }
+    },
+    {
+      "cenario": "calendar_evento_meia_noite",
+      "linha": {
+        "cenario": "calendar_evento_meia_noite",
+        "cronotipo": "noturno",
+        "indice_capacidade": 0.6,
+        "contrato_valido": 1.0,
+        "persistencia_integra": 1.0,
+        "integridade_circadiana": 1.0,
+        "precisao_capacidade": 1.0,
+        "consistencia_agenda": 1.0,
+        "porteiro_ok": 1.0,
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "fontes_recuperadas": "artigo_10_pomodoro_cirillo.txt;artigo_01_active_recall_karpicke.txt;artigo_02_spaced_repetition_cepeda.txt;artigo_16_pareto_engineering_box.txt",
+        "rotulo": 1.0,
+        "erros": ""
+      },
+      "contexto": {
+        "estudante_id": "est-noturno",
+        "cronotipo": "noturno",
+        "semana_inicio": "2026-11-30",
+        "livres": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "10:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "14:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "10:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "14:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "10:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "14:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "10:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "14:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "10:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "14:00:00",
+            "fim": "18:00:00"
+          }
+        ],
+        "ocupados": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "00:00:00",
+            "fim": "01:00:00"
+          }
+        ],
+        "picos": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:30:00",
+            "fim": "22:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:30:00",
+            "fim": "22:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:30:00",
+            "fim": "22:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:30:00",
+            "fim": "22:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:30:00",
+            "fim": "22:30:00"
+          }
+        ],
+        "vales": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          }
+        ],
+        "sono": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "02:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "02:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "02:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "02:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "02:00:00",
+            "fim": "10:00:00"
+          }
+        ],
+        "refeicoes": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "14:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "14:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "14:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "14:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "14:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          }
+        ],
+        "materiais": [
+          {
+            "id": "calc-01",
+            "disciplina": "Cálculo I",
+            "titulo": "Limites e derivadas: lista 3",
+            "carga": "alta",
+            "horas_estimadas": 4.0,
+            "dificuldade": 4,
+            "prazo": "2026-12-04"
+          },
+          {
+            "id": "prog-01",
+            "disciplina": "Programação",
+            "titulo": "Exercícios de recursão em Python",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 3,
+            "prazo": null
+          },
+          {
+            "id": "hist-01",
+            "disciplina": "História",
+            "titulo": "Leitura: capítulo 5 (Era Vargas)",
+            "carga": "baixa",
+            "horas_estimadas": 2.0,
+            "dificuldade": 2,
+            "prazo": null
+          },
+          {
+            "id": "ing-01",
+            "disciplina": "Inglês",
+            "titulo": "Flashcards de vocabulário (unidade 4)",
+            "carga": "baixa",
+            "horas_estimadas": 1.5,
+            "dificuldade": 1,
+            "prazo": null
+          }
+        ],
+        "checkin": {
+          "energia": 3,
+          "horas_sono": 7.0,
+          "estresse": 2
+        },
+        "indice_capacidade": 0.6
+      },
+      "recuperacao": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "porteiro_ok": 1.0,
+        "fontes_recuperadas": [
+          "artigo_10_pomodoro_cirillo.txt",
+          "artigo_01_active_recall_karpicke.txt",
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_16_pareto_engineering_box.txt"
+        ]
+      }
+    },
+    {
+      "cenario": "calendar_eventos_cancelados_ignorados",
+      "linha": {
+        "cenario": "calendar_eventos_cancelados_ignorados",
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.6,
+        "contrato_valido": 1.0,
+        "persistencia_integra": 1.0,
+        "integridade_circadiana": 1.0,
+        "precisao_capacidade": 1.0,
+        "consistencia_agenda": 1.0,
+        "porteiro_ok": 1.0,
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "fontes_recuperadas": "artigo_10_pomodoro_cirillo.txt;artigo_01_active_recall_karpicke.txt;artigo_02_spaced_repetition_cepeda.txt;artigo_16_pareto_engineering_box.txt",
+        "rotulo": 1.0,
+        "erros": ""
+      },
+      "contexto": {
+        "estudante_id": "est-matutino",
+        "cronotipo": "matutino",
+        "semana_inicio": "2026-11-30",
+        "livres": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "07:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "11:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          }
+        ],
+        "ocupados": [
+          {
+            "dia": "2026-12-01",
+            "inicio": "10:00:00",
+            "fim": "11:00:00"
+          }
+        ],
+        "picos": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          }
+        ],
+        "vales": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          }
+        ],
+        "sono": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          }
+        ],
+        "refeicoes": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          }
+        ],
+        "materiais": [
+          {
+            "id": "calc-01",
+            "disciplina": "Cálculo I",
+            "titulo": "Limites e derivadas: lista 3",
+            "carga": "alta",
+            "horas_estimadas": 4.0,
+            "dificuldade": 4,
+            "prazo": "2026-12-04"
+          },
+          {
+            "id": "prog-01",
+            "disciplina": "Programação",
+            "titulo": "Exercícios de recursão em Python",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 3,
+            "prazo": null
+          },
+          {
+            "id": "hist-01",
+            "disciplina": "História",
+            "titulo": "Leitura: capítulo 5 (Era Vargas)",
+            "carga": "baixa",
+            "horas_estimadas": 2.0,
+            "dificuldade": 2,
+            "prazo": null
+          },
+          {
+            "id": "ing-01",
+            "disciplina": "Inglês",
+            "titulo": "Flashcards de vocabulário (unidade 4)",
+            "carga": "baixa",
+            "horas_estimadas": 1.5,
+            "dificuldade": 1,
+            "prazo": null
+          }
+        ],
+        "checkin": {
+          "energia": 3,
+          "horas_sono": 7.0,
+          "estresse": 2
+        },
+        "indice_capacidade": 0.6
+      },
+      "recuperacao": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "porteiro_ok": 1.0,
+        "fontes_recuperadas": [
+          "artigo_10_pomodoro_cirillo.txt",
+          "artigo_01_active_recall_karpicke.txt",
+          "artigo_02_spaced_repetition_cepeda.txt",
+          "artigo_16_pareto_engineering_box.txt"
+        ]
+      }
+    },
+    {
+      "cenario": "persona_1_lucas_clt",
+      "linha": {
+        "cenario": "persona_1_lucas_clt",
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.6,
+        "contrato_valido": 1.0,
+        "persistencia_integra": 1.0,
+        "integridade_circadiana": 1.0,
+        "precisao_capacidade": 1.0,
+        "consistencia_agenda": 1.0,
+        "porteiro_ok": 1.0,
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "fontes_recuperadas": "artigo_19_dual_burden_clt_martins.txt;artigo_04_cognitive_load_sweller.txt;artigo_14_willpower_depletion_baumeister.txt;artigo_19_dual_burden_clt_martins.txt",
+        "rotulo": 1.0,
+        "erros": ""
+      },
+      "contexto": {
+        "estudante_id": "est-clt",
+        "cronotipo": "matutino",
+        "semana_inicio": "2026-11-30",
+        "livres": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:00:00",
+            "fim": "22:00:00"
+          }
+        ],
+        "ocupados": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "08:00:00",
+            "fim": "17:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "08:00:00",
+            "fim": "17:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "08:00:00",
+            "fim": "17:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "08:00:00",
+            "fim": "17:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "08:00:00",
+            "fim": "17:00:00"
+          }
+        ],
+        "picos": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:00:00",
+            "fim": "20:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:00:00",
+            "fim": "20:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:00:00",
+            "fim": "20:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:00:00",
+            "fim": "20:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "06:00:00",
+            "fim": "07:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:00:00",
+            "fim": "20:30:00"
+          }
+        ],
+        "vales": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "21:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "21:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "21:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "21:00:00",
+            "fim": "22:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "21:00:00",
+            "fim": "22:00:00"
+          }
+        ],
+        "sono": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "22:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "00:00:00",
+            "fim": "05:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "22:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "00:00:00",
+            "fim": "05:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "22:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "00:00:00",
+            "fim": "05:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "22:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "00:00:00",
+            "fim": "05:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "22:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "00:00:00",
+            "fim": "05:30:00"
+          }
+        ],
+        "refeicoes": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          }
+        ],
+        "materiais": [
+          {
+            "id": "calc-01",
+            "disciplina": "Cálculo I",
+            "titulo": "Limites e derivadas: lista 3",
+            "carga": "alta",
+            "horas_estimadas": 4.0,
+            "dificuldade": 4,
+            "prazo": "2026-12-04"
+          },
+          {
+            "id": "prog-01",
+            "disciplina": "Programação",
+            "titulo": "Exercícios de recursão em Python",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 3,
+            "prazo": null
+          },
+          {
+            "id": "hist-01",
+            "disciplina": "História",
+            "titulo": "Leitura: capítulo 5 (Era Vargas)",
+            "carga": "baixa",
+            "horas_estimadas": 2.0,
+            "dificuldade": 2,
+            "prazo": null
+          }
+        ],
+        "checkin": {
+          "energia": 3,
+          "horas_sono": 7.0,
+          "estresse": 2
+        },
+        "indice_capacidade": 0.6
+      },
+      "recuperacao": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "porteiro_ok": 1.0,
+        "fontes_recuperadas": [
+          "artigo_19_dual_burden_clt_martins.txt",
+          "artigo_04_cognitive_load_sweller.txt",
+          "artigo_14_willpower_depletion_baumeister.txt",
+          "artigo_19_dual_burden_clt_martins.txt"
+        ]
+      }
+    },
+    {
+      "cenario": "persona_2_lisa_overplanning",
+      "linha": {
+        "cenario": "persona_2_lisa_overplanning",
+        "cronotipo": "vespertino",
+        "indice_capacidade": 0.6,
+        "contrato_valido": 1.0,
+        "persistencia_integra": 1.0,
+        "integridade_circadiana": 1.0,
+        "precisao_capacidade": 1.0,
+        "consistencia_agenda": 1.0,
+        "porteiro_ok": 1.0,
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "fontes_recuperadas": "artigo_12_perfectionism_flett.txt;artigo_03_interleaving_rohwer.txt;artigo_17_study_cycle_perez.txt;artigo_18_project_based_learning_thomas.txt",
+        "rotulo": 1.0,
+        "erros": ""
+      },
+      "contexto": {
+        "estudante_id": "est-vespertino",
+        "cronotipo": "vespertino",
+        "semana_inicio": "2026-11-30",
+        "livres": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "10:00:00",
+            "fim": "12:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:30:00",
+            "fim": "19:00:00"
+          }
+        ],
+        "ocupados": [
+          {
+            "dia": "2026-12-01",
+            "inicio": "16:00:00",
+            "fim": "17:00:00"
+          }
+        ],
+        "picos": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "15:30:00",
+            "fim": "18:30:00"
+          }
+        ],
+        "vales": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:30:00",
+            "fim": "15:00:00"
+          }
+        ],
+        "sono": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "23:30:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "00:00:00",
+            "fim": "07:30:00"
+          }
+        ],
+        "refeicoes": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "12:30:00",
+            "fim": "13:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "20:00:00",
+            "fim": "21:00:00"
+          }
+        ],
+        "materiais": [
+          {
+            "id": "calc-01",
+            "disciplina": "Cálculo I",
+            "titulo": "Limites e derivadas: lista 3",
+            "carga": "alta",
+            "horas_estimadas": 4.0,
+            "dificuldade": 4,
+            "prazo": "2026-12-04"
+          },
+          {
+            "id": "prog-01",
+            "disciplina": "Programação",
+            "titulo": "Exercícios de recursão em Python",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 3,
+            "prazo": null
+          },
+          {
+            "id": "hist-01",
+            "disciplina": "História",
+            "titulo": "Leitura: capítulo 5 (Era Vargas)",
+            "carga": "baixa",
+            "horas_estimadas": 2.0,
+            "dificuldade": 2,
+            "prazo": null
+          },
+          {
+            "id": "ing-01",
+            "disciplina": "Inglês",
+            "titulo": "Flashcards de vocabulário (unidade 4)",
+            "carga": "baixa",
+            "horas_estimadas": 1.5,
+            "dificuldade": 1,
+            "prazo": null
+          }
+        ],
+        "checkin": {
+          "energia": 3,
+          "horas_sono": 7.0,
+          "estresse": 2
+        },
+        "indice_capacidade": 0.6
+      },
+      "recuperacao": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "porteiro_ok": 1.0,
+        "fontes_recuperadas": [
+          "artigo_12_perfectionism_flett.txt",
+          "artigo_03_interleaving_rohwer.txt",
+          "artigo_17_study_cycle_perez.txt",
+          "artigo_18_project_based_learning_thomas.txt"
+        ]
+      }
+    },
+    {
+      "cenario": "persona_3_bob_autodidata",
+      "linha": {
+        "cenario": "persona_3_bob_autodidata",
+        "cronotipo": "noturno",
+        "indice_capacidade": 0.6,
+        "contrato_valido": 1.0,
+        "persistencia_integra": 1.0,
+        "integridade_circadiana": 1.0,
+        "precisao_capacidade": 1.0,
+        "consistencia_agenda": 1.0,
+        "porteiro_ok": 1.0,
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "fontes_recuperadas": "artigo_18_project_based_learning_thomas.txt;artigo_03_interleaving_rohwer.txt;artigo_16_pareto_engineering_box.txt;artigo_19_dual_burden_clt_martins.txt",
+        "rotulo": 1.0,
+        "erros": ""
+      },
+      "contexto": {
+        "estudante_id": "est-noturno",
+        "cronotipo": "noturno",
+        "semana_inicio": "2026-11-30",
+        "livres": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "14:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:00:00",
+            "fim": "23:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "14:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:00:00",
+            "fim": "23:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "14:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:00:00",
+            "fim": "23:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "14:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:00:00",
+            "fim": "23:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "14:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:00:00",
+            "fim": "23:00:00"
+          }
+        ],
+        "ocupados": [],
+        "picos": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:30:00",
+            "fim": "22:30:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:30:00",
+            "fim": "22:30:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:30:00",
+            "fim": "22:30:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:30:00",
+            "fim": "22:30:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:30:00",
+            "fim": "22:30:00"
+          }
+        ],
+        "vales": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          }
+        ],
+        "sono": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "02:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "02:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "02:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "02:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "02:00:00",
+            "fim": "10:00:00"
+          }
+        ],
+        "refeicoes": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "14:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "14:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "14:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "14:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "14:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "18:00:00",
+            "fim": "19:00:00"
+          }
+        ],
+        "materiais": [
+          {
+            "id": "calc-01",
+            "disciplina": "Cálculo I",
+            "titulo": "Limites e derivadas: lista 3",
+            "carga": "alta",
+            "horas_estimadas": 4.0,
+            "dificuldade": 4,
+            "prazo": "2026-12-04"
+          },
+          {
+            "id": "prog-01",
+            "disciplina": "Programação",
+            "titulo": "Exercícios de recursão em Python",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 3,
+            "prazo": null
+          },
+          {
+            "id": "hist-01",
+            "disciplina": "História",
+            "titulo": "Leitura: capítulo 5 (Era Vargas)",
+            "carga": "baixa",
+            "horas_estimadas": 2.0,
+            "dificuldade": 2,
+            "prazo": null
+          },
+          {
+            "id": "ing-01",
+            "disciplina": "Inglês",
+            "titulo": "Flashcards de vocabulário (unidade 4)",
+            "carga": "baixa",
+            "horas_estimadas": 1.5,
+            "dificuldade": 1,
+            "prazo": null
+          }
+        ],
+        "checkin": {
+          "energia": 3,
+          "horas_sono": 7.0,
+          "estresse": 2
+        },
+        "indice_capacidade": 0.6
+      },
+      "recuperacao": {
+        "hit_rate": 1.0,
+        "mrr": 1.0,
+        "porteiro_ok": 1.0,
+        "fontes_recuperadas": [
+          "artigo_18_project_based_learning_thomas.txt",
+          "artigo_03_interleaving_rohwer.txt",
+          "artigo_16_pareto_engineering_box.txt",
+          "artigo_19_dual_burden_clt_martins.txt"
+        ]
+      }
+    },
+    {
+      "cenario": "porteiro_fora_de_escopo",
+      "linha": {
+        "cenario": "porteiro_fora_de_escopo",
+        "cronotipo": "matutino",
+        "indice_capacidade": 0.6,
+        "contrato_valido": 1.0,
+        "persistencia_integra": 1.0,
+        "integridade_circadiana": 1.0,
+        "precisao_capacidade": 1.0,
+        "consistencia_agenda": 1.0,
+        "porteiro_ok": 1.0,
+        "hit_rate": null,
+        "mrr": null,
+        "fontes_recuperadas": "",
+        "rotulo": 1.0,
+        "erros": ""
+      },
+      "contexto": {
+        "estudante_id": "est-matutino",
+        "cronotipo": "matutino",
+        "semana_inicio": "2026-11-30",
+        "livres": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "07:00:00",
+            "fim": "12:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "18:00:00"
+          }
+        ],
+        "ocupados": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "09:00:00",
+            "fim": "10:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "14:00:00",
+            "fim": "16:00:00"
+          }
+        ],
+        "picos": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "08:00:00",
+            "fim": "11:00:00"
+          }
+        ],
+        "vales": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "13:00:00",
+            "fim": "15:00:00"
+          }
+        ],
+        "sono": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "22:00:00",
+            "fim": "23:59:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "00:00:00",
+            "fim": "06:00:00"
+          }
+        ],
+        "refeicoes": [
+          {
+            "dia": "2026-11-30",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-11-30",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-01",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-02",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-03",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "12:00:00",
+            "fim": "13:00:00"
+          },
+          {
+            "dia": "2026-12-04",
+            "inicio": "19:00:00",
+            "fim": "20:00:00"
+          }
+        ],
+        "materiais": [
+          {
+            "id": "calc-01",
+            "disciplina": "Cálculo I",
+            "titulo": "Limites e derivadas: lista 3",
+            "carga": "alta",
+            "horas_estimadas": 4.0,
+            "dificuldade": 4,
+            "prazo": "2026-12-04"
+          },
+          {
+            "id": "prog-01",
+            "disciplina": "Programação",
+            "titulo": "Exercícios de recursão em Python",
+            "carga": "alta",
+            "horas_estimadas": 3.0,
+            "dificuldade": 3,
+            "prazo": null
+          },
+          {
+            "id": "hist-01",
+            "disciplina": "História",
+            "titulo": "Leitura: capítulo 5 (Era Vargas)",
+            "carga": "baixa",
+            "horas_estimadas": 2.0,
+            "dificuldade": 2,
+            "prazo": null
+          },
+          {
+            "id": "ing-01",
+            "disciplina": "Inglês",
+            "titulo": "Flashcards de vocabulário (unidade 4)",
+            "carga": "baixa",
+            "horas_estimadas": 1.5,
+            "dificuldade": 1,
+            "prazo": null
+          }
+        ],
+        "checkin": {
+          "energia": 3,
+          "horas_sono": 7.0,
+          "estresse": 2
+        },
+        "indice_capacidade": 0.6
+      },
+      "recuperacao": {
+        "hit_rate": null,
+        "mrr": null,
+        "porteiro_ok": 1.0,
+        "fontes_recuperadas": []
+      }
+    }
+  ]
+}
