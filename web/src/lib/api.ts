@@ -1,3 +1,6 @@
+import { respostaMock } from "./mock";
+import { MODO } from "./modo";
+
 export const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
 const TETO_DO_CORPO = 300;
@@ -41,6 +44,13 @@ function normalizarDetalhe(detalhe: unknown, corpo: string, status: number): str
 }
 
 export async function api<T>(path: string, init?: RequestInit): Promise<T> {
+  // No modo mock, o caminho registrado responde local; o que não está registrado segue para a rede,
+  // para que a tela do assistente continue funcionando contra a API real no mesmo servidor.
+  if (MODO === "mock") {
+    const mock = respostaMock(init?.method ?? "GET", path, init?.body);
+    if (mock.encontrada) return mock.corpo as T;
+  }
+
   const res = await fetch(`${API_URL}${path}`, { cache: "no-store", ...init });
 
   // Sempre texto primeiro: o 500 do FastAPI é text/plain e não tem JSON para ler.

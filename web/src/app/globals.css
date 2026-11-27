@@ -530,3 +530,49 @@ select {
   margin: 0;
   overflow-wrap: anywhere;
 }
+
+/* --- fluxo de estudo: casca dos passos --- */
+
+.fluxo__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+  font-size: var(--texto-menor);
+}
+
+.fluxo__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--tinta-secundaria);
+  text-decoration: none;
+}
+
+.fluxo__link:hover {
+  color: var(--tinta);
+}
+
+.fluxo__link[aria-current="step"] {
+  color: var(--acento);
+  font-weight: 600;
+}
+
+.fluxo__titulo {
+  margin-bottom: 1rem;
+}
+
+.fluxo__vazio {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+  max-width: var(--prosa);
+}
+
+/* o botão também aparece como link de navegação */
+a.botao {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
