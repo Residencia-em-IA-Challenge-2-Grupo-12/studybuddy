@@ -60,11 +60,13 @@ studybuddy/
 │   │   └── modules/
 │   │       ├── assistente/                   # Rotas HTTP (/assistente/perguntar, /assistente/info)
 │   │       ├── rag/                          # Núcleo RAG: ChromaDB, porteiro, prompts, llm.py, verificador.py
-│   │       └── agentes/                      # Multiagente: triagem.py, planejador.py, orquestrador.py, guardrails.py
+│   │       ├── agentes/                      # Multiagente: triagem.py, planejador.py, orquestrador.py, guardrails.py
+│   │       └── multimodal/                   # Perguntas sobre PDFs com texto selecionável
 │   ├── data/                                 # Base de conhecimento: 20 artigos científicos (.txt)
 │   ├── chroma_db/                            # Índice vetorial ChromaDB (gerado localmente, ignorado no git)
 │   ├── tests/                                # Testes unitários sem LLM (rodam no CI)
 │   ├── demo.py                               # Demonstração interativa e comparativa dos pipelines
+│   ├── demo_multimodal_pdf.py                # Perguntas com evidências sobre PDFs
 │   ├── .env.example                          # Variáveis de ambiente (copie para api/.env)
 │   └── requirements.txt
 ├── web/                                      # Frontend (Next.js, módulos em src/modules/)
@@ -238,6 +240,9 @@ cd web && npm install && npm run dev
 # Demonstração interativa no terminal (a partir de api/)
 python demo.py -i
 
+# Perguntas sobre PDF digital (em outro terminal)
+cd api && OLLAMA_LLM_MODEL=llama3.2:latest python demo_multimodal_pdf.py tests/fixtures/multimodal/ementa_texto.pdf "Quando será a prova de biologia?"
+
 # Os dois pipelines em containers separados (clássico :8001 | multiagente :8002)
 docker compose up -d --build
 ```
@@ -260,3 +265,4 @@ python3 pesquisa/experimentos/modelos/harness_guardrails.py --suite completa
 - **Entrega 2 (RAG):** [`pesquisa/Entrega2.md`](pesquisa/Entrega2.md)
 - **Entrega 4 (Multiagente):** [`pesquisa/Entrega4.md`](pesquisa/Entrega4.md)
 - **Experimento de Modelos nos Guardrails:** [`pesquisa/experimentos/modelos/guardrails.md`](pesquisa/experimentos/modelos/guardrails.md)
+- **Demonstração multimodal de texto e PDF:** [`docs/entrega-multimodal-texto-pdf.md`](docs/entrega-multimodal-texto-pdf.md)
