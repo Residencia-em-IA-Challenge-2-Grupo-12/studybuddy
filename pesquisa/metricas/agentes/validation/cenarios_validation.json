@@ -1,0 +1,360 @@
+[
+  {
+    "id": "val_01_proposta_valida_matutino",
+    "grupo": "valido",
+    "descricao": "Fixture oficial proposta/valida.json sobre contexto/matutino.json",
+    "contexto_fixture": "matutino",
+    "proposta_fixture": "valida",
+    "esperado": {
+      "status": "APROVADO",
+      "violacoes": []
+    }
+  },
+  {
+    "id": "val_02_reducao_danos_fadiga",
+    "grupo": "valido",
+    "descricao": "Fixture oficial proposta/reducao_danos.json sobre contexto/fadiga.json (com corte de 30%)",
+    "contexto_fixture": "fadiga",
+    "proposta_fixture": "reducao_danos",
+    "esperado": {
+      "status": "APROVADO",
+      "violacoes": []
+    }
+  },
+  {
+    "id": "val_03_eventos_adjacentes_google_agenda",
+    "grupo": "valido",
+    "descricao": "Blocos colados nas bordas de compromisso ocupado (09:00-10:00) não geram conflito",
+    "contexto_fixture": "matutino",
+    "blocos": [
+      {"id": "b1", "dia": "2026-11-30", "inicio": "08:35", "fim": "09:00", "carga": "alta", "disciplina": "Cálculo I", "material_id": "calc-01"},
+      {"id": "b2", "dia": "2026-11-30", "inicio": "10:00", "fim": "10:25", "carga": "alta", "disciplina": "Programação", "material_id": "prog-01"},
+      {"id": "b3", "dia": "2026-12-01", "inicio": "09:00", "fim": "09:25", "carga": "alta", "disciplina": "Cálculo I", "material_id": "calc-01"}
+    ],
+    "esperado": {
+      "status": "APROVADO",
+      "violacoes": []
+    }
+  },
+  {
+    "id": "val_04_alta_energia_200min_com_pausas",
+    "grupo": "valido",
+    "descricao": "200 min/dia com pausas em contexto/alta_energia.json respeita 240 min/dia e 90 min contínuo",
+    "contexto_fixture": "alta_energia",
+    "proposta_fixture": "sobrecarga_fadiga",
+    "esperado": {
+      "status": "APROVADO",
+      "violacoes": []
+    }
+  },
+  {
+    "id": "val_05_baixa_carga_em_higiene_e_vale_clt",
+    "grupo": "valido",
+    "descricao": "Em agenda_cheia.json (sono 22:30), alta no pico e baixa na higiene/vale (21:30-21:55) são aprovadas",
+    "contexto_fixture": "agenda_cheia",
+    "blocos": [
+      {"id": "b_pico", "dia": "2026-11-30", "inicio": "19:00", "fim": "19:25", "carga": "alta", "disciplina": "Cálculo I", "material_id": "calc-01"},
+      {"id": "b_neutro", "dia": "2026-11-30", "inicio": "20:30", "fim": "20:55", "carga": "alta", "disciplina": "Programação", "material_id": "prog-01"},
+      {"id": "b_baixa", "dia": "2026-11-30", "inicio": "21:30", "fim": "21:55", "carga": "baixa", "disciplina": "História", "material_id": "hist-01"}
+    ],
+    "esperado": {
+      "status": "APROVADO",
+      "violacoes": []
+    }
+  },
+  {
+    "id": "val_06_vespertino_pico_tarde",
+    "grupo": "valido",
+    "descricao": "Cronotipo vespertino com alta carga no pico da tarde e baixa no vale pós-almoço",
+    "contexto_fixture": "vespertino",
+    "blocos": [
+      {"id": "v1", "dia": "2026-11-30", "inicio": "13:30", "fim": "13:55", "carga": "baixa", "disciplina": "Inglês", "material_id": "ing-01"},
+      {"id": "v2", "dia": "2026-11-30", "inicio": "15:30", "fim": "16:20", "carga": "alta", "disciplina": "Cálculo I", "material_id": "calc-01"},
+      {"id": "v3", "dia": "2026-12-01", "inicio": "17:00", "fim": "17:50", "carga": "alta", "disciplina": "Programação", "material_id": "prog-01"}
+    ],
+    "esperado": {
+      "status": "APROVADO",
+      "violacoes": []
+    }
+  },
+  {
+    "id": "val_07_noturno_pico_noite",
+    "grupo": "valido",
+    "descricao": "Cronotipo noturno (sono 02:00-10:00) com alta carga às 20:00-21:50 com pausa",
+    "contexto_fixture": "noturno",
+    "blocos": [
+      {"id": "n1", "dia": "2026-11-30", "inicio": "20:00", "fim": "20:50", "carga": "alta", "disciplina": "Cálculo I", "material_id": "calc-01"},
+      {"id": "n2", "dia": "2026-11-30", "inicio": "21:00", "fim": "21:50", "carga": "alta", "disciplina": "Programação", "material_id": "prog-01"}
+    ],
+    "esperado": {
+      "status": "APROVADO",
+      "violacoes": []
+    }
+  },
+  {
+    "id": "ag_01_fixture_violacoes_mistas",
+    "grupo": "CONFLITO_AGENDA",
+    "descricao": "Fixture oficial proposta/violacoes.json: b1 conflito agenda, b2 vale, b3 sono, b4 válido",
+    "contexto_fixture": "matutino",
+    "proposta_fixture": "violacoes",
+    "esperado": {
+      "status": "REPROVADO",
+      "violacoes": [
+        {"regra": "CONFLITO_AGENDA", "dia": "2026-11-30", "bloco_id": "b1", "excesso_min": null},
+        {"regra": "INTEGRIDADE_CIRCADIANA", "dia": "2026-12-01", "bloco_id": "b2", "excesso_min": null},
+        {"regra": "INTEGRIDADE_CIRCADIANA", "dia": "2026-12-02", "bloco_id": "b3", "excesso_min": null}
+      ]
+    }
+  },
+  {
+    "id": "ag_02_sobreposicao_parcial_inicio",
+    "grupo": "CONFLITO_AGENDA",
+    "descricao": "Bloco começa antes e invade os primeiros 10 min do compromisso 09:00-10:00",
+    "contexto_fixture": "matutino",
+    "blocos": [
+      {"id": "b_ini", "dia": "2026-11-30", "inicio": "08:45", "fim": "09:10", "carga": "alta", "disciplina": "Cálculo I", "material_id": "calc-01"}
+    ],
+    "esperado": {
+      "status": "REPROVADO",
+      "violacoes": [
+        {"regra": "CONFLITO_AGENDA", "dia": "2026-11-30", "bloco_id": "b_ini", "excesso_min": null}
+      ]
+    }
+  },
+  {
+    "id": "ag_03_sobreposicao_parcial_fim",
+    "grupo": "CONFLITO_AGENDA",
+    "descricao": "Bloco começa nos últimos 10 min do compromisso 09:00-10:00",
+    "contexto_fixture": "matutino",
+    "blocos": [
+      {"id": "b_fim", "dia": "2026-11-30", "inicio": "09:50", "fim": "10:15", "carga": "alta", "disciplina": "Cálculo I", "material_id": "calc-01"}
+    ],
+    "esperado": {
+      "status": "REPROVADO",
+      "violacoes": [
+        {"regra": "CONFLITO_AGENDA", "dia": "2026-11-30", "bloco_id": "b_fim", "excesso_min": null}
+      ]
+    }
+  },
+  {
+    "id": "ag_04_conflito_jornada_clt",
+    "grupo": "CONFLITO_AGENDA",
+    "descricao": "Bloco dentro da jornada CLT ocupada (08:00-17:00) em agenda_cheia.json",
+    "contexto_fixture": "agenda_cheia",
+    "blocos": [
+      {"id": "b_clt", "dia": "2026-12-01", "inicio": "10:00", "fim": "10:30", "carga": "alta", "disciplina": "Programação", "material_id": "prog-01"}
+    ],
+    "esperado": {
+      "status": "REPROVADO",
+      "violacoes": [
+        {"regra": "CONFLITO_AGENDA", "dia": "2026-12-01", "bloco_id": "b_clt", "excesso_min": null}
+      ]
+    }
+  },
+  {
+    "id": "ag_05_novo_evento_google_calendar_provedor",
+    "grupo": "CONFLITO_AGENDA",
+    "descricao": "Compromisso recém-adicionado no Google Agenda via ProvedorAgenda bloqueia b1 de valida.json",
+    "contexto_fixture": "matutino",
+    "proposta_fixture": "valida",
+    "ocupados_provedor": [
+      {"dia": "2026-11-30", "inicio": "08:00", "fim": "08:30"}
+    ],
+    "esperado": {
+      "status": "REPROVADO",
+      "violacoes": [
+        {"regra": "CONFLITO_AGENDA", "dia": "2026-11-30", "bloco_id": "b1", "excesso_min": null}
+      ]
+    }
+  },
+  {
+    "id": "circ_01_fixture_higiene_sono_matutino",
+    "grupo": "INTEGRIDADE_CIRCADIANA",
+    "descricao": "Fixture proposta/higiene_sono.json: alta carga em 21:15 reprova, baixa carga em 21:15 passa",
+    "contexto_fixture": "matutino",
+    "proposta_fixture": "higiene_sono",
+    "esperado": {
+      "status": "REPROVADO",
+      "violacoes": [
+        {"regra": "INTEGRIDADE_CIRCADIANA", "dia": "2026-11-30", "bloco_id": "b_higiene", "excesso_min": null}
+      ]
+    }
+  },
+  {
+    "id": "circ_02_higiene_sono_vespertino",
+    "grupo": "INTEGRIDADE_CIRCADIANA",
+    "descricao": "Vespertino (sono 23:30) com alta carga na higiene 22:30-23:30",
+    "contexto_fixture": "vespertino",
+    "blocos": [
+      {"id": "hv1", "dia": "2026-11-30", "inicio": "22:45", "fim": "23:10", "carga": "alta", "disciplina": "Cálculo I", "material_id": "calc-01"}
+    ],
+    "esperado": {
+      "status": "REPROVADO",
+      "violacoes": [
+        {"regra": "INTEGRIDADE_CIRCADIANA", "dia": "2026-11-30", "bloco_id": "hv1", "excesso_min": null}
+      ]
+    }
+  },
+  {
+    "id": "circ_03_higiene_sono_noturno",
+    "grupo": "INTEGRIDADE_CIRCADIANA",
+    "descricao": "Noturno (sono 02:00) com alta carga na higiene 01:00-02:00",
+    "contexto_fixture": "noturno",
+    "blocos": [
+      {"id": "hn1", "dia": "2026-12-01", "inicio": "01:15", "fim": "01:40", "carga": "alta", "disciplina": "Programação", "material_id": "prog-01"}
+    ],
+    "esperado": {
+      "status": "REPROVADO",
+      "violacoes": [
+        {"regra": "INTEGRIDADE_CIRCADIANA", "dia": "2026-12-01", "bloco_id": "hn1", "excesso_min": null}
+      ]
+    }
+  },
+  {
+    "id": "circ_04_higiene_cruzando_meia_noite",
+    "grupo": "INTEGRIDADE_CIRCADIANA",
+    "descricao": "Sono começando 00:30 na terça estende higiene para segunda 23:30-24:00 e terça 00:00-00:30",
+    "contexto_fixture": "noturno",
+    "contexto_overrides": {
+      "sono": [{"dia": "2026-12-01", "inicio": "00:30", "fim": "08:30"}]
+    },
+    "blocos": [
+      {"id": "hm_vesp", "dia": "2026-11-30", "inicio": "23:35", "fim": "23:55", "carga": "alta", "disciplina": "Cálculo I", "material_id": "calc-01"},
+      {"id": "hm_mad", "dia": "2026-12-01", "inicio": "00:00", "fim": "00:25", "carga": "alta", "disciplina": "Programação", "material_id": "prog-01"}
+    ],
+    "esperado": {
+      "status": "REPROVADO",
+      "violacoes": [
+        {"regra": "INTEGRIDADE_CIRCADIANA", "dia": "2026-11-30", "bloco_id": "hm_vesp", "excesso_min": null},
+        {"regra": "INTEGRIDADE_CIRCADIANA", "dia": "2026-12-01", "bloco_id": "hm_mad", "excesso_min": null}
+      ]
+    }
+  },
+  {
+    "id": "circ_05_fixture_refeicao",
+    "grupo": "INTEGRIDADE_CIRCADIANA",
+    "descricao": "Fixture proposta/refeicao.json: bloco durante almoço (12:00-13:00)",
+    "contexto_fixture": "matutino",
+    "proposta_fixture": "refeicao",
+    "esperado": {
+      "status": "REPROVADO",
+      "violacoes": [
+        {"regra": "INTEGRIDADE_CIRCADIANA", "dia": "2026-12-03", "bloco_id": "b_refeicao", "excesso_min": null}
+      ]
+    }
+  },
+  {
+    "id": "circ_06_sono_madrugada_baixa_carga",
+    "grupo": "INTEGRIDADE_CIRCADIANA",
+    "descricao": "Mesmo baixa carga não é permitida durante a janela de sono (00:00-06:00)",
+    "contexto_fixture": "matutino",
+    "blocos": [
+      {"id": "s_mad", "dia": "2026-12-01", "inicio": "05:15", "fim": "05:40", "carga": "baixa", "disciplina": "Inglês", "material_id": "ing-01"}
+    ],
+    "esperado": {
+      "status": "REPROVADO",
+      "violacoes": [
+        {"regra": "INTEGRIDADE_CIRCADIANA", "dia": "2026-12-01", "bloco_id": "s_mad", "excesso_min": null}
+      ]
+    }
+  },
+  {
+    "id": "sob_01_excesso_diario_normal",
+    "grupo": "SOBRECARGA",
+    "descricao": "250 min/dia com pausas no perfil normal excede teto de 240 min/dia em 10 min",
+    "contexto_fixture": "matutino",
+    "blocos": [
+      {"id": "d1", "dia": "2026-11-30", "inicio": "07:00", "fim": "07:50", "carga": "alta", "disciplina": "Cálculo I", "material_id": "calc-01"},
+      {"id": "d2", "dia": "2026-11-30", "inicio": "08:00", "fim": "08:50", "carga": "alta", "disciplina": "Programação", "material_id": "prog-01"},
+      {"id": "d3", "dia": "2026-11-30", "inicio": "10:00", "fim": "10:50", "carga": "alta", "disciplina": "Cálculo I", "material_id": "calc-01"},
+      {"id": "d4", "dia": "2026-11-30", "inicio": "15:00", "fim": "15:50", "carga": "baixa", "disciplina": "História", "material_id": "hist-01"},
+      {"id": "d5", "dia": "2026-11-30", "inicio": "16:00", "fim": "16:50", "carga": "baixa", "disciplina": "Inglês", "material_id": "ing-01"}
+    ],
+    "esperado": {
+      "status": "REPROVADO",
+      "violacoes": [
+        {"regra": "SOBRECARGA", "dia": "2026-11-30", "bloco_id": null, "excesso_min": 10}
+      ]
+    }
+  },
+  {
+    "id": "sob_02_bloco_unico_continuo_longo",
+    "grupo": "SOBRECARGA",
+    "descricao": "Bloco contínuo único de 105 min excede limite contínuo de 90 min em 15 min",
+    "contexto_fixture": "matutino",
+    "blocos": [
+      {"id": "b_105", "dia": "2026-12-01", "inicio": "07:00", "fim": "08:45", "carga": "alta", "disciplina": "Cálculo I", "material_id": "calc-01"}
+    ],
+    "esperado": {
+      "status": "REPROVADO",
+      "violacoes": [
+        {"regra": "SOBRECARGA", "dia": "2026-12-01", "bloco_id": "b_105", "excesso_min": 15}
+      ]
+    }
+  },
+  {
+    "id": "sob_03_blocos_colados_sem_pausa",
+    "grupo": "SOBRECARGA",
+    "descricao": "Dois blocos de 50 min sem pausa entre eles (100 min contínuos > 90 min)",
+    "contexto_fixture": "matutino",
+    "blocos": [
+      {"id": "c1", "dia": "2026-12-01", "inicio": "07:00", "fim": "07:50", "carga": "alta", "disciplina": "Cálculo I", "material_id": "calc-01"},
+      {"id": "c2", "dia": "2026-12-01", "inicio": "07:50", "fim": "08:40", "carga": "alta", "disciplina": "Programação", "material_id": "prog-01"}
+    ],
+    "esperado": {
+      "status": "REPROVADO",
+      "violacoes": [
+        {"regra": "SOBRECARGA", "dia": "2026-12-01", "bloco_id": null, "excesso_min": 10}
+      ]
+    }
+  },
+  {
+    "id": "sob_04_fixture_corte_30_fadiga",
+    "grupo": "SOBRECARGA",
+    "descricao": "Fixture proposta/sobrecarga_fadiga.json (200 min) com fadiga.json (corte 30% -> 168 min, excesso 32)",
+    "contexto_fixture": "fadiga",
+    "proposta_fixture": "sobrecarga_fadiga",
+    "esperado": {
+      "status": "REPROVADO",
+      "violacoes": [
+        {"regra": "SOBRECARGA", "dia": "2026-11-30", "bloco_id": null, "excesso_min": 32}
+      ]
+    }
+  },
+  {
+    "id": "sob_05_corte_15_estresse_moderado",
+    "grupo": "SOBRECARGA",
+    "descricao": "Estresse 4/5 isolado reduz teto em 15% (204 min/dia); 210 min gera excesso de 6 min",
+    "contexto_fixture": "matutino",
+    "contexto_overrides": {
+      "checkin": {"energia": 3, "horas_sono": 7.0, "estresse": 4}
+    },
+    "blocos": [
+      {"id": "e1", "dia": "2026-11-30", "inicio": "07:00", "fim": "07:55", "carga": "alta", "disciplina": "Cálculo I", "material_id": "calc-01"},
+      {"id": "e2", "dia": "2026-11-30", "inicio": "08:05", "fim": "08:55", "carga": "alta", "disciplina": "Programação", "material_id": "prog-01"},
+      {"id": "e3", "dia": "2026-11-30", "inicio": "10:00", "fim": "10:55", "carga": "alta", "disciplina": "Cálculo I", "material_id": "calc-01"},
+      {"id": "e4", "dia": "2026-11-30", "inicio": "15:00", "fim": "15:50", "carga": "baixa", "disciplina": "História", "material_id": "hist-01"}
+    ],
+    "esperado": {
+      "status": "REPROVADO",
+      "violacoes": [
+        {"regra": "SOBRECARGA", "dia": "2026-11-30", "bloco_id": null, "excesso_min": 6}
+      ]
+    }
+  },
+  {
+    "id": "sob_06_fixture_6h_noturno_ininterrupto",
+    "grupo": "SOBRECARGA",
+    "descricao": "Fixture proposta/sobrecarga_noturna.json em noturno.json: 6h seguidas (18:00-23:59), excesso diário 120 e contínuo 270 + refeição n1",
+    "contexto_fixture": "noturno",
+    "proposta_fixture": "sobrecarga_noturna",
+    "esperado": {
+      "status": "REPROVADO",
+      "violacoes": [
+        {"regra": "INTEGRIDADE_CIRCADIANA", "dia": "2026-12-02", "bloco_id": "n1", "excesso_min": null},
+        {"regra": "SOBRECARGA", "dia": "2026-12-02", "bloco_id": null, "excesso_min": 120},
+        {"regra": "SOBRECARGA", "dia": "2026-12-02", "bloco_id": null, "excesso_min": 270}
+      ]
+    }
+  }
+]
