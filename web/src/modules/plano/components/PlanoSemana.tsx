@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react";
 
+import { BloqueioError } from "@/lib/veredito";
 import { useFluxo } from "@/modules/fluxo/FluxoProvider";
+import { EstadoBloqueio, causaDoBloqueio } from "@/modules/fluxo/components/EstadoBloqueio";
 import { carregarPlano, confirmarPlano } from "@/modules/fluxo/service";
 import type { BlocoEstudo, PlanoResposta } from "@/modules/fluxo/types";
 
@@ -25,7 +27,11 @@ function rotuloDoDia(dia: string): string {
   return `${curto} ${dd}/${mm}`;
 }
 
-type Estado = { tipo: "carregando" } | { tipo: "erro"; mensagem: string } | { tipo: "pronto"; dados: PlanoResposta };
+type Estado =
+  | { tipo: "carregando" }
+  | { tipo: "erro"; mensagem: string }
+  | { tipo: "bloqueado"; bloqueio: BloqueioError }
+  | { tipo: "pronto"; dados: PlanoResposta };
 
 export function PlanoSemana() {
   const { materiais } = useFluxo();
@@ -40,7 +46,9 @@ export function PlanoSemana() {
         if (ativo) setEstado({ tipo: "pronto", dados });
       })
       .catch((exc) => {
-        if (ativo)
+        if (!ativo) return;
+        if (exc instanceof BloqueioError) setEstado({ tipo: "bloqueado", bloqueio: exc });
+        else
           setEstado({
             tipo: "erro",
             mensagem: exc instanceof Error ? exc.message : "Falha ao montar o plano.",
@@ -64,6 +72,15 @@ export function PlanoSemana() {
       <p className="falha" role="alert">
         {estado.mensagem}
       </p>
+    );
+  }
+
+  if (estado.tipo === "bloqueado") {
+    return (
+      <EstadoBloqueio
+        frase={estado.bloqueio.mensagem}
+        causa={causaDoBloqueio(estado.bloqueio.categoria, "pedido")}
+      />
     );
   }
 

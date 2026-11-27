@@ -31,17 +31,12 @@ export type Verificacao = {
   alterou?: boolean;
 };
 
-/** Resultado da barreira de guardrails. Dois formatos convivem hoje:
- *  - o do `guardrails/injection.py` (`categoria: "INJECTION"`, `motivos`), que o serviço já devolve;
- *  - o canônico do Maestro (`agentes/contratos.py`: `permitido`, `resposta_bloqueio` e as categorias
- *    `PROMPT_INJECTION`, `HATE_SPEECH`, `MEDICAL_ADVICE`, `OUT_OF_SCOPE`), que a `clinico.py` já usa.
- *  A tela bloqueia por `permitido === false`, e por default-deny em qualquer categoria diferente de "OK". */
-export type Veredito = {
-  permitido?: boolean;
-  categoria?: "OK" | "INJECTION" | "PROMPT_INJECTION" | "HATE_SPEECH" | "MEDICAL_ADVICE" | "OUT_OF_SCOPE" | (string & {});
-  motivos?: string[];
-  resposta_bloqueio?: string | null;
-};
+/** O veredito dos guardrails mora em `lib/veredito.ts`, porque o fluxo também consome. */
+export type { Veredito } from "@/lib/veredito";
+
+import type { Veredito } from "@/lib/veredito";
+
+/** Resultado da barreira de guardrails (ver `lib/veredito.ts`). */
 
 export type Resposta = {
   pipeline: Pipeline;

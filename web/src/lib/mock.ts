@@ -51,6 +51,25 @@ function cenarioAtual(): string {
   }
 }
 
+/** Resposta de bloqueio: é o que o guardrail devolve antes de qualquer pipeline. */
+const BLOQUEIO_INJECAO = {
+  veredito: {
+    permitido: false,
+    categoria: "PROMPT_INJECTION",
+    resposta_bloqueio:
+      "Não consigo ajudar com esse pedido. Posso ajudar com organização dos estudos, técnicas de aprendizagem e rotina.",
+  },
+};
+
+const BLOQUEIO_CLINICO = {
+  veredito: {
+    permitido: false,
+    categoria: "MEDICAL_ADVICE",
+    resposta_bloqueio:
+      "Como mentor de estudos, posso ajustar sua carga horária e pausas de acordo com seu cansaço, mas não forneço recomendações médicas, nutricionais ou sobre medicamentos. Consulte um profissional de saúde.",
+  },
+};
+
 /** Chave: "MÉTODO /caminho", igual ao que `api()` recebe. A função recebe o corpo já decodificado. */
 export const ROTAS_MOCK: Record<string, (corpo?: Record<string, unknown>) => unknown> = {
   // As três fixtures de cronotipo existem: o mock devolve a que combina com a escolha.
@@ -81,6 +100,13 @@ export function respostaMock(
   caminho: string,
   corpo?: BodyInit | null,
 ): { encontrada: boolean; corpo?: unknown } {
+  // Cenário de bloqueio: todo passo do fluxo responde como o guardrail responderia.
+  if (caminho.startsWith("/fluxo/")) {
+    const cenario = cenarioAtual();
+    if (cenario === "bloqueio") return { encontrada: true, corpo: BLOQUEIO_INJECAO };
+    if (cenario === "bloqueio_clinico") return { encontrada: true, corpo: BLOQUEIO_CLINICO };
+  }
+
   const rota = ROTAS_MOCK[`${metodo.toUpperCase()} ${caminho}`];
   if (!rota) return { encontrada: false };
   return { encontrada: true, corpo: rota(corpoDecodificado(corpo)) };

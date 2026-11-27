@@ -3,8 +3,10 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+import { BloqueioError } from "@/lib/veredito";
 import { useFluxo } from "@/modules/fluxo/FluxoProvider";
 import { EscolhaUnica } from "@/modules/fluxo/components/EscolhaUnica";
+import { EstadoBloqueio, causaDoBloqueio } from "@/modules/fluxo/components/EstadoBloqueio";
 import { carregarContexto } from "@/modules/fluxo/service";
 import type { Cronotipo } from "@/modules/fluxo/types";
 
@@ -27,6 +29,7 @@ export function OnboardingForm() {
   const [agenda, setAgenda] = useState(false);
   const [enviando, setEnviando] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
+  const [bloqueio, setBloqueio] = useState<BloqueioError | null>(null);
 
   const horarios = [dormir, acordar, cafe, almoco, jantar];
   const pronto = cronotipo !== null && horarios.every((horario) => horario !== "") && dormir !== acordar;
@@ -37,6 +40,7 @@ export function OnboardingForm() {
 
     setEnviando(true);
     setErro(null);
+    setBloqueio(null);
     try {
       // A tela manda horários, não datas: quem distribui pelos dias da semana é o Research.
       const contexto = await carregarContexto({
@@ -48,7 +52,8 @@ export function OnboardingForm() {
       definir({ contexto });
       router.push("/check-in");
     } catch (exc) {
-      setErro(exc instanceof Error ? exc.message : "Não foi possível carregar o contexto.");
+      if (exc instanceof BloqueioError) setBloqueio(exc);
+      else setErro(exc instanceof Error ? exc.message : "Não foi possível carregar o contexto.");
       setEnviando(false);
     }
   }
@@ -134,6 +139,10 @@ export function OnboardingForm() {
             : "Nenhuma agenda conectada."}
         </p>
       </div>
+
+      {bloqueio ? (
+        <EstadoBloqueio frase={bloqueio.mensagem} causa={causaDoBloqueio(bloqueio.categoria, "pedido")} />
+      ) : null}
 
       {erro ? (
         <p className="falha" role="alert">

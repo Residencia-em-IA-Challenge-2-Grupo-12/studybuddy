@@ -1,7 +1,8 @@
 "use client";
 
+import { bloqueou } from "@/lib/veredito";
+
 import type { Resposta } from "../types";
-import { bloqueou } from "../veredito";
 
 /** Equivalente ao _NAO_DITO de api/app/modules/agentes/triagem.py:69. O filtro existe só no Python;
  *  o JSON traz o valor cru, então a tela precisa repetir a regra ou mostra "não especificado" como restrição. */

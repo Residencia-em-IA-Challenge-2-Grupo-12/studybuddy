@@ -1,3 +1,4 @@
+import { exigirPermitido } from "@/lib/veredito";
 import { api } from "@/lib/api";
 
 import type {
@@ -10,7 +11,9 @@ import type {
 
 /** Superfície provisória do fluxo. Ainda **não existe rota** no backend: hoje só o mock responde,
  *  e estes caminhos serão reconciliados com as rotas reais quando o Maestro expuser as dele.
- */
+ *
+ *  Todo retorno passa por `exigirPermitido`: se o guardrail barrou, o serviço lança `BloqueioError`
+ *  e o dado não circula. */
 
 const corpo = (dados: unknown): RequestInit => ({
   method: "POST",
@@ -19,21 +22,21 @@ const corpo = (dados: unknown): RequestInit => ({
 });
 
 export async function carregarContexto(entrada: EntradaOnboarding): Promise<ContextoEstudante> {
-  return api<ContextoEstudante>("/fluxo/contexto", corpo(entrada));
+  return exigirPermitido(await api<ContextoEstudante>("/fluxo/contexto", corpo(entrada)));
 }
 
 export async function enviarCheckin(checkin: CheckIn): Promise<CheckIn> {
-  return api<CheckIn>("/fluxo/checkin", corpo(checkin));
+  return exigirPermitido(await api<CheckIn>("/fluxo/checkin", corpo(checkin)));
 }
 
 export async function enviarMateriais(materiais: Material[]): Promise<Material[]> {
-  return api<Material[]>("/fluxo/materiais", corpo({ materiais }));
+  return exigirPermitido(await api<Material[]>("/fluxo/materiais", corpo({ materiais })));
 }
 
 export async function carregarPlano(): Promise<PlanoResposta> {
-  return api<PlanoResposta>("/fluxo/plano", corpo({}));
+  return exigirPermitido(await api<PlanoResposta>("/fluxo/plano", corpo({})));
 }
 
 export async function confirmarPlano(): Promise<{ sincronizado: boolean }> {
-  return api<{ sincronizado: boolean }>("/fluxo/confirmar", corpo({}));
+  return exigirPermitido(await api<{ sincronizado: boolean }>("/fluxo/confirmar", corpo({})));
 }

@@ -3,8 +3,10 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+import { BloqueioError } from "@/lib/veredito";
 import { useFluxo } from "@/modules/fluxo/FluxoProvider";
 import { EscolhaUnica } from "@/modules/fluxo/components/EscolhaUnica";
+import { EstadoBloqueio, causaDoBloqueio } from "@/modules/fluxo/components/EstadoBloqueio";
 import { enviarCheckin } from "@/modules/fluxo/service";
 import type { EscalasCheckIn } from "@/modules/fluxo/types";
 
@@ -24,6 +26,7 @@ export function CheckinForm() {
   const [horas, setHoras] = useState("");
   const [enviando, setEnviando] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
+  const [bloqueio, setBloqueio] = useState<BloqueioError | null>(null);
 
   const horasNumero = Number(horas);
   const horasOk = horas !== "" && Number.isFinite(horasNumero) && horasNumero >= 0 && horasNumero <= 24;
@@ -36,6 +39,7 @@ export function CheckinForm() {
 
     setEnviando(true);
     setErro(null);
+    setBloqueio(null);
     try {
       const escalas: EscalasCheckIn = { humor, estresse, sono, fadiga };
       const checkin = paraCheckIn(escalas, horasNumero);
@@ -43,7 +47,8 @@ export function CheckinForm() {
       definir({ checkin: devolvido, escalas });
       router.push("/materiais");
     } catch (exc) {
-      setErro(exc instanceof Error ? exc.message : "Não foi possível registrar o check-in.");
+      if (exc instanceof BloqueioError) setBloqueio(exc);
+      else setErro(exc instanceof Error ? exc.message : "Não foi possível registrar o check-in.");
       setEnviando(false);
     }
   }
@@ -74,6 +79,10 @@ export function CheckinForm() {
           As horas vão para o contrato do check-in; humor e qualidade do sono ficam guardados aqui.
         </p>
       </div>
+
+      {bloqueio ? (
+        <EstadoBloqueio frase={bloqueio.mensagem} causa={causaDoBloqueio(bloqueio.categoria, "pedido")} />
+      ) : null}
 
       {erro ? (
         <p className="falha" role="alert">

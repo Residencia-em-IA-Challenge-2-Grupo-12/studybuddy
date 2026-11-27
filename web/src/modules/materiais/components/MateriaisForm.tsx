@@ -3,8 +3,10 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+import { BloqueioError } from "@/lib/veredito";
 import { useFluxo } from "@/modules/fluxo/FluxoProvider";
 import { EscolhaUnica } from "@/modules/fluxo/components/EscolhaUnica";
+import { EstadoBloqueio, causaDoBloqueio } from "@/modules/fluxo/components/EstadoBloqueio";
 import { enviarMateriais } from "@/modules/fluxo/service";
 import type { CargaCognitiva, Material } from "@/modules/fluxo/types";
 
@@ -33,6 +35,7 @@ export function MateriaisForm() {
 
   const [enviando, setEnviando] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
+  const [bloqueio, setBloqueio] = useState<BloqueioError | null>(null);
 
   const horasNumero = Number(horas);
   const horasOk = horas !== "" && Number.isFinite(horasNumero) && horasNumero > 0 && horasNumero <= 100;
@@ -89,12 +92,14 @@ export function MateriaisForm() {
     if (itens.length === 0 || enviando) return;
     setEnviando(true);
     setErro(null);
+    setBloqueio(null);
     try {
       const devolvido = await enviarMateriais(itens);
       definir({ materiais: devolvido });
       router.push("/plano");
     } catch (exc) {
-      setErro(exc instanceof Error ? exc.message : "Não foi possível salvar os materiais.");
+      if (exc instanceof BloqueioError) setBloqueio(exc);
+      else setErro(exc instanceof Error ? exc.message : "Não foi possível salvar os materiais.");
       setEnviando(false);
     }
   }
@@ -201,6 +206,10 @@ export function MateriaisForm() {
           </ul>
         )}
       </section>
+
+      {bloqueio ? (
+        <EstadoBloqueio frase={bloqueio.mensagem} causa={causaDoBloqueio(bloqueio.categoria, "pedido")} />
+      ) : null}
 
       {erro ? (
         <p className="falha" role="alert">

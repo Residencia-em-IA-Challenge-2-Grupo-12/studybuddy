@@ -2,8 +2,9 @@
 
 import { useEffect, useId, useRef } from "react";
 
+import { bloqueou } from "@/lib/veredito";
+
 import type { Resposta } from "../types";
-import { bloqueou } from "../veredito";
 import { DetalhesTecnicos } from "./DetalhesTecnicos";
 import { EstadoRecusa } from "./EstadoRecusa";
 import { FontesList } from "./FontesList";
