@@ -8,6 +8,7 @@ from pydantic import BaseModel
 
 from experimentos.modelos import rodar
 from experimentos.modelos.agentes.analysis import tecnica_adequada
+from experimentos.modelos.agentes.research import AgenteResearchExperimento, aderencia_cronotipo_e_estado
 from experimentos.modelos.rodar import Caso, Config
 
 
@@ -74,3 +75,18 @@ def test_tecnica_adequada_pela_carga():
 def test_juiz_nao_julga_a_propria_familia():
     assert rodar.familia("gemma4:e4b") == rodar.familia("gemma3:12b") == "gemma"
     assert rodar.familia("qwen3.5:9b") == "qwen" and rodar.familia("ministral-3:8b") == "ministral"
+
+
+def test_plugin_research_registrado_e_gera_10_casos():
+    agentes = rodar._agentes()
+    assert "research" in agentes
+    exp = AgenteResearchExperimento()
+    casos = exp.casos()
+    assert len(casos) == 10
+    assert all(c.prompt and c.contexto and c.dados["trechos"] for c in casos)
+    saida = exp.contrato(
+        foco_recomendado="Usar blocos de 25 min na fadiga com pausas.",
+        orientacao_circadiana="Para o cronotipo matutino, focar às 08:00 e preservar o sono.",
+        sintese_evidencias="O sono consolida a memória [Fonte: artigo_05_sleep_consolidation_walker.txt].",
+    )
+    assert aderencia_cronotipo_e_estado(saida, "matutino", "fadiga") is True

@@ -81,8 +81,12 @@ class Agente(Protocol):
 
 def _agentes() -> dict[str, Callable[[], Agente]]:
     from .agentes.analysis import AgenteAnalysisExperimento
+    from .agentes.research import AgenteResearchExperimento
 
-    return {"analysis": AgenteAnalysisExperimento}
+    return {
+        "analysis": AgenteAnalysisExperimento,
+        "research": AgenteResearchExperimento,
+    }
 
 
 # ---------------------------------------------------------------- Ollama
