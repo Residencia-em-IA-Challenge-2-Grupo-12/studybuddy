@@ -49,6 +49,18 @@ def analysis(modelo: str | None = None):
 
 
 @lru_cache
+def research(modelo: str | None = None):
+    """Modelo do Research: síntese bibliotecária de evidências científicas em JSON de esquema fixo."""
+    from langchain_ollama import ChatOllama
+
+    from app.modules.agentes.research.agente import ESQUEMA_RESEARCH
+
+    return ChatOllama(model=modelo or settings.ollama_research_model, temperature=0, reasoning=False,
+                      format=ESQUEMA_RESEARCH, base_url=settings.ollama_base_url,
+                      client_kwargs={"timeout": settings.ollama_timeout_llm})
+
+
+@lru_cache
 def guardrails():
     """Modelo classificador principal dos Guardrails (barreiras 4.4 a 4.7), com saída JSON estruturada."""
     from langchain_ollama import ChatOllama

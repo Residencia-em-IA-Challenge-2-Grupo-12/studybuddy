@@ -28,6 +28,8 @@ class Settings(BaseSettings):
     # Analysis (técnica + justificativa de cada material, em JSON). A alocação não usa LLM.
     # Escolha em pesquisa/experimentos/modelos/analysis_escolha.md; alternativa leve: qwen3.5:4b
     ollama_analysis_model: str = "llama3.1:8b"
+    # Research (curadoria bibliotecária e síntese de evidências científicas em JSON)
+    ollama_research_model: str = "llama3.1:8b"
     # Communication (abertura da mensagem). Separado para trocar o modelo sem tocar no RAG
     ollama_communication_model: str = "qwen3:8b"
     # Guardrails (barreiras 4.4 a 4.7: injection, ódio, saúde e domínio).
