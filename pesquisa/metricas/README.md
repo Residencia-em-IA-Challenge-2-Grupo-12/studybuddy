@@ -32,7 +32,7 @@ O RAG medido é o do notebook `rag_pipeline_semana2.ipynb`: o `recuperacao/noteb
   Rodar: `python -m metricas.geracao.runner --nome qwen3_bge`. Usa a chain do notebook, que desde a Semana 3 tem `TOP_K=5` e o porteiro de distância (`TOP_K=3 PORTEIRO_TAU=desligado` reproduz as rodadas antigas; ver `relatorio/final/04-implementacao.md`).
 - `comparacao/`: `modos.py` gera as respostas de cada modo (`calibrar`, `llm_puro`, `so_busca`, `rag_llm`, `rag_otimizado`, `rag_llm_k3`); `avaliar.py` avalia todos e monta `relatorios/comparacao.md`.
   Rodar: `python -m metricas.comparacao.modos <modo>` e depois `python -m metricas.comparacao.avaliar <modos...>`.
-- `agentes/validation/`: pesquisa, definição formal (`METRICAS.md`), conjuntos versionados (`cenarios_validation.json` com 24 cenários sobre fixtures `[0.2]` e `cenarios_guardrails.json` com 64 cenários diretos, disfarçados/ofuscados, válidos e limítrofes), fórmulas (`metricas.py`), runner (`runner.py`) e testes (`test_metricas.py`).
+- `agentes/validation/`: pesquisa, definição formal (`METRICAS.md`), conjuntos versionados (`cenarios_validation.json` com 24 cenários sobre fixtures `[0.2]` e `cenarios_guardrails.json` com 64 cenários diretos, disfarçados/ofuscados, válidos e limítrofes), fórmulas (`metricas.py`), runner (`runner.py`) e testes (`test_metricas.py`). Relatório final consolidado em [`relatorios/RELATORIO_VALIDATION.md`](relatorios/RELATORIO_VALIDATION.md).
   Rodar: `python -m metricas.agentes.validation.runner` (determinístico, sem Ollama) ou `--guardrails` (com Ollama); testes: `python -m pytest -q metricas/agentes/validation`.
 
 ## Notas sobre o gabarito

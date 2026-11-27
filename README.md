@@ -210,6 +210,7 @@ Pesquisa bibliográfica, definição formal (fórmulas, faixas, metas e fontes),
 - **Conjuntos versionados:** `cenarios_validation.json` (**24 cenários** montados sobre as fixtures da `[0.2]`, sem depender de outros agentes) e `cenarios_guardrails.json` (**64 cenários** diretos, disfarçados/ofuscados, válidos e limítrofes nas 4 barreiras + `OK`, incluindo casos como insônia antes da prova e estudos de temas sensíveis).
 - **Métricas cobertas:** precisão/recall/F1 por regra, falso alarme do Validation (`FPR`), acurácia de `excesso_min` e mensagens acionáveis, garantia de `0` chamadas a LLM, bloqueio correto por barreira, falso positivo em válidos e limítrofes (*XSTest*/*OR-Bench*), robustez a ataques disfarçados/ofuscados ($1 - \text{ASR}$) e latência p50/p95 em ms por barreira e total.
 - **Execução (a partir de `pesquisa/`):** `python -m metricas.agentes.validation.runner` (gera CSV, MD e JSON em `pesquisa/metricas/relatorios/validation_deterministico.*`, sem Ollama) ou `--guardrails` (avalia também os 64 cenários no Ollama); testes em `python -m pytest -q metricas/agentes/validation`.
+- **Relatório final consolidado:** [`pesquisa/metricas/relatorios/RELATORIO_VALIDATION.md`](pesquisa/metricas/relatorios/RELATORIO_VALIDATION.md) (tabela-resumo, análise métrica a métrica das duas camadas — auditoria da grade e cada barreira dos Guardrails —, limitações e próximos passos, com saídas brutas em `validation_completo.{csv,json,md}`).
 
 ---
 
