@@ -1,0 +1,1403 @@
+{
+  "config": {
+    "modelo": "qwen3:8b",
+    "cenarios": 25,
+    "maquina": "Darwin 27.0.0, arm64, 24 GB de RAM, Ollama em http://localhost:11434",
+    "juiz": "gemma3:12b"
+  },
+  "resumo": {
+    "n": 25,
+    "erros": 0,
+    "fidelidade_plano": 1.0,
+    "planos_fieis": 1.0,
+    "horarios_inventados": 0,
+    "citacoes_invalidas": 0,
+    "citacoes_validas": 1.0,
+    "clareza_indice_mediana": 69.5,
+    "tom_regra": 1.0,
+    "tom_juiz": 0.98,
+    "fidelidade_evidencias": 0.7733,
+    "latencia_s_p50": 6.583,
+    "latencia_s_p95": 7.995
+  },
+  "metas": [
+    {
+      "metrica": "Fidelidade ao plano",
+      "meta": 1.0,
+      "resultado": 1.0,
+      "regra": "maior ou igual",
+      "atingiu": true
+    },
+    {
+      "metrica": "Planos fiéis (todos os blocos, na ordem)",
+      "meta": 1.0,
+      "resultado": 1.0,
+      "regra": "maior ou igual",
+      "atingiu": true
+    },
+    {
+      "metrica": "Horários inventados",
+      "meta": 0,
+      "resultado": 0,
+      "regra": "igual",
+      "atingiu": true
+    },
+    {
+      "metrica": "Citações inválidas",
+      "meta": 0,
+      "resultado": 0,
+      "regra": "igual",
+      "atingiu": true
+    },
+    {
+      "metrica": "Citações válidas",
+      "meta": 1.0,
+      "resultado": 1.0,
+      "regra": "maior ou igual",
+      "atingiu": true
+    },
+    {
+      "metrica": "Clareza (Flesch-PT)",
+      "meta": 50.0,
+      "resultado": 69.5,
+      "regra": "maior ou igual",
+      "atingiu": true
+    },
+    {
+      "metrica": "Tom pela regra",
+      "meta": 1.0,
+      "resultado": 1.0,
+      "regra": "maior ou igual",
+      "atingiu": true
+    },
+    {
+      "metrica": "Adequação do tom (juiz)",
+      "meta": 0.8,
+      "resultado": 0.98,
+      "regra": "maior ou igual",
+      "atingiu": true
+    },
+    {
+      "metrica": "Faithfulness (juiz)",
+      "meta": 0.9,
+      "resultado": 0.7733,
+      "regra": "maior ou igual",
+      "atingiu": false
+    },
+    {
+      "metrica": "Latência p95 (s)",
+      "meta": 30.0,
+      "resultado": 7.995,
+      "regra": "menor ou igual",
+      "atingiu": true
+    }
+  ],
+  "cenarios": [
+    {
+      "cenario": "fadiga_extrema",
+      "tom_esperado": "acolhedor",
+      "tom_gerado": "acolhedor",
+      "latencia_s": 11.335,
+      "abertura": "Olá, tudo bem? Hoje parece que o corpo e a mente estão pedindo um descanso, mas você já deu um passo importante ao se dedicar aos estudos [Fonte: artigo_19_clt.txt]. Lembre-se de que dormir bem é essencial para consolidar o que aprendeu e recarregar as energias [Fonte: artigo_05_sleep.txt]. Que tal começar o dia com uma pequena pausa para descansar e depois retomar com calma?",
+      "abertura_bruta": "Olá, tudo bem? Hoje parece que o corpo e a mente estão pedindo um descanso, mas você já deu um passo importante ao se dedicar aos estudos [Fonte: artigo_19_clt.txt]. Lembre-se de que dormir bem é essencial para consolidar o que aprendeu e recarregar as energias [Fonte: artigo_05_sleep.txt]. Que tal começar o dia com uma pequena pausa para descansar e depois retomar com calma?",
+      "markdown": "Olá, tudo bem? Hoje parece que o corpo e a mente estão pedindo um descanso, mas você já deu um passo importante ao se dedicar aos estudos [Fonte: artigo_19_clt.txt]. Lembre-se de que dormir bem é essencial para consolidar o que aprendeu e recarregar as energias [Fonte: artigo_05_sleep.txt]. Que tal começar o dia com uma pequena pausa para descansar e depois retomar com calma?\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 60,
+          "frases": 4,
+          "palavras_por_frase": 15.0,
+          "silabas_por_palavra": 1.82,
+          "indice": 79.9
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "A mensagem demonstra um tom acolhedor ao reconhecer o estado de fadiga e estresse do estudante, oferecendo sugestões gentis para descanso e retomada dos estudos. A referência às fontes (artigos) também contribui para um tom de apoio e informação, sem ser excessivamente desafiador."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Quem concilia trabalho e estudo se beneficia de blocos curtos e previsíveis de estudo.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Dormir bem é essencial para consolidar o que aprendeu e recarregar as energias.",
+              "sustentada": true
+            }
+          ],
+          "total": 2,
+          "sustentadas": 2,
+          "score": 1.0
+        }
+      }
+    },
+    {
+      "cenario": "estresse_alto",
+      "tom_esperado": "acolhedor",
+      "tom_gerado": "acolhedor",
+      "latencia_s": 8.05,
+      "abertura": "Olá, tudo bem? Hoje parece que você está enfrentando um dia um pouco desafiador, mas já está fazendo um esforço incrível para seguir em frente [Fonte: artigo_19_clt.txt]. Lembre-se de que pequenas conquistas são importantes, e mesmo que o sono não tenha sido ideal, dormir de forma consistente ajuda a melhorar a sua capacidade de estudar e se sentir bem [Fonte: artigo_05_sleep.txt]. Que tal começar o dia com um pequeno passo, como revisar um tema que você já estudou?",
+      "abertura_bruta": "Olá, tudo bem? Hoje parece que você está enfrentando um dia um pouco desafiador, mas já está fazendo um esforço incrível para seguir em frente [Fonte: artigo_19_clt.txt]. Lembre-se de que pequenas conquistas são importantes, e mesmo que o sono não tenha sido ideal, dormir de forma consistente ajuda a melhorar a sua capacidade de estudar e se sentir bem [Fonte: artigo_05_sleep.txt]. Que tal começar o dia com um pequeno passo, como revisar um tema que você já estudou?",
+      "markdown": "Olá, tudo bem? Hoje parece que você está enfrentando um dia um pouco desafiador, mas já está fazendo um esforço incrível para seguir em frente [Fonte: artigo_19_clt.txt]. Lembre-se de que pequenas conquistas são importantes, e mesmo que o sono não tenha sido ideal, dormir de forma consistente ajuda a melhorar a sua capacidade de estudar e se sentir bem [Fonte: artigo_05_sleep.txt]. Que tal começar o dia com um pequeno passo, como revisar um tema que você já estudou?\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 75,
+          "frases": 4,
+          "palavras_por_frase": 18.75,
+          "silabas_por_palavra": 1.87,
+          "indice": 71.9
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "A mensagem demonstra um tom acolhedor ao reconhecer os desafios (estresse e humor baixo) e oferecer incentivo com foco em pequenas conquistas. A referência à importância do sono e a sugestão de começar com algo simples são elementos que reforçam essa abordagem gentil e compreensiva, alinhada com o estado de espírito indicado no check-in."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Pequenas conquistas são importantes",
+              "sustentada": false
+            },
+            {
+              "afirmacao": "Dormir de forma consistente ajuda a melhorar a sua capacidade de estudar e se sentir bem",
+              "sustentada": true
+            }
+          ],
+          "total": 2,
+          "sustentadas": 1,
+          "score": 0.5
+        }
+      }
+    },
+    {
+      "cenario": "humor_baixo",
+      "tom_esperado": "acolhedor",
+      "tom_gerado": "acolhedor",
+      "latencia_s": 7.713,
+      "abertura": "Hoje é um dia importante, e eu fico feliz por você estar aqui, mesmo com um pouco de cansaço. Lembre-se de que dormir de forma consistente ajuda a melhorar a sua memória e a disposição para estudar [Fonte: artigo_05_sleep.txt], e pequenos blocos de estudo podem ser muito eficazes, especialmente quando você está equilibrando trabalho e estudo [Fonte: artigo_19_clt.txt]. Vamos começar com algo simples hoje — que tal revisar um tema que você já estudou?",
+      "abertura_bruta": "Hoje é um dia importante, e eu fico feliz por você estar aqui, mesmo com um pouco de cansaço. Lembre-se de que dormir de forma consistente ajuda a melhorar a sua memória e a disposição para estudar [Fonte: artigo_05_sleep.txt], e pequenos blocos de estudo podem ser muito eficazes, especialmente quando você está equilibrando trabalho e estudo [Fonte: artigo_19_clt.txt]. Vamos começar com algo simples hoje — que tal revisar um tema que você já estudou?",
+      "markdown": "Hoje é um dia importante, e eu fico feliz por você estar aqui, mesmo com um pouco de cansaço. Lembre-se de que dormir de forma consistente ajuda a melhorar a sua memória e a disposição para estudar [Fonte: artigo_05_sleep.txt], e pequenos blocos de estudo podem ser muito eficazes, especialmente quando você está equilibrando trabalho e estudo [Fonte: artigo_19_clt.txt]. Vamos começar com algo simples hoje — que tal revisar um tema que você já estudou?\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 70,
+          "frases": 3,
+          "palavras_por_frase": 23.33,
+          "silabas_por_palavra": 1.97,
+          "indice": 58.4
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "A mensagem demonstra acolhimento ao reconhecer o cansaço e o estresse do estudante (indicados no check-in). A sugestão de revisar um tema já estudado é uma abordagem gentil e compreensiva para começar o dia, alinhando-se com um tom acolhedor em um momento de baixa energia."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Dormir de forma consistente ajuda a melhorar a sua memória",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Dormir de forma consistente ajuda a disposição para estudar",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Pequenos blocos de estudo podem ser muito eficazes",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Blocos curtos e previsíveis de estudo são benéficos quando se equilibra trabalho e estudo",
+              "sustentada": true
+            }
+          ],
+          "total": 4,
+          "sustentadas": 4,
+          "score": 1.0
+        }
+      }
+    },
+    {
+      "cenario": "fadiga_limite",
+      "tom_esperado": "acolhedor",
+      "tom_gerado": "acolhedor",
+      "latencia_s": 5.451,
+      "abertura": "Hoje é um dia importante, e eu fico feliz por você estar aqui, mesmo com um pouco de fadiga [Fonte: artigo_05_sleep.txt]. Pequenas conquistas, como manter a rotina, já são grandes passos para o sucesso. Vamos aproveitar o que for possível hoje, sem se pressionar — você já está fazendo muito.",
+      "abertura_bruta": "Hoje é um dia importante, e eu fico feliz por você estar aqui, mesmo com um pouco de fadiga [Fonte: artigo_05_sleep.txt]. Pequenas conquistas, como manter a rotina, já são grandes passos para o sucesso. Vamos aproveitar o que for possível hoje, sem se pressionar — você já está fazendo muito.",
+      "markdown": "Hoje é um dia importante, e eu fico feliz por você estar aqui, mesmo com um pouco de fadiga [Fonte: artigo_05_sleep.txt]. Pequenas conquistas, como manter a rotina, já são grandes passos para o sucesso. Vamos aproveitar o que for possível hoje, sem se pressionar — você já está fazendo muito.\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 47,
+          "frases": 3,
+          "palavras_por_frase": 15.67,
+          "silabas_por_palavra": 1.85,
+          "indice": 76.3
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "A mensagem demonstra um tom acolhedor ao reconhecer e validar a fadiga do estudante ('mesmo com um pouco de fadiga', 'sem se pressionar'). A ênfase nas pequenas conquistas e no reconhecimento do esforço já realizado reforça ainda mais essa abordagem acolhedora, alinhando-se perfeitamente com o estado de check-in reportado."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Dormir de forma consistente melhora a consolidação da memória e a disposição para estudar.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Quem concilia trabalho e estudo se beneficia de blocos curtos e previsíveis de estudo.",
+              "sustentada": true
+            }
+          ],
+          "total": 2,
+          "sustentadas": 2,
+          "score": 1.0
+        }
+      }
+    },
+    {
+      "cenario": "estresse_limite",
+      "tom_esperado": "acolhedor",
+      "tom_gerado": "acolhedor",
+      "latencia_s": 5.219,
+      "abertura": "Hoje parece que você está enfrentando um dia desafiador, mas já está fazendo um grande esforço para seguir em frente [Fonte: artigo_19_clt.txt]. Lembre-se de que pequenas conquistas são importantes e que cuidar da sua saúde é parte essencial do processo. Que tal começar o dia com um sono mais reparador?",
+      "abertura_bruta": "Hoje parece que você está enfrentando um dia desafiador, mas já está fazendo um grande esforço para seguir em frente [Fonte: artigo_19_clt.txt]. Lembre-se de que pequenas conquistas são importantes e que cuidar da sua saúde é parte essencial do processo. Que tal começar o dia com um sono mais reparador?",
+      "markdown": "Hoje parece que você está enfrentando um dia desafiador, mas já está fazendo um grande esforço para seguir em frente [Fonte: artigo_19_clt.txt]. Lembre-se de que pequenas conquistas são importantes e que cuidar da sua saúde é parte essencial do processo. Que tal começar o dia com um sono mais reparador?\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 49,
+          "frases": 3,
+          "palavras_por_frase": 16.33,
+          "silabas_por_palavra": 1.84,
+          "indice": 76.9
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 1,
+          "score": 0.5,
+          "justificativa": "A mensagem reconhece os desafios e oferece incentivo, o que é positivo dado o check-in. No entanto, a sugestão de 'começar o dia com um sono mais reparador' soa um pouco direta e pode não ser totalmente acolhedora para alguém já exausto. Um tom mais acolhedor poderia ter focado mais na validação dos sentimentos e menos em soluções imediatas."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Pequenas conquistas são importantes",
+              "sustentada": false
+            },
+            {
+              "afirmacao": "Cuidar da sua saúde é parte essencial do processo",
+              "sustentada": false
+            },
+            {
+              "afirmacao": "Dormir de forma consistente melhora a consolidação da memória e a disposição para estudar",
+              "sustentada": true
+            }
+          ],
+          "total": 3,
+          "sustentadas": 1,
+          "score": 0.3333
+        }
+      }
+    },
+    {
+      "cenario": "humor_limite_alta_energia",
+      "tom_esperado": "acolhedor",
+      "tom_gerado": "acolhedor",
+      "latencia_s": 5.414,
+      "abertura": "Hoje parece que você está com um humor leve, mas já está dormindo bem, o que é um grande passo para manter a energia e a clareza [Fonte: artigo_05_sleep.txt]. Aproveite esse bom sono para se preparar para os estudos de hoje, que podem ser mais leves e produtivos. Vamos lá!",
+      "abertura_bruta": "Hoje parece que você está com um humor leve, mas já está dormindo bem, o que é um grande passo para manter a energia e a clareza [Fonte: artigo_05_sleep.txt]. Aproveite esse bom sono para se preparar para os estudos de hoje, que podem ser mais leves e produtivos. Vamos lá!",
+      "markdown": "Hoje parece que você está com um humor leve, mas já está dormindo bem, o que é um grande passo para manter a energia e a clareza [Fonte: artigo_05_sleep.txt]. Aproveite esse bom sono para se preparar para os estudos de hoje, que podem ser mais leves e produtivos. Vamos lá!\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 48,
+          "frases": 3,
+          "palavras_por_frase": 16.0,
+          "silabas_por_palavra": 1.75,
+          "indice": 84.5
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "A mensagem reconhece o humor leve e o bom sono (pontos positivos no check-in) e oferece um incentivo gentil ('Vamos lá!'). A referência à preparação para estudos mais leves também é condizente com a ideia de um tom acolhedor, alinhado com um estado de menor fadiga e estresse."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Dormir bem ajuda a manter a energia e a clareza.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Dormir bem é um grande passo.",
+              "sustentada": false
+            }
+          ],
+          "total": 2,
+          "sustentadas": 1,
+          "score": 0.5
+        }
+      }
+    },
+    {
+      "cenario": "misto",
+      "tom_esperado": "acolhedor",
+      "tom_gerado": "acolhedor",
+      "latencia_s": 6.487,
+      "abertura": "Olá, tudo bem? Hoje parece que você está enfrentando um dia um pouco desafiador, mas já está fazendo um esforço incrível para seguir em frente [Fonte: artigo_19_clt.txt]. Lembre-se de que pequenas conquistas são importantes, e mesmo que o sono tenha sido difícil, você já está aqui, pronto para aprender. Que tal começar hoje com um pequeno passo, como revisar um tema que você já estudou?",
+      "abertura_bruta": "Olá, tudo bem? Hoje parece que você está enfrentando um dia um pouco desafiador, mas já está fazendo um esforço incrível para seguir em frente [Fonte: artigo_19_clt.txt]. Lembre-se de que pequenas conquistas são importantes, e mesmo que o sono tenha sido difícil, você já está aqui, pronto para aprender. Que tal começar hoje com um pequeno passo, como revisar um tema que você já estudou?",
+      "markdown": "Olá, tudo bem? Hoje parece que você está enfrentando um dia um pouco desafiador, mas já está fazendo um esforço incrível para seguir em frente [Fonte: artigo_19_clt.txt]. Lembre-se de que pequenas conquistas são importantes, e mesmo que o sono tenha sido difícil, você já está aqui, pronto para aprender. Que tal começar hoje com um pequeno passo, como revisar um tema que você já estudou?\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 64,
+          "frases": 4,
+          "palavras_por_frase": 16.0,
+          "silabas_por_palavra": 1.91,
+          "indice": 71.3
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "A mensagem demonstra claramente um tom acolhedor e empático, reconhecendo os desafios indicados no check-in (humor baixo, estresse alto, sono ruim, fadiga). A validação do esforço ("
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Pequenas conquistas são importantes",
+              "sustentada": false
+            },
+            {
+              "afirmacao": "Mesmo que o sono tenha sido difícil, você já está aqui, pronto para aprender.",
+              "sustentada": false
+            }
+          ],
+          "total": 2,
+          "sustentadas": 0,
+          "score": 0.0
+        }
+      }
+    },
+    {
+      "cenario": "recuperado",
+      "tom_esperado": "desafiador",
+      "tom_gerado": "desafiador",
+      "latencia_s": 7.775,
+      "abertura": "Hoje você está em plena forma, com humor e sono em alta, e a fadiga quase não existe — é hora de aproveitar esse momento para ir além. Vamos usar a consistência do sono [Fonte: artigo_05_sleep.txt] e a previsibilidade dos blocos de estudo [Fonte: artigo_19_clt.txt] para elevar o desempenho. O desafio? Transformar esses dias em pilares de produtividade sem comprometer o equilíbrio. Vamos lá?",
+      "abertura_bruta": "Hoje você está em plena forma, com humor e sono em alta, e a fadiga quase não existe — é hora de aproveitar esse momento para ir além. Vamos usar a consistência do sono [Fonte: artigo_05_sleep.txt] e a previsibilidade dos blocos de estudo [Fonte: artigo_19_clt.txt] para elevar o desempenho. O desafio? Transformar esses dias em pilares de produtividade sem comprometer o equilíbrio. Vamos lá?",
+      "markdown": "Hoje você está em plena forma, com humor e sono em alta, e a fadiga quase não existe — é hora de aproveitar esse momento para ir além. Vamos usar a consistência do sono [Fonte: artigo_05_sleep.txt] e a previsibilidade dos blocos de estudo [Fonte: artigo_19_clt.txt] para elevar o desempenho. O desafio? Transformar esses dias em pilares de produtividade sem comprometer o equilíbrio. Vamos lá?\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 59,
+          "frases": 5,
+          "palavras_por_frase": 11.8,
+          "silabas_por_palavra": 2.05,
+          "indice": 63.4
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "A mensagem adota um tom desafiador e motivacional, alinhado com o check-in que indica alto humor, bom sono e baixa fadiga. A linguagem incentiva a superar limites e transformar a energia em produtividade, reforçando a correspondência entre o estado do aluno e o tom da mensagem."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Dormir de forma consistente melhora a consolidação da memória.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Dormir de forma consistente melhora a disposição para estudar.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Quem concilia trabalho e estudo se beneficia de blocos curtos e previsíveis de estudo.",
+              "sustentada": true
+            }
+          ],
+          "total": 3,
+          "sustentadas": 3,
+          "score": 1.0
+        }
+      }
+    },
+    {
+      "cenario": "fim_de_semana",
+      "tom_esperado": "desafiador",
+      "tom_gerado": "desafiador",
+      "latencia_s": 7.498,
+      "abertura": "Hoje você está em posição de dominar o dia com eficiência e equilíbrio — e eu quero que você prove isso. Com o sono acima da média e a consistência do sono em seu favor [Fonte: artigo_05_sleep.txt], é hora de transformar essa energia em foco. Vamos aproveitar os blocos curtos e previsíveis para maximizar o aprendizado sem sobrecarregar [Fonte: artigo_19_clt.txt]. O desafio? Fazer mais com menos, e fazer bem.",
+      "abertura_bruta": "Hoje você está em posição de dominar o dia com eficiência e equilíbrio — e eu quero que você prove isso. Com o sono acima da média e a consistência do sono em seu favor [Fonte: artigo_05_sleep.txt], é hora de transformar essa energia em foco. Vamos aproveitar os blocos curtos e previsíveis para maximizar o aprendizado sem sobrecarregar [Fonte: artigo_19_clt.txt]. O desafio? Fazer mais com menos, e fazer bem.",
+      "markdown": "Hoje você está em posição de dominar o dia com eficiência e equilíbrio — e eu quero que você prove isso. Com o sono acima da média e a consistência do sono em seu favor [Fonte: artigo_05_sleep.txt], é hora de transformar essa energia em foco. Vamos aproveitar os blocos curtos e previsíveis para maximizar o aprendizado sem sobrecarregar [Fonte: artigo_19_clt.txt]. O desafio? Fazer mais com menos, e fazer bem.\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 64,
+          "frases": 5,
+          "palavras_por_frase": 12.8,
+          "silabas_por_palavra": 1.92,
+          "indice": 73.3
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "A mensagem apresenta um tom desafiador, incentivando o aluno a usar sua energia e consistência de sono para maximizar o aprendizado. Isso se alinha perfeitamente com o check-in que indica humor alto, estresse baixo e sono bom."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Dormir de forma consistente melhora a consolidação da memória.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Dormir de forma consistente melhora a disposição para estudar.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Quem concilia trabalho e estudo se beneficia de blocos curtos e previsíveis de estudo.",
+              "sustentada": true
+            }
+          ],
+          "total": 3,
+          "sustentadas": 3,
+          "score": 1.0
+        }
+      }
+    },
+    {
+      "cenario": "quase_limite",
+      "tom_esperado": "desafiador",
+      "tom_gerado": "desafiador",
+      "latencia_s": 6.871,
+      "abertura": "Hoje você tem tudo o que precisa para dominar o dia: sono e disposição acima da média [Fonte: artigo_05_sleep.txt], e um plano que já está aprovado para transformar esses recursos em resultados. Vamos aproveitar os blocos curtos e previsíveis para maximizar a produtividade [Fonte: artigo_19_clt.txt] — o desafio é fazer mais com menos, e você já tem o mapa para isso.",
+      "abertura_bruta": "Hoje você tem tudo o que precisa para dominar o dia: sono e disposição acima da média [Fonte: artigo_05_sleep.txt], e um plano que já está aprovado para transformar esses recursos em resultados. Vamos aproveitar os blocos curtos e previsíveis para maximizar a produtividade [Fonte: artigo_19_clt.txt] — o desafio é fazer mais com menos, e você já tem o mapa para isso.",
+      "markdown": "Hoje você tem tudo o que precisa para dominar o dia: sono e disposição acima da média [Fonte: artigo_05_sleep.txt], e um plano que já está aprovado para transformar esses recursos em resultados. Vamos aproveitar os blocos curtos e previsíveis para maximizar a produtividade [Fonte: artigo_19_clt.txt] — o desafio é fazer mais com menos, e você já tem o mapa para isso.\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 56,
+          "frases": 2,
+          "palavras_por_frase": 28.0,
+          "silabas_por_palavra": 1.98,
+          "indice": 52.7
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "A mensagem adota um tom desafiador ao incentivar a maximização da produtividade com os recursos disponíveis (sono e disposição acima da média). Isso se alinha com o estado de humor relativamente alto (4/5) e a energia positiva indicada no check-in."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Dormir de forma consistente melhora a consolidação da memória.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Dormir de forma consistente melhora a disposição para estudar.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Quem concilia trabalho e estudo se beneficia de blocos curtos e previsíveis de estudo.",
+              "sustentada": true
+            }
+          ],
+          "total": 3,
+          "sustentadas": 3,
+          "score": 1.0
+        }
+      }
+    },
+    {
+      "cenario": "energia_moderada",
+      "tom_esperado": "equilibrado",
+      "tom_gerado": "equilibrado",
+      "latencia_s": 6.583,
+      "abertura": "Hoje parece que você está em um bom ritmo, com um humor e sono acima da média. [Fonte: artigo_05_sleep.txt] sugere que manter uma rotina de sono consistente pode ajudar a consolidar o que você estuda e manter a energia. Continue assim, e aproveite os blocos curtos de estudo para manter o foco [Fonte: artigo_19_clt.txt].",
+      "abertura_bruta": "Hoje parece que você está em um bom ritmo, com um humor e sono acima da média. [Fonte: artigo_05_sleep.txt] sugere que manter uma rotina de sono consistente pode ajudar a consolidar o que você estuda e manter a energia. Continue assim, e aproveite os blocos curtos de estudo para manter o foco [Fonte: artigo_19_clt.txt].",
+      "markdown": "Hoje parece que você está em um bom ritmo, com um humor e sono acima da média. [Fonte: artigo_05_sleep.txt] sugere que manter uma rotina de sono consistente pode ajudar a consolidar o que você estuda e manter a energia. Continue assim, e aproveite os blocos curtos de estudo para manter o foco [Fonte: artigo_19_clt.txt].\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 50,
+          "frases": 3,
+          "palavras_por_frase": 16.67,
+          "silabas_por_palavra": 1.92,
+          "indice": 69.5
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "A mensagem é equilibrada e encorajadora, alinhando-se com os indicadores positivos de humor, sono e ritmo do check-in. A sugestão para manter o foco e aproveitar blocos curtos de estudo reforça a ideia de um tom equilibrado e motivacional, sem ser excessivamente desafiador."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Manter uma rotina de sono consistente pode ajudar a consolidar o que você estuda.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Manter uma rotina de sono consistente pode manter a energia.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Blocos curtos de estudo ajudam a manter o foco.",
+              "sustentada": true
+            }
+          ],
+          "total": 3,
+          "sustentadas": 3,
+          "score": 1.0
+        }
+      }
+    },
+    {
+      "cenario": "sono_curto",
+      "tom_esperado": "equilibrado",
+      "tom_gerado": "equilibrado",
+      "latencia_s": 5.731,
+      "abertura": "Hoje parece que você está em um bom momento, com um humor leve e estresse controlado [Fonte: artigo_19_clt.txt]. Aconselho a priorizar o sono, já que ele é essencial para consolidar o que você estuda e manter a energia [Fonte: artigo_05_sleep.txt]. Vamos seguir com a grade aprovada, sem pressa.",
+      "abertura_bruta": "Hoje parece que você está em um bom momento, com um humor leve e estresse controlado [Fonte: artigo_19_clt.txt]. Aconselho a priorizar o sono, já que ele é essencial para consolidar o que você estuda e manter a energia [Fonte: artigo_05_sleep.txt]. Vamos seguir com a grade aprovada, sem pressa.",
+      "markdown": "Hoje parece que você está em um bom momento, com um humor leve e estresse controlado [Fonte: artigo_19_clt.txt]. Aconselho a priorizar o sono, já que ele é essencial para consolidar o que você estuda e manter a energia [Fonte: artigo_05_sleep.txt]. Vamos seguir com a grade aprovada, sem pressa.\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 44,
+          "frases": 3,
+          "palavras_por_frase": 14.67,
+          "silabas_por_palavra": 1.91,
+          "indice": 72.4
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "A mensagem demonstra um tom equilibrado e acolhedor, reconhecendo os pontos positivos (humor leve, estresse controlado) e oferecendo suporte para as áreas que precisam de atenção (sono). A linguagem é suave e encorajadora, alinhada com o estado do check-in."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Você está em um bom momento, com um humor leve e estresse controlado",
+              "sustentada": false
+            },
+            {
+              "afirmacao": "O sono é essencial para consolidar o que você estuda e manter a energia",
+              "sustentada": true
+            }
+          ],
+          "total": 2,
+          "sustentadas": 1,
+          "score": 0.5
+        }
+      }
+    },
+    {
+      "cenario": "neutro",
+      "tom_esperado": "equilibrado",
+      "tom_gerado": "equilibrado",
+      "latencia_s": 6.455,
+      "abertura": "Hoje está tudo sob controle, você está mantendo um equilíbrio razoável entre os desafios do dia a dia [Fonte: artigo_19_clt.txt]. Aconselho a priorizar um sono mais consistente, já que isso pode melhorar a sua capacidade de estudar e se recuperar [Fonte: artigo_05_sleep.txt]. Vamos seguir com a grade aprovada, sem pressa.",
+      "abertura_bruta": "Hoje está tudo sob controle, você está mantendo um equilíbrio razoável entre os desafios do dia a dia [Fonte: artigo_19_clt.txt]. Aconselho a priorizar um sono mais consistente, já que isso pode melhorar a sua capacidade de estudar e se recuperar [Fonte: artigo_05_sleep.txt]. Vamos seguir com a grade aprovada, sem pressa.",
+      "markdown": "Hoje está tudo sob controle, você está mantendo um equilíbrio razoável entre os desafios do dia a dia [Fonte: artigo_19_clt.txt]. Aconselho a priorizar um sono mais consistente, já que isso pode melhorar a sua capacidade de estudar e se recuperar [Fonte: artigo_05_sleep.txt]. Vamos seguir com a grade aprovada, sem pressa.\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 46,
+          "frases": 3,
+          "palavras_por_frase": 15.33,
+          "silabas_por_palavra": 2.0,
+          "indice": 64.1
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "A mensagem demonstra um tom equilibrado e encorajador, alinhado com os níveis moderados de humor, estresse, sono e fadiga indicados no check-in. O conselho é construtivo (priorizar o sono) e a recomendação de seguir a grade sem pressa reforça a ideia de equilíbrio."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Manter um equilíbrio razoável entre os desafios do dia a dia é importante.",
+              "sustentada": false
+            },
+            {
+              "afirmacao": "Dormir de forma consistente pode melhorar a capacidade de estudar e se recuperar.",
+              "sustentada": true
+            }
+          ],
+          "total": 2,
+          "sustentadas": 1,
+          "score": 0.5
+        }
+      }
+    },
+    {
+      "cenario": "um_pouco_cansado",
+      "tom_esperado": "equilibrado",
+      "tom_gerado": "equilibrado",
+      "latencia_s": 5.851,
+      "abertura": "Hoje parece que você está em um bom ritmo, com um humor leve e estresse controlado [Fonte: artigo_19_clt.txt]. A consistência no sono também está contribuindo para manter a disposição e a clareza mental [Fonte: artigo_05_sleep.txt]. Vamos aproveitar esse equilíbrio para seguir com a rotina aprovada.",
+      "abertura_bruta": "Hoje parece que você está em um bom ritmo, com um humor leve e estresse controlado [Fonte: artigo_19_clt.txt]. A consistência no sono também está contribuindo para manter a disposição e a clareza mental [Fonte: artigo_05_sleep.txt]. Vamos aproveitar esse equilíbrio para seguir com a rotina aprovada.",
+      "markdown": "Hoje parece que você está em um bom ritmo, com um humor leve e estresse controlado [Fonte: artigo_19_clt.txt]. A consistência no sono também está contribuindo para manter a disposição e a clareza mental [Fonte: artigo_05_sleep.txt]. Vamos aproveitar esse equilíbrio para seguir com a rotina aprovada.\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 41,
+          "frases": 3,
+          "palavras_por_frase": 13.67,
+          "silabas_por_palavra": 2.1,
+          "indice": 57.5
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "A mensagem reflete positivamente o estado de humor leve e estresse controlado indicado no check-in, utilizando um tom equilibrado e encorajador. A referência aos artigos que sustentam as observações reforça a adequação do tom à situação."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Hoje parece que você está em um bom ritmo, com um humor leve e estresse controlado",
+              "sustentada": false
+            },
+            {
+              "afirmacao": "A consistência no sono também está contribuindo para manter a disposição e a clareza mental",
+              "sustentada": true
+            }
+          ],
+          "total": 2,
+          "sustentadas": 1,
+          "score": 0.5
+        }
+      }
+    },
+    {
+      "cenario": "stress_leve",
+      "tom_esperado": "equilibrado",
+      "tom_gerado": "equilibrado",
+      "latencia_s": 6.05,
+      "abertura": "Hoje parece que você está em um bom momento, com um humor leve e sono adequado, o que já é um bom começo para manter o ritmo. [Fonte: artigo_05_sleep.txt] e [Fonte: artigo_19_clt.txt] mostram que a consistência e a previsibilidade são aliadas importantes nesse processo. Vamos aproveitar bem o dia!",
+      "abertura_bruta": "Hoje parece que você está em um bom momento, com um humor leve e sono adequado, o que já é um bom começo para manter o ritmo. [Fonte: artigo_05_sleep.txt] e [Fonte: artigo_19_clt.txt] mostram que a consistência e a previsibilidade são aliadas importantes nesse processo. Vamos aproveitar bem o dia!",
+      "markdown": "Hoje parece que você está em um bom momento, com um humor leve e sono adequado, o que já é um bom começo para manter o ritmo. [Fonte: artigo_05_sleep.txt] e [Fonte: artigo_19_clt.txt] mostram que a consistência e a previsibilidade são aliadas importantes nesse processo. Vamos aproveitar bem o dia!\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 45,
+          "frases": 3,
+          "palavras_por_frase": 15.0,
+          "silabas_por_palavra": 1.89,
+          "indice": 73.8
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "A mensagem reflete positivamente o bom humor e sono reportados no check-in, incentivando a continuidade com um tom equilibrado e motivacional. A referência às fontes reforça a base para a consistência, alinhada ao estado de espírito positivo."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Dormir de forma consistente melhora a consolidação da memória.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Dormir de forma consistente melhora a disposição para estudar.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Quem concilia trabalho e estudo se beneficia de blocos curtos e previsíveis de estudo.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "A consistência é uma aliada importante nesse processo.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "A previsibilidade é uma aliada importante nesse processo.",
+              "sustentada": true
+            }
+          ],
+          "total": 5,
+          "sustentadas": 5,
+          "score": 1.0
+        }
+      }
+    },
+    {
+      "cenario": "humor_bom_cansado",
+      "tom_esperado": "equilibrado",
+      "tom_gerado": "equilibrado",
+      "latencia_s": 6.701,
+      "abertura": "Hoje parece que você está em um bom ritmo, com um humor leve e um estresse controlado. O sono em destaque sugere que sua rotina está ajudando a consolidar o aprendizado e a manter a energia [Fonte: artigo_05_sleep.txt]. Mantenha essa consistência e aproveite os blocos curtos de estudo para avançar com clareza [Fonte: artigo_19_clt.txt].",
+      "abertura_bruta": "Hoje parece que você está em um bom ritmo, com um humor leve e um estresse controlado. O sono em destaque sugere que sua rotina está ajudando a consolidar o aprendizado e a manter a energia [Fonte: artigo_05_sleep.txt]. Mantenha essa consistência e aproveite os blocos curtos de estudo para avançar com clareza [Fonte: artigo_19_clt.txt].",
+      "markdown": "Hoje parece que você está em um bom ritmo, com um humor leve e um estresse controlado. O sono em destaque sugere que sua rotina está ajudando a consolidar o aprendizado e a manter a energia [Fonte: artigo_05_sleep.txt]. Mantenha essa consistência e aproveite os blocos curtos de estudo para avançar com clareza [Fonte: artigo_19_clt.txt].\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 50,
+          "frases": 3,
+          "palavras_por_frase": 16.67,
+          "silabas_por_palavra": 2.04,
+          "indice": 59.3
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "O tom da mensagem é equilibrado e positivo, alinhando-se perfeitamente com o check-in que indica bom humor, baixo estresse e sono adequado. A mensagem reconhece os pontos positivos (sono em destaque) e oferece um incentivo suave para manter a consistência, sem ser excessivamente desafiadora ou acolhedora."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Dormir de forma consistente melhora a consolidação da memória.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Dormir de forma consistente melhora a disposição para estudar.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Quem concilia trabalho e estudo se beneficia de blocos curtos de estudo.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Quem concilia trabalho e estudo se beneficia de blocos previsíveis de estudo.",
+              "sustentada": true
+            }
+          ],
+          "total": 4,
+          "sustentadas": 4,
+          "score": 1.0
+        }
+      }
+    },
+    {
+      "cenario": "desafiador_limite",
+      "tom_esperado": "desafiador",
+      "tom_gerado": "desafiador",
+      "latencia_s": 6.441,
+      "abertura": "Hoje você está em plena forma, com humor e sono em alta, e a fadiga quase não existe — é hora de aproveitar esse momento para ir além. Vamos usar a consistência do sono [Fonte: artigo_05_sleep.txt] e a previsibilidade dos blocos de estudo [Fonte: artigo_19_clt.txt] para elevar o desempenho. O desafio? Transformar esses dias em pilares de produtividade sem comprometer o equilíbrio. Vamos lá?",
+      "abertura_bruta": "Hoje você está em plena forma, com humor e sono em alta, e a fadiga quase não existe — é hora de aproveitar esse momento para ir além. Vamos usar a consistência do sono [Fonte: artigo_05_sleep.txt] e a previsibilidade dos blocos de estudo [Fonte: artigo_19_clt.txt] para elevar o desempenho. O desafio? Transformar esses dias em pilares de produtividade sem comprometer o equilíbrio. Vamos lá?",
+      "markdown": "Hoje você está em plena forma, com humor e sono em alta, e a fadiga quase não existe — é hora de aproveitar esse momento para ir além. Vamos usar a consistência do sono [Fonte: artigo_05_sleep.txt] e a previsibilidade dos blocos de estudo [Fonte: artigo_19_clt.txt] para elevar o desempenho. O desafio? Transformar esses dias em pilares de produtividade sem comprometer o equilíbrio. Vamos lá?\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 59,
+          "frases": 5,
+          "palavras_por_frase": 11.8,
+          "silabas_por_palavra": 2.05,
+          "indice": 63.4
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "A mensagem adota um tom desafiador e motivacional, alinhado com o check-in que indica alto humor, bom sono e baixa fadiga. A linguagem incentiva a superar limites e transformar a energia em produtividade, reforçando a correspondência entre o estado do aluno e o tom da mensagem."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Dormir de forma consistente melhora a consolidação da memória.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Dormir de forma consistente melhora a disposição para estudar.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Quem concilia trabalho e estudo se beneficia de blocos curtos e previsíveis de estudo.",
+              "sustentada": true
+            }
+          ],
+          "total": 3,
+          "sustentadas": 3,
+          "score": 1.0
+        }
+      }
+    },
+    {
+      "cenario": "sono_ruim_humor_bom",
+      "tom_esperado": "equilibrado",
+      "tom_gerado": "equilibrado",
+      "latencia_s": 6.31,
+      "abertura": "Hoje parece que você está em um bom momento, com um humor leve e estresse controlado [Fonte: artigo_19_clt.txt]. Aconselho a priorizar o sono, já que ele é essencial para consolidar o que você estuda e manter a energia [Fonte: artigo_05_sleep.txt]. Vamos aproveitar o que está funcionando e ajustar o que pode ser melhorado.",
+      "abertura_bruta": "Hoje parece que você está em um bom momento, com um humor leve e estresse controlado [Fonte: artigo_19_clt.txt]. Aconselho a priorizar o sono, já que ele é essencial para consolidar o que você estuda e manter a energia [Fonte: artigo_05_sleep.txt]. Vamos aproveitar o que está funcionando e ajustar o que pode ser melhorado.",
+      "markdown": "Hoje parece que você está em um bom momento, com um humor leve e estresse controlado [Fonte: artigo_19_clt.txt]. Aconselho a priorizar o sono, já que ele é essencial para consolidar o que você estuda e manter a energia [Fonte: artigo_05_sleep.txt]. Vamos aproveitar o que está funcionando e ajustar o que pode ser melhorado.\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 49,
+          "frases": 3,
+          "palavras_por_frase": 16.33,
+          "silabas_por_palavra": 1.96,
+          "indice": 66.5
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "A mensagem demonstra um tom equilibrado e acolhedor, reconhecendo os pontos positivos (humor leve, estresse controlado) e oferecendo conselhos específicos para as áreas que precisam de atenção (sono). Isso alinha-se perfeitamente com o estado do check-in, que indica humor bom, estresse baixo, mas sono e fadiga baixos. A mensagem é encorajadora e focada em soluções, refletindo um tom adequado ao contexto."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Você está em um bom momento, com um humor leve e estresse controlado",
+              "sustentada": false
+            },
+            {
+              "afirmacao": "O sono é essencial para consolidar o que você estuda e manter a energia",
+              "sustentada": true
+            }
+          ],
+          "total": 2,
+          "sustentadas": 1,
+          "score": 0.5
+        }
+      }
+    },
+    {
+      "cenario": "tudo_no_limite_ruim",
+      "tom_esperado": "acolhedor",
+      "tom_gerado": "acolhedor",
+      "latencia_s": 6.645,
+      "abertura": "Olá, tudo bem? Vejo que hoje está com um humor e sono baixos, mas não desista — pequenas conquistas são importantes e já são um passo à frente [Fonte: artigo_05_sleep.txt]. Vamos começar com algo simples: aproveite o que for possível para descansar um pouco, mesmo que seja por alguns minutos, e depois retomamos juntos. Você está fazendo o que pode!",
+      "abertura_bruta": "Olá, tudo bem? Vejo que hoje está com um humor e sono baixos, mas não desista — pequenas conquistas são importantes e já são um passo à frente [Fonte: artigo_05_sleep.txt]. Vamos começar com algo simples: aproveite o que for possível para descansar um pouco, mesmo que seja por alguns minutos, e depois retomamos juntos. Você está fazendo o que pode!",
+      "markdown": "Olá, tudo bem? Vejo que hoje está com um humor e sono baixos, mas não desista — pequenas conquistas são importantes e já são um passo à frente [Fonte: artigo_05_sleep.txt]. Vamos começar com algo simples: aproveite o que for possível para descansar um pouco, mesmo que seja por alguns minutos, e depois retomamos juntos. Você está fazendo o que pode!\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 57,
+          "frases": 4,
+          "palavras_por_frase": 14.25,
+          "silabas_por_palavra": 1.84,
+          "indice": 78.5
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "A mensagem demonstra um tom acolhedor ao reconhecer os sentimentos negativos expressos no check-in (humor baixo, sono ruim, estresse e fadiga) e oferecer palavras de incentivo e apoio. A sugestão de começar com algo simples e a afirmação 'Você está fazendo o que pode!' reforçam essa abordagem acolhedora."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Dormir de forma consistente melhora a consolidação da memória.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Dormir de forma consistente melhora a disposição para estudar.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Quem concilia trabalho e estudo se beneficia de blocos curtos e previsíveis de estudo.",
+              "sustentada": true
+            }
+          ],
+          "total": 3,
+          "sustentadas": 3,
+          "score": 1.0
+        }
+      }
+    },
+    {
+      "cenario": "energia_maxima",
+      "tom_esperado": "desafiador",
+      "tom_gerado": "desafiador",
+      "latencia_s": 7.562,
+      "abertura": "Hoje você está em plena forma, com humor e sono no topo da escala — é hora de aproveitar esse estado de graça para dominar os blocos de estudo. [Fonte: artigo_05_sleep.txt] e [Fonte: artigo_19_clt.txt] mostram que a consistência e a previsibilidade são suas aliadas, então vamos transformar isso em resultados. O desafio? Maximizar a produtividade sem sobrecarregar. Pronto para a batalha?",
+      "abertura_bruta": "Hoje você está em plena forma, com humor e sono no topo da escala — é hora de aproveitar esse estado de graça para dominar os blocos de estudo. [Fonte: artigo_05_sleep.txt] e [Fonte: artigo_19_clt.txt] mostram que a consistência e a previsibilidade são suas aliadas, então vamos transformar isso em resultados. O desafio? Maximizar a produtividade sem sobrecarregar. Pronto para a batalha?",
+      "markdown": "Hoje você está em plena forma, com humor e sono no topo da escala — é hora de aproveitar esse estado de graça para dominar os blocos de estudo. [Fonte: artigo_05_sleep.txt] e [Fonte: artigo_19_clt.txt] mostram que a consistência e a previsibilidade são suas aliadas, então vamos transformar isso em resultados. O desafio? Maximizar a produtividade sem sobrecarregar. Pronto para a batalha?\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 56,
+          "frases": 5,
+          "palavras_por_frase": 11.2,
+          "silabas_por_palavra": 2.11,
+          "indice": 59.2
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "O check-in indica alta energia (humor e sono no máximo, fadiga e estresse baixos). A mensagem utiliza um tom desafiador ("
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Dormir de forma consistente melhora a consolidação da memória.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Dormir de forma consistente melhora a disposição para estudar.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Quem concilia trabalho e estudo se beneficia de blocos curtos e previsíveis de estudo.",
+              "sustentada": true
+            }
+          ],
+          "total": 3,
+          "sustentadas": 3,
+          "score": 1.0
+        }
+      }
+    },
+    {
+      "cenario": "humor_neutro",
+      "tom_esperado": "equilibrado",
+      "tom_gerado": "equilibrado",
+      "latencia_s": 5.847,
+      "abertura": "Hoje parece que você está em um bom momento, com um humor e sono acima da média. [Fonte: artigo_05_sleep.txt] sugere que manter uma rotina de sono consistente pode ajudar a consolidar o que você estuda e melhorar sua disposição. Vamos aproveitar esse equilíbrio para seguir com a grade aprovada.",
+      "abertura_bruta": "Hoje parece que você está em um bom momento, com um humor e sono acima da média. [Fonte: artigo_05_sleep.txt] sugere que manter uma rotina de sono consistente pode ajudar a consolidar o que você estuda e melhorar sua disposição. Vamos aproveitar esse equilíbrio para seguir com a grade aprovada.",
+      "markdown": "Hoje parece que você está em um bom momento, com um humor e sono acima da média. [Fonte: artigo_05_sleep.txt] sugere que manter uma rotina de sono consistente pode ajudar a consolidar o que você estuda e melhorar sua disposição. Vamos aproveitar esse equilíbrio para seguir com a grade aprovada.\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 47,
+          "frases": 3,
+          "palavras_por_frase": 15.67,
+          "silabas_por_palavra": 2.06,
+          "indice": 58.3
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "A mensagem reconhece positivamente o bom humor e sono do estudante (indicado pelos valores acima da média), e oferece um conselho alinhado com essa situação de bem-estar. O tom é encorajador e equilibrado, como esperado para um check-in com esses indicadores."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Manter uma rotina de sono consistente pode ajudar a consolidar o que você estuda.",
+              "sustentada": true
+            }
+          ],
+          "total": 1,
+          "sustentadas": 1,
+          "score": 1.0
+        }
+      }
+    },
+    {
+      "cenario": "prova_amanha",
+      "tom_esperado": "acolhedor",
+      "tom_gerado": "acolhedor",
+      "latencia_s": 7.29,
+      "abertura": "Olá, tudo bem? Hoje parece que o corpo e a mente estão pedindo um descanso, mas você já deu um passo importante ao se dedicar aos estudos [Fonte: artigo_19_clt.txt]. Lembre-se de que dormir bem é essencial para consolidar o que aprendeu e recarregar as energias [Fonte: artigo_05_sleep.txt]. Que tal começar o dia com um pequeno momento de relaxamento ou uma pausa curta?",
+      "abertura_bruta": "Olá, tudo bem? Hoje parece que o corpo e a mente estão pedindo um descanso, mas você já deu um passo importante ao se dedicar aos estudos [Fonte: artigo_19_clt.txt]. Lembre-se de que dormir bem é essencial para consolidar o que aprendeu e recarregar as energias [Fonte: artigo_05_sleep.txt]. Que tal começar o dia com um pequeno momento de relaxamento ou uma pausa curta?",
+      "markdown": "Olá, tudo bem? Hoje parece que o corpo e a mente estão pedindo um descanso, mas você já deu um passo importante ao se dedicar aos estudos [Fonte: artigo_19_clt.txt]. Lembre-se de que dormir bem é essencial para consolidar o que aprendeu e recarregar as energias [Fonte: artigo_05_sleep.txt]. Que tal começar o dia com um pequeno momento de relaxamento ou uma pausa curta?\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 59,
+          "frases": 4,
+          "palavras_por_frase": 14.75,
+          "silabas_por_palavra": 1.83,
+          "indice": 79.0
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "A mensagem demonstra um tom acolhedor ao reconhecer o estado de fadiga e estresse do estudante, oferecendo sugestões gentis para relaxamento e reforçando a importância do sono. A referência às fontes também adiciona um toque de suporte e cuidado, alinhando-se com um mentor que se preocupa com o bem-estar do aluno."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Quem concilia trabalho e estudo se beneficia de blocos curtos e previsíveis de estudo.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "Dormir bem é essencial para consolidar o que aprendeu e recarregar as energias.",
+              "sustentada": true
+            }
+          ],
+          "total": 2,
+          "sustentadas": 2,
+          "score": 1.0
+        }
+      }
+    },
+    {
+      "cenario": "pos_descanso",
+      "tom_esperado": "desafiador",
+      "tom_gerado": "desafiador",
+      "latencia_s": 6.263,
+      "abertura": "Hoje você está em posição de dominar o dia com eficiência e equilíbrio — e eu quero que você prove isso. Com o sono acima da média e a fadiga mínima, é hora de aproveitar a consistência do seu ritmo para consolidar o que aprendeu [Fonte: artigo_05_sleep.txt]. Vamos transformar esses números em resultados reais.",
+      "abertura_bruta": "Hoje você está em posição de dominar o dia com eficiência e equilíbrio — e eu quero que você prove isso. Com o sono acima da média e a fadiga mínima, é hora de aproveitar a consistência do seu ritmo para consolidar o que aprendeu [Fonte: artigo_05_sleep.txt]. Vamos transformar esses números em resultados reais.",
+      "markdown": "Hoje você está em posição de dominar o dia com eficiência e equilíbrio — e eu quero que você prove isso. Com o sono acima da média e a fadiga mínima, é hora de aproveitar a consistência do seu ritmo para consolidar o que aprendeu [Fonte: artigo_05_sleep.txt]. Vamos transformar esses números em resultados reais.\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 51,
+          "frases": 3,
+          "palavras_por_frase": 17.0,
+          "silabas_por_palavra": 1.94,
+          "indice": 67.4
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "A mensagem apresenta um tom desafiador, incentivando o aluno a aproveitar seu bom estado (humor alto, estresse baixo, sono bom e fadiga mínima) para alcançar resultados. Isso está alinhado com o 'TOM ESPERADO' definido no prompt."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Dormir de forma consistente melhora a consolidação da memória e a disposição para estudar.",
+              "sustentada": true
+            },
+            {
+              "afirmacao": "É hora de aproveitar a consistência do seu ritmo para consolidar o que aprendeu.",
+              "sustentada": true
+            }
+          ],
+          "total": 2,
+          "sustentadas": 2,
+          "score": 1.0
+        }
+      }
+    },
+    {
+      "cenario": "rotina_estavel",
+      "tom_esperado": "equilibrado",
+      "tom_gerado": "equilibrado",
+      "latencia_s": 6.619,
+      "abertura": "Hoje parece que você está em um bom ritmo, com um equilíbrio razoável entre energia e foco [Fonte: artigo_19_clt.txt]. Aconselho a manter a consistência no sono, já que isso reforça a capacidade de estudo e a disposição [Fonte: artigo_05_sleep.txt]. Vamos seguir com a grade aprovada e ajustar conforme a necessidade.",
+      "abertura_bruta": "Hoje parece que você está em um bom ritmo, com um equilíbrio razoável entre energia e foco [Fonte: artigo_19_clt.txt]. Aconselho a manter a consistência no sono, já que isso reforça a capacidade de estudo e a disposição [Fonte: artigo_05_sleep.txt]. Vamos seguir com a grade aprovada e ajustar conforme a necessidade.",
+      "markdown": "Hoje parece que você está em um bom ritmo, com um equilíbrio razoável entre energia e foco [Fonte: artigo_19_clt.txt]. Aconselho a manter a consistência no sono, já que isso reforça a capacidade de estudo e a disposição [Fonte: artigo_05_sleep.txt]. Vamos seguir com a grade aprovada e ajustar conforme a necessidade.\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 46,
+          "frases": 3,
+          "palavras_por_frase": 15.33,
+          "silabas_por_palavra": 2.07,
+          "indice": 58.6
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "A mensagem demonstra um tom equilibrado e encorajador, alinhado com os níveis moderados de humor, estresse, sono e fadiga indicados no check-in. O conselho é construtivo e oferece suporte sem ser excessivamente desafiador ou condescendente."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Há um equilíbrio razoável entre energia e foco.",
+              "sustentada": false
+            },
+            {
+              "afirmacao": "A consistência no sono reforça a capacidade de estudo e a disposição.",
+              "sustentada": true
+            }
+          ],
+          "total": 2,
+          "sustentadas": 1,
+          "score": 0.5
+        }
+      }
+    },
+    {
+      "cenario": "exausto_fim_de_semana",
+      "tom_esperado": "acolhedor",
+      "tom_gerado": "acolhedor",
+      "latencia_s": 7.135,
+      "abertura": "Olá, tudo bem? Hoje parece que o corpo está pedindo um pouco mais de cuidado, mas já sabemos que pequenas conquistas fazem toda a diferença [Fonte: artigo_19_clt.txt]. Que tal começar o dia com um sono mais reparador? Dormir de forma consistente ajuda a melhorar a disposição e a memória [Fonte: artigo_05_sleep.txt]. Vamos lá, um passo de cada vez!",
+      "abertura_bruta": "Olá, tudo bem? Hoje parece que o corpo está pedindo um pouco mais de cuidado, mas já sabemos que pequenas conquistas fazem toda a diferença [Fonte: artigo_19_clt.txt]. Que tal começar o dia com um sono mais reparador? Dormir de forma consistente ajuda a melhorar a disposição e a memória [Fonte: artigo_05_sleep.txt]. Vamos lá, um passo de cada vez!",
+      "markdown": "Olá, tudo bem? Hoje parece que o corpo está pedindo um pouco mais de cuidado, mas já sabemos que pequenas conquistas fazem toda a diferença [Fonte: artigo_19_clt.txt]. Que tal começar o dia com um sono mais reparador? Dormir de forma consistente ajuda a melhorar a disposição e a memória [Fonte: artigo_05_sleep.txt]. Vamos lá, um passo de cada vez!\n\n## Seu plano da semana\n- segunda, 19:00-20:00: Matemática. Material: [Material](https://example.org/materiais/matematica)\n- quarta, 20:00-21:00: Biologia.\n- sexta, 19:30-21:00: História. Material: [Material](https://example.org/materiais/historia)",
+      "avaliacao": {
+        "fidelidade_plano": {
+          "blocos": 3,
+          "blocos_presentes": 3,
+          "blocos_ausentes": [],
+          "na_ordem": true,
+          "score": 1.0,
+          "fiel": true
+        },
+        "horarios_inventados": [],
+        "citacoes_invalidas": [],
+        "citacoes_validas": 1.0,
+        "clareza": {
+          "palavras": 54,
+          "frases": 5,
+          "palavras_por_frase": 10.8,
+          "silabas_por_palavra": 1.85,
+          "indice": 81.2
+        },
+        "tom_regra": true,
+        "tom_juiz": {
+          "nota": 2,
+          "score": 1.0,
+          "justificativa": "A mensagem demonstra um tom acolhedor ao reconhecer o estado de fadiga e estresse do aluno, oferecendo sugestões gentis e encorajadoras ('pequenas conquistas fazem toda a diferença', 'um passo de cada vez'). A referência a artigos sobre sono reforça uma abordagem cuidadosa e informativa, alinhada com um tom acolhedor em um momento de vulnerabilidade."
+        },
+        "fidelidade_evidencias": {
+          "afirmacoes": [
+            {
+              "afirmacao": "Pequenas conquistas fazem toda a diferença",
+              "sustentada": false
+            },
+            {
+              "afirmacao": "Dormir de forma consistente ajuda a melhorar a disposição e a memória",
+              "sustentada": true
+            }
+          ],
+          "total": 2,
+          "sustentadas": 1,
+          "score": 0.5
+        }
+      }
+    }
+  ]
+}

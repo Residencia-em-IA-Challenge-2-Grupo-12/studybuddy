@@ -26,3 +26,6 @@ chroma_db/
 .agents/
 .claude/skills/
 skills-lock.json
+
+# Saídas geradas pelo runner de métricas do Communication
+pesquisa/metricas/agentes/communication/saidas/
