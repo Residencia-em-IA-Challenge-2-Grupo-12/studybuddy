@@ -61,9 +61,33 @@ Definidos em pydantic, com `extra="forbid"`.[^contratos]
 onboarding → check-in → materiais → plano → confirmar e sincronizar
 ```
 
-Cada passo grava no estado do fluxo (contexto + `localStorage`) e o seguinte só abre com o anterior
-preenchido. A tela não inventa datas: ela envia horários e o Research distribui pelos dias da semana,
-quebrando as janelas na meia-noite, como o contrato exige.[^plano-fluxo]
+Cinco telas em `web/src/app/`, cada uma com o seu módulo em `web/src/modules/<passo>/`. O estado do
+fluxo (`modules/fluxo/FluxoProvider.tsx`) guarda contexto, check-in, escalas e materiais em contexto
+React + `localStorage`; cada passo só abre com o anterior preenchido, e o que falta aparece nomeado, não
+como tela quebrada.[^plano-fluxo]
+
+| Tela | Rota | O que faz | Contrato envolvido |
+|---|---|---|---|
+| Onboarding | `/onboarding` | cronotipo, janela de sono, refeições e conexão de agenda (simulada) | entrada do `ContextoEstudante` |
+| Check-in | `/check-in` | quatro escalas de 1 a 5 (humor, estresse, sono, fadiga) e horas dormidas | `CheckIn` |
+| Materiais | `/materiais` | cadastro, edição e remoção; lista com disciplina, carga, horas, dificuldade e prazo | `Material[]` |
+| Plano | `/plano` | grade de sete dias, mensagem do mentor, o que ficou fora da grade e o botão "confirmar e sincronizar" | `PropostaGrade`, `ResultadoValidacao`, `MensagemFinal` |
+
+O que vale saber antes de mexer:
+
+- **A tela envia horários, não datas.** O contrato não deixa uma `Janela` cruzar a meia-noite; quem
+  distribui pelos dias e quebra a janela é o Research. Por isso `EntradaOnboarding.sono` é `{inicio, fim}`.
+- **Quatro escalas, três campos.** A issue pede humor, estresse, sono e fadiga; `CheckIn` tem energia,
+  horas de sono e estresse. O mapeamento é explícito em `modules/checkin/mapeamento.ts`
+  (`energia = 6 − fadiga`) e humor e qualidade do sono ficam no cliente.
+- **A grade empilha em uma coluna a 390px.** O plano usa uma variante larga da página (72rem); as demais
+  telas continuam na coluna de leitura de 46rem.
+- **Bloqueio de guardrail não é erro de sistema.** `EstadoBloqueio` é a marcação única — tom de recusa, sem
+  `role="alert"` — e a decisão é default-deny: qualquer categoria diferente de `OK` bloqueia, inclusive
+  uma que a tela ainda não conheça.
+- **O mock responde os cinco passos.** Com `NEXT_PUBLIC_API_MODE=mock` (o padrão), `web/src/mocks` serve as
+  fixtures da [0.2]; `localStorage["studybuddy.cenario"]` escolhe o plano (`valida`, `reprovado`,
+  `reducao_danos`, `sobrecarga`) e os bloqueios (`bloqueio`, `bloqueio_clinico`).
 
 # Como rodar
 
